@@ -43,7 +43,7 @@ public class ModBlocks {
 		LanguageRegistry.addName(blockPowerPipe, "Power Generator ( Passive ) ");
 		LanguageRegistry.addName(oreIndium, "Indium Ore");
 		LanguageRegistry.addName(oreRoentgenium, "Roentgenium Ore");
-		GameRegistry.registerBlock(dimensionalInfuser, "Dimensional Infuser");
+		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
@@ -60,6 +60,6 @@ public class ModBlocks {
 		basicFutureFurnace.setCreativeTab(Ref.getRecommendedTab("block"));
 		oreIndium.setCreativeTab(Ref.getRecommendedTab("block"));
 		oreRoentgenium.setCreativeTab(Ref.getRecommendedTab("block"));
-		dimensionalInfuser.setCreativeTab(Ref.getRecommendedTab("blocK"));
+		dimensionalInfuser.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 }
