@@ -11,6 +11,7 @@ import com.matt.mod.ModItems;
 
 public class TileEntityDimensionalInfuser extends TileEntity {
 	public void run(World w, EntityPlayer p, int x, int y, int z) {
+		if(p.inventory.hasItem(Item.ingotIron.itemID)) {
 		switch(w.provider.dimensionId) {
 		case -1:
 			System.out.println("DIMENSIONAL INFUSER : NETHER");
@@ -27,7 +28,7 @@ public class TileEntityDimensionalInfuser extends TileEntity {
 			
 			this.getBlockType().setTextureName(Ref.NAME.toLowerCase() + ":diminfuserend");
 			break;
-		
+		} 
 		
 		}
 		
