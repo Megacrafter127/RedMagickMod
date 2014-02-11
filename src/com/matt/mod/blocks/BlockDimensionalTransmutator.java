@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.*;
 
 import com.matt.lib.Ref;
 import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
@@ -25,6 +26,15 @@ public class BlockDimensionalTransmutator extends Block implements ITileEntityPr
 		}
 		return false;
 	}
+	
+	@Override
+	public void onBlockAdded(World w,int x,int y,int z) {
+		BiomeGenBase b=w.getBiomeGenForCoords(x, z);
+		if(b instanceof BiomeGenEnd) setTextureName(Ref.NAME.toLowerCase() + ":diminfuserend");
+		else if(b instanceof BiomeGenHell) setTextureName(Ref.NAME.toLowerCase() + ":diminfusernether");
+		else setTextureName(Ref.NAME.toLowerCase() + ":diminfuser");
+	}
+	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		// TODO Auto-generated method stub
