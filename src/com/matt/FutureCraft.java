@@ -14,6 +14,7 @@ import com.matt.mod.ModItems;
 import com.matt.mod.ModRecipes;
 import com.matt.mod.ModTileEntities;
 import com.matt.mod.TabFuture;
+import com.matt.mod.handlers.WorldHandlerFuture;
 import com.matt.proxy.CommonProxy;
 
 import cpw.mods.fml.common.Mod;
@@ -24,6 +25,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 
 @Mod(modid = Ref.ID, name = Ref.NAME, version = "0.0.1a1")
@@ -39,11 +41,16 @@ public class FutureCraft {
 		public static int basicFBlockID = 538;
 		public static int goldenFBlockID = 539;
 		public static int basicFurnaceID = 540;
-		public static int powerPipeID = 541;
-		
+		public static int powerGenPassiveID = 541;
+		public static int powerGenAgressiveID = 542;
+		public static int oreIndiumID = 543;
+		public static int oreRoentgeniumID = 544;
+		public static int dimTransID = 545;
 		//Item IDs
 		public static int netheriumIngotId = 590;
 		public static int enderiumIngotId = 591;
+		public static int ingotIndiumId = 590;
+		public static int ingotRoentgeniumId = 591;
 		
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
@@ -62,6 +69,8 @@ public class FutureCraft {
 		
 		
 		
+		
+		
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
@@ -72,9 +81,12 @@ public class FutureCraft {
              		basicFBlockID = config.getBlock("basicMachineHandler", 538).getInt();
              		goldenFBlockID = config.getBlock("advancedMachineHandler", 539).getInt();
              		basicFurnaceID = config.getItem("basicFurnace", 540).getInt();
-             		powerPipeID = config.getBlock("powerPipe", 541).getInt();
+             		powerGenPassiveID = config.getBlock("powerPipe", 541).getInt();
              		netheriumIngotId = config.getItem("netheriumIngot", 590).getInt();
              		enderiumIngotId = config.getItem("enderiumIngot", 591).getInt();
+             		oreIndiumID = config.getBlock("oreIndium", 543).getInt();
+            		oreRoentgeniumID = config.getBlock("oreRoentgenium", 544).getInt();
+            		dimTransID = config.getBlock("dimensionalTransmutator", 545).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
@@ -99,6 +111,8 @@ public class FutureCraft {
          	ModTileEntities.registerTileEntities();
           	System.out.println("Registering FutureCraft CREATIVE TABS!!");
          	ModBlocks.setCreativeTabs();
+         	System.out.println("Registering FutureCraft worldgenerator handler!");
+         	GameRegistry.registerWorldGenerator(new WorldHandlerFuture());
          	
          	
          	

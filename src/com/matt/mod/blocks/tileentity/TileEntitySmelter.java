@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.matt.mod.ModBlocks;
 import com.matt.mod.power.IPowerReceiver;
 
 public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
@@ -33,27 +34,40 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2));
 			System.out.println("Smelted coal");
 			return true;
-		} else if(w.getBlockId(x, y + 1, z) == Block.oreIron.blockID && currentPower > powerUsage) {
+		} else if(w.getBlockId(x, y + 1, z) == Block.oreIron.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage;
 			w.setBlockToAir(x, y + 1, z);
 			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotIron,2) );
 			System.out.println("Smelted iron using power");
 			System.out.println(currentPower);
 			return true;
-		}else if(w.getBlockId(x, y + 1, z) == Block.oreGold.blockID && currentPower > powerUsage) {
+		}else if(w.getBlockId(x, y + 1, z) == Block.oreGold.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage;
 			w.setBlockToAir(x, y + 1, z);
 			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotGold,2) );
 			System.out.println("Smelted gold using power");
 			System.out.println(currentPower);
 			return true;
-		}else if(w.getBlockId(x, y + 1, z) == Block.oreCoal.blockID && currentPower > powerUsage) {
+		}else if(w.getBlockId(x, y + 1, z) == Block.oreCoal.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage;
 			w.setBlockToAir(x, y + 1, z);
 			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) );
 			System.out.println("Smelted coal using power");
 			System.out.println(currentPower);
 			return true; 
+		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreRoentgenium.blockID && currentPower >= powerUsage) {
+			currentPower = currentPower - powerUsage;
+			w.setBlockToAir(x, y + 1, z);
+			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) );
+			System.out.println("Smelted coal using power");
+			System.out.println(currentPower); 
+		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreIndium.blockID && currentPower >= powerUsage) {
+			currentPower = currentPower - powerUsage;
+			w.setBlockToAir(x, y + 1, z);
+			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) );
+			System.out.println("Smelted coal using power");
+			System.out.println(currentPower);
+			
 			} else {
 				p.addChatMessage("You're using an invalid block, or don't have enought power.");
 				int idToString = w.getBlockId(x,y+1,z);
