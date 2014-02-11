@@ -22,10 +22,12 @@ public class BlockDimensionalTransmutator extends Block implements ITileEntityPr
 	
 	public BlockDimensionalTransmutator(int par1) {
 		super(par1, Material.iron);
-		setTextureName(Ref.NAME.toLowerCase() + ":diminfuser");
 		
 	}
-	
+	@Override
+	public String getItemIconName() {
+		return null;
+	}
 	@Override
 	public void registerIcons(IconRegister r) {
 		inactive=r.registerIcon(Ref.NAME.toLowerCase() + ":diminfuser");
