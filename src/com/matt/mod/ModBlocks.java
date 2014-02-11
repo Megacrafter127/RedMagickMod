@@ -6,7 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
-import com.matt.mod.blocks.BlockDimensionalTransmutator;
+import com.matt.mod.blocks.BlockDimensionalInfuser;
 import com.matt.mod.blocks.BlockFutureBasic;
 import com.matt.mod.blocks.BlockFutureFurnace;
 import com.matt.mod.blocks.BlockFutureGold;
@@ -24,7 +24,7 @@ public class ModBlocks {
 	public static final Block goldenFutureBlock = new BlockFutureGold(FutureCraft.goldenFBlockID, Material.ground,"goldfutureblock");
 	public static final Block basicFutureFurnace = new BlockFutureFurnace(FutureCraft.basicFurnaceID,"compressionSmelter");
 	public static final Block blockPowerPipe = new BlockPowerPipe(FutureCraft.powerGenPassiveID,"powerpipe");
-	public static final Block dimensionalInfuser = new BlockDimensionalTransmutator(FutureCraft.dimTransID);
+	public static final Block dimensionalInfuser = new BlockDimensionalInfuser(FutureCraft.dimTransID);
 	public static final Block oreIndium = new BlockOre(FutureCraft.oreIndiumID,"oreindium").setTextureName(Ref.NAME.toLowerCase() + ":oreindium");
 	public static final Block oreRoentgenium = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
 	public static void registerBlocks() {

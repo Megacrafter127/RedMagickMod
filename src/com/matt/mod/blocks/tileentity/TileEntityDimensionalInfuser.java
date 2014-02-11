@@ -11,22 +11,22 @@ import com.matt.mod.ModItems;
 
 public class TileEntityDimensionalInfuser extends TileEntity {
 	public void run(World w, EntityPlayer p, int x, int y, int z) {
-		if(p.inventory.hasItem(Item.ingotIron.itemID)) {
+		if(p.inventory.getCurrentItem()==null) return;
+		if(p.inventory.getCurrentItem().getItem()==null) return;
+		if(p.inventory.getCurrentItem().getItem().itemID==Item.ingotIron.itemID) {
 		switch(w.provider.dimensionId) {
 		case -1:
 			System.out.println("DIMENSIONAL INFUSER : NETHER");
-			p.inventory.consumeInventoryItem(Item.ingotIron.itemID);
+			p.inventory.getCurrentItem().splitStack(1);
 			p.inventory.addItemStackToInventory(new ItemStack(ModItems.neth));
-			this.getBlockType().setTextureName(Ref.NAME.toLowerCase() + ":diminfuserneth");
 			break;
 		case 0:
 			p.addChatMessage("You can't dimensional-infuse iron in the overworld! You would get iron back!");
 		case 1:
 			System.out.println("DIMENSIONAL INFUSER : THE END");
-			p.inventory.consumeInventoryItem(Item.ingotIron.itemID);
+			p.inventory.getCurrentItem().splitStack(1);
 			p.inventory.addItemStackToInventory(new ItemStack(ModItems.endh));
 			
-			this.getBlockType().setTextureName(Ref.NAME.toLowerCase() + ":diminfuserend");
 			break;
 		} 
 		

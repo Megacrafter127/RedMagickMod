@@ -15,12 +15,12 @@ import net.minecraft.util.Icon;
 import com.matt.lib.Ref;
 import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
 
-public class BlockDimensionalTransmutator extends Block implements ITileEntityProvider {
+public class BlockDimensionalInfuser extends Block implements ITileEntityProvider {
 	private Icon inactive;
 	private Icon nether;
 	private Icon end;
 	
-	public BlockDimensionalTransmutator(int par1) {
+	public BlockDimensionalInfuser(int par1) {
 		super(par1, Material.iron);
 		
 	}
