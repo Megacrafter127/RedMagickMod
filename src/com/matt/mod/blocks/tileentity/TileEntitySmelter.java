@@ -9,11 +9,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.mod.ModBlocks;
+import com.matt.mod.ModItems;
 import com.matt.mod.power.IPowerReceiver;
-
+/**
+ * Tile entity for the Compression Smeltery block.
+ * @author Matheus
+ *
+ */
 public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 	int currentPower;
 	int powerUsage = 10;
+	/**
+	 * Runs when right-clicked.
+	 * @param p player that clicked
+	 * @param w world object
+	 * @param x x coord
+	 * @param y y coord
+	 * @param z z coord
+	 * @return True if operation was sucessful, false if not
+	 */
 	public boolean run(EntityPlayer p,World w,int x,int y,int z) {
 		receive(w, x, y, z);
 		if(w.getBlockId(x, y + 1, z) == Block.oreIron.blockID && w.getBlockId(x,y -1,z) == Block.oreCoal.blockID) {
@@ -35,44 +49,46 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 			System.out.println("Smelted coal");
 			return true;
 		} else if(w.getBlockId(x, y + 1, z) == Block.oreIron.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage;
+			currentPower = currentPower - powerUsage; // Removes power from storage
 			w.setBlockToAir(x, y + 1, z);
 			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotIron,2) );
 			System.out.println("Smelted iron using power");
 			System.out.println(currentPower);
 			return true;
 		}else if(w.getBlockId(x, y + 1, z) == Block.oreGold.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage;
-			w.setBlockToAir(x, y + 1, z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotGold,2) );
+			currentPower = currentPower - powerUsage; // Removes power from storage
+			w.setBlockToAir(x, y + 1, z); // Removes block above from storage
+			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotGold,2) ); // Adds stack to inventory
 			System.out.println("Smelted gold using power");
 			System.out.println(currentPower);
 			return true;
 		}else if(w.getBlockId(x, y + 1, z) == Block.oreCoal.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage;
-			w.setBlockToAir(x, y + 1, z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) );
+			currentPower = currentPower - powerUsage; // Removes power from storage
+			w.setBlockToAir(x, y + 1, z); // Removes block above
+			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) ); // Adds stack to inventory 
 			System.out.println("Smelted coal using power");
 			System.out.println(currentPower);
 			return true; 
 		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreRoentgenium.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage;
-			w.setBlockToAir(x, y + 1, z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) );
-			System.out.println("Smelted coal using power");
-			System.out.println(currentPower); 
+			currentPower = currentPower - powerUsage; // Removes power from storage
+			w.setBlockToAir(x, y + 1, z);// Removes block above
+			p.inventory.addItemStackToInventory(new ItemStack(ModItems.ingotRoentgenium,2) ); // Adds stack to inventory 
+			System.out.println("Smelted coal using power"); 
+			System.out.println(currentPower); 	
+			return true;
 		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreIndium.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage;
-			w.setBlockToAir(x, y + 1, z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) );
-			System.out.println("Smelted coal using power");
+			currentPower = currentPower - powerUsage; // Removes power from storage
+			w.setBlockToAir(x, y + 1, z);// Removes block above
+			p.inventory.addItemStackToInventory(new ItemStack(ModItems.ingotIndium,2) ); // Adds stack to inventory
+			System.out.println("Smelted indium using power");
 			System.out.println(currentPower);
-			
+			return true;
 			} else {
 				p.addChatMessage("You're using an invalid block, or don't have enought power.");
 				int idToString = w.getBlockId(x,y+1,z);
 				p.addChatMessage("Debug message : Block ID : "+ idToString );
 				p.addChatMessage("Debug message : Block power ammount : "+ this.currentPower );
+				
 			}
 		
 		return false;

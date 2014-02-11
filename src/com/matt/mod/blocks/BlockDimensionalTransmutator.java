@@ -1,14 +1,14 @@
 package com.matt.mod.blocks;
 
-import com.matt.lib.Ref;
-import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.matt.lib.Ref;
+import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
 
 public class BlockDimensionalTransmutator extends Block implements ITileEntityProvider {
 	public BlockDimensionalTransmutator(int par1) {
@@ -28,7 +28,7 @@ public class BlockDimensionalTransmutator extends Block implements ITileEntityPr
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		// TODO Auto-generated method stub
-		return null;
+		return new TileEntityDimensionalInfuser();
 	}
 
 }
