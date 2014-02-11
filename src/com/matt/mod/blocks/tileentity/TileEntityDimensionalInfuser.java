@@ -10,27 +10,31 @@ import com.matt.lib.Ref;
 import com.matt.mod.ModItems;
 
 public class TileEntityDimensionalInfuser extends TileEntity {
+	static {
+		TileEntity.addMapping(TileEntityDimensionalInfuser.class,"TileEntityDimensionalInfuser");
+	}
 	public void run(World w, EntityPlayer p, int x, int y, int z) {
 		if(p.inventory.getCurrentItem()==null) return;
 		if(p.inventory.getCurrentItem().getItem()==null) return;
 		if(p.inventory.getCurrentItem().getItem().itemID==Item.ingotIron.itemID) {
-		switch(w.provider.dimensionId) {
-		case -1:
-			System.out.println("DIMENSIONAL INFUSER : NETHER");
-			p.inventory.getCurrentItem().splitStack(1);
-			p.inventory.addItemStackToInventory(new ItemStack(ModItems.neth));
-			break;
-		case 0:
-			p.addChatMessage("You can't dimensional-infuse iron in the overworld! You would get iron back!");
-		case 1:
-			System.out.println("DIMENSIONAL INFUSER : THE END");
-			p.inventory.getCurrentItem().splitStack(1);
-			p.inventory.addItemStackToInventory(new ItemStack(ModItems.endh));
-			
-			break;
-		} 
-		
+			int i;
+			switch(w.provider.dimensionId) {
+				case -1:
+					System.out.println("DIMENSIONAL INFUSER : NETHER");
+					i=p.inventory.getCurrentItem().stackSize;
+					p.inventory.getCurrentItem().splitStack(i);
+					p.inventory.addItemStackToInventory(new ItemStack(ModItems.neth,i));
+					return;
+				case 0:
+					p.addChatMessage("You can't dimensional-infuse iron in the overworld! You would get iron back!");
+					return;
+				case 1:
+					System.out.println("DIMENSIONAL INFUSER : THE END");
+					i=p.inventory.getCurrentItem().stackSize;
+					p.inventory.getCurrentItem().splitStack(i);
+					p.inventory.addItemStackToInventory(new ItemStack(ModItems.endh,i));
+					return;
+			}
 		}
-		
 	}
 }
