@@ -52,8 +52,9 @@ public class FutureCraft {
 		public static int ingotIndiumId = 590;
 		public static int ingotRoentgeniumId = 591;
 		
-		public static final int netheriumPickaxeId = 592;
-		public static final int enderiumPickaxeId = 593;
+		public static int netheriumPickaxeId = 592;
+		public static int enderiumPickaxeId = 593;
+		public static int indiumPickaxeId = 594;
 		
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
@@ -69,6 +70,7 @@ public class FutureCraft {
 		
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft");
+		
 		
 		
 		
@@ -90,6 +92,9 @@ public class FutureCraft {
              		oreIndiumID = config.getBlock("oreIndium", 543).getInt();
             		oreRoentgeniumID = config.getBlock("oreRoentgenium", 544).getInt();
             		dimTransID = config.getBlock("dimensionalTransmutator", 545).getInt();
+            		netheriumPickaxeId  = config.getBlock("netheriumPick", 592).getInt();
+            		enderiumPickaxeId  = config.getBlock("enderiumPick", 592).getInt();
+            		indiumPickaxeId  = config.getBlock("indiumPick", 592).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();

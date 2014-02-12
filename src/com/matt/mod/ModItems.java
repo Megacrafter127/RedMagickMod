@@ -16,7 +16,7 @@ public class ModItems {
 	
 	public static final ItemModPickaxe nethpick=new ItemModPickaxe(FutureCraft.netheriumPickaxeId,ItemModPickaxe.netherium);
 	public static final ItemModPickaxe endpick=new ItemModPickaxe(FutureCraft.enderiumPickaxeId,ItemModPickaxe.enderium);
-	
+	public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.indiumPickaxeId,ItemModPickaxe.enderium);
 	public static void registerAllItems() {
 		GameRegistry.registerItem(neth, "ingotNetherium");
 		LanguageRegistry.addName(neth, "Netherium Ingot");
