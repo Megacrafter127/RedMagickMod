@@ -6,8 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.matt.lib.Ref;
-import com.matt.mod.ModItems;
+import com.matt.mod.ModHelper;
 
 public class TileEntityDimensionalInfuser extends TileEntity {
 	static {
@@ -23,7 +22,7 @@ public class TileEntityDimensionalInfuser extends TileEntity {
 					System.out.println("DIMENSIONAL INFUSER : NETHER");
 					i=p.inventory.getCurrentItem().stackSize;
 					p.inventory.getCurrentItem().splitStack(i);
-					p.inventory.addItemStackToInventory(new ItemStack(ModItems.neth,i));
+					p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().neth,i));
 					return;
 				case 0:
 					p.addChatMessage("You can't dimensional-infuse iron in the overworld! You would get iron back!");
@@ -32,7 +31,7 @@ public class TileEntityDimensionalInfuser extends TileEntity {
 					System.out.println("DIMENSIONAL INFUSER : THE END");
 					i=p.inventory.getCurrentItem().stackSize;
 					p.inventory.getCurrentItem().splitStack(i);
-					p.inventory.addItemStackToInventory(new ItemStack(ModItems.endh,i));
+					p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().endh,i));
 					return;
 			}
 		}
