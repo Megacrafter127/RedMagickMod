@@ -3,6 +3,7 @@ package com.matt;
 import java.io.File;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -70,13 +71,8 @@ public class FutureCraft {
 		public static ItemStack gFutureStack = new ItemStack(ModHelper.goldenFutureBlock);
 		
 		// Creative Tabs
-		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft");
-		
-		
-		
-		
-		
-		
+		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
+		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
@@ -100,7 +96,6 @@ public class FutureCraft {
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
-             
              
      }
      @EventHandler // used in 1.6.2

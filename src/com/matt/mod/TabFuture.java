@@ -1,27 +1,40 @@
 package com.matt.mod;
 
-import com.matt.FutureCraft;
-
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+
+import com.matt.FutureCraft;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TabFuture extends CreativeTabs {
-
-	public TabFuture(int i, String label) {
+	String str;
+	public TabFuture(int i, String label, String type) {
 		super(i,label);
-		// TODO Auto-generated constructor stub
+		str = type;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getIconItemStack(){
-	// Here you make the Icon of the creative Tab
-	return FutureCraft.bFutureStack;
+	if(str == "block") {
+		return FutureCraft.bFutureStack;	
+	} else if(str == "item") {
+		return ModHelper.enderiumStack;
+	} else {
+		return new ItemStack(Block.blockDiamond);
+	}
+	 
 	}
 	public String getTranslatedTabLabel(){
-	// Here the Name
-	return "FutureCraft";
+		if(str == "block") {
+			return "FutureCraft Blocks";	
+		} else if(str == "item") {
+			return "FutureCraft Items";
+		} else {
+			return "Either mat or mega derped up somewhere";
+		}
 	}
 }

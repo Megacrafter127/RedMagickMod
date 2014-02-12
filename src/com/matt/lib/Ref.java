@@ -11,8 +11,11 @@ public static final String VERSION = "0.0.1";
 public static CreativeTabs getRecommendedTab(String type) {
 	if(type.toLowerCase() == "block") {
 		return FutureCraft.tabFCraft;
-	} else {
-		return null;
+	} else if(type.toLowerCase() == "item") {
+		return FutureCraft.tabFCraftItems;
+	}
+	else{
+		return CreativeTabs.tabMisc;
 	}
 }
 }
