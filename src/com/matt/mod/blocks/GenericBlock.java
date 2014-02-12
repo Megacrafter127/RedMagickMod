@@ -12,6 +12,7 @@ public class GenericBlock extends Block {
 		setUnlocalizedName(p.getName());
 		setTextureName(p.getTexture());
 		this.setCreativeTab(Ref.getRecommendedTab("block"));
-	}
 
+	}
+	
 }
