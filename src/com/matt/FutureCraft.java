@@ -46,12 +46,12 @@ public class FutureCraft {
 		//Item IDs
 		public static int netheriumIngotId = 590;
 		public static int enderiumIngotId = 591;
-		public static int ingotIndiumId = 590;
-		public static int ingotRoentgeniumId = 591;
+		public static int ingotIndiumId = 592;
+		public static int ingotRoentgeniumId = 593;
 		
-		public static int netheriumPickaxeId = 592;
-		public static int enderiumPickaxeId = 593;
-		public static int indiumPickaxeId = 594;
+		public static int netheriumPickaxeId = 600;
+		public static int enderiumPickaxeId = 601;
+		public static int indiumPickaxeId = 602;
 		
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
