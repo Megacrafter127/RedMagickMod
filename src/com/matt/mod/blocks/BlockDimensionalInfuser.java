@@ -22,14 +22,11 @@ public class BlockDimensionalInfuser extends Block implements ITileEntityProvide
 	
 	public BlockDimensionalInfuser(int par1) {
 		super(par1, Material.iron);
-		
-	}
-	@Override
-	public String getItemIconName() {
-		return null;
+		setTextureName(Ref.NAME.toLowerCase() + ":diminfuser");
 	}
 	@Override
 	public void registerIcons(IconRegister r) {
+		super.registerIcons(r);
 		inactive=r.registerIcon(Ref.NAME.toLowerCase() + ":diminfuser");
 		nether=r.registerIcon(Ref.NAME.toLowerCase() + ":diminfusernether");
 		end=r.registerIcon(Ref.NAME.toLowerCase() + ":diminfuserend");
@@ -54,7 +51,6 @@ public class BlockDimensionalInfuser extends Block implements ITileEntityProvide
 	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		// TODO Auto-generated method stub
 		return new TileEntityDimensionalInfuser();
 	}
 
