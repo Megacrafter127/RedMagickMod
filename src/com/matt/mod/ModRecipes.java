@@ -1,5 +1,7 @@
 package com.matt.mod;
 
+import com.matt.mod.recipes.*;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,5 +28,6 @@ public class ModRecipes {
 		GameRegistry.addRecipe(bFutureStackCraft, 
      			"xxx", "xyx", "xxx", 
      			'x',goldStack,'y',diamondStack);
+		GameRegistry.addRecipe(new PickRecipe(new ItemStack(ModItems.endh,1),new ItemStack(Item.stick,1),new ItemStack(ModItems.endpick,1)));
 	}
 }
