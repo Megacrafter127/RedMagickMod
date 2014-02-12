@@ -15,7 +15,8 @@ public class ItemEnderiumPickaxe extends ItemPickaxe {
 
 	public ItemEnderiumPickaxe(int par1) {
 		super(par1, material);
-		setTextureName(Ref.NAME.toLowerCase() + "pickaxeenderium");
+		setTextureName(Ref.NAME.toLowerCase() + ":pickaxeenderium");
+		setUnlocalizedName("Enderium Pickaxe");
 	}
 
 }

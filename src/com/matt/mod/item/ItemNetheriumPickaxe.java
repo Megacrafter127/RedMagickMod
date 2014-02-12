@@ -16,6 +16,7 @@ public class ItemNetheriumPickaxe extends ItemPickaxe {
 	public ItemNetheriumPickaxe(int par1) {
 		super(par1,material);
 		setTextureName(Ref.NAME.toLowerCase() + ":pickaxenetherium");
+		setUnlocalizedName("Netherium Pickaxe");
 	}
 
 }
