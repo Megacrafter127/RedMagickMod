@@ -15,22 +15,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemEnderium extends Item {
 	
-	static int idI = 590;
-	static String unlocName = "netheriumIngot";
-	static CreativeTabs tab = CreativeTabs.tabMisc;
-	static String readName = "Netherium Ingot";
-	static ItemNetherium instance;
-	static String textureName = "null";
-	
 	public ItemEnderium(int id, String unlocalizedName, CreativeTabs creativetab,String textureNameC) {
 		super(id);
-		idI = id;
-		unlocName = unlocalizedName;
-		tab = creativetab;
-		textureName = Ref.NAME + ":" + textureNameC;
-		setUnlocalizedName(unlocName);
-		setCreativeTab(tab);
-		setTextureName(textureName);
+		setUnlocalizedName(unlocalizedName);
+		setCreativeTab(creativetab);
+		setTextureName(Ref.NAME + ":" + textureNameC);
 	}
 	public void addInformation(ItemStack par1ItemStack, List par2List)
 	{
