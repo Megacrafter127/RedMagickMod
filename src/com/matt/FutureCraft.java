@@ -77,6 +77,7 @@ public class FutureCraft {
      public void preInit(FMLPreInitializationEvent event) {
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
              configPatch = event.getSuggestedConfigurationFile();
+             System.out.println("Config File:"+configPatch.getAbsolutePath());
              Configuration config = new Configuration(FutureCraft.configPatch);
              System.out.println("[FC]Loading futurecraft config!");
              config.load();
@@ -90,8 +91,8 @@ public class FutureCraft {
             		oreRoentgeniumID = config.getBlock("oreRoentgenium", 544).getInt();
             		dimTransID = config.getBlock("dimensionalTransmutator", 545).getInt();
             		netheriumPickaxeId  = config.getBlock("netheriumPick", 592).getInt();
-            		enderiumPickaxeId  = config.getBlock("enderiumPick", 592).getInt();
-            		indiumPickaxeId  = config.getBlock("indiumPick", 592).getInt();
+            		enderiumPickaxeId  = config.getBlock("enderiumPick", 593).getInt();
+            		indiumPickaxeId  = config.getBlock("indiumPick", 594).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
