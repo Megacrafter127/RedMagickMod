@@ -27,11 +27,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ModHelper {
-	public static ModHelper instance;
-	public static ModHelper getInstance() {
-		return instance;
-		
-	}
+	
 	//Blocks
 	public static final Block basicFutureBlock = new BlockFutureBasic(FutureCraft.basicFBlockID, Material.ground,"blueblockfuture");
 	public static final Block goldenFutureBlock = new BlockFutureGold(FutureCraft.goldenFBlockID, Material.ground,"goldfutureblock");
@@ -127,17 +123,17 @@ public class ModHelper {
 	public static ItemStack ironStack = new ItemStack(Item.ingotIron,1);
 	public static ItemStack diamondStack = new ItemStack(Item.diamond,1);
 	public static ItemStack goldStack = new ItemStack(Item.ingotGold,1);
-	public static ItemStack bFutureStackCraft = new ItemStack(getInstance().basicFutureBlock,8);
-	public static ItemStack gFutureStackCraft = new ItemStack(getInstance().goldenFutureBlock,8);
-	public static ItemStack bFutureStack = new ItemStack(getInstance().basicFutureBlock);
-	public static ItemStack gFutureStack = new ItemStack(getInstance().goldenFutureBlock);
+	public static ItemStack bFutureStackCraft = new ItemStack(basicFutureBlock,8);
+	public static ItemStack gFutureStackCraft = new ItemStack(goldenFutureBlock,8);
+	public static ItemStack bFutureStack = new ItemStack(basicFutureBlock);
+	public static ItemStack gFutureStack = new ItemStack(goldenFutureBlock);
 	
 	public static final ItemStack stickStack = new ItemStack(Item.stick);
 	public static final ItemStack enderpearlStack = new ItemStack(Item.enderPearl);
-	public static final ItemStack enderiumStack = new ItemStack(getInstance().endh);
-	public static final ItemStack netheriumStack = new ItemStack(getInstance().neth);
-	public static final ItemStack indiumStack = new ItemStack(getInstance().ingotIndium);
-	public static final ItemStack roentgeniumStack = new ItemStack(getInstance().ingotRoentgenium);
+	public static final ItemStack enderiumStack = new ItemStack(endh);
+	public static final ItemStack netheriumStack = new ItemStack(neth);
+	public static final ItemStack indiumStack = new ItemStack(ingotIndium);
+	public static final ItemStack roentgeniumStack = new ItemStack(ingotRoentgenium);
 	
 	public static void registerRecipesShapeless() {
 		GameRegistry.addShapelessRecipe(grasStack,dirtStack, seedStack);
@@ -149,10 +145,10 @@ public class ModHelper {
 		GameRegistry.addRecipe(gFutureStackCraft, 
      			"xzx", "zyz", "xzx", 
      			'x',goldStack,'y',diamondStack, 'z', enderiumStack );
-		GameRegistry.addRecipe(new ItemStack(getInstance().dimensionalInfuser,1),"xxx","xyx","xxx",'x',ironStack,'y',enderpearlStack);
-		GameRegistry.addRecipe(new PickRecipe(enderiumStack,stickStack,new ItemStack(getInstance().endpick,1)));
-		GameRegistry.addRecipe(new PickRecipe(netheriumStack,stickStack,new ItemStack(getInstance().nethpick,1)));
-		GameRegistry.addRecipe(new PickRecipe(indiumStack,stickStack,new ItemStack(getInstance().indiumPick,1)));
+		GameRegistry.addRecipe(new ItemStack(dimensionalInfuser,1),"xxx","xyx","xxx",'x',ironStack,'y',enderpearlStack);
+		GameRegistry.addRecipe(new PickRecipe(enderiumStack,stickStack,new ItemStack(endpick,1)));
+		GameRegistry.addRecipe(new PickRecipe(netheriumStack,stickStack,new ItemStack(nethpick,1)));
+		GameRegistry.addRecipe(new PickRecipe(indiumStack,stickStack,new ItemStack(indiumPick,1)));
 	}
 	//Tile entities
 	public static void registerTileEntities() {
