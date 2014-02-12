@@ -1,23 +1,22 @@
 package com.matt.mod.item;
 
-import com.matt.lib.Ref;
-import com.matt.mod.ModItems;
-
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.EnumRarity;
 import net.minecraftforge.common.EnumHelper;
+
+import com.matt.lib.Ref;
+import com.matt.mod.ModHelper;
 
 public class ItemModPickaxe extends ItemPickaxe {
 	public static final EnumToolMaterial enderium=EnumHelper.addToolMaterial("Enderium",3,1024,10.0F,4.0F,40);
 	public static final EnumToolMaterial netherium=EnumHelper.addToolMaterial("Netherium",0,4096,10.0F,3.0F,2);
 	public static final EnumToolMaterial indium=EnumHelper.addToolMaterial("Indium",4,2048,5.0F,3.0F,0);
 	static{
-		enderium.customCraftingMaterial=ModItems.endh;
-		netherium.customCraftingMaterial=ModItems.neth;
-		indium.customCraftingMaterial=ModItems.ingotIndium;
+		enderium.customCraftingMaterial=ModHelper.getInstance().endh;
+		netherium.customCraftingMaterial=ModHelper.getInstance().neth;
+		indium.customCraftingMaterial=ModHelper.getInstance().ingotIndium;
 	}
 
 	public ItemModPickaxe(int par1,EnumToolMaterial material) {

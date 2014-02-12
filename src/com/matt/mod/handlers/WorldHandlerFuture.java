@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-import com.matt.mod.ModBlocks;
+import com.matt.mod.ModHelper;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -61,8 +61,8 @@ public class WorldHandlerFuture implements IWorldGenerator {
 			int roentgeniumX = i + random.nextInt(16);
 			int roentgeniumY = random.nextInt(15);
 			int roentgeniumZ = j + random.nextInt(16);
-			(new WorldGenMinable(ModBlocks.oreIndium.blockID, 13)).generate(world, random, indiumX, indiumY,indiumZ);
-			(new WorldGenMinable(ModBlocks.oreRoent.blockID, 13)).generate(world, random, indiumX, indiumY,indiumZ);
+			(new WorldGenMinable(ModHelper.getInstance().oreIndium.blockID, 13)).generate(world, random, indiumX, indiumY,indiumZ);
+			(new WorldGenMinable(ModHelper.getInstance().oreRoent.blockID, 13)).generate(world, random, indiumX, indiumY,indiumZ);
 		}
 	}
 	/**

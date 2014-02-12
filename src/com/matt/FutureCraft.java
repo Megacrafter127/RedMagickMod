@@ -9,10 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
 import com.matt.lib.Ref;
-import com.matt.mod.ModBlocks;
-import com.matt.mod.ModItems;
-import com.matt.mod.ModRecipes;
-import com.matt.mod.ModTileEntities;
+import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
 import com.matt.mod.handlers.WorldHandlerFuture;
 import com.matt.proxy.CommonProxy;
@@ -63,10 +60,10 @@ public class FutureCraft {
 		public static ItemStack ironStack = new ItemStack(Item.ingotIron,1);
 		public static ItemStack diamondStack = new ItemStack(Item.diamond,1);
 		public static ItemStack goldStack = new ItemStack(Item.ingotGold,1);
-		public static ItemStack bFutureStackCraft = new ItemStack(ModBlocks.basicFutureBlock,8);
-		public static ItemStack gFutureStackCraft = new ItemStack(ModBlocks.goldenFutureBlock,8);
-		public static ItemStack bFutureStack = new ItemStack(ModBlocks.basicFutureBlock);
-		public static ItemStack gFutureStack = new ItemStack(ModBlocks.goldenFutureBlock);
+		public static ItemStack bFutureStackCraft = new ItemStack(ModHelper.getInstance().basicFutureBlock,8);
+		public static ItemStack gFutureStackCraft = new ItemStack(ModHelper.getInstance().goldenFutureBlock,8);
+		public static ItemStack bFutureStack = new ItemStack(ModHelper.getInstance().basicFutureBlock);
+		public static ItemStack gFutureStack = new ItemStack(ModHelper.getInstance().goldenFutureBlock);
 		
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft");
@@ -106,19 +103,7 @@ public class FutureCraft {
      public void load(FMLInitializationEvent event) {
              proxy.registerRenderers();
              System.out.println("Registering FutureCraft blocks!");
-             ModBlocks.registerBlocks();
-             ModBlocks.registerBlockNames();
-             ModBlocks.registerMiningTools();
-             System.out.println("Registering FutureCraft items!");
-             ModItems.registerAllItems();
-             System.out.println("Registering FutureCraft SHAPELESS recipes!");
-             ModRecipes.registerRecipesShapeless();
-         	System.out.println("Registering FutureCraft SHAPED recipes!");
-         	ModRecipes.registerRecipesShaped();
-         	System.out.println("Registering FutureCraft TILE ENTITIES!");
-         	ModTileEntities.registerTileEntities();
-          	System.out.println("Registering FutureCraft CREATIVE TABS!!");
-         	ModBlocks.setCreativeTabs();
+             ModHelper.getInstance().registerAll();
          	System.out.println("Registering FutureCraft worldgenerator handler!");
          	GameRegistry.registerWorldGenerator(new WorldHandlerFuture());
          	

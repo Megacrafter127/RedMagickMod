@@ -8,8 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.matt.mod.ModBlocks;
-import com.matt.mod.ModItems;
+import com.matt.mod.ModHelper;
 import com.matt.mod.power.IPowerReceiver;
 /**
  * Tile entity for the Compression Smeltery block.
@@ -69,17 +68,17 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 			System.out.println("Smelted coal using power");
 			System.out.println(currentPower);
 			return true; 
-		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreRoent.blockID && currentPower >= powerUsage) {
+		}else if(w.getBlockId(x, y + 1, z) == ModHelper.getInstance().oreRoent.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage; // Removes power from storage
 			w.setBlockToAir(x, y + 1, z);// Removes block above
-			p.inventory.addItemStackToInventory(new ItemStack(ModItems.ingotRoentgenium,2) ); // Adds stack to inventory 
+			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().ingotRoentgenium,2) ); // Adds stack to inventory 
 			System.out.println("Smelted coal using power"); 
 			System.out.println(currentPower); 	
 			return true;
-		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreIndium.blockID && currentPower >= powerUsage) {
+		}else if(w.getBlockId(x, y + 1, z) == ModHelper.getInstance().oreIndium.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage; // Removes power from storage
 			w.setBlockToAir(x, y + 1, z);// Removes block above
-			p.inventory.addItemStackToInventory(new ItemStack(ModItems.ingotIndium,2) ); // Adds stack to inventory
+			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().ingotIndium,2) ); // Adds stack to inventory
 			System.out.println("Smelted indium using power");
 			System.out.println(currentPower);
 			return true;
