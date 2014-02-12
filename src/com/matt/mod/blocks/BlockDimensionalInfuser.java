@@ -23,6 +23,7 @@ public class BlockDimensionalInfuser extends Block implements ITileEntityProvide
 	public BlockDimensionalInfuser(int par1) {
 		super(par1, Material.iron);
 		setTextureName(Ref.NAME.toLowerCase() + ":diminfuser");
+		setUnlocalizedName("Dimensional Infuser");
 	}
 	@Override
 	public void registerIcons(IconRegister r) {
