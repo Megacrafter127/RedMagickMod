@@ -78,10 +78,10 @@ public class ModHelper {
 		registerBlockNames();
 		setCreativeTabs();
 	}
-	public static ItemNetherium neth = new ItemNetherium(FutureCraft.netheriumIngotId,"ingotNetherium", CreativeTabs.tabMisc, "netheriumingot");
-	public static ItemEnderium endh = new ItemEnderium(FutureCraft.enderiumIngotId,"ingotEnderium", CreativeTabs.tabMisc, "enderiumingot");
-	public static Item ingotIndium = new ItemEnderium(FutureCraft.ingotIndiumId,"ingotIndium", CreativeTabs.tabMisc, "indiumtingot").setTextureName(Ref.NAME.toLowerCase() +":indiumingot");
-	public static Item ingotRoentgenium = new ItemEnderium(FutureCraft.ingotRoentgeniumId,"ingotRoentgenium", CreativeTabs.tabMisc, "roentgeniumingot").setTextureName(Ref.NAME.toLowerCase() +":roentgeniumingot");
+	public static final ItemNetherium neth = new ItemNetherium(FutureCraft.netheriumIngotId,"ingotNetherium", CreativeTabs.tabMisc, "netheriumingot");
+	public static final ItemEnderium endh = new ItemEnderium(FutureCraft.enderiumIngotId,"ingotEnderium", CreativeTabs.tabMisc, "enderiumingot");
+	public static final Item ingotIndium = new ItemEnderium(FutureCraft.ingotIndiumId,"ingotIndium", CreativeTabs.tabMisc, "indiumtingot").setTextureName(Ref.NAME.toLowerCase() +":indiumingot");
+	public static final Item ingotRoentgenium = new ItemEnderium(FutureCraft.ingotRoentgeniumId,"ingotRoentgenium", CreativeTabs.tabMisc, "roentgeniumingot").setTextureName(Ref.NAME.toLowerCase() +":roentgeniumingot");
 	public static final ItemModPickaxe nethpick=new ItemModPickaxe(FutureCraft.netheriumPickaxeId,ItemModPickaxe.netherium);
 	public static final ItemModPickaxe endpick=new ItemModPickaxe(FutureCraft.enderiumPickaxeId,ItemModPickaxe.enderium);
 	public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.indiumPickaxeId,ItemModPickaxe.indium);
@@ -117,16 +117,16 @@ public class ModHelper {
 		endpick.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 	//Recipes
-	public static ItemStack dirtStack = new ItemStack(Block.dirt);
-	public static ItemStack seedStack = new ItemStack(Item.seeds);
-	public  static ItemStack grasStack = new ItemStack(Block.grass);
-	public static ItemStack ironStack = new ItemStack(Item.ingotIron,1);
-	public static ItemStack diamondStack = new ItemStack(Item.diamond,1);
-	public static ItemStack goldStack = new ItemStack(Item.ingotGold,1);
-	public static ItemStack bFutureStackCraft = new ItemStack(basicFutureBlock,8);
-	public static ItemStack gFutureStackCraft = new ItemStack(goldenFutureBlock,8);
-	public static ItemStack bFutureStack = new ItemStack(basicFutureBlock);
-	public static ItemStack gFutureStack = new ItemStack(goldenFutureBlock);
+	public static final ItemStack dirtStack = new ItemStack(Block.dirt);
+	public static final ItemStack seedStack = new ItemStack(Item.seeds);
+	public static final ItemStack grasStack = new ItemStack(Block.grass);
+	public static final ItemStack ironStack = new ItemStack(Item.ingotIron,1);
+	public static final ItemStack diamondStack = new ItemStack(Item.diamond,1);
+	public static final ItemStack goldStack = new ItemStack(Item.ingotGold,1);
+	public static final ItemStack bFutureStackCraft = new ItemStack(basicFutureBlock,8);
+	public static final ItemStack gFutureStackCraft = new ItemStack(goldenFutureBlock,8);
+	public static final ItemStack bFutureStack = new ItemStack(basicFutureBlock);
+	public static final ItemStack gFutureStack = new ItemStack(goldenFutureBlock);
 	
 	public static final ItemStack stickStack = new ItemStack(Item.stick);
 	public static final ItemStack enderpearlStack = new ItemStack(Item.enderPearl);
