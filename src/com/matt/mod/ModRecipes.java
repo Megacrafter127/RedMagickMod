@@ -19,7 +19,14 @@ public class ModRecipes {
 	public static ItemStack gFutureStackCraft = new ItemStack(ModBlocks.goldenFutureBlock,8);
 	public static ItemStack bFutureStack = new ItemStack(ModBlocks.basicFutureBlock);
 	public static ItemStack gFutureStack = new ItemStack(ModBlocks.goldenFutureBlock);
-	public static ItemStack enderiumStack = new ItemStack(ModItems.endh);
+	
+	public static final ItemStack stickStack = new ItemStack(Item.stick);
+	public static final ItemStack enderpearlStack = new ItemStack(Item.enderPearl);
+	public static final ItemStack enderiumStack = new ItemStack(ModItems.endh);
+	public static final ItemStack netheriumStack = new ItemStack(ModItems.neth);
+	public static final ItemStack indiumStack = new ItemStack(ModItems.ingotIndium);
+	public static final ItemStack roentgeniumStack = new ItemStack(ModItems.ingotRoentgenium);
+	
 	public static void registerRecipesShapeless() {
 		GameRegistry.addShapelessRecipe(grasStack,dirtStack, seedStack);
 	}
@@ -30,7 +37,9 @@ public class ModRecipes {
 		GameRegistry.addRecipe(gFutureStackCraft, 
      			"xzx", "zyz", "xzx", 
      			'x',goldStack,'y',diamondStack, 'z', enderiumStack );
-		GameRegistry.addRecipe(new PickRecipe(new ItemStack(ModItems.endh,1),new ItemStack(Item.stick,1),new ItemStack(ModItems.endpick,1)));
-		GameRegistry.addRecipe(new PickRecipe(new ItemStack(ModItems.neth,1),new ItemStack(Item.stick,1),new ItemStack(ModItems.nethpick,1)));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.dimensionalInfuser,1),"xxx","xyx","xxx",'x',ironStack,'y',enderpearlStack);
+		GameRegistry.addRecipe(new PickRecipe(enderiumStack,stickStack,new ItemStack(ModItems.endpick,1)));
+		GameRegistry.addRecipe(new PickRecipe(netheriumStack,stickStack,new ItemStack(ModItems.nethpick,1)));
+		GameRegistry.addRecipe(new PickRecipe(indiumStack,stickStack,new ItemStack(ModItems.indiumPick,1)));
 	}
 }
