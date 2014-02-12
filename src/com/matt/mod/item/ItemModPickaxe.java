@@ -47,6 +47,9 @@ public class ItemModPickaxe extends ItemPickaxe {
 		else if(((ItemPickaxe)s.getItem()).getToolMaterialName().equals("Netherium")) {
 			return EnumRarity.rare;
 		}
+		else if(((ItemPickaxe)s.getItem()).getToolMaterialName().equals("Indium")) {
+			return EnumRarity.epic;
+		}
 		return EnumRarity.common;
 	}
 
