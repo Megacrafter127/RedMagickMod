@@ -1,10 +1,11 @@
 package com.matt.mod;
 
-import com.matt.mod.recipes.*;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.matt.mod.recipes.PickRecipe;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 public class ModRecipes {
 
@@ -18,6 +19,7 @@ public class ModRecipes {
 	public static ItemStack gFutureStackCraft = new ItemStack(ModBlocks.goldenFutureBlock,8);
 	public static ItemStack bFutureStack = new ItemStack(ModBlocks.basicFutureBlock);
 	public static ItemStack gFutureStack = new ItemStack(ModBlocks.goldenFutureBlock);
+	public static ItemStack enderiumStack = new ItemStack(ModItems.endh);
 	public static void registerRecipesShapeless() {
 		GameRegistry.addShapelessRecipe(grasStack,dirtStack, seedStack);
 	}
@@ -25,9 +27,9 @@ public class ModRecipes {
 		GameRegistry.addRecipe(bFutureStackCraft, 
      			"xxx", "xyx", "xxx", 
      			'x',ironStack,'y',diamondStack);
-		GameRegistry.addRecipe(bFutureStackCraft, 
-     			"xxx", "xyx", "xxx", 
-     			'x',goldStack,'y',diamondStack);
+		GameRegistry.addRecipe(gFutureStackCraft, 
+     			"xzx", "zyz", "xzx", 
+     			'x',goldStack,'y',diamondStack, 'z', enderiumStack );
 		GameRegistry.addRecipe(new PickRecipe(new ItemStack(ModItems.endh,1),new ItemStack(Item.stick,1),new ItemStack(ModItems.endpick,1)));
 		GameRegistry.addRecipe(new PickRecipe(new ItemStack(ModItems.neth,1),new ItemStack(Item.stick,1),new ItemStack(ModItems.nethpick,1)));
 	}

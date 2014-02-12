@@ -12,7 +12,7 @@ public class BlockFutureGold extends Block {
 	public BlockFutureGold(int par1, Material par2Material, String textureName) {
 		super(par1, par2Material);
 		setTextureName(Ref.NAME.toLowerCase() + ":goldfutureblock");
-		setUnlocalizedName("basicFutureBlock");
+		setUnlocalizedName("goldenFutureBlock");
 		this.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 
