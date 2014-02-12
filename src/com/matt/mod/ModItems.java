@@ -14,8 +14,8 @@ public class ModItems {
 	public static Item ingotIndium = new ItemEnderium(FutureCraft.ingotIndiumId,"ingotIndium", CreativeTabs.tabMisc, "indiumtingot").setTextureName(Ref.NAME.toLowerCase() +":indiumingot");
 	public static Item ingotRoentgenium = new ItemEnderium(FutureCraft.ingotRoentgeniumId,"ingotRoentgenium", CreativeTabs.tabMisc, "roentgeniumingot").setTextureName(Ref.NAME.toLowerCase() +":roentgeniumingot");
 	
-	public static final ItemNetheriumPickaxe nethpick=new ItemNetheriumPickaxe(FutureCraft.netheriumPickaxeId);
-	public static final ItemEnderiumPickaxe endpick=new ItemEnderiumPickaxe(FutureCraft.enderiumPickaxeId);
+	public static final ItemModPickaxe nethpick=new ItemModPickaxe(FutureCraft.netheriumPickaxeId,ItemModPickaxe.netherium);
+	public static final ItemModPickaxe endpick=new ItemModPickaxe(FutureCraft.enderiumPickaxeId,ItemModPickaxe.enderium);
 	
 	public static void registerAllItems() {
 		GameRegistry.registerItem(neth, "ingotNetherium");
