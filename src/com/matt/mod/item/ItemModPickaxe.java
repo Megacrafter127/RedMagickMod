@@ -3,8 +3,11 @@ package com.matt.mod.item;
 import com.matt.lib.Ref;
 import com.matt.mod.ModItems;
 
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.EnumRarity;
 import net.minecraftforge.common.EnumHelper;
 
 public class ItemModPickaxe extends ItemPickaxe {
@@ -25,6 +28,21 @@ public class ItemModPickaxe extends ItemPickaxe {
 			setTextureName(Ref.NAME.toLowerCase() + ":pickaxenetherium");
 			setUnlocalizedName("Netherium Pickaxe");
 		}
+	}
+	
+	@Override
+	public boolean hasEffect(ItemStack s) {
+		return true;
+	}
+	
+	public EnumRarity getRarity(ItemStack s) {
+		if(((ItemPickaxe)s.getItem()).getToolMaterialName().equals("Enderium")) {
+			return EnumRarity.epic;
+		}
+		else if(((ItemPickaxe)s.getItem()).getToolMaterialName().equals("Netherium")) {
+			return EnumRarity.rare;
+		}
+		return EnumRarity.common;
 	}
 
 }
