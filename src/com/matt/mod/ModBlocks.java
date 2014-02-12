@@ -12,6 +12,7 @@ import com.matt.mod.blocks.BlockFutureFurnace;
 import com.matt.mod.blocks.BlockFutureGold;
 import com.matt.mod.blocks.BlockOre;
 import com.matt.mod.blocks.BlockPowerPipe;
+import com.matt.mod.handlers.FutureCraftRegistry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -26,14 +27,14 @@ public class ModBlocks {
 	public static final Block blockPowerPipe = new BlockPowerPipe(FutureCraft.powerGenPassiveID,"powerpipe");
 	public static final Block dimensionalInfuser = new BlockDimensionalInfuser(FutureCraft.dimTransID);
 	public static final Block oreIndium = new BlockOre(FutureCraft.oreIndiumID,"oreindium").setTextureName(Ref.NAME.toLowerCase() + ":oreindium");
-	public static final Block oreRoentgenium = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
+	public static final Block oreRoent = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
 	public static void registerBlocks() {
 		GameRegistry.registerBlock(basicFutureBlock, "basicFutureBlock");
 		GameRegistry.registerBlock(goldenFutureBlock, "goldenFutureBlock");
 		GameRegistry.registerBlock(basicFutureFurnace,"basicFutureFurnace");
 		GameRegistry.registerBlock(blockPowerPipe,"blockPowerPipe");
 		GameRegistry.registerBlock(oreIndium, "oreIndium");
-		GameRegistry.registerBlock(oreRoentgenium, "oreRoentgenium");
+		GameRegistry.registerBlock(oreRoent, "oreRoentgenium");
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
 		}
 	public static void registerBlockNames() {
@@ -41,8 +42,8 @@ public class ModBlocks {
 		LanguageRegistry.addName(goldenFutureBlock, "Golden Machine Handler");
 		LanguageRegistry.addName(basicFutureFurnace, "Basic Compression Smelter");
 		LanguageRegistry.addName(blockPowerPipe, "Power Generator ( Passive ) ");
-		LanguageRegistry.addName(oreIndium, "Indium Ore");
-		LanguageRegistry.addName(oreRoentgenium, "Roentgenium Ore");
+		FutureCraftRegistry.setCommonName(oreIndium, "Indium Ore");
+		FutureCraftRegistry.setCommonName(oreRoent, "Roentgenium Ore");
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
 	}
 	public static void registerMiningTools() {
@@ -50,7 +51,7 @@ public class ModBlocks {
 		MinecraftForge.setBlockHarvestLevel(goldenFutureBlock, "pickaxe",1);
 		MinecraftForge.setBlockHarvestLevel(basicFutureFurnace, "pickaxe",1);
 		MinecraftForge.setBlockHarvestLevel(oreIndium, "pickaxe",2);
-		MinecraftForge.setBlockHarvestLevel(oreRoentgenium, "pickaxe",3);
+		MinecraftForge.setBlockHarvestLevel(oreRoent, "pickaxe",3);
 		
 	}
 	public static void setCreativeTabs() {
@@ -59,7 +60,7 @@ public class ModBlocks {
 		goldenFutureBlock.setCreativeTab(Ref.getRecommendedTab("block"));
 		basicFutureFurnace.setCreativeTab(Ref.getRecommendedTab("block"));
 		oreIndium.setCreativeTab(Ref.getRecommendedTab("block"));
-		oreRoentgenium.setCreativeTab(Ref.getRecommendedTab("block"));
+		oreRoent.setCreativeTab(Ref.getRecommendedTab("block"));
 		dimensionalInfuser.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 }

@@ -69,7 +69,7 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 			System.out.println("Smelted coal using power");
 			System.out.println(currentPower);
 			return true; 
-		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreRoentgenium.blockID && currentPower >= powerUsage) {
+		}else if(w.getBlockId(x, y + 1, z) == ModBlocks.oreRoent.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage; // Removes power from storage
 			w.setBlockToAir(x, y + 1, z);// Removes block above
 			p.inventory.addItemStackToInventory(new ItemStack(ModItems.ingotRoentgenium,2) ); // Adds stack to inventory 
