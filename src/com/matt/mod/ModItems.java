@@ -34,8 +34,8 @@ public class ModItems {
 		endh.setCreativeTab(Ref.getRecommendedTab("block"));
 		ingotIndium.setCreativeTab(Ref.getRecommendedTab("block"));
 		ingotRoentgenium.setCreativeTab(Ref.getRecommendedTab("block"));
-		nethpick.setCreativeTab(Ref.getRecommendedTab("tool"));
-		endpick.setCreativeTab(Ref.getRecommendedTab("tool"));
+		nethpick.setCreativeTab(Ref.getRecommendedTab("block"));
+		endpick.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 
 }
