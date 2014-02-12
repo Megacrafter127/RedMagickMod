@@ -18,9 +18,9 @@ import com.matt.mod.blocks.BlockPowerPipe;
 import com.matt.mod.blocks.tileentity.TileEntityPowerPipe;
 import com.matt.mod.blocks.tileentity.TileEntitySmelter;
 import com.matt.mod.handlers.FutureCraftRegistry;
-import com.matt.mod.item.ItemEnderium;
+import com.matt.mod.item.ItemIngot;
 import com.matt.mod.item.ItemModPickaxe;
-import com.matt.mod.item.ItemNetherium;
+import com.matt.mod.item.ItemIngot;
 import com.matt.mod.recipes.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -78,10 +78,10 @@ public class ModHelper {
 		registerBlockNames();
 		setCreativeTabs();
 	}
-	public static final ItemNetherium neth = new ItemNetherium(FutureCraft.netheriumIngotId,"ingotNetherium", CreativeTabs.tabMisc, "netheriumingot");
-	public static final ItemEnderium endh = new ItemEnderium(FutureCraft.enderiumIngotId,"ingotEnderium", CreativeTabs.tabMisc, "enderiumingot");
-	public static final Item ingotIndium = new ItemEnderium(FutureCraft.ingotIndiumId,"ingotIndium", CreativeTabs.tabMisc, "indiumtingot").setTextureName(Ref.NAME.toLowerCase() +":indiumingot");
-	public static final Item ingotRoentgenium = new ItemEnderium(FutureCraft.ingotRoentgeniumId,"ingotRoentgenium", CreativeTabs.tabMisc, "roentgeniumingot").setTextureName(Ref.NAME.toLowerCase() +":roentgeniumingot");
+	public static final ItemIngot neth = new ItemIngot(FutureCraft.netheriumIngotId,"ingotNetherium", CreativeTabs.tabMisc, "netheriumingot");
+	public static final ItemIngot endh = new ItemIngot(FutureCraft.enderiumIngotId,"ingotEnderium", CreativeTabs.tabMisc, "enderiumingot");
+	public static final ItemIngot ingotIndium = new ItemIngot(FutureCraft.ingotIndiumId,"ingotIndium", CreativeTabs.tabMisc, "indiumingot");
+	public static final ItemIngot ingotRoentgenium = new ItemIngot(FutureCraft.ingotRoentgeniumId,"ingotRoentgenium", CreativeTabs.tabMisc, "roentgeniumingot");
 	public static final ItemModPickaxe nethpick=new ItemModPickaxe(FutureCraft.netheriumPickaxeId,ItemModPickaxe.netherium);
 	public static final ItemModPickaxe endpick=new ItemModPickaxe(FutureCraft.enderiumPickaxeId,ItemModPickaxe.enderium);
 	public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.indiumPickaxeId,ItemModPickaxe.indium);

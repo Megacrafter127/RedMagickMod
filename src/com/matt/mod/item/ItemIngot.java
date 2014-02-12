@@ -13,9 +13,9 @@ import com.matt.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemEnderium extends Item {
+public class ItemIngot extends Item {
 	
-	public ItemEnderium(int id, String unlocalizedName, CreativeTabs creativetab,String textureNameC) {
+	public ItemIngot(int id, String unlocalizedName, CreativeTabs creativetab,String textureNameC) {
 		super(id);
 		setUnlocalizedName(unlocalizedName);
 		setCreativeTab(creativetab);

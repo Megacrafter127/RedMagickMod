@@ -16,7 +16,7 @@ public class GenericItem extends Item {
 	static String unlocName = "netheriumIngot";
 	static CreativeTabs tab = CreativeTabs.tabMisc;
 	static String readName = "Netherium Ingot";
-	static ItemNetherium instance;
+	static ItemIngot instance;
 	static String textureName = "null";
 	
 	public GenericItem(int id, String unlocalizedName, CreativeTabs creativetab,String textureNameC) {
