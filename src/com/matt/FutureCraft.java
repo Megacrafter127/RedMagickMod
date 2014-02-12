@@ -109,7 +109,7 @@ public class FutureCraft {
              System.out.println("Registering FutureCraft SHAPELESS recipes!");
              ModRecipes.registerRecipesShapeless();
          	System.out.println("Registering FutureCraft SHAPED recipes!");
-         	ModRecipes.registerRecipesShapeless();
+         	ModRecipes.registerRecipesShaped();
          	System.out.println("Registering FutureCraft TILE ENTITIES!");
          	ModTileEntities.registerTileEntities();
           	System.out.println("Registering FutureCraft CREATIVE TABS!!");
