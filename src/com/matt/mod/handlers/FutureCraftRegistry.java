@@ -45,16 +45,6 @@ public static void setLocalizedName(String loc, Object obj, String str) {
 		registeredMap.put(str, obj);
 	}
 }
-/**
- * Adds an object to registering queue
- * @param obj
- * @param str
- */
-public static void addNameToRegisterQueue(Object obj, String str) {
-	registryMapToR.put(obj, str);
-}
-public static void registerFromQueue(String key, String name, String loc) {
-	Object obj = registryMapToR.get(key);
-	setLocalizedName(loc,obj,name);
-}
+
+
 }
