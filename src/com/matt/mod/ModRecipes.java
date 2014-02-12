@@ -29,5 +29,6 @@ public class ModRecipes {
      			"xxx", "xyx", "xxx", 
      			'x',goldStack,'y',diamondStack);
 		GameRegistry.addRecipe(new PickRecipe(new ItemStack(ModItems.endh,1),new ItemStack(Item.stick,1),new ItemStack(ModItems.endpick,1)));
+		System.out.println("registered futurecraft recipes");
 	}
 }
