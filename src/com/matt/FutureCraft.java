@@ -24,7 +24,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-
+/**
+ * The futurecraft mod!
+ * @author Matheus
+ *
+ */
 @Mod(modid = Ref.ID, name = Ref.NAME, version = "0.0.1a1")
 @NetworkMod( channels = {""}, clientSideRequired = true, serverSideRequired = true )
 public class FutureCraft {

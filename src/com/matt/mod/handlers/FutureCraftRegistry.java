@@ -9,7 +9,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class FutureCraftRegistry {
 static FutureCraftRegistry instance;
 // Hashmap!
-static HashMap<Object,String> registryMapToR=new HashMap<Object,String>();
 static HashMap<String,Object> registeredMap=new HashMap<String,Object>();
 public static FutureCraftRegistry getInstance() {
 	return instance;
