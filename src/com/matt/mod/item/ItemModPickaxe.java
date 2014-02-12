@@ -12,10 +12,12 @@ import net.minecraftforge.common.EnumHelper;
 
 public class ItemModPickaxe extends ItemPickaxe {
 	public static final EnumToolMaterial enderium=EnumHelper.addToolMaterial("Enderium",3,1024,10.0F,4.0F,40);
-	public static final EnumToolMaterial netherium=EnumHelper.addToolMaterial("Netherium",0,4096,10.0F,3.0F,10);
+	public static final EnumToolMaterial netherium=EnumHelper.addToolMaterial("Netherium",0,4096,10.0F,3.0F,2);
+	public static final EnumToolMaterial indium=EnumHelper.addToolMaterial("Indium",0,512,2.0F,2.0F,10);
 	static{
 		enderium.customCraftingMaterial=ModItems.endh;
 		netherium.customCraftingMaterial=ModItems.neth;
+		indium.customCraftingMaterial=ModItems.ingotIndium;
 	}
 
 	public ItemModPickaxe(int par1,EnumToolMaterial material) {
