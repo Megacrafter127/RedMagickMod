@@ -42,8 +42,10 @@ public class ModBlocks {
 		LanguageRegistry.addName(goldenFutureBlock, "Golden Machine Handler");
 		LanguageRegistry.addName(basicFutureFurnace, "Basic Compression Smelter");
 		LanguageRegistry.addName(blockPowerPipe, "Power Generator ( Passive ) ");
-		FutureCraftRegistry.setCommonName(oreIndium, "Indium Ore");
-		FutureCraftRegistry.setCommonName(oreRoent, "Roentgenium Ore");
+		FutureCraftRegistry.setLocalizedName("en_US", oreIndium, "Indium Ore");
+		FutureCraftRegistry.setLocalizedName("en_US", oreRoent, "Indium Ore");
+		FutureCraftRegistry.setLocalizedName("en_UK", oreIndium, "Indium Ore");
+		FutureCraftRegistry.setLocalizedName("en_UK", oreRoent, "Indium Ore");
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
 	}
 	public static void registerMiningTools() {
