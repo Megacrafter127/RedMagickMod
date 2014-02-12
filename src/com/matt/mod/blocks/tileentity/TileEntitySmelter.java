@@ -68,17 +68,17 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 			System.out.println("Smelted coal using power");
 			System.out.println(currentPower);
 			return true; 
-		}else if(w.getBlockId(x, y + 1, z) == ModHelper.getInstance().oreRoent.blockID && currentPower >= powerUsage) {
+		}else if(w.getBlockId(x, y + 1, z) == ModHelper.oreRoent.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage; // Removes power from storage
 			w.setBlockToAir(x, y + 1, z);// Removes block above
-			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().ingotRoentgenium,2) ); // Adds stack to inventory 
+			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.ingotRoentgenium,2) ); // Adds stack to inventory 
 			System.out.println("Smelted coal using power"); 
 			System.out.println(currentPower); 	
 			return true;
-		}else if(w.getBlockId(x, y + 1, z) == ModHelper.getInstance().oreIndium.blockID && currentPower >= powerUsage) {
+		}else if(w.getBlockId(x, y + 1, z) == ModHelper.oreIndium.blockID && currentPower >= powerUsage) {
 			currentPower = currentPower - powerUsage; // Removes power from storage
 			w.setBlockToAir(x, y + 1, z);// Removes block above
-			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().ingotIndium,2) ); // Adds stack to inventory
+			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.ingotIndium,2) ); // Adds stack to inventory
 			System.out.println("Smelted indium using power");
 			System.out.println(currentPower);
 			return true;

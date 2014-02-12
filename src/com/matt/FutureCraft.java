@@ -60,10 +60,10 @@ public class FutureCraft {
 		public static ItemStack ironStack = new ItemStack(Item.ingotIron,1);
 		public static ItemStack diamondStack = new ItemStack(Item.diamond,1);
 		public static ItemStack goldStack = new ItemStack(Item.ingotGold,1);
-		public static ItemStack bFutureStackCraft = new ItemStack(ModHelper.getInstance().basicFutureBlock,8);
-		public static ItemStack gFutureStackCraft = new ItemStack(ModHelper.getInstance().goldenFutureBlock,8);
-		public static ItemStack bFutureStack = new ItemStack(ModHelper.getInstance().basicFutureBlock);
-		public static ItemStack gFutureStack = new ItemStack(ModHelper.getInstance().goldenFutureBlock);
+		public static ItemStack bFutureStackCraft = new ItemStack(ModHelper.basicFutureBlock,8);
+		public static ItemStack gFutureStackCraft = new ItemStack(ModHelper.goldenFutureBlock,8);
+		public static ItemStack bFutureStack = new ItemStack(ModHelper.basicFutureBlock);
+		public static ItemStack gFutureStack = new ItemStack(ModHelper.goldenFutureBlock);
 		
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft");
@@ -103,7 +103,7 @@ public class FutureCraft {
      public void load(FMLInitializationEvent event) {
              proxy.registerRenderers();
              System.out.println("Registering FutureCraft blocks!");
-             ModHelper.getInstance().registerAll();
+             ModHelper.registerAll();
          	System.out.println("Registering FutureCraft worldgenerator handler!");
          	GameRegistry.registerWorldGenerator(new WorldHandlerFuture());
          	

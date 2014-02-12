@@ -22,7 +22,7 @@ public class TileEntityDimensionalInfuser extends TileEntity {
 					System.out.println("DIMENSIONAL INFUSER : NETHER");
 					i=p.inventory.getCurrentItem().stackSize;
 					p.inventory.getCurrentItem().splitStack(i);
-					p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().neth,i));
+					p.inventory.addItemStackToInventory(new ItemStack(ModHelper.neth,i));
 					return;
 				case 0:
 					p.addChatMessage("You can't dimensional-infuse iron in the overworld! You would get iron back!");
@@ -31,7 +31,7 @@ public class TileEntityDimensionalInfuser extends TileEntity {
 					System.out.println("DIMENSIONAL INFUSER : THE END");
 					i=p.inventory.getCurrentItem().stackSize;
 					p.inventory.getCurrentItem().splitStack(i);
-					p.inventory.addItemStackToInventory(new ItemStack(ModHelper.getInstance().endh,i));
+					p.inventory.addItemStackToInventory(new ItemStack(ModHelper.endh,i));
 					return;
 			}
 		}

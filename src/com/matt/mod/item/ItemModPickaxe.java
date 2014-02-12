@@ -14,9 +14,9 @@ public class ItemModPickaxe extends ItemPickaxe {
 	public static final EnumToolMaterial netherium=EnumHelper.addToolMaterial("Netherium",0,4096,10.0F,3.0F,2);
 	public static final EnumToolMaterial indium=EnumHelper.addToolMaterial("Indium",4,2048,5.0F,3.0F,0);
 	static{
-		enderium.customCraftingMaterial=ModHelper.getInstance().endh;
-		netherium.customCraftingMaterial=ModHelper.getInstance().neth;
-		indium.customCraftingMaterial=ModHelper.getInstance().ingotIndium;
+		enderium.customCraftingMaterial=ModHelper.endh;
+		netherium.customCraftingMaterial=ModHelper.neth;
+		indium.customCraftingMaterial=ModHelper.ingotIndium;
 	}
 
 	public ItemModPickaxe(int par1,EnumToolMaterial material) {
