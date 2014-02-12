@@ -82,7 +82,7 @@ public class FutureCraft {
              config.load();
              		basicFBlockID = config.getBlock("basicMachineHandler", 538).getInt();
              		goldenFBlockID = config.getBlock("advancedMachineHandler", 539).getInt();
-             		basicFurnaceID = config.getItem("basicFurnace", 540).getInt();
+             		basicFurnaceID = config.getBlock("basicFurnace", 540).getInt();
              		powerGenPassiveID = config.getBlock("powerPipe", 541).getInt();
              		netheriumIngotId = config.getItem("netheriumIngot", 590).getInt();
              		enderiumIngotId = config.getItem("enderiumIngot", 591).getInt();
