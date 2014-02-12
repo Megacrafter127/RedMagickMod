@@ -109,12 +109,12 @@ public class ModHelper {
 		LanguageRegistry.addName(endpick, "Enderium Pickaxe");
 	}
 	public static void registerItemCreativeTabs() {
-		neth.setCreativeTab(Ref.getRecommendedTab("block"));
-		endh.setCreativeTab(Ref.getRecommendedTab("block"));
-		ingotIndium.setCreativeTab(Ref.getRecommendedTab("block"));
-		ingotRoentgenium.setCreativeTab(Ref.getRecommendedTab("block"));
-		nethpick.setCreativeTab(Ref.getRecommendedTab("block"));
-		endpick.setCreativeTab(Ref.getRecommendedTab("block"));
+		neth.setCreativeTab(Ref.getRecommendedTab("item"));
+		endh.setCreativeTab(Ref.getRecommendedTab("item"));
+		ingotIndium.setCreativeTab(Ref.getRecommendedTab("item"));
+		ingotRoentgenium.setCreativeTab(Ref.getRecommendedTab("item"));
+		nethpick.setCreativeTab(Ref.getRecommendedTab("item"));
+		endpick.setCreativeTab(Ref.getRecommendedTab("item"));
 	}
 	//Recipes
 	public static final ItemStack dirtStack = new ItemStack(Block.dirt);
