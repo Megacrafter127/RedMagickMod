@@ -21,7 +21,7 @@ import com.matt.mod.handlers.FutureCraftRegistry;
 import com.matt.mod.item.ItemEnderium;
 import com.matt.mod.item.ItemModPickaxe;
 import com.matt.mod.item.ItemNetherium;
-import com.matt.mod.recipes.PickRecipe;
+import com.matt.mod.recipes.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -139,13 +139,9 @@ public class ModHelper {
 		GameRegistry.addShapelessRecipe(grasStack,dirtStack, seedStack);
 	}
 	public static void registerRecipesShaped() {
-		GameRegistry.addRecipe(bFutureStackCraft, 
-     			"xxx", "xyx", "xxx", 
-     			'x',ironStack,'y',diamondStack);
-		GameRegistry.addRecipe(gFutureStackCraft, 
-     			"xzx", "zyz", "xzx", 
-     			'x',goldStack,'y',diamondStack, 'z', enderiumStack );
-		GameRegistry.addRecipe(new ItemStack(dimensionalInfuser,1),"xxx","xyx","xxx",'x',ironStack,'y',enderpearlStack);
+		GameRegistry.addRecipe(new QuadSymetricRecipe(bFutureStackCraft,ironStack,netheriumStack,diamondStack));
+		GameRegistry.addRecipe(new QuadSymetricRecipe(gFutureStackCraft,goldStack,enderiumStack,diamondStack));
+		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(dimensionalInfuser,1),ironStack,ironStack,enderpearlStack));
 		GameRegistry.addRecipe(new PickRecipe(enderiumStack,stickStack,new ItemStack(endpick,1)));
 		GameRegistry.addRecipe(new PickRecipe(netheriumStack,stickStack,new ItemStack(nethpick,1)));
 		GameRegistry.addRecipe(new PickRecipe(indiumStack,stickStack,new ItemStack(indiumPick,1)));
