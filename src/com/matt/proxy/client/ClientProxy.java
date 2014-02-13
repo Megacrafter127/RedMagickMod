@@ -3,6 +3,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.matt.gui.LoreBookGui;
 import com.matt.proxy.CommonProxy;
 
 public class ClientProxy extends CommonProxy {
@@ -20,6 +21,7 @@ public class ClientProxy extends CommonProxy {
         	switch(ID)
         	{
         		case 0: /* your GUIs go here */
+        			return new LoreBookGui();
         	}
         	}
         	return null;
