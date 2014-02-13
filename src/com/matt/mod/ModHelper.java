@@ -14,6 +14,7 @@ import com.matt.mod.blocks.tileentity.*;
 import com.matt.mod.handlers.FutureCraftRegistry;
 import com.matt.mod.item.*;
 import com.matt.mod.recipes.*;
+import com.matt.proxy.CommonProxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -82,7 +83,8 @@ public class ModHelper {
 	public static final ItemIngot ingotRoentgenium = new ItemIngot(FutureCraft.ingotRoentgeniumId,"ingotRoentgenium", CreativeTabs.tabMisc, "roentgeniumingot");
 	public static final ItemModPickaxe nethpick=new ItemModPickaxe(FutureCraft.netheriumPickaxeId,ItemModPickaxe.netherium);
 	public static final ItemModPickaxe endpick=new ItemModPickaxe(FutureCraft.enderiumPickaxeId,ItemModPickaxe.enderium);
-	public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.indiumPickaxeId,ItemModPickaxe.indium);
+public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.indiumPickaxeId,ItemModPickaxe.indium);
+	public static final Item netheriumJetpack = new GenericItem(FutureCraft.jetpackId,"netheriumJetpack",Ref.getRecommendedTab("item"),"jetpack");
 	public static void registerAllItems() {
 		GameRegistry.registerItem(neth, "ingotNetherium");
 		
@@ -97,6 +99,8 @@ public class ModHelper {
 		GameRegistry.registerItem(endpick, "pickaxeEnderium");
 		
 		GameRegistry.registerItem(indiumPick, "pickaxeIndium");
+		
+		GameRegistry.registerItem(netheriumJetpack, "netheriumJetpack");
 	}
 	public static void registerItemNames() {
 		LanguageRegistry.addName(neth, "Netherium Ingot");
@@ -166,6 +170,7 @@ public class ModHelper {
 		registerAllItems();
 		registerRecipesShapeless();
 		registerRecipesShaped();
+		
 		
 	}
 }
