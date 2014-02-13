@@ -9,12 +9,26 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
-import com.matt.mod.blocks.*;
-import com.matt.mod.blocks.tileentity.*;
+import com.matt.mod.blocks.BlockDimensionalBeacon;
+import com.matt.mod.blocks.BlockDimensionalInfuser;
+import com.matt.mod.blocks.BlockEnchantmentAltarCore;
+import com.matt.mod.blocks.BlockFutureBasic;
+import com.matt.mod.blocks.BlockFutureFurnace;
+import com.matt.mod.blocks.BlockFutureGold;
+import com.matt.mod.blocks.BlockOre;
+import com.matt.mod.blocks.BlockPowerPipe;
+import com.matt.mod.blocks.tileentity.DimensionalBeaconTileEntity;
+import com.matt.mod.blocks.tileentity.TileEntityAltar;
+import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
+import com.matt.mod.blocks.tileentity.TileEntityPowerPipe;
+import com.matt.mod.blocks.tileentity.TileEntitySmelter;
 import com.matt.mod.handlers.FutureCraftRegistry;
-import com.matt.mod.item.*;
-import com.matt.mod.recipes.*;
-import com.matt.proxy.CommonProxy;
+import com.matt.mod.item.GenericItem;
+import com.matt.mod.item.ItemFutureNote;
+import com.matt.mod.item.ItemIngot;
+import com.matt.mod.item.ItemModPickaxe;
+import com.matt.mod.recipes.PickRecipe;
+import com.matt.mod.recipes.QuadSymetricRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -30,6 +44,7 @@ public class ModHelper {
 	public static final Block oreIndium = new BlockOre(FutureCraft.oreIndiumID,"oreindium").setTextureName(Ref.NAME.toLowerCase() + ":oreindium");
 	public static final Block oreRoent = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
 	public static final Block dimBeacon = new BlockDimensionalBeacon(FutureCraft.dimBeaconID);
+	public static final Block altarCore = new BlockEnchantmentAltarCore().setUnlocalizedName("Altar Core");
 	public static void registerBlocksInForge() {
 		GameRegistry.registerBlock(basicFutureBlock, "basicFutureBlock");
 		GameRegistry.registerBlock(goldenFutureBlock, "goldenFutureBlock");
@@ -39,6 +54,7 @@ public class ModHelper {
 		GameRegistry.registerBlock(oreRoent, "oreRoentgenium");
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
 		GameRegistry.registerBlock(dimBeacon, "dimensionalBeacon");
+		GameRegistry.registerBlock(altarCore, "altarCore");
 		}
 	public static void registerBlockNames() {
 		LanguageRegistry.addName(basicFutureBlock, "Iron Machine Handler");
@@ -164,6 +180,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		GameRegistry.registerTileEntity(TileEntityPowerPipe.class, "tileeEntityPowerPipe");
 		GameRegistry.registerTileEntity(DimensionalBeaconTileEntity.class, "tileEntityDimensionalBeacon");
 		GameRegistry.registerTileEntity(TileEntityDimensionalInfuser.class, "tileEntityDimensionalInfuser");
+		GameRegistry.registerTileEntity(TileEntityAltar.class, "tileEntityAltarCore");
 	}
 	public static void registerAll() {
 		registerBlocks();
