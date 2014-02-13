@@ -9,15 +9,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.mod.ModHelper;
-import com.matt.mod.power.IPowerReceiver;
+import com.matt.mod.power.Powerable;
 /**
  * Tile entity for the Compression Smeltery block.
  * @author Matheus
  *
  */
-public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
-	int currentPower;
-	int powerUsage = 10;
+public class TileEntitySmelter extends TileEntity implements Powerable{
+	private int currentPower;
+	static int powerUsage = 10;
 	/**
 	 * Runs when right-clicked.
 	 * @param p player that clicked
@@ -93,7 +93,6 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 		return false;
 	}
 
-	@Override
 	public void receive(World w,int x,int y,int z) {
 		TileEntityPowerPipe pipe;
 		if(w.getBlockTileEntity(x+1,y,z) instanceof TileEntityPowerPipe)  {
@@ -115,13 +114,13 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 		
 	}
 
-	@Override
+
 	public int consume(int ammountToConsume) {
 		currentPower = currentPower - ammountToConsume;
 		return 0;
 	}
 
-	@Override
+
 	public int consume(World w, int x, int y, int z) {
 		return 0;
 	}
@@ -138,4 +137,16 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 		nbt.setInteger("currentPower",currentPower);
 		
 	}
+	
+	public int addPower(int amount) {
+		currentPower+=amount;
+		return 0;
+	}
+	public int removePower(int amount) {
+		return 0;
+	}
+	public void transmit(World w,int x,int y,int z,int x2,int y2,int z2) {
+		System.out.println("A Smelter won't give away power");
+	}
+	
 }
