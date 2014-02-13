@@ -3,10 +3,10 @@ package com.matt.gui;
 
 import java.util.List;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.*;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.StringTokenizer;
 
 import org.lwjgl.opengl.GL11;
 
@@ -14,6 +14,7 @@ import com.matt.lib.Ref;
 
 public class LoreBookGui extends GuiScreen {
 	private String lore;
+	private GuiTextField text;
 	public final int xSize = 176;
 	public final int ySize = 88;
 	public LoreBookGui(String lore) {
@@ -33,7 +34,13 @@ public class LoreBookGui extends GuiScreen {
 
 	drawTexturedModalRect(posX, posY, 0, 0, 176, 88);
 	
-	super.drawString(fontRenderer, lore, posX+10,posY+10, 15);
+	if(text==null) {
+		text=new GuiTextField(fontRenderer,posX+5,posY+10,xSize-10,ySize-20);
+		text.setMaxStringLength(lore.length());
+		text.setText(lore);
+	}
+	
+	text.drawTextBox();
 
 	this.drawString(fontRenderer, "FutureCraft Companion", posX, posY,1);
 
