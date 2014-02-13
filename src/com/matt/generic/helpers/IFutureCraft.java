@@ -1,4 +1,4 @@
-package com.matt.heneric.helpers;
+package com.matt.generic.helpers;
 /**
  * FutureCraft tagging interface - for use with multiblocks
  * @author Matheus

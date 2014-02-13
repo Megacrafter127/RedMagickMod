@@ -3,11 +3,13 @@ package com.matt.mod.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.FutureCraft;
-import com.matt.heneric.helpers.IFutureCraft;
+import com.matt.generic.helpers.IFutureCraft;
+import com.matt.mod.blocks.tileentity.TileEntityAltar;
 
 public class BlockEnchantmentAltarCore extends Block implements
 		ITileEntityProvider, IFutureCraft {
@@ -22,6 +24,15 @@ public class BlockEnchantmentAltarCore extends Block implements
 		// TODO Auto-generated method stub
 		return new TileEntityAltar();
 	}
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z,
+            EntityPlayer player, int metadata, float what, float these, float are) {
+		TileEntityAltar a = (TileEntityAltar)world.getBlockTileEntity(x,y,z);
+		return a.run(player, world, x, y, z);
+	}
+		
+		
+    
 
 
 }
