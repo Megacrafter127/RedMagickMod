@@ -31,7 +31,6 @@ public class BlockFutureFurnace extends Block implements ITileEntityProvider{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		// TODO Auto-generated method stub
 		return new TileEntitySmelter();
 	}
 	@Override

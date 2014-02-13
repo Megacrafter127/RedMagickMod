@@ -123,7 +123,6 @@ public class TileEntitySmelter extends TileEntity implements IPowerReceiver{
 
 	@Override
 	public int consume(World w, int x, int y, int z) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override

@@ -14,7 +14,6 @@ public class SolidRecipe extends ShapedRecipes {
 
 	public SolidRecipe(ItemStack result, int width, int height, ItemStack material) {
 		super(width, height, generateArray(width*height,material), result);
-		// TODO Auto-generated constructor stub
 	}
 
 }
