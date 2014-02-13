@@ -3,7 +3,6 @@ package com.matt;
 import java.io.File;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,6 +22,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -60,6 +60,7 @@ public class FutureCraft {
 		public static int enderiumPickaxeId = 601;
 		public static int indiumPickaxeId = 602;
 		public static int roentgeniumPickaxeId = 603;
+		public static int loreBookId = 650;
 		
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
@@ -76,6 +77,7 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
+		
 		
 		 
 		@EventHandler
@@ -100,7 +102,8 @@ public class FutureCraft {
             		enderiumPickaxeId  = config.getBlock("enderiumPick", 601).getInt();
             		indiumPickaxeId  = config.getBlock("indiumPick", 602).getInt();
             		roentgeniumPickaxeId = config.getBlock("roentgeniumPick", 603).getInt();
-            		jetpackId = config.getBlock("jetpack", 594).getInt();
+            		jetpackId = config.getItem("jetpack", 594).getInt();
+            		loreBookId = config.getItem("loreBook", 650).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
@@ -114,6 +117,7 @@ public class FutureCraft {
              ModHelper.registerAll();
          	System.out.println("Registering FutureCraft worldgenerator handler!");
          	GameRegistry.registerWorldGenerator(new WorldHandlerFuture());
+         	NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
          	
          	
          	
