@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class GenericItem extends Item {
-	
+	//DERP
 	static int idI = 590;
 	static String unlocName = "netheriumIngot";
 	static CreativeTabs tab = CreativeTabs.tabMisc;

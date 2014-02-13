@@ -75,6 +75,7 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
+		 
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
