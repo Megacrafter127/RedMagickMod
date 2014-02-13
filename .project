@@ -19,12 +19,12 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<location>/home/til/C::/home/til/C::/home/til/C::/Users/Matheus/Desktop/Things/ATrueMod/forge/mcp/src/minecraft/assets/futurecraft</location>
+			<location>C:/home/til/C::/home/til/C::/home/til/C::/Users/Matheus/Desktop/Things/ATrueMod/forge/mcp/src/minecraft/assets/futurecraft</location>
 		</link>
 		<link>
 			<name>futurecraft</name>
 			<type>2</type>
-			<location>/home/til/C::/Users/Matheus/Desktop/Things/ATrueMod/forge/mcp/src/minecraft/assets/futurecraft</location>
+			<location>C:/home/til/C::/Users/Matheus/Desktop/Things/ATrueMod/forge/mcp/src/minecraft/assets/futurecraft</location>
 		</link>
 	</linkedResources>
 </projectDescription>
