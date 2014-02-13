@@ -48,6 +48,7 @@ public class FutureCraft {
 		public static int oreIndiumID = 543;
 		public static int oreRoentgeniumID = 544;
 		public static int dimTransID = 545;
+		public static int dimBeaconID = 546;
 		//Item IDs
 		public static int netheriumIngotId = 590;
 		public static int enderiumIngotId = 591;
@@ -57,11 +58,12 @@ public class FutureCraft {
 		public static int netheriumPickaxeId = 600;
 		public static int enderiumPickaxeId = 601;
 		public static int indiumPickaxeId = 602;
+		public static int roentgeniumPickaxeId = 603;
 		
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
-		public  static ItemStack grasStack = new ItemStack(Block.grass);
+		public static ItemStack grasStack = new ItemStack(Block.grass);
 		public static ItemStack ironStack = new ItemStack(Item.ingotIron,1);
 		public static ItemStack diamondStack = new ItemStack(Item.diamond,1);
 		public static ItemStack goldStack = new ItemStack(Item.ingotGold,1);
@@ -90,9 +92,11 @@ public class FutureCraft {
              		oreIndiumID = config.getBlock("oreIndium", 543).getInt();
             		oreRoentgeniumID = config.getBlock("oreRoentgenium", 544).getInt();
             		dimTransID = config.getBlock("dimensionalTransmutator", 545).getInt();
-            		netheriumPickaxeId  = config.getBlock("netheriumPick", 592).getInt();
-            		enderiumPickaxeId  = config.getBlock("enderiumPick", 593).getInt();
-            		indiumPickaxeId  = config.getBlock("indiumPick", 594).getInt();
+            		dimBeaconID = config.getBlock("dimensionalBeacon", 546).getInt();
+            		netheriumPickaxeId  = config.getBlock("netheriumPick", 600).getInt();
+            		enderiumPickaxeId  = config.getBlock("enderiumPick", 601).getInt();
+            		indiumPickaxeId  = config.getBlock("indiumPick", 602).getInt();
+            		roentgeniumPickaxeId = config.getBlock("roentgeniumPick", 603).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();

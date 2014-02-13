@@ -11,6 +11,7 @@ public class BlockDimensionalBeacon extends BlockBeacon {
 	public BlockDimensionalBeacon(int par1) {
 		super(par1);
 		setCreativeTab(Ref.getRecommendedTab("block"));
+		setUnlocalizedName("Dimensional Beacon");
 		// TODO add textures
 	}
 	

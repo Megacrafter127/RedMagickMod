@@ -9,18 +9,10 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
-import com.matt.mod.blocks.BlockDimensionalInfuser;
-import com.matt.mod.blocks.BlockFutureBasic;
-import com.matt.mod.blocks.BlockFutureFurnace;
-import com.matt.mod.blocks.BlockFutureGold;
-import com.matt.mod.blocks.BlockOre;
-import com.matt.mod.blocks.BlockPowerPipe;
-import com.matt.mod.blocks.tileentity.TileEntityPowerPipe;
-import com.matt.mod.blocks.tileentity.TileEntitySmelter;
+import com.matt.mod.blocks.*;
+import com.matt.mod.blocks.tileentity.*;
 import com.matt.mod.handlers.FutureCraftRegistry;
-import com.matt.mod.item.ItemIngot;
-import com.matt.mod.item.ItemModPickaxe;
-import com.matt.mod.item.ItemIngot;
+import com.matt.mod.item.*;
 import com.matt.mod.recipes.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -36,6 +28,7 @@ public class ModHelper {
 	public static final Block dimensionalInfuser = new BlockDimensionalInfuser(FutureCraft.dimTransID);
 	public static final Block oreIndium = new BlockOre(FutureCraft.oreIndiumID,"oreindium").setTextureName(Ref.NAME.toLowerCase() + ":oreindium");
 	public static final Block oreRoent = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
+	public static final Block dimBeacon = new BlockDimensionalBeacon(FutureCraft.dimBeaconID);
 	public static void registerBlocksInForge() {
 		GameRegistry.registerBlock(basicFutureBlock, "basicFutureBlock");
 		GameRegistry.registerBlock(goldenFutureBlock, "goldenFutureBlock");
@@ -44,6 +37,7 @@ public class ModHelper {
 		GameRegistry.registerBlock(oreIndium, "oreIndium");
 		GameRegistry.registerBlock(oreRoent, "oreRoentgenium");
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
+		GameRegistry.registerBlock(dimBeacon, "dimensionalBeacon");
 		}
 	public static void registerBlockNames() {
 		LanguageRegistry.addName(basicFutureBlock, "Iron Machine Handler");
@@ -55,6 +49,8 @@ public class ModHelper {
 		FutureCraftRegistry.setLocalizedName("en_UK", oreIndium, "Indium Ore");
 		FutureCraftRegistry.setLocalizedName("en_UK", oreRoent, "Roentgenium Ore");
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
+		FutureCraftRegistry.setLocalizedName("en_US", dimBeacon, "Dimensional Beacon");
+		FutureCraftRegistry.setLocalizedName("en_UK", dimBeacon, "Dimensional Beacon");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
@@ -62,7 +58,8 @@ public class ModHelper {
 		MinecraftForge.setBlockHarvestLevel(basicFutureFurnace, "pickaxe",1);
 		MinecraftForge.setBlockHarvestLevel(oreIndium, "pickaxe",2);
 		MinecraftForge.setBlockHarvestLevel(oreRoent, "pickaxe",3);
-		
+		MinecraftForge.setBlockHarvestLevel(dimensionalInfuser, "pickaxe",1);
+		MinecraftForge.setBlockHarvestLevel(dimBeacon, "pickaxe",1);
 	}
 	public static void setCreativeTabs() {
 		blockPowerPipe.setCreativeTab(Ref.getRecommendedTab("block"));
@@ -72,6 +69,7 @@ public class ModHelper {
 		oreIndium.setCreativeTab(Ref.getRecommendedTab("block"));
 		oreRoent.setCreativeTab(Ref.getRecommendedTab("block"));
 		dimensionalInfuser.setCreativeTab(Ref.getRecommendedTab("block"));
+		dimBeacon.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 	public static void registerBlocks() {
 		registerBlocksInForge();
@@ -98,7 +96,7 @@ public class ModHelper {
 		
 		GameRegistry.registerItem(endpick, "pickaxeEnderium");
 		
-		
+		GameRegistry.registerItem(indiumPick, "pickaxeIndium");
 	}
 	public static void registerItemNames() {
 		LanguageRegistry.addName(neth, "Netherium Ingot");
@@ -107,6 +105,7 @@ public class ModHelper {
 		LanguageRegistry.addName(ingotRoentgenium, "Roentgenium Ingot");
 		LanguageRegistry.addName(nethpick, "Netherium Pickaxe");
 		LanguageRegistry.addName(endpick, "Enderium Pickaxe");
+		LanguageRegistry.addName(indiumPick, "Indium Pickaxe");
 	}
 	public static void registerItemCreativeTabs() {
 		neth.setCreativeTab(Ref.getRecommendedTab("item"));
@@ -115,6 +114,7 @@ public class ModHelper {
 		ingotRoentgenium.setCreativeTab(Ref.getRecommendedTab("item"));
 		nethpick.setCreativeTab(Ref.getRecommendedTab("item"));
 		endpick.setCreativeTab(Ref.getRecommendedTab("item"));
+		indiumPick.setCreativeTab(Ref.getRecommendedTab("item"));
 	}
 	//Recipes
 	public static final ItemStack dirtStack = new ItemStack(Block.dirt);
@@ -134,9 +134,14 @@ public class ModHelper {
 	public static final ItemStack netheriumStack = new ItemStack(neth);
 	public static final ItemStack indiumStack = new ItemStack(ingotIndium);
 	public static final ItemStack roentgeniumStack = new ItemStack(ingotRoentgenium);
+	public static final ItemStack netherstarStack = new ItemStack(Item.netherStar);
+	public static final ItemStack beaconStack = new ItemStack(Block.beacon);
+	public static final ItemStack dimbeaconStack = new ItemStack(dimBeacon);
 	
 	public static void registerRecipesShapeless() {
 		GameRegistry.addShapelessRecipe(grasStack,dirtStack, seedStack);
+		GameRegistry.addShapelessRecipe(netherstarStack,beaconStack);
+		GameRegistry.addShapelessRecipe(netherstarStack,dimbeaconStack);
 	}
 	public static void registerRecipesShaped() {
 		GameRegistry.addRecipe(new QuadSymetricRecipe(bFutureStackCraft,ironStack,netheriumStack,diamondStack));
@@ -145,11 +150,14 @@ public class ModHelper {
 		GameRegistry.addRecipe(new PickRecipe(enderiumStack,stickStack,new ItemStack(endpick,1)));
 		GameRegistry.addRecipe(new PickRecipe(netheriumStack,stickStack,new ItemStack(nethpick,1)));
 		GameRegistry.addRecipe(new PickRecipe(indiumStack,stickStack,new ItemStack(indiumPick,1)));
+		GameRegistry.addRecipe(new QuadSymetricRecipe(dimbeaconStack,netheriumStack,enderiumStack,beaconStack));
 	}
 	//Tile entities
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntitySmelter.class, "tileEntitySmelter");
 		GameRegistry.registerTileEntity(TileEntityPowerPipe.class, "tileeEntityPowerPipe");
+		GameRegistry.registerTileEntity(DimensionalBeaconTileEntity.class, "tileEntityDimensionalBeacon");
+		GameRegistry.registerTileEntity(TileEntityDimensionalInfuser.class, "tileEntityDimensionalInfuser");
 	}
 	public static void registerAll() {
 		registerBlocks();
