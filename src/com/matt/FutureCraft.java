@@ -49,7 +49,7 @@ public class FutureCraft {
 		public static int oreRoentgeniumID = 544;
 		public static int dimTransID = 545;
 		public static int dimBeaconID = 546;
-		
+		public static int altarCoreID = 547;
 		//Item IDs
 		public static int netheriumIngotId = 590;
 		public static int enderiumIngotId = 591;
@@ -79,6 +79,7 @@ public class FutureCraft {
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
 		
 		
+		
 		 
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
@@ -104,6 +105,7 @@ public class FutureCraft {
             		roentgeniumPickaxeId = config.getBlock("roentgeniumPick", 603).getInt();
             		jetpackId = config.getItem("jetpack", 594).getInt();
             		loreBookId = config.getItem("loreBook", 650).getInt();
+            		altarCoreID = config.getBlock("Altar Core", 547).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
