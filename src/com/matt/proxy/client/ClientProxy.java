@@ -18,7 +18,7 @@ public class ClientProxy extends CommonProxy {
         public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
         {
         	if(player.inventory.getCurrentItem().itemID == ModHelper.loreBook.itemID && ID == 0) {
-        		return new LoreBookGui();
+        		return new LoreBookGui("Add lore here.");
         	}
         	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         	if (tileEntity != null)
