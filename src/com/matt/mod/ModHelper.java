@@ -35,6 +35,8 @@ public class ModHelper {
 	public static final Block oreIndium = new BlockOre(FutureCraft.oreIndiumID,"oreindium").setTextureName(Ref.NAME.toLowerCase() + ":oreindium");
 	public static final Block oreRoent = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
 	public static final Block altarCore = new BlockEnchantmentAltarCore().setUnlocalizedName("Altar Core");
+	public static final Block gameOfLifeBlock = new BlockGOL(FutureCraft.blockGOLID).setUnlocalizedName("Game of life Block");
+	
 	public static void registerBlocksInForge() {
 		GameRegistry.registerBlock(basicFutureBlock, "basicFutureBlock");
 		GameRegistry.registerBlock(goldenFutureBlock, "goldenFutureBlock");
@@ -44,6 +46,7 @@ public class ModHelper {
 		GameRegistry.registerBlock(oreRoent, "oreRoentgenium");
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
 		GameRegistry.registerBlock(altarCore, "altarCore");
+		GameRegistry.registerBlock(gameOfLifeBlock, "gameOfLifeBlock");
 		}
 	public static void registerBlockNames() {
 		LanguageRegistry.addName(basicFutureBlock, "Iron Machine Handler");
@@ -55,6 +58,7 @@ public class ModHelper {
 		FutureCraftRegistry.setLocalizedName("en_UK", oreIndium, "Indium Ore");
 		FutureCraftRegistry.setLocalizedName("en_UK", oreRoent, "Roentgenium Ore");
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
+		LanguageRegistry.addName(gameOfLifeBlock, "Game of life Block");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
@@ -72,6 +76,7 @@ public class ModHelper {
 		oreIndium.setCreativeTab(Ref.getRecommendedTab("block"));
 		oreRoent.setCreativeTab(Ref.getRecommendedTab("block"));
 		dimensionalInfuser.setCreativeTab(Ref.getRecommendedTab("block"));
+		gameOfLifeBlock.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 	public static void registerBlocks() {
 		registerBlocksInForge();
