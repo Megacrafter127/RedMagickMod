@@ -76,6 +76,7 @@ public class FutureCraft {
 		public static int swag_wall2_id = 753;
 		public static int swag_wall3_id = 754;
 		public static int swag_wand_id = 801;
+		public static int swag_catalist_id = 802;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -91,6 +92,7 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
+		
 		
 		
 		
@@ -123,16 +125,16 @@ public class FutureCraft {
             		blockGOLID = config.getBlock("GOL", 548).getInt();
             		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
             		swag_wand_id = FutureCraft.config.getItem("swagWand", 801 ).getInt();
-            		System.out.println(swag_wand_id);
-            		swag_wall_id  = FutureCraft.config.getBlock("magicWall", 751).getInt();
-            		System.out.println(swag_wall_id);
-            		swag_wall1_id = FutureCraft.config.getBlock("magicWall1", 752 ).getInt();
-            		System.out.println(swag_wall1_id);
-            		swag_wall2_id = FutureCraft.config.getBlock("magicWall2", 753 ).getInt();
-            		System.out.println(swag_wall2_id);
-            		swag_wall3_id = FutureCraft.config.getBlock("magicWall3", 754 ).getInt();
-            		System.out.println(swag_wall3_id);
             		
+            		swag_wall_id  = FutureCraft.config.getBlock("magicWall", 751).getInt();
+            		
+            		swag_wall1_id = FutureCraft.config.getBlock("magicWall1", 752 ).getInt();
+            		
+            		swag_wall2_id = FutureCraft.config.getBlock("magicWall2", 753 ).getInt();
+            	
+            		swag_wall3_id = FutureCraft.config.getBlock("magicWall3", 754 ).getInt();
+            		
+            		swag_catalist_id = FutureCraft.config.getItem("Flying Catalist", 802).getInt();
             		
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
