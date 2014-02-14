@@ -10,7 +10,7 @@ import com.matt.mod.swag.items.ItemSwaggishWand;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SwagHelper {
-public static final Item swaggishWand = new ItemSwaggishWand("swaggishwand");
+public static final Item swaggishWand = new ItemSwaggishWand("swaggishwand").setFull3D();
 public static final Block blockMagicalBlock = new SwagBlock("magicalwall");
 public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
