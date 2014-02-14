@@ -20,7 +20,7 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 
 	public BlockGOL(int par1) {
 		super(par1, Material.circuits);
-		setTextureName(Ref.NAME.toLowerCase() + ":cellalive");
+		setTextureName(Ref.NAME.toLowerCase() + ":cellactive");
 	}
 	
 	@Override
