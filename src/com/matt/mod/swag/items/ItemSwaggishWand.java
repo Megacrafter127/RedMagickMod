@@ -10,6 +10,7 @@ public class ItemSwaggishWand extends Item{
 	public ItemSwaggishWand(String str) {
 		super(SwagLib.getIdFor(str));
 		setTextureName(Ref.NAME.toLowerCase() + ":" + str);
+		setMaxStackSize(1);
 	}
 
 }
