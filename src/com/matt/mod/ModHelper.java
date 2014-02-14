@@ -189,6 +189,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 			IFutureCraftPlugin p = (IFutureCraftPlugin)obj;
 			System.out.println("Registering futurecraft plugin : " + p.getName());
 			p.register();
+			FutureCraft.pluginHash.put(p.getName(),p);
 		}else {
 			System.out.println("REGISTERED NULL PLUGIN!");
 		}

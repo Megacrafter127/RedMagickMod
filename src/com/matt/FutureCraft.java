@@ -39,7 +39,7 @@ public class FutureCraft {
 	 @SidedProxy(clientSide="com.matt.proxy.client.ClientProxy", serverSide="com.matt.proxy.CommonProxy")
         public static CommonProxy proxy;
 	
-	 public static HashMap<String, Object> a = new HashMap<String, Object>();
+	 public static HashMap<String, Object> pluginHash = new HashMap<String, Object>();
 	 public static File configPatch;
 	 // Block IDs
 		public static int basicFBlockID = 538;
