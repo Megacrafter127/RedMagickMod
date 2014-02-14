@@ -1,6 +1,7 @@
 package com.matt;
 
 import java.io.File;
+import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -38,6 +39,7 @@ public class FutureCraft {
 	 @SidedProxy(clientSide="com.matt.proxy.client.ClientProxy", serverSide="com.matt.proxy.CommonProxy")
         public static CommonProxy proxy;
 	
+	 public static HashMap<String, Object> pluginHash = new HashMap<String, Object>();
 	 public static File configPatch;
 	 // Block IDs
 		public static int basicFBlockID = 538;
@@ -87,7 +89,6 @@ public class FutureCraft {
              configPatch = event.getSuggestedConfigurationFile();
              System.out.println("Config File:"+configPatch.getAbsolutePath());
              Configuration config = new Configuration(FutureCraft.configPatch);
-             System.out.println("[FC]Loading futurecraft config!");
              config.load();
              		basicFBlockID = config.getBlock("basicMachineHandler", 538).getInt();
              		goldenFBlockID = config.getBlock("advancedMachineHandler", 539).getInt();

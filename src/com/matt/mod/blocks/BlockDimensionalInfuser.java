@@ -37,7 +37,7 @@ public class BlockDimensionalInfuser extends Block implements ITileEntityProvide
              EntityPlayer player, int metadata, float what, float these, float are) {
 		if(world.getBlockTileEntity(x, y, z) instanceof TileEntityDimensionalInfuser) {
 			TileEntityDimensionalInfuser a = (TileEntityDimensionalInfuser)world.getBlockTileEntity(x, y, z);
-			a.run(world, player, x, y, z);
+			a.run(world, player);
 		}
 		return false;
 	}
