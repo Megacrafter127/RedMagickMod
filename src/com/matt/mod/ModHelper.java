@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.matt.FutureCraft;
+import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
 import com.matt.mod.blocks.BlockDimensionalBeacon;
 import com.matt.mod.blocks.BlockDimensionalInfuser;
@@ -29,6 +30,7 @@ import com.matt.mod.item.ItemIngot;
 import com.matt.mod.item.ItemModPickaxe;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
+import com.matt.mod.swag.FutureCraftSwag;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -182,6 +184,15 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		GameRegistry.registerTileEntity(TileEntityDimensionalInfuser.class, "tileEntityDimensionalInfuser");
 		GameRegistry.registerTileEntity(TileEntityAltar.class, "tileEntityAltarCore");
 	}
+	public static void registerPlugin(Object obj) {
+		if(obj != null && obj instanceof IFutureCraftPlugin) {
+			IFutureCraftPlugin p = (IFutureCraftPlugin)obj;
+			System.out.println("Registering futurecraft plugin : " + p.getName());
+			p.register();
+		}else {
+			System.out.println("REGISTERED NULL PLUGIN!");
+		}
+	}
 	public static void registerAll() {
 		registerBlocks();
 		registerItemNames();
@@ -190,6 +201,8 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		registerRecipesShapeless();
 		registerRecipesShaped();
 		registerTileEntities();
+		registerPlugin(new FutureCraftSwag());
+		
 		
 	}
 }
