@@ -13,6 +13,8 @@ public class ItemFlyingCatalist extends Item{
 public ItemFlyingCatalist() {
 	super(FutureCraft.swag_catalist_id);
 	setTextureName(Ref.NAME.toLowerCase() + ":catalist1");
+	setUnlocalizedName("Catalist of Flying");
+	setMaxStackSize(1);
 }
 @Override
 public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
