@@ -36,6 +36,7 @@ public class ModHelper {
 	public static final Block oreRoent = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
 	public static final Block altarCore = new BlockEnchantmentAltarCore().setUnlocalizedName("Altar Core");
 	public static final Block gameOfLifeBlock = new BlockGOL(FutureCraft.blockGOLID).setUnlocalizedName("Game of life Block");
+	public static final Block controlerGOL = new BlockGOLControler(FutureCraft.blockGOLControlerID).setUnlocalizedName("Game of life Block Controler");
 	
 	public static void registerBlocksInForge() {
 		GameRegistry.registerBlock(basicFutureBlock, "basicFutureBlock");
@@ -47,6 +48,7 @@ public class ModHelper {
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
 		GameRegistry.registerBlock(altarCore, "altarCore");
 		GameRegistry.registerBlock(gameOfLifeBlock, "gameOfLifeBlock");
+		GameRegistry.registerBlcok(controlerGOL, "gameOfLifeControler");
 		}
 	public static void registerBlockNames() {
 		LanguageRegistry.addName(basicFutureBlock, "Iron Machine Handler");
@@ -59,6 +61,7 @@ public class ModHelper {
 		FutureCraftRegistry.setLocalizedName("en_UK", oreRoent, "Roentgenium Ore");
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
 		LanguageRegistry.addName(gameOfLifeBlock, "Game of life Block");
+		LanguageRegistry.addNAme(controlerGOL, "Game of life Block Controler");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
@@ -77,6 +80,7 @@ public class ModHelper {
 		oreRoent.setCreativeTab(Ref.getRecommendedTab("block"));
 		dimensionalInfuser.setCreativeTab(Ref.getRecommendedTab("block"));
 		gameOfLifeBlock.setCreativeTab(Ref.getRecommendedTab("block"));
+		controlerGOL.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 	public static void registerBlocks() {
 		registerBlocksInForge();

@@ -82,4 +82,8 @@ public class TileEntityGOL extends TileEntity {
 	public boolean isAlive() {
 		return alive;
 	}
+	
+	public void switchAlive() {
+		alive=!alive;
+	}
 }

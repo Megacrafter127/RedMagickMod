@@ -57,6 +57,7 @@ public class FutureCraft {
 		public static int dimBeaconID = 546;
 		public static int altarCoreID = 547;
 		public static int blockGOLID = 548;
+		public static int blockGOLControlerID = 549;
 		//Item IDs
 		public static int netheriumIngotId = 590;
 		public static int enderiumIngotId = 591;
@@ -113,6 +114,7 @@ public class FutureCraft {
             		loreBookId = config.getItem("loreBook", 650).getInt();
             		altarCoreID = config.getBlock("Altar Core", 547).getInt();
             		blockGOLID = config.getBlock("GOL", 548).getInt();
+            		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
             		
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();

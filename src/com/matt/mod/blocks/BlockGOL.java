@@ -11,6 +11,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.util.Icon;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+
 import java.util.Random;
 
 public class BlockGOL extends Block implements ITileEntityProvider {
@@ -64,5 +66,16 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	@Override
 	public int tickRate(World w) {
 		return 5;
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z,
+            EntityPlayer player, int metadata, float what, float these, float are) {
+		try{
+			((TileEntityGOL)world.getBlockTileEntity(x,y,z)).switchAlive();
+		}
+		catch(ClassCastException ex) {}
+		catch(NullPointerException ex) {}
+		return false;
 	}
 }
