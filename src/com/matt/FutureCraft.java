@@ -12,6 +12,7 @@ import net.minecraftforge.common.Configuration;
 import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
+import com.matt.mod.commands.FutureCraftCommand;
 import com.matt.mod.handlers.WorldHandlerFuture;
 import com.matt.proxy.CommonProxy;
 
@@ -22,6 +23,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -41,6 +43,8 @@ public class FutureCraft {
 	
 	 public static HashMap<String, Object> pluginHash = new HashMap<String, Object>();
 	 public static File configPatch;
+	 public static File swagConfig;
+	public static  Configuration config;
 	 // Block IDs
 		public static int basicFBlockID = 538;
 		public static int goldenFBlockID = 539;
@@ -88,7 +92,7 @@ public class FutureCraft {
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
              configPatch = event.getSuggestedConfigurationFile();
              System.out.println("Config File:"+configPatch.getAbsolutePath());
-             Configuration config = new Configuration(FutureCraft.configPatch);
+            config = new Configuration(FutureCraft.configPatch);     
              config.load();
              		basicFBlockID = config.getBlock("basicMachineHandler", 538).getInt();
              		goldenFBlockID = config.getBlock("advancedMachineHandler", 539).getInt();
@@ -107,6 +111,7 @@ public class FutureCraft {
             		jetpackId = config.getItem("jetpack", 594).getInt();
             		loreBookId = config.getItem("loreBook", 650).getInt();
             		altarCoreID = config.getBlock("Altar Core", 547).getInt();
+            		
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
@@ -121,14 +126,15 @@ public class FutureCraft {
          	System.out.println("Registering FutureCraft worldgenerator handler!");
          	GameRegistry.registerWorldGenerator(new WorldHandlerFuture());
          	NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
-         	
-         	
-         	
      }
+ /*@EventHandler
+ public void serverLoad(FMLServerStartingEvent event)
+ {
+   event.registerServerCommand(new FutureCraftCommand());
+ }*/
      
      @EventHandler // used in 1.6.2
-     //@PostInit   // used in 1.5.2
      public void postInit(FMLPostInitializationEvent event) {
-             // Stub Method
+    	 
      }
 }

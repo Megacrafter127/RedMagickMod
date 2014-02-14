@@ -1,5 +1,6 @@
 package com.matt.mod.swag;
 
+import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 
 public class FutureCraftSwag implements IFutureCraftPlugin{
@@ -11,4 +12,6 @@ System.out.println("Registering FutureCraftSwag plugin!");
 public String getName() {
 	return "FutureCraft Swag";
 }
+
+
 }
