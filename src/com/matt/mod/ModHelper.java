@@ -20,6 +20,7 @@ import com.matt.mod.item.ItemModPickaxe;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
 import com.matt.mod.swag.FutureCraftSwag;
+import com.matt.mod.swag.SwagHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -62,6 +63,7 @@ public class ModHelper {
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
 		LanguageRegistry.addName(gameOfLifeBlock, "Game of life Block");
 		LanguageRegistry.addName(controlerGOL, "Game of life Block Controler");
+		LanguageRegistry.addName(SwagHelper.swaggishWand, "Swaggish Wand - T1");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);

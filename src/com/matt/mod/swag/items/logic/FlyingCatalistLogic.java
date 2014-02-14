@@ -6,9 +6,10 @@ public class FlyingCatalistLogic extends ItemLogic {
 	public static boolean isFlying;
 	public static boolean canFly;
 	public static  boolean run(EntityPlayer p) {
+		System.out.println("p right clicked ItemCatalist");
 		canFly = p.capabilities.allowFlying;
 		isFlying = p.isAirBorne;
-		if(canFly == false && isFlying == false) {
+		/* if(canFly == false && isFlying == false) {
 			p.capabilities.allowFlying = true;
 			canFly = p.capabilities.allowFlying;
 			isFlying = p.isAirBorne;
@@ -29,7 +30,10 @@ public class FlyingCatalistLogic extends ItemLogic {
 			p.addChatMessage("You believe you can fly.. And surprisingly, now, you can!");
 			return canFly == isFlying;
 		}
-		return canFly == isFlying;
+		return canFly == isFlying; */
+		p.capabilities.allowFlying = true;
+		return true;
+		
 		
 	}
 
