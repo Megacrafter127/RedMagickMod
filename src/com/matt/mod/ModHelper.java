@@ -10,19 +10,8 @@ import net.minecraftforge.common.MinecraftForge;
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
-import com.matt.mod.blocks.BlockDimensionalBeacon;
-import com.matt.mod.blocks.BlockDimensionalInfuser;
-import com.matt.mod.blocks.BlockEnchantmentAltarCore;
-import com.matt.mod.blocks.BlockFutureBasic;
-import com.matt.mod.blocks.BlockFutureFurnace;
-import com.matt.mod.blocks.BlockFutureGold;
-import com.matt.mod.blocks.BlockOre;
-import com.matt.mod.blocks.BlockPowerPipe;
-import com.matt.mod.blocks.tileentity.DimensionalBeaconTileEntity;
-import com.matt.mod.blocks.tileentity.TileEntityAltar;
-import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
-import com.matt.mod.blocks.tileentity.TileEntityPowerPipe;
-import com.matt.mod.blocks.tileentity.TileEntitySmelter;
+import com.matt.mod.blocks.*;
+import com.matt.mod.blocks.tileentity.*;
 import com.matt.mod.handlers.FutureCraftRegistry;
 import com.matt.mod.item.GenericItem;
 import com.matt.mod.item.ItemFutureNote;
@@ -45,7 +34,6 @@ public class ModHelper {
 	public static final Block dimensionalInfuser = new BlockDimensionalInfuser(FutureCraft.dimTransID);
 	public static final Block oreIndium = new BlockOre(FutureCraft.oreIndiumID,"oreindium").setTextureName(Ref.NAME.toLowerCase() + ":oreindium");
 	public static final Block oreRoent = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
-	public static final Block dimBeacon = new BlockDimensionalBeacon(FutureCraft.dimBeaconID);
 	public static final Block altarCore = new BlockEnchantmentAltarCore().setUnlocalizedName("Altar Core");
 	public static void registerBlocksInForge() {
 		GameRegistry.registerBlock(basicFutureBlock, "basicFutureBlock");
@@ -55,7 +43,6 @@ public class ModHelper {
 		GameRegistry.registerBlock(oreIndium, "oreIndium");
 		GameRegistry.registerBlock(oreRoent, "oreRoentgenium");
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
-		GameRegistry.registerBlock(dimBeacon, "dimensionalBeacon");
 		GameRegistry.registerBlock(altarCore, "altarCore");
 		}
 	public static void registerBlockNames() {
@@ -68,8 +55,6 @@ public class ModHelper {
 		FutureCraftRegistry.setLocalizedName("en_UK", oreIndium, "Indium Ore");
 		FutureCraftRegistry.setLocalizedName("en_UK", oreRoent, "Roentgenium Ore");
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
-		FutureCraftRegistry.setLocalizedName("en_US", dimBeacon, "Dimensional Beacon");
-		FutureCraftRegistry.setLocalizedName("en_UK", dimBeacon, "Dimensional Beacon");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
@@ -78,7 +63,6 @@ public class ModHelper {
 		MinecraftForge.setBlockHarvestLevel(oreIndium, "pickaxe",2);
 		MinecraftForge.setBlockHarvestLevel(oreRoent, "pickaxe",3);
 		MinecraftForge.setBlockHarvestLevel(dimensionalInfuser, "pickaxe",1);
-		MinecraftForge.setBlockHarvestLevel(dimBeacon, "pickaxe",1);
 	}
 	public static void setCreativeTabs() {
 		blockPowerPipe.setCreativeTab(Ref.getRecommendedTab("block"));
@@ -88,7 +72,6 @@ public class ModHelper {
 		oreIndium.setCreativeTab(Ref.getRecommendedTab("block"));
 		oreRoent.setCreativeTab(Ref.getRecommendedTab("block"));
 		dimensionalInfuser.setCreativeTab(Ref.getRecommendedTab("block"));
-		dimBeacon.setCreativeTab(Ref.getRecommendedTab("block"));
 	}
 	public static void registerBlocks() {
 		registerBlocksInForge();
@@ -160,12 +143,10 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 	public static final ItemStack roentgeniumStack = new ItemStack(ingotRoentgenium);
 	public static final ItemStack netherstarStack = new ItemStack(Item.netherStar);
 	public static final ItemStack beaconStack = new ItemStack(Block.beacon);
-	public static final ItemStack dimbeaconStack = new ItemStack(dimBeacon);
 	
 	public static void registerRecipesShapeless() {
 		GameRegistry.addShapelessRecipe(grasStack,dirtStack, seedStack);
 		GameRegistry.addShapelessRecipe(netherstarStack,beaconStack);
-		GameRegistry.addShapelessRecipe(netherstarStack,dimbeaconStack);
 	}
 	public static void registerRecipesShaped() {
 		GameRegistry.addRecipe(new QuadSymetricRecipe(bFutureStackCraft,ironStack,netheriumStack,diamondStack));
@@ -174,13 +155,11 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		GameRegistry.addRecipe(new PickRecipe(enderiumStack,stickStack,new ItemStack(endpick,1)));
 		GameRegistry.addRecipe(new PickRecipe(netheriumStack,stickStack,new ItemStack(nethpick,1)));
 		GameRegistry.addRecipe(new PickRecipe(indiumStack,stickStack,new ItemStack(indiumPick,1)));
-		GameRegistry.addRecipe(new QuadSymetricRecipe(dimbeaconStack,netheriumStack,enderiumStack,beaconStack));
 	}
 	//Tile entities
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntitySmelter.class, "tileEntitySmelter");
 		GameRegistry.registerTileEntity(TileEntityPowerPipe.class, "tileeEntityPowerPipe");
-		GameRegistry.registerTileEntity(DimensionalBeaconTileEntity.class, "tileEntityDimensionalBeacon");
 		GameRegistry.registerTileEntity(TileEntityDimensionalInfuser.class, "tileEntityDimensionalInfuser");
 		GameRegistry.registerTileEntity(TileEntityAltar.class, "tileEntityAltarCore");
 	}
