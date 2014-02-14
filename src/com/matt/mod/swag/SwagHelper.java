@@ -25,10 +25,10 @@ public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlockYellow,"magicalWallYellow");
 	GameRegistry.registerItem(swaggishWand, "swaggishWand");
 	GameRegistry.registerBlock(blockNetherald,"netheriumBlock");
-	LanguageRegistry.instance().addName(blockMagicalBlock, "Magical Wall");
-	LanguageRegistry.instance().addName(blockMagicalBlockBlue, "Magical Wall - Colored");
-	LanguageRegistry.instance().addName(blockMagicalBlockRed, "Magical Wall - Colored");
-	LanguageRegistry.instance().addName(blockMagicalBlockYellow, "Magical Wall - Colored");
-	LanguageRegistry.instance().addName(blockNetherald, "Netherium Block");
+	LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
+	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
+	LanguageRegistry.addName(blockMagicalBlockRed, "Magical Wall - Colored");
+	LanguageRegistry.addName(blockMagicalBlockYellow, "Magical Wall - Colored");
+	LanguageRegistry.addName(blockNetherald, "Netherium Block");
 }
 }

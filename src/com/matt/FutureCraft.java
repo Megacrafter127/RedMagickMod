@@ -123,10 +123,15 @@ public class FutureCraft {
             		blockGOLID = config.getBlock("GOL", 548).getInt();
             		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
             		swag_wand_id = FutureCraft.config.getItem("swagWand", 801 ).getInt();
+            		System.out.println(swag_wand_id);
             		swag_wall_id  = FutureCraft.config.getBlock("magicWall", 751).getInt();
-            		swag_wall3_id = FutureCraft.config.getBlock("magicWall1", 752 ).getInt();
+            		System.out.println(swag_wall_id);
+            		swag_wall1_id = FutureCraft.config.getBlock("magicWall1", 752 ).getInt();
+            		System.out.println(swag_wall1_id);
             		swag_wall2_id = FutureCraft.config.getBlock("magicWall2", 753 ).getInt();
+            		System.out.println(swag_wall2_id);
             		swag_wall3_id = FutureCraft.config.getBlock("magicWall3", 754 ).getInt();
+            		System.out.println(swag_wall3_id);
             		
             		
          	 	System.out.println("[FC]Saving futurecraft config!");
