@@ -37,6 +37,12 @@ public class BlockGOLControler extends Block {
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
 		BlockGOL.halted=!BlockGOL.halted;
+		if(BlockGOL.halted) {
+			System.out.println("Halted GOL-blocks");
+		}
+		else {
+			System.out.println("Resumed GOL");
+		}
 		return false;
 	}
 }

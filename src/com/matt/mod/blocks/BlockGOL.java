@@ -73,6 +73,7 @@ public class BlockGOL extends Block implements ITileEntityProvider {
             EntityPlayer player, int metadata, float what, float these, float are) {
 		try{
 			((TileEntityGOL)world.getBlockTileEntity(x,y,z)).switchAlive();
+			System.out.println("Switched");
 		}
 		catch(ClassCastException ex) {}
 		catch(NullPointerException ex) {}
