@@ -19,10 +19,11 @@ public class SwagBlock extends Block {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
              EntityPlayer player, int metadata, float what, float these, float are) {
-				if(player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWand.itemID && player.isSneaking()) {
+				if(player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWand.itemID) {
 					System.out.println("Swaggish wand clicked on a SwagBlock!");
 					player.inventory.addItemStackToInventory(new ItemStack(this));
 					world.setBlockToAir(x, y, z);
+					return true;
 				}
 		return false;
 		
