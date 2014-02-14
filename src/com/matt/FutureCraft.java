@@ -30,7 +30,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * The futurecraft mod!
- * @author Matheus
+ * @author Matheus and Mega
  *
  */
 @Mod(modid = Ref.ID, name = Ref.NAME, version = "0.0.1a1")
@@ -68,7 +68,13 @@ public class FutureCraft {
 		public static int indiumPickaxeId = 602;
 		public static int roentgeniumPickaxeId = 603;
 		public static int loreBookId = 650;
-		
+		// FutureCraft Swag
+		public static int swag_default_id = 750;
+		public static int swag_wall_id = 751;
+		public static int swag_wall1_id = 752;
+		public static int swag_wall2_id = 753;
+		public static int swag_wall3_id = 754;
+		public static int swag_wand_id = 801;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -84,6 +90,7 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
+		
 		
 		
 		

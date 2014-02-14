@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 
 public class ItemSwaggishWand extends Item{
 
-	public ItemSwaggishWand(String str) {
-		super(SwagLib.getIdFor(str));
+	public ItemSwaggishWand(int i, String str) {
+		super(i);
 		setTextureName(Ref.NAME.toLowerCase() + ":" + str);
 		setMaxStackSize(1);
 	}
