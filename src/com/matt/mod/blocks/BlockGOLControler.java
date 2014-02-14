@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class BlockGOLControler extends Block {
 	private Icon on;
 	private Icon off;
+	private boolean b;
 
 	public BlockGOLControler(int par1) {
 		super(par1,Material.circuits);
@@ -36,6 +37,10 @@ public class BlockGOLControler extends Block {
 	
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
+		b=!b;
+		if(b) {
+			return true;
+		}
 		BlockGOL.halted=!BlockGOL.halted;
 		if(BlockGOL.halted) {
 			System.out.println("Halted GOL-blocks");

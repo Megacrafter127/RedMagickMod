@@ -19,6 +19,7 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	private Icon alive;
 	private Icon dead;
 	public static boolean halted;
+	private boolean b;
 
 	public BlockGOL(int par1) {
 		super(par1, Material.circuits);
@@ -71,6 +72,10 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
+		b=!b;
+		if(b) {
+			return false;
+		}
 		try{
 			((TileEntityGOL)world.getBlockTileEntity(x,y,z)).switchAlive();
 			System.out.println("Switched");
