@@ -48,7 +48,7 @@ public class ModHelper {
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
 		GameRegistry.registerBlock(altarCore, "altarCore");
 		GameRegistry.registerBlock(gameOfLifeBlock, "gameOfLifeBlock");
-		GameRegistry.registerBlcok(controlerGOL, "gameOfLifeControler");
+		GameRegistry.registerBlock(controlerGOL, "gameOfLifeControler");
 		}
 	public static void registerBlockNames() {
 		LanguageRegistry.addName(basicFutureBlock, "Iron Machine Handler");
@@ -61,7 +61,7 @@ public class ModHelper {
 		FutureCraftRegistry.setLocalizedName("en_UK", oreRoent, "Roentgenium Ore");
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
 		LanguageRegistry.addName(gameOfLifeBlock, "Game of life Block");
-		LanguageRegistry.addNAme(controlerGOL, "Game of life Block Controler");
+		LanguageRegistry.addName(controlerGOL, "Game of life Block Controler");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
