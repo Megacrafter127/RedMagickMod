@@ -31,19 +31,21 @@ public class BlockFutureFurnace extends Block implements ITileEntityProvider{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntitySmelter();
+		return new TileEntitySmelter(2);
 	}
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z,
                     EntityPlayer player, int metadata, float what, float these, float are) {
 		System.out.println("Clicked on smelter");
-					if(world.getBlockTileEntity(x, y, z) instanceof TileEntitySmelter) {
-						TileEntitySmelter smelt = (TileEntitySmelter) world.getBlockTileEntity(x,y,z);
-						smelt.run(player, world, x, y, z);
-						return true;
-					}
-					return false;
-            }
+		
+		try{
+			TileEntitySmelter smelt = (TileEntitySmelter) world.getBlockTileEntity(x,y,z);
+			smelt.run(player, world);
+			return true;
+		}
+		catch(ClassCastException ex) {}
+		return false;
+	}
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister icon) { 

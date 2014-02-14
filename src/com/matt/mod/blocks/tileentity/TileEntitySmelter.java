@@ -10,131 +10,62 @@ import net.minecraft.world.World;
 
 import com.matt.mod.ModHelper;
 import com.matt.mod.power.Powerable;
+import java.util.HashMap;
 /**
  * Tile entity for the Compression Smeltery block.
  * @author Matheus
  *
  */
 public class TileEntitySmelter extends TileEntity implements Powerable{
-	private int currentPower;
+	private int currentPower=0;
 	static int powerUsage = 10;
+	public int smeltResult;
+	public static final HashMap<Integer,Item> smeltHash=new HashMap<Integer,Item>();
+	static{
+		smeltHash.put(Block.oreIron.blockID, Item.ingotIron);
+		smeltHash.put(Block.oreGold.blockID, Item.ingotGold);
+	}
+	
+	public TileEntitySmelter(int smeltResult) {
+		this.smeltResult=smeltResult;
+	}
+	public TileEntitySmelter() {
+		this(2);
+	}
 	/**
 	 * Runs when right-clicked.
 	 * @param p player that clicked
 	 * @param w world object
-	 * @param x x coord
-	 * @param y y coord
-	 * @param z z coord
 	 * @return True if operation was sucessful, false if not
 	 */
-	public boolean run(EntityPlayer p,World w,int x,int y,int z) {
-		receive(w, x, y, z);
-		if(w.getBlockId(x, y + 1, z) == Block.oreIron.blockID && w.getBlockId(x,y -1,z) == Block.oreCoal.blockID) {
-			w.setBlockToAir(x, y + 1, z);
-			w.setBlockToAir(x,y -1,z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotIron,2) );
-			System.out.println("Smelted iron");
-			return true;
-		} else if(w.getBlockId(x,y + 1,z) == Block.oreGold.blockID && w.getBlockId(x,y -1,z) == Block.oreCoal.blockID) {
-			w.setBlockToAir(x, y + 1, z);
-			w.setBlockToAir(x,y -1,z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotGold,2));
-			System.out.println("Smelted gold");
-			return true;
-		} else if(w.getBlockId(x,y + 1,z) == Block.oreCoal.blockID && w.getBlockId(x,y -1,z) == Block.oreCoal.blockID) {
-			w.setBlockToAir(x, y + 1, z);
-			w.setBlockToAir(x,y -1,z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2));
-			System.out.println("Smelted coal");
-			return true;
-		} else if(w.getBlockId(x, y + 1, z) == Block.oreIron.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage; // Removes power from storage
-			w.setBlockToAir(x, y + 1, z);
-			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotIron,2) );
-			System.out.println("Smelted iron using power");
-			System.out.println(currentPower);
-			return true;
-		}else if(w.getBlockId(x, y + 1, z) == Block.oreGold.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage; // Removes power from storage
-			w.setBlockToAir(x, y + 1, z); // Removes block above from storage
-			p.inventory.addItemStackToInventory(new ItemStack(Item.ingotGold,2) ); // Adds stack to inventory
-			System.out.println("Smelted gold using power");
-			System.out.println(currentPower);
-			return true;
-		}else if(w.getBlockId(x, y + 1, z) == Block.oreCoal.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage; // Removes power from storage
-			w.setBlockToAir(x, y + 1, z); // Removes block above
-			p.inventory.addItemStackToInventory(new ItemStack(Item.coal,2) ); // Adds stack to inventory 
-			System.out.println("Smelted coal using power");
-			System.out.println(currentPower);
-			return true; 
-		}else if(w.getBlockId(x, y + 1, z) == ModHelper.oreRoent.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage; // Removes power from storage
-			w.setBlockToAir(x, y + 1, z);// Removes block above
-			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.ingotRoentgenium,2) ); // Adds stack to inventory 
-			System.out.println("Smelted coal using power"); 
-			System.out.println(currentPower); 	
-			return true;
-		}else if(w.getBlockId(x, y + 1, z) == ModHelper.oreIndium.blockID && currentPower >= powerUsage) {
-			currentPower = currentPower - powerUsage; // Removes power from storage
-			w.setBlockToAir(x, y + 1, z);// Removes block above
-			p.inventory.addItemStackToInventory(new ItemStack(ModHelper.ingotIndium,2) ); // Adds stack to inventory
-			System.out.println("Smelted indium using power");
-			System.out.println(currentPower);
-			return true;
-			} else {
-				p.addChatMessage("You're using an invalid block, or don't have enought power.");
-				int idToString = w.getBlockId(x,y+1,z);
-				p.addChatMessage("Debug message : Block ID : "+ idToString );
-				p.addChatMessage("Debug message : Block power ammount : "+ this.currentPower );
-				
-			}
-		
-		return false;
-	}
-
-	public void receive(World w,int x,int y,int z) {
-		TileEntityPowerPipe pipe;
-		if(w.getBlockTileEntity(x+1,y,z) instanceof TileEntityPowerPipe)  {
-			pipe = (TileEntityPowerPipe) w.getBlockTileEntity(x-1,y,z);
-			pipe.transmit(this);
-		}else if(w.getBlockTileEntity(x-1,y,z) instanceof TileEntityPowerPipe) {
-			pipe = (TileEntityPowerPipe) w.getBlockTileEntity(x-1,y,z);
-			pipe.transmit(this);
-		} else if(w.getBlockTileEntity(x-1,y,z) instanceof TileEntityPowerPipe) {
-			pipe = (TileEntityPowerPipe) w.getBlockTileEntity(x+1,y,z);
-			pipe.transmit(this);
-		} else if(w.getBlockTileEntity(x,y,z+1) instanceof TileEntityPowerPipe) {
-			pipe = (TileEntityPowerPipe) w.getBlockTileEntity(x,y,z+1);
-			pipe.transmit(this);
-		} else if(w.getBlockTileEntity(x,y,z-1) instanceof TileEntityPowerPipe) {
-			pipe = (TileEntityPowerPipe) w.getBlockTileEntity(x,y,z-1);
-			pipe.transmit(this);
+	public boolean run(EntityPlayer p,World w) {
+		if(currentPower<powerUsage) return false; 
+		Item i=smeltHash.get(w.getBlockId(xCoord, yCoord+1, zCoord));
+		if(i==null) {
+			p.addChatMessage("The block cannot be smelted.");
+			return false;
 		}
-		
+		currentPower-=powerUsage;
+		p.inventory.addItemStackToInventory(new ItemStack(i,smeltResult));
+		return true;
 	}
 
+	
 
-	public int consume(int ammountToConsume) {
-		currentPower = currentPower - ammountToConsume;
-		return 0;
-	}
-
-
-	public int consume(World w, int x, int y, int z) {
-		return 0;
-	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		this.currentPower = nbt.getInteger("currentPower");
+		this.smeltResult = nbt.getInteger("smeltResult");
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 		nbt.setInteger("currentPower",currentPower);
+		nbt.setInteger("smeltResult",smeltResult);
 		
 	}
 	
@@ -145,7 +76,7 @@ public class TileEntitySmelter extends TileEntity implements Powerable{
 	public int removePower(int amount) {
 		return 0;
 	}
-	public void transmit(World w,int x,int y,int z,int x2,int y2,int z2) {
+	public void transmit(World w,int x,int y,int z) {
 		System.out.println("A Smelter won't give away power");
 	}
 	
