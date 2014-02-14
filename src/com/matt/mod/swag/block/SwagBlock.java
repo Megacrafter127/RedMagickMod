@@ -25,8 +25,9 @@ public class SwagBlock extends Block {
 					world.setBlockToAir(x, y, z);
 					player.inventory.addItemStackToInventory(new ItemStack(this));
 					return true;
+				} else {
+					return false;
 				}
-		return false;
 		
 		 
 	}
