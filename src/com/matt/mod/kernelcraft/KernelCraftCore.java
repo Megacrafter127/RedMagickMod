@@ -2,11 +2,13 @@ package com.matt.mod.kernelcraft;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
+import com.matt.lib.Ref;
 
 public class KernelCraftCore implements IFutureCraftPlugin {
-	static{
-		loadIDs();
+	public static String toTextureName(String name) {
+		return Ref.NAME.toLowerCase()+":"+name;
 	}
+	
 	public static int DriveID=911;
 	public static int BatteryID=912;
 	public static int IOExpanderID=913;
