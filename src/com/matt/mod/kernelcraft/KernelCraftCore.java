@@ -2,17 +2,25 @@ package com.matt.mod.kernelcraft;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
-import com.matt.mod.TabFuture;
-import com.matt.mod.kernelcraft.blocks.*;
-import com.matt.mod.kernelcraft.items.*;
-import com.matt.mod.kernelcraft.tileentities.*;
+import com.matt.mod.kernelcraft.blocks.BlockKernelCPU;
+import com.matt.mod.kernelcraft.blocks.BlockKernelIOFace;
+import com.matt.mod.kernelcraft.blocks.BlockKernelModule;
+import com.matt.mod.kernelcraft.blocks.BlockKernelStorage;
+import com.matt.mod.kernelcraft.blocks.BlockKernelUSV;
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCPU;
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelIOFace;
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelModule;
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelStorage;
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelUSV;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class KernelCraftCore implements IFutureCraftPlugin {
 	private static class KernelTab extends CreativeTabs {
@@ -55,6 +63,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		public static Block Battery;
 		public static Block IOExpander;
 		public static Block Overclocker;
+		
 		//end base extenders
 		//base
 		public static BlockKernelModule Module;
@@ -95,7 +104,11 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		GameRegistry.registerBlock(IOFace, "kernelIOFace");
 		CPU=new BlockKernelCPU(CPUID);
 		GameRegistry.registerBlock(CPU, "kernelCPU");
-		//TODO add blocks
+		LanguageRegistry.addName(Module,"KernelCraft Module");
+		LanguageRegistry.addName(Storage,"Kernel Storage");
+		LanguageRegistry.addName(USV, "Kernel USV");
+		LanguageRegistry.addName(IOFace,"Kernel IO Face");
+		LanguageRegistry.addName(CPU,"Kernel CPU");
 	}
 	
 	public static void registerCreativeTabs() {
