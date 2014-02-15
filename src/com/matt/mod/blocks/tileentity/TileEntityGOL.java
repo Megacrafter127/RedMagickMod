@@ -13,12 +13,6 @@ import net.minecraft.world.World;
 import java.util.LinkedList;
 
 public class TileEntityGOL extends TileEntity {
-	private static String getName(Block b) {
-		if(b==null) {
-			return "air";
-		}
-		return b.getUnlocalizedName();
-	}
 	private static class Switcher extends Thread {
 		public void run() {
 			while(true) {
@@ -69,6 +63,7 @@ public class TileEntityGOL extends TileEntity {
 			z=i[2];
 			if(w.getBlockId(x, y, z)==ModHelper.gameOfLifeBlock.blockID) {
 				w.setBlockToAir(x, y, z);
+				w.removeBlockTileEntity(x, y, z);
 			}
 		}
 		inactiveCoords.clear();
@@ -78,7 +73,7 @@ public class TileEntityGOL extends TileEntity {
 	private static LinkedList<int[]> inactiveCoords=new LinkedList<int[]>();
 	private boolean lastChange=true;
 	private static boolean change=false;
-	public static final long timeBetweenFrames=500;
+	public static final long timeBetweenFrames=250;
 	public static final int minPop=2;
 	public static final int switchPop=6;
 	public static final int maxPop=8;

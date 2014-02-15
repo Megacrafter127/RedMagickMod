@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -18,6 +19,7 @@ public class BlockGOLControler extends Block {
 	private Icon on;
 	@SideOnly(Side.CLIENT)
 	private Icon off;
+	
 
 	public BlockGOLControler(int par1) {
 		super(par1,Material.circuits);
@@ -40,9 +42,12 @@ public class BlockGOLControler extends Block {
 			return off;
 		}
 	}
+	
+	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
+		Minecraft.getMinecraft().renderGlobal.markBlockForRenderUpdate(x, y, z);
 		if(world.isRemote) {
 			return true;
 		}
@@ -53,7 +58,6 @@ public class BlockGOLControler extends Block {
 		else {
 			System.out.println("Resumed GOL");
 		}
-		world.setBlock(x, y, z, blockID);
 		return false;
 	}
 }
