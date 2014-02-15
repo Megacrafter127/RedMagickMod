@@ -97,7 +97,7 @@ public class ModHelper {
 	public static final ItemModPickaxe endpick=new ItemModPickaxe(FutureCraft.enderiumPickaxeId,ItemModPickaxe.enderium);
 public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.indiumPickaxeId,ItemModPickaxe.indium);
 	public static final Item netheriumJetpack = new GenericItem(FutureCraft.jetpackId,"netheriumJetpack",Ref.getRecommendedTab("item"),"jetpack");
-	public static final Item loreBook = new ItemFutureNote().setUnlocalizedName("Lore Book").setCreativeTab(Ref.getRecommendedTab("item"));
+	public static final Item loreBook = new ItemFutureNote().setUnlocalizedName("Lore Book").setCreativeTab(Ref.getRecommendedTab("item")).setTextureName(Ref.NAME.toLowerCase()+ ":lorebook");
 	public static void registerAllItems() {
 		GameRegistry.registerItem(neth, "ingotNetherium");
 		
@@ -113,7 +113,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		
 		GameRegistry.registerItem(indiumPick, "pickaxeIndium");
 		
-		GameRegistry.registerItem(netheriumJetpack, "netheriumJetpack");
+	//	GameRegistry.registerItem(netheriumJetpack, "netheriumJetpack");
 		GameRegistry.registerItem(loreBook, "LoreBook");
 	}
 	public static void registerItemNames() {
