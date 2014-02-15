@@ -209,7 +209,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 			registerPlugin(new FutureCraftSwag());
 		}
 		
-		//registerPlugin(new KernelCraftCore());
+		registerPlugin(new KernelCraftCore());
 		
 	}
 }
