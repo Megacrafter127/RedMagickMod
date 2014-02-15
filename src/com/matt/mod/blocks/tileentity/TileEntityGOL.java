@@ -1,6 +1,7 @@
 package com.matt.mod.blocks.tileentity;
 
 import com.matt.FutureCraft;
+import com.matt.mod.ModHelper;
 import com.matt.mod.blocks.BlockGOL;
 
 import net.minecraft.tileentity.TileEntity;
@@ -58,7 +59,7 @@ public class TileEntityGOL extends TileEntity {
 			y=i[1];
 			z=i[2];
 			if(Block.blocksList[w.getBlockId(x, y, z)]==null) {
-				w.setBlock(x, y, z, FutureCraft.blockGOLID);
+				w.setBlock(x, y, z, ModHelper.gameOfLifeBlock.blockID);
 				System.out.println("Spawned cell: "+x+", "+y+", "+z);
 			}
 			else {
