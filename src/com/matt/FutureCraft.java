@@ -77,7 +77,9 @@ public class FutureCraft {
 		public static int swag_wall2_id = 753;
 		public static int swag_wall3_id = 754;
 		public static int swag_wand_id = 801;
-		public static int swag_catalist_id = 802;
+		public static int swag_wand_idt2 = 802;
+		public static int swag_wand_idt3 = 803;
+		public static int swag_catalist_id = 804;
 		public static int netheraldId = 755;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
@@ -129,7 +131,10 @@ public class FutureCraft {
             		enable_swag = FutureCraft.config.get("Module", "Enable Swag", false).getBoolean(false);
             		
             		swag_wand_id = FutureCraft.config.getItem("swagWand", 801 ).getInt();
-            		
+
+            		swag_wand_idt2 = FutureCraft.config.getItem("swagWand", 802 ).getInt();
+
+            		swag_wand_idt3 = FutureCraft.config.getItem("swagWand", 803 ).getInt();
             		swag_wall_id  = FutureCraft.config.getBlock("magicWall", 751).getInt();
             		
             		swag_wall1_id = FutureCraft.config.getBlock("magicWall1", 752 ).getInt();
@@ -138,7 +143,7 @@ public class FutureCraft {
             	
             		swag_wall3_id = FutureCraft.config.getBlock("magicWall3", 754 ).getInt();
             		
-            		swag_catalist_id = FutureCraft.config.getItem("Flying Catalist", 802).getInt();
+            		swag_catalist_id = FutureCraft.config.getItem("Flying Catalist", 804).getInt();
             		
             		netheraldId = FutureCraft.config.getBlock("Netherium Block", 755).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
