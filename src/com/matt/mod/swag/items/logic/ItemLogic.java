@@ -1,7 +1,13 @@
 package com.matt.mod.swag.items.logic;
 
-import net.minecraft.entity.player.EntityPlayer;
 /** Tagger class */
-public abstract class ItemLogic {
-
+public class ItemLogic {
+	private int manaLevel;
+	public  void setManaLevel(int i) {
+		manaLevel = i;
+	}
+	public int getManaLevel() {
+		return manaLevel;
+	}
+	
 }

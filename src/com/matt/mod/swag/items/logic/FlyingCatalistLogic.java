@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class FlyingCatalistLogic extends ItemLogic {
 	public static boolean isFlying;
 	public static boolean canFly;
+	public static int mana;
 	public static  boolean run(EntityPlayer p) {
 		System.out.println("p right clicked ItemCatalist");
 		canFly = p.capabilities.allowFlying;
@@ -33,8 +34,13 @@ public class FlyingCatalistLogic extends ItemLogic {
 		return canFly == isFlying; */
 		p.capabilities.allowFlying = true;
 		return true;
-		
-		
+
+	}
+	public int getMana() {
+		return mana;
+	}
+	public void setMana(int i) {
+		mana = i;
 	}
 
 }

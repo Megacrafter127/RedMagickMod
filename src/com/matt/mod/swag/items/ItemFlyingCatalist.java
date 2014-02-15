@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 import com.matt.mod.swag.items.logic.FlyingCatalistLogic;
+import com.matt.mod.swag.items.logic.ItemLogic;
 
 public class ItemFlyingCatalist extends Item{
 public ItemFlyingCatalist() {
@@ -18,7 +19,11 @@ public ItemFlyingCatalist() {
 }
 @Override
 public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
+	System.out.println(getLogic().getManaLevel());
 	return FlyingCatalistLogic.run(entityPlayer);
 	
+}
+public static ItemLogic getLogic() {
+	return new FlyingCatalistLogic();
 }
 }
