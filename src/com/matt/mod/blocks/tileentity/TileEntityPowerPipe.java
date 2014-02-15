@@ -1,6 +1,8 @@
 package com.matt.mod.blocks.tileentity;
 
+
 import com.matt.mod.power.Powerable;
+
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -13,7 +15,6 @@ public class TileEntityPowerPipe extends TileEntity implements Powerable {
 	static int powerToProvide = 10;
 	static int powerToGenerate = 10;
 	public void run(World w) {
-		System.out.println("ticking");
 		int overflow=addPower(powerToGenerate);
 		int[] coords=new int[]{xCoord,yCoord,zCoord};
 		for(int i=0;i<coords.length;i++) {
@@ -68,6 +69,16 @@ public class TileEntityPowerPipe extends TileEntity implements Powerable {
 				System.out.println("Lost "+power+" power units.");
 			}
 		}
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		run(getWorldObj());
+	}
+	@Override
+	public boolean canUpdate() {
+		return true;
 	}
 }
 

@@ -5,12 +5,21 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.Icon;
 import net.minecraft.client.renderer.texture.IconRegister;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ColumnBlock extends Block {
+	@SideOnly(Side.CLIENT)
 	private Icon top;
+	@SideOnly(Side.CLIENT)
 	private String topName;
+	@SideOnly(Side.CLIENT)
 	private Icon bottom;
+	@SideOnly(Side.CLIENT)
 	private String bottomName;
+	@SideOnly(Side.CLIENT)
 	private Icon side;
+	@SideOnly(Side.CLIENT)
 	private String sideName;
 
 	public ColumnBlock(int par1, Material par2Material,String top,String bottom,String side,String name) {
@@ -21,6 +30,7 @@ public class ColumnBlock extends Block {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister r) {
 		top=r.registerIcon(topName);
 		bottom=r.registerIcon(bottomName);
@@ -28,6 +38,7 @@ public class ColumnBlock extends Block {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side,int meta) {
 		if(side==0) {
 			return top;

@@ -6,13 +6,20 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.client.renderer.texture.IconRegister;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.matt.lib.Ref;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelChest;
 
 public class BlockKernelChest extends BlockChest {
+	@SideOnly(Side.CLIENT)
 	protected Icon top;
+	@SideOnly(Side.CLIENT)
 	protected Icon front;
+	@SideOnly(Side.CLIENT)
 	protected Icon side;
+	@SideOnly(Side.CLIENT)
 	protected Icon bottom;
 	//0=normal,1=left,2=back,3=right
 
@@ -23,6 +30,7 @@ public class BlockKernelChest extends BlockChest {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister r) {
 		top=r.registerIcon(Ref.NAME.toLowerCase() + ":kernelChestTop");
 		front=r.registerIcon(Ref.NAME.toLowerCase() + ":kernelChestFront");
@@ -31,6 +39,7 @@ public class BlockKernelChest extends BlockChest {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side,int meta) {
 		if(side==0) {
 			return bottom;

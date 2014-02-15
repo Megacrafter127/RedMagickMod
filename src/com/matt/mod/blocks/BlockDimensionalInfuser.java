@@ -12,12 +12,18 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.*;
 import net.minecraft.util.Icon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.matt.lib.Ref;
 import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
 
 public class BlockDimensionalInfuser extends Block implements ITileEntityProvider {
+	@SideOnly(Side.CLIENT)
 	private Icon inactive;
+	@SideOnly(Side.CLIENT)
 	private Icon nether;
+	@SideOnly(Side.CLIENT)
 	private Icon end;
 	
 	public BlockDimensionalInfuser(int par1) {
@@ -26,6 +32,7 @@ public class BlockDimensionalInfuser extends Block implements ITileEntityProvide
 		setUnlocalizedName("Dimensional Infuser");
 	}
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister r) {
 		super.registerIcons(r);
 		inactive=r.registerIcon(Ref.NAME.toLowerCase() + ":diminfuser");
@@ -43,6 +50,7 @@ public class BlockDimensionalInfuser extends Block implements ITileEntityProvide
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess a,int x,int y,int z,int side) {
 		BiomeGenBase b=a.getBiomeGenForCoords(x, z);
 		if(b instanceof BiomeGenHell) return nether;

@@ -7,6 +7,10 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import com.matt.mod.blocks.tileentity.TileEntityGOL;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.util.Icon;
@@ -16,7 +20,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.Random;
 
 public class BlockGOL extends Block implements ITileEntityProvider {
+	@SideOnly(Side.CLIENT)
 	private Icon alive;
+	@SideOnly(Side.CLIENT)
 	private Icon dead;
 	public static boolean halted;
 	private boolean b;
@@ -27,6 +33,7 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister r) {
 		super.registerIcons(r);
 		alive=r.registerIcon(Ref.NAME.toLowerCase() + ":cellactive");
@@ -34,6 +41,7 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess a,int x,int y,int z,int side) {
 		try{
 			if(((TileEntityGOL)a.getBlockTileEntity(x, y, z)).isAlive()) {
@@ -54,22 +62,6 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	}
 	
 	@Override
-	public void updateTick(World w,int x,int y,int z,Random r) {
-		if(!halted) {
-			try{
-				((TileEntityGOL)w.getBlockTileEntity(x, y, z)).run(w);
-			}
-			catch(ClassCastException ex) {}
-			catch(NullPointerException ex) {}
-		}
-	}
-	
-	@Override
-	public int tickRate(World w) {
-		return 5;
-	}
-	
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
 		b=!b;
@@ -79,6 +71,7 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 		try{
 			((TileEntityGOL)world.getBlockTileEntity(x,y,z)).switchAlive();
 			System.out.println("Switched");
+			world.markBlockForRenderUpdate(x, y, z);
 		}
 		catch(ClassCastException ex) {}
 		catch(NullPointerException ex) {}

@@ -22,6 +22,7 @@ public class TileEntityGOL extends TileEntity {
 	}
 	private boolean alive;
 	private boolean next;
+	private boolean lastChange=true;
 	private static boolean change=false;
 	public static final long timeBetweenFrames=500;
 	public static final int minPop=2;
@@ -48,6 +49,7 @@ public class TileEntityGOL extends TileEntity {
 	}
 	
 	public void run(World w) {
+		lastChange=change;
 		if(change) {
 			alive=next;
 		}
@@ -76,6 +78,7 @@ public class TileEntityGOL extends TileEntity {
 			else if(count>maxPop) {
 				next=false;
 			}
+			w.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 		}
 	}
 	
@@ -85,5 +88,16 @@ public class TileEntityGOL extends TileEntity {
 	
 	public void switchAlive() {
 		alive=!alive;
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		run(getWorldObj());
+	}
+	
+	@Override
+	public boolean canUpdate() {
+		return lastChange!=change;
 	}
 }
