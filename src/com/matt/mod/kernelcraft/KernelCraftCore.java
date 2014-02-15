@@ -1,8 +1,9 @@
 package com.matt.mod.kernelcraft;
 
 import com.matt.FutureCraft;
+import com.matt.generic.helpers.IFutureCraftPlugin;
 
-public class KernelCraftCore {
+public class KernelCraftCore implements IFutureCraftPlugin {
 	static{
 		loadIDs();
 	}
@@ -30,5 +31,20 @@ public class KernelCraftCore {
 	
 	public static void registerRecipes() {
 		//TODO make crafting recipes
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "KernelCraft";
+	}
+
+	@Override
+	public void register() {
+		loadIDs();
+		registerBlocks();
+		registerItems();
+		registerTileEntities();
+		registerRecipes();
 	}
 }
