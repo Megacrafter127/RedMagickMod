@@ -60,7 +60,6 @@ public class TileEntityGOL extends TileEntity {
 			z=i[2];
 			if(Block.blocksList[w.getBlockId(x, y, z)]==null) {
 				w.setBlock(x, y, z, ModHelper.gameOfLifeBlock.blockID);
-
 			}
 		}
 		activeCoords.clear();
@@ -106,7 +105,7 @@ public class TileEntityGOL extends TileEntity {
 				for(int j=-1;j<2;j++) {
 					for(int k=-1;k<2;k++) {
 						int active=countActiveCells(w,xCoord+i,yCoord+j,zCoord+k);
-						if(active>maxPop) {
+						if(active>maxPop||active<minPop) {
 							inactiveCoords.add(new int[]{xCoord+i,yCoord+j,zCoord+k});
 						}
 						else if(active<switchPop) {
