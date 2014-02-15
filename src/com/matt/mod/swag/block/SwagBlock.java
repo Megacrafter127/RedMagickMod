@@ -20,6 +20,8 @@ public class SwagBlock extends Block implements IWandAble {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
              EntityPlayer player, int metadata, float what, float these, float are) {
+		if(!world.isRemote) {
+			if(!player.isSneaking()) {
 		System.out.println("Activated SwagBlock!");
 		if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID) {
 			onWandRightClick(player,world,x,y,z);
@@ -30,6 +32,20 @@ public class SwagBlock extends Block implements IWandAble {
 		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID){
 			onWandRightClick(player,world,x,y,z);
 			return true;
+		} 
+			} else {
+				System.out.println("Activated SwagBlock! - Sneak!");
+				/*if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID) {
+					onWandSneakRightClick(player,world,x,y,z);
+					return true;
+				} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID) {
+					onWandSneakRightClick(player,world,x,y,z);
+					return true;
+				} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID){
+					onWandSneakRightClick(player,world,x,y,z);
+					return true;
+				} */
+			}
 		}
 		return false;	 
 	}
