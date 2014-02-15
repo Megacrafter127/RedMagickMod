@@ -81,6 +81,7 @@ public class FutureCraft {
 		public static int swag_wand_idt3 = 803;
 		public static int swag_catalist_id = 804;
 		public static int netheraldId = 755;
+		public static int manaBatteryId = 756;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -96,6 +97,7 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
+		
 		
 		 
 		@EventHandler
@@ -146,6 +148,7 @@ public class FutureCraft {
             		swag_catalist_id = FutureCraft.config.getItem("Flying Catalist", 804).getInt();
             		
             		netheraldId = FutureCraft.config.getBlock("Netherium Block", 755).getInt();
+            		manaBatteryId = FutureCraft.config.getBlock("Mana Battery", 756).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
