@@ -70,6 +70,7 @@ public class FutureCraft {
 		public static int roentgeniumPickaxeId = 603;
 		public static int loreBookId = 650;
 		// FutureCraft Swag
+		public static boolean enable_swag = false;
 		public static int swag_default_id = 750;
 		public static int swag_wall_id = 751;
 		public static int swag_wall1_id = 752;
@@ -77,6 +78,7 @@ public class FutureCraft {
 		public static int swag_wall3_id = 754;
 		public static int swag_wand_id = 801;
 		public static int swag_catalist_id = 802;
+		public static int netheraldId = 755;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -93,17 +95,16 @@ public class FutureCraft {
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
 		
-		
-		
-		
-		
 		 
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
              configPatch = event.getSuggestedConfigurationFile();
              System.out.println("Config File:"+configPatch.getAbsolutePath());
-            config = new Configuration(FutureCraft.configPatch);     
+             /**
+              * FutureCraft Config file
+              */
+             config = new Configuration(FutureCraft.configPatch);     
              config.load();
              		basicFBlockID = config.getBlock("basicMachineHandler", 538).getInt();
              		goldenFBlockID = config.getBlock("advancedMachineHandler", 539).getInt();
@@ -124,6 +125,9 @@ public class FutureCraft {
             		altarCoreID = config.getBlock("Altar Core", 547).getInt();
             		blockGOLID = config.getBlock("GOL", 548).getInt();
             		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
+            		
+            		enable_swag = FutureCraft.config.get("Module", "Enable Swag", false).getBoolean(false);
+            		
             		swag_wand_id = FutureCraft.config.getItem("swagWand", 801 ).getInt();
             		
             		swag_wall_id  = FutureCraft.config.getBlock("magicWall", 751).getInt();
@@ -136,6 +140,7 @@ public class FutureCraft {
             		
             		swag_catalist_id = FutureCraft.config.getItem("Flying Catalist", 802).getInt();
             		
+            		netheraldId = FutureCraft.config.getBlock("Netherium Block", 755).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();

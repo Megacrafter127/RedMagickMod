@@ -14,11 +14,12 @@ public class SwagHelper {
 public static final Item swaggishWand = new ItemSwaggishWand(FutureCraft.swag_wand_id,"swaggishwand",tier.BASIC).setFull3D().setUnlocalizedName("Swaggish Wand").setCreativeTab(Ref.getRecommendedTab("block"));
 public static final Item swaggishWandT2 = new ItemSwaggishWand(FutureCraft.swag_wand_id + 1,"swaggishwand",tier.NETHERIUM).setFull3D().setUnlocalizedName("Swaggish Wand - T2").setCreativeTab(Ref.getRecommendedTab("block"));
 public static final Item swaggishWandT3 = new ItemSwaggishWand(FutureCraft.swag_wand_id + 2,"swaggishwand",tier.ENDERIUM).setFull3D().setUnlocalizedName("Swaggish Wand - T3").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Block blockMagicalBlockYellow = new SwagBlock(FutureCraft.swag_wall3_id,"magicalwallyel").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Block blockNetherald = new SwagBlock(FutureCraft.swag_default_id,"netheriumblock").setUnlocalizedName("Netherium Block");
+public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
+public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
+public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
+public static final Block blockMagicalBlockYellow = new SwagBlock(FutureCraft.swag_wall3_id,"magicalwallyel").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
+public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId,"netheriumblock").setUnlocalizedName("Netherium Block");
+//public static final Block blockMagicalLighter = new SwagLighter(FutureCraft.swag_default_id,"netheriumblock");
 public static final Item swaggishFlyer = new ItemFlyingCatalist();
 public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
