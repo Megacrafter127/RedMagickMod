@@ -116,7 +116,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	}
 	
 	public static void registerCreativeTabs() {
-		kernelCraft.
 		Module.setCreativeTab(kernelCraft);
 		Storage.setCreativeTab(kernelCraft);
 		USV.setCreativeTab(kernelCraft);
