@@ -110,7 +110,6 @@ public class TileEntityGOL extends TileEntity {
 						}
 						else if(active<switchPop) {
 							activeCoords.add(new int[]{xCoord+i,yCoord+j,zCoord+k});
-							System.out.println("born Cell: "+(xCoord+i)+""+(yCoord+j)+""+(zCoord+k));
 						}
 					}
 				}
