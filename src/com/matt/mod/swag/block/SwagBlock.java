@@ -21,11 +21,14 @@ public class SwagBlock extends Block {
 	public boolean onBlockActivated(World world, int x, int y, int z,
              EntityPlayer player, int metadata, float what, float these, float are) {
 		try {
-				if(player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWand.itemID) {
+				if(player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWand.itemID || player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWandT2.itemID || player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWandT3.itemID) {
 					System.out.println("Swaggish wand clicked on a SwagBlock!");
 					world.setBlockToAir(x, y, z);
-					player.inventory.addItemStackToInventory(new ItemStack(this));
-					return true;
+					if(world.getBlockId(x, y, z) >= 0) {
+						world.setBlockToAir(x, y, z);
+						player.inventory.addItemStackToInventory(new ItemStack(this));
+					}
+					
 				} else {
 					return false;
 				}
@@ -33,6 +36,7 @@ public class SwagBlock extends Block {
 			e.printStackTrace();
 			return false;
 		}
+		return false;
 		
 		 
 	}

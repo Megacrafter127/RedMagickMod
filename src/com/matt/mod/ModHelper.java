@@ -20,6 +20,7 @@ import com.matt.mod.item.ItemModPickaxe;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
 import com.matt.mod.swag.FutureCraftSwag;
+import com.matt.mod.swag.SwagHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -62,6 +63,7 @@ public class ModHelper {
 		LanguageRegistry.addName(dimensionalInfuser, "Dimensional Infuser");
 		LanguageRegistry.addName(gameOfLifeBlock, "Game of life Block");
 		LanguageRegistry.addName(controlerGOL, "Game of life Block Controler");
+		LanguageRegistry.addName(SwagHelper.swaggishWand, "Swaggish Wand - T1");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
@@ -95,7 +97,7 @@ public class ModHelper {
 	public static final ItemModPickaxe endpick=new ItemModPickaxe(FutureCraft.enderiumPickaxeId,ItemModPickaxe.enderium);
 public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.indiumPickaxeId,ItemModPickaxe.indium);
 	public static final Item netheriumJetpack = new GenericItem(FutureCraft.jetpackId,"netheriumJetpack",Ref.getRecommendedTab("item"),"jetpack");
-	public static final Item loreBook = new ItemFutureNote().setUnlocalizedName("Lore Book").setCreativeTab(Ref.getRecommendedTab("item"));
+	public static final Item loreBook = new ItemFutureNote().setUnlocalizedName("Lore Book").setCreativeTab(Ref.getRecommendedTab("item")).setTextureName(Ref.NAME.toLowerCase()+ ":lorebook");
 	public static void registerAllItems() {
 		GameRegistry.registerItem(neth, "ingotNetherium");
 		
@@ -111,7 +113,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		
 		GameRegistry.registerItem(indiumPick, "pickaxeIndium");
 		
-		GameRegistry.registerItem(netheriumJetpack, "netheriumJetpack");
+	//	GameRegistry.registerItem(netheriumJetpack, "netheriumJetpack");
 		GameRegistry.registerItem(loreBook, "LoreBook");
 	}
 	public static void registerItemNames() {
