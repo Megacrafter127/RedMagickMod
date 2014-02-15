@@ -2,6 +2,7 @@ package com.matt.mod.kernelcraft;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.*;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
@@ -14,13 +15,25 @@ import com.matt.mod.kernelcraft.tileentities.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class KernelCraftCore implements IFutureCraftPlugin {
+	private static class KernelTab extends CreativeTabs {
+		private ItemStack texture;
+		public KernelTab(String name,Block texture) {
+			super(CreativeTabs.getNextID(),name);
+			this.texture=new ItemStack(texture);
+		}
+		public KernelTab(String name,Item texture) {
+			super(CreativeTabs.getNextID(),name);
+			this.texture=new ItemStack(texture);
+		}
+		@Override
+		public ItemStack getIconItemStack() {
+			return texture;
+		}
+	}
 	public static String toTextureName(String name) {
 		return Ref.NAME.toLowerCase()+":"+name;
 	}
-	public static final CreativeTabs kernelCraft = new CreativeTabs(CreativeTabs.getNextID(), "KernelCraft");
-	static{
-		kernelCraft.setBackgroundImageName(toTextureName("kernelmodule"));
-	}
+	protected static CreativeTabs kernelCraft ;
 	//IDs
 		//base extenders
 		public static int DriveID=911;
@@ -86,6 +99,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	}
 	
 	public static void registerCreativeTabs() {
+		kernelCraft=new KernelTab("KernelCraft core",Module);
 		Module.setCreativeTab(kernelCraft);
 		Storage.setCreativeTab(kernelCraft);
 		USV.setCreativeTab(kernelCraft);
