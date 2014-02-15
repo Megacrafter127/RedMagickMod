@@ -25,7 +25,7 @@ public static final Block blockMagicalBlockYellow = new SwagBlock(FutureCraft.sw
 public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId,"netheriumblock").setUnlocalizedName("Netherium Block");
 public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery");
 //public static final Block blockMagicalLighter = new SwagLighter(FutureCraft.swag_default_id,"netheriumblock");
-public static final Item swaggishFlyer = new ItemFlyingCatalist();
+public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
 	GameRegistry.registerBlock(blockMagicalBlockBlue,"magicalWallBlue");
@@ -37,6 +37,7 @@ public static void register() {
 	GameRegistry.registerItem(swaggishWandT2, "Swaggish Want t2");
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
+	swaggishFlyer.getLogic().setManaLevel(1000);
 	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockMagicalBlockRed, "Magical Wall - Colored");

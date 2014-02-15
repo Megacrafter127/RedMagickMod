@@ -60,6 +60,7 @@ public class TileEntityGOL extends TileEntity {
 			z=i[2];
 			if(Block.blocksList[w.getBlockId(x, y, z)]==null) {
 				w.setBlock(x, y, z, ModHelper.gameOfLifeBlock.blockID);
+
 			}
 		}
 		activeCoords.clear();
