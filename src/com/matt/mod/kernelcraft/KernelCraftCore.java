@@ -17,7 +17,10 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	public static String toTextureName(String name) {
 		return Ref.NAME.toLowerCase()+":"+name;
 	}
-	public static final CreativeTabs kernelCraft = new TabFuture(CreativeTabs.getNextID(), "KernelCraft","kernel");
+	public static final CreativeTabs kernelCraft = new CreativeTabs(CreativeTabs.getNextID(), "KernelCraft");
+	static{
+		kernelCraft.setBackgroundImageName(toTextureName("kernelmodule"));
+	}
 	//IDs
 		//base extenders
 		public static int DriveID=911;
