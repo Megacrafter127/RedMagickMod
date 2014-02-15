@@ -104,11 +104,11 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		GameRegistry.registerBlock(IOFace, "kernelIOFace");
 		CPU=new BlockKernelCPU(CPUID);
 		GameRegistry.registerBlock(CPU, "kernelCPU");
-		LanguageRegistry.addName(Module,"KernelCraft Module");
-		LanguageRegistry.addName(Storage,"Kernel Storage");
-		LanguageRegistry.addName(USV, "Kernel USV");
-		LanguageRegistry.addName(IOFace,"Kernel IO Face");
-		LanguageRegistry.addName(CPU,"Kernel CPU");
+		Module.setUnlocalizedName("Kernel Module");
+		Storage.setUnlocalizedName("Kernel Storage");
+		USV.setUnlocalizedName("Kernel USV");
+		IOFace.setUnlocalizedName("Kernel IO Face");
+		CPU.setUnlocalizedName("Kernel CPU");
 	}
 	
 	public static void registerCreativeTabs() {
