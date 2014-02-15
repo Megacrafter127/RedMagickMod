@@ -75,6 +75,8 @@ public class ModHelper {
 		LanguageRegistry.addName(gameOfLifeBlock, "Game of life Block");
 		LanguageRegistry.addName(controlerGOL, "Game of life Block Controler");
 		LanguageRegistry.addName(SwagHelper.swaggishWand, "Swaggish Wand - T1");
+		LanguageRegistry.addName(SwagHelper.swaggishWandT2, "Swaggish Wand - T2");
+		LanguageRegistry.addName(SwagHelper.swaggishWandT3, "Swaggish Wand - T3");
 	}
 	public static void registerMiningTools() {
 		MinecraftForge.setBlockHarvestLevel(basicFutureBlock, "pickaxe",1);
