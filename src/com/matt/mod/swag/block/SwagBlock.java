@@ -57,13 +57,8 @@ public class SwagBlock extends Block implements IWandAble {
 	 * @param z
 	 */
 	public void onWandRightClick(EntityPlayer p, World w, int x, int y, int z) {
-		if(!this.isAirBlock(w,x,y,z)) {
 		w.setBlockToAir(x, y, z);
-		
-		} else {
 			p.inventory.addItemStackToInventory(new ItemStack(this));
-			p.experienceTotal = p.experienceTotal - 10;
-		}
 	}
 	public void onWandSneakRightClick(EntityPlayer p, World w, int x, int y, int z) {
 		
