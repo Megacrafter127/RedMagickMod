@@ -6,12 +6,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 import com.matt.mod.swag.SwagHelper;
-import com.matt.mod.swag.lib.SwagLib;
+import com.matt.mod.swag.lib.IWandAble;
 
-public class SwagBlock extends Block {
+public class SwagBlock extends Block implements IWandAble {
 
 	public SwagBlock(int id, String str) {
 		super(id, Material.sand);
@@ -20,26 +19,54 @@ public class SwagBlock extends Block {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
              EntityPlayer player, int metadata, float what, float these, float are) {
-		try {
-				if(player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWand.itemID || player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWandT2.itemID || player.inventory.getCurrentItem().itemID == SwagHelper.swaggishWandT3.itemID) {
-					System.out.println("Swaggish wand clicked on a SwagBlock!");
-					world.setBlockToAir(x, y, z);
-					if(world.getBlockId(x, y, z) >= 0) {
-						world.setBlockToAir(x, y, z);
-						player.inventory.addItemStackToInventory(new ItemStack(this));
-					}
-					
-				} else {
-					return false;
-				}
-		}catch(NullPointerException e) {
-			e.printStackTrace();
-			return false;
+		if(!player.isSneaking()) {
+		if(player.inventory.currentItem == SwagHelper.swaggishWand.itemID) {
+			onWandRightClick(player,world,x,y,z);
+			return true;
+		} else if(player.inventory.currentItem == SwagHelper.swaggishWandT2.itemID) {
+			onWandRightClick(player,world,x,y,z);
+			return true;
+		} else if(player.inventory.currentItem == SwagHelper.swaggishWandT3.itemID){
+			onWandRightClick(player,world,x,y,z);
+			return true;
 		}
-		return false;
-		
-		 
-	}
+		}else {
+			if(player.inventory.currentItem == SwagHelper.swaggishWand.itemID){
+				onWandSneakRightClick(player,world,x,y,z);
+				return true;
+			}else if(player.inventory.currentItem == SwagHelper.swaggishWandT2.itemID){
+				onWandSneakRightClick(player,world,x,y,z);
+				return true;
+			}else if(player.inventory.currentItem == SwagHelper.swaggishWandT3.itemID){
+				onWandSneakRightClick(player,world,x,y,z);
+				return true;
+			}
 
+		}
+		return false;	 
+	}
+	
+	@Override
+	/** Sets this block to air,
+	 *  Removes 10 xp,
+	 * 	Adds a stack of this to inventory.
+	 * @param p
+	 * @param w
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	public void onWandRightClick(EntityPlayer p, World w, int x, int y, int z) {
+		if(!this.isAirBlock(w,x,y,z)) {
+		w.setBlockToAir(x, y, z);
+		
+		} else {
+			p.inventory.addItemStackToInventory(new ItemStack(this));
+			p.experienceTotal = p.experienceTotal - 10;
+		}
+	}
+	public void onWandSneakRightClick(EntityPlayer p, World w, int x, int y, int z) {
+		
+	}
 
 }
