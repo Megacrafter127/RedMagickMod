@@ -14,14 +14,17 @@ public class TileEntityKernelModule extends TileEntity {
 	protected TileEntityKernelUSV power;
 	protected TileEntityKernelIOFace range;
 	protected TileEntityKernelCPU speed;
-	private boolean update;
+	protected boolean active=false;
+	private long lastUpdate=System.currentTimeMillis();;
 
 	public TileEntityKernelModule(World w) {
 		update(w);
 	}
 	
 	public void update(World w) {
-		update=true;
+		if(w.isRemote) {
+			return;
+		}
 		storage=null;
 		power=null;
 		range=null;
@@ -43,21 +46,33 @@ public class TileEntityKernelModule extends TileEntity {
 				}
 			}
 		}
+		active=storage!=null&&power!=null&&range!=null&&speed!=null;
+		if(active) {
+			System.out.println("active kernel");
+		}
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("distance", distance);
-		nbt.setBoolean("update", update);
-	}
+		}
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		distance=nbt.getInteger("distance");
-		if(nbt.getBoolean("update")) {
-			update(getWorldObj());
-			update=false;
-		}
+	}
+	@Override
+	public void updateEntity() {
+		lastUpdate=System.currentTimeMillis();
+		update(getWorldObj());
+	}
+	public boolean isActive() {
+		return active;
+	}
+	
+	@Override
+	public boolean canUpdate() {
+		return System.currentTimeMillis()-lastUpdate>250;
 	}
 }

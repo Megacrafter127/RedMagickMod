@@ -1,10 +1,12 @@
 package com.matt.mod.kernelcraft;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
+import com.matt.mod.TabFuture;
 import com.matt.mod.kernelcraft.blocks.*;
 import com.matt.mod.kernelcraft.items.*;
 import com.matt.mod.kernelcraft.tileentities.*;
@@ -15,6 +17,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	public static String toTextureName(String name) {
 		return Ref.NAME.toLowerCase()+":"+name;
 	}
+	public static final CreativeTabs kernelCraft = new TabFuture(CreativeTabs.getNextID(), "KernelCraft","kernel");
 	//IDs
 		//base extenders
 		public static int DriveID=911;
@@ -77,6 +80,14 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		CPU=new BlockKernelCPU(CPUID);
 		GameRegistry.registerBlock(CPU, "kernelCPU");
 		//TODO add blocks
+	}
+	
+	public static void registerCreativeTabs() {
+		Module.setCreativeTab(kernelCraft);
+		Storage.setCreativeTab(kernelCraft);
+		USV.setCreativeTab(kernelCraft);
+		IOFace.setCreativeTab(kernelCraft);
+		CPU.setCreativeTab(kernelCraft);
 	}
 	
 	public static void registerItems() {}
