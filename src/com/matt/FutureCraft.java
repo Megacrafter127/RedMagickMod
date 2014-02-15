@@ -132,11 +132,11 @@ public class FutureCraft {
             		
             		enable_swag = FutureCraft.config.get("Module", "Enable Swag", false).getBoolean(false);
             		
-            		swag_wand_id = FutureCraft.config.getItem("swagWand", 801 ).getInt();
+            		swag_wand_id = FutureCraft.config.getItem("Swaggish Wand - Tier 1", 801 ).getInt();
 
-            		swag_wand_idt2 = FutureCraft.config.getItem("swagWand", 802 ).getInt();
+            		swag_wand_idt2 = FutureCraft.config.getItem("Swaggish Wand - Tier 2", 802 ).getInt();
 
-            		swag_wand_idt3 = FutureCraft.config.getItem("swagWand", 803 ).getInt();
+            		swag_wand_idt3 = FutureCraft.config.getItem("Swaggish Wand - Tier 3", 803 ).getInt();
             		swag_wall_id  = FutureCraft.config.getBlock("magicWall", 751).getInt();
             		
             		swag_wall1_id = FutureCraft.config.getBlock("magicWall1", 752 ).getInt();

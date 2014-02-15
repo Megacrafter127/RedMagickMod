@@ -28,14 +28,25 @@ public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryI
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
+	
 	GameRegistry.registerBlock(blockMagicalBlockBlue,"magicalWallBlue");
+	
 	GameRegistry.registerBlock(blockMagicalBlockRed,"magicalWallRed");
+	
 	GameRegistry.registerBlock(blockMagicalBlockYellow,"magicalWallYellow");
-	GameRegistry.registerItem(swaggishWand, "swaggishWand");
-	GameRegistry.registerBlock(blockNetherald,"netheriumBlock");
+
 	GameRegistry.registerItem(swaggishFlyer, "Swaggish Flyer");
-	GameRegistry.registerItem(swaggishWandT2, "Swaggish Want t2");
+	
+	GameRegistry.registerBlock(blockNetherald,"netheriumBlock");
+	//Register wand 
+	GameRegistry.registerItem(swaggishWand, "swaggishWand");
+	//Register wand t2
+	GameRegistry.registerItem(swaggishWandT2, "Swaggish Wand T2");
+	//Register wand t3
+	GameRegistry.registerItem(swaggishWandT3, "Swaggish Wand T3");
+	//Register mana battery
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
+	//Register mana battery tile
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	swaggishFlyer.getLogic().setManaLevel(1000);
 	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
