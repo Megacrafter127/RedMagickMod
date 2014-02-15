@@ -50,6 +50,7 @@ public class TileEntitySmelter extends TileEntity implements Powerable{
 		}
 		currentPower-=powerUsage;
 		p.inventory.addItemStackToInventory(new ItemStack(i,smeltResult));
+		w.setBlockToAir(xCoord, yCoord+1, zCoord);
 		return true;
 	}
 

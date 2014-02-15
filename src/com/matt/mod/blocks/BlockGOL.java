@@ -71,7 +71,7 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 		try{
 			((TileEntityGOL)world.getBlockTileEntity(x,y,z)).switchAlive();
 			System.out.println("Switched");
-			world.markBlockForRenderUpdate(x, y, z);
+			world.markBlockForUpdate(x, y, z);
 		}
 		catch(ClassCastException ex) {}
 		catch(NullPointerException ex) {}

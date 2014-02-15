@@ -55,6 +55,7 @@ public class BlockGOLControler extends Block {
 		else {
 			System.out.println("Resumed GOL");
 		}
+		world.setBlock(x, y, z, blockID);
 		return false;
 	}
 }

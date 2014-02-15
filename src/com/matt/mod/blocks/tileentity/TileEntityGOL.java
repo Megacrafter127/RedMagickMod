@@ -1,5 +1,7 @@
 package com.matt.mod.blocks.tileentity;
 
+import com.matt.FutureCraft;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -78,7 +80,10 @@ public class TileEntityGOL extends TileEntity {
 			else if(count>maxPop) {
 				next=false;
 			}
-			w.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			w.setBlock(xCoord, yCoord, zCoord, FutureCraft.blockGOLID);
+			validate();
+			w.setBlockTileEntity(xCoord, yCoord, zCoord, this);
+			validate();
 		}
 	}
 	
