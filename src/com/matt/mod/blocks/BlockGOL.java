@@ -64,14 +64,17 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
-		b=!b;
-		if(b) {
-			return false;
+		if(world.isRemote) {
+			return true;
 		}
 		try{
 			((TileEntityGOL)world.getBlockTileEntity(x,y,z)).switchAlive();
 			System.out.println("Switched");
-			world.markBlockForUpdate(x, y, z);
+			TileEntity t=world.getBlockTileEntity(x, y, z);
+			world.setBlock(x, y, z, blockID);
+			t.validate();
+			world.setBlockTileEntity(x, y, z, t);
+			t.validate();
 		}
 		catch(ClassCastException ex) {}
 		catch(NullPointerException ex) {}

@@ -44,8 +44,7 @@ public class BlockGOLControler extends Block {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
-		b=!b;
-		if(b) {
+		if(world.isRemote) {
 			return true;
 		}
 		BlockGOL.halted=!BlockGOL.halted;
