@@ -17,10 +17,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 	
 public class BlockFutureFurnace extends Block implements ITileEntityProvider{
-	
+	@SideOnly(Side.CLIENT)
 	Icon bottom;
+	@SideOnly(Side.CLIENT)
 	Icon top;
+	@SideOnly(Side.CLIENT)
 	Icon sidei;
+	@SideOnly(Side.CLIENT)
 	Icon front;
 	public BlockFutureFurnace(int par1, String texturename) {
 		super(par1, Material.circuits);
@@ -36,12 +39,12 @@ public class BlockFutureFurnace extends Block implements ITileEntityProvider{
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z,
                     EntityPlayer player, int metadata, float what, float these, float are) {
-		System.out.println("Clicked on smelter");
-		
+		if(world.isRemote) {
+			return true;
+		}
 		try{
 			TileEntitySmelter smelt = (TileEntitySmelter) world.getBlockTileEntity(x,y,z);
 			smelt.run(player, world);
-			return true;
 		}
 		catch(ClassCastException ex) {}
 		return false;

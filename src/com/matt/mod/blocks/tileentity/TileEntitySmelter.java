@@ -21,10 +21,6 @@ public class TileEntitySmelter extends TileEntity implements Powerable{
 	static int powerUsage = 10;
 	public int smeltResult;
 	public static final HashMap<Integer,Item> smeltHash=new HashMap<Integer,Item>();
-	static{
-		smeltHash.put(Block.oreIron.blockID, Item.ingotIron);
-		smeltHash.put(Block.oreGold.blockID, Item.ingotGold);
-	}
 	
 	public TileEntitySmelter(int smeltResult) {
 		this.smeltResult=smeltResult;
@@ -32,6 +28,7 @@ public class TileEntitySmelter extends TileEntity implements Powerable{
 	public TileEntitySmelter() {
 		this(2);
 	}
+	
 	/**
 	 * Runs when right-clicked.
 	 * @param p player that clicked
