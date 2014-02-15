@@ -7,6 +7,7 @@ import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 import com.matt.mod.swag.block.SwagBattery;
 import com.matt.mod.swag.block.SwagBlock;
+import com.matt.mod.swag.block.tile.TileEntityWandRecharger;
 import com.matt.mod.swag.items.ItemFlyingCatalist;
 import com.matt.mod.swag.items.ItemSwaggishWand;
 import com.matt.mod.swag.items.ItemSwaggishWand.tier;
@@ -35,6 +36,7 @@ public static void register() {
 	GameRegistry.registerItem(swaggishFlyer, "Swaggish Flyer");
 	GameRegistry.registerItem(swaggishWandT2, "Swaggish Want t2");
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
+	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockMagicalBlockRed, "Magical Wall - Colored");
