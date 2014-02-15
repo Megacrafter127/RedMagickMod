@@ -1,11 +1,9 @@
 package com.matt.mod.kernelcraft;
 
 import com.matt.FutureCraft;
-import com.matt.mod.kernelcraft.blocks.*;
-import com.matt.mod.kernelcraft.tileentities.*;
-import com.matt.mod.kernelcraft.items.*;
+import com.matt.generic.helpers.IFutureCraftPlugin;
 
-public class KernelCraftCore {
+public class KernelCraftCore implements IFutureCraftPlugin {
 	static{
 		loadIDs();
 	}
@@ -15,10 +13,12 @@ public class KernelCraftCore {
 	public static int OverclockerID=914;
 	
 	public static void loadIDs() {
+		FutureCraft.config.load();
 		DriveID=FutureCraft.config.getBlock("kernelDrive", DriveID).getInt();
 		BatteryID=FutureCraft.config.getBlock("kernelBattery", BatteryID).getInt();
 		IOExpanderID=FutureCraft.config.getBlock("kernelIOExpander", IOExpanderID).getInt();
 		OverclockerID=FutureCraft.config.getBlock("kernelOverclockere", OverclockerID).getInt();
+		FutureCraft.config.save();
 	}
 	
 	public static void registerBlocks() {
@@ -31,5 +31,20 @@ public class KernelCraftCore {
 	
 	public static void registerRecipes() {
 		//TODO make crafting recipes
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "KernelCraft";
+	}
+
+	@Override
+	public void register() {
+		loadIDs();
+		registerBlocks();
+		registerItems();
+		registerTileEntities();
+		registerRecipes();
 	}
 }

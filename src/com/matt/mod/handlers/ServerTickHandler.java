@@ -27,7 +27,6 @@ public class ServerTickHandler implements ITickHandler {
 
 	private void playerTick(EntityPlayer entityPlayer) {
 		
-		
 	}
 
 	@Override

@@ -10,13 +10,24 @@ import net.minecraftforge.common.MinecraftForge;
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
-import com.matt.mod.blocks.*;
-import com.matt.mod.blocks.tileentity.*;
+import com.matt.mod.blocks.BlockDimensionalInfuser;
+import com.matt.mod.blocks.BlockEnchantmentAltarCore;
+import com.matt.mod.blocks.BlockFutureBasic;
+import com.matt.mod.blocks.BlockFutureFurnace;
+import com.matt.mod.blocks.BlockFutureGold;
+import com.matt.mod.blocks.BlockGOL;
+import com.matt.mod.blocks.BlockGOLControler;
+import com.matt.mod.blocks.BlockOre;
+import com.matt.mod.blocks.BlockPowerPipe;
+import com.matt.mod.blocks.tileentity.TileEntityAltar;
+import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
+import com.matt.mod.blocks.tileentity.TileEntityPowerPipe;
+import com.matt.mod.blocks.tileentity.TileEntitySmelter;
 import com.matt.mod.handlers.FutureCraftRegistry;
-import com.matt.mod.item.GenericItem;
 import com.matt.mod.item.ItemFutureNote;
 import com.matt.mod.item.ItemIngot;
 import com.matt.mod.item.ItemModPickaxe;
+import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
 import com.matt.mod.swag.FutureCraftSwag;
@@ -193,7 +204,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		registerRecipesShaped();
 		registerTileEntities();
 		registerPlugin(new FutureCraftSwag());
-		
+		//registerPlugin(new KernelCraftCore());
 		
 	}
 }
