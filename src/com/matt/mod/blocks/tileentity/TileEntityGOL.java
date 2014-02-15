@@ -4,6 +4,7 @@ import com.matt.FutureCraft;
 import com.matt.mod.blocks.BlockGOL;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -11,6 +12,12 @@ import net.minecraft.world.World;
 import java.util.LinkedList;
 
 public class TileEntityGOL extends TileEntity {
+	private static String getName(Block b) {
+		if(b==null) {
+			return "air";
+		}
+		return b.getUnlocalizedName();
+	}
 	private static class Switcher extends Thread {
 		public void run() {
 			while(true) {
@@ -50,8 +57,12 @@ public class TileEntityGOL extends TileEntity {
 			x=i[0];
 			y=i[1];
 			z=i[2];
-			if(w.isAirBlock(x, y, z)) {
+			if(Block.blocksList[w.getBlockId(x, y, z)]==null) {
 				w.setBlock(x, y, z, FutureCraft.blockGOLID);
+				System.out.println("Spawned cell: "+x+", "+y+", "+z);
+			}
+			else {
+				System.out.println("Block occupied: "+x+", "+y+", "+z+" by: "+getName(Block.blocksList[w.getBlockId(x, y, z)]));
 			}
 		}
 		activeCoords.clear();
@@ -59,7 +70,7 @@ public class TileEntityGOL extends TileEntity {
 			x=i[0];
 			y=i[1];
 			z=i[2];
-			if(w.getBlockId(x, y, z)==FutureCraft.blockGOLID) {
+			if(Block.blocksList[w.getBlockId(x, y, z)] instanceof BlockGOL) {
 				w.setBlockToAir(x, y, z);
 			}
 		}
@@ -85,7 +96,7 @@ public class TileEntityGOL extends TileEntity {
 	}
 	
 	public void run(World w) {
-		if(BlockGOL.halted) {
+		if(BlockGOL.halted||w.isRemote) {
 			return;
 		}
 		lastChange=change;
@@ -97,11 +108,12 @@ public class TileEntityGOL extends TileEntity {
 				for(int j=-1;j<2;j++) {
 					for(int k=-1;k<2;k++) {
 						int active=countActiveCells(w,xCoord+i,yCoord+j,zCoord+k);
-						if(active<minPop||active>maxPop) {
+						if(active>maxPop) {
 							inactiveCoords.add(new int[]{xCoord+i,yCoord+j,zCoord+k});
 						}
 						else if(active<switchPop) {
 							activeCoords.add(new int[]{xCoord+i,yCoord+j,zCoord+k});
+							System.out.println("born Cell: "+(xCoord+i)+""+(yCoord+j)+""+(zCoord+k));
 						}
 					}
 				}

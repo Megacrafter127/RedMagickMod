@@ -31,4 +31,11 @@ public class BlockGOL extends Block implements ITileEntityProvider {
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityGOL();
 	}
+	
+	@Override
+	public void onBlockAdded(World w,int x,int y,int z) {
+		if(w.getBlockTileEntity(x, y, z)==null) {
+			w.setBlockTileEntity(x, y, z, createNewTileEntity(w));
+		}
+	}
 }
