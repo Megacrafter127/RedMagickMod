@@ -34,6 +34,7 @@ public static void register() {
 	GameRegistry.registerBlock(blockNetherald,"netheriumBlock");
 	GameRegistry.registerItem(swaggishFlyer, "Swaggish Flyer");
 	GameRegistry.registerItem(swaggishWandT2, "Swaggish Want t2");
+	GameRegistry.registerBlock(manaBattery,"Mana Battery");
 	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockMagicalBlockRed, "Magical Wall - Colored");

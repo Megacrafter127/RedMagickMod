@@ -1,6 +1,7 @@
 package com.matt.mod.swag.block.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -35,5 +36,15 @@ public class TileEntityWandRecharger extends TileEntity {
 			}
 		}
 	}
+	@Override
+	 public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    { 
+		manalevel = par1NBTTagCompound.getInteger("manaLevel");
+    }
+	@Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    { 
+		par1NBTTagCompound.setInteger("manaLevel", manalevel);
+    }
 
 }

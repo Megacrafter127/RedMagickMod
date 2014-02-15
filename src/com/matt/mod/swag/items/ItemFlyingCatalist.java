@@ -16,6 +16,7 @@ public ItemFlyingCatalist() {
 	setTextureName(Ref.NAME.toLowerCase() + ":catalist1");
 	setUnlocalizedName("Catalist of Flying");
 	setMaxStackSize(1);
+	getLogic().setManaLevel(100);
 }
 @Override
 public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
