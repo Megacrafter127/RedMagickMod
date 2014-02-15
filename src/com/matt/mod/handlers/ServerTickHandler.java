@@ -26,7 +26,7 @@ public class ServerTickHandler implements ITickHandler {
 	}
 
 	private void playerTick(EntityPlayer entityPlayer) {
-		if(entityPlayer.inventory.hasItem(ModHelper.netheriumJetpack.itemID)) {
+		/*if(entityPlayer.inventory.hasItem(ModHelper.netheriumJetpack.itemID)) {
 			if(entityPlayer.inventory.hasItem(Item.enderPearl.itemID)) {
 				entityPlayer.capabilities.allowFlying = true;
 			}else if(entityPlayer.inventory.hasItem(Item.blazeRod.itemID) ) {
@@ -35,7 +35,7 @@ public class ServerTickHandler implements ITickHandler {
 			
 		}else {
 			entityPlayer.capabilities.allowFlying = false;
-		}
+		}*/
 		
 	}
 

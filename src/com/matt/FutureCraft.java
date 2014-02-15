@@ -33,7 +33,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * @author Matheus and Mega
  *
  */
-@Mod(modid = Ref.ID, name = Ref.NAME, version = "0.0.1a1")
+@Mod(modid = Ref.ID, name = Ref.NAME, version = "0.0.1rev84a1")
 @NetworkMod( channels = {""}, clientSideRequired = true, serverSideRequired = true )
 public class FutureCraft {
 	 @Instance(Ref.ID)
