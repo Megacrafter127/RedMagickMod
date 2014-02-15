@@ -20,64 +20,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.Random;
 
 public class BlockGOL extends Block implements ITileEntityProvider {
-	@SideOnly(Side.CLIENT)
-	private Icon alive;
-	@SideOnly(Side.CLIENT)
-	private Icon dead;
 	public static boolean halted;
-	private boolean b;
 
 	public BlockGOL(int par1) {
-		super(par1, Material.circuits);
-		setTextureName(Ref.NAME.toLowerCase() + ":cellactive");
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister r) {
-		super.registerIcons(r);
-		alive=r.registerIcon(Ref.NAME.toLowerCase() + ":cellactive");
-		dead=r.registerIcon(Ref.NAME.toLowerCase() + ":cellinactive");
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess a,int x,int y,int z,int side) {
-		try{
-			if(((TileEntityGOL)a.getBlockTileEntity(x, y, z)).isAlive()) {
-				return alive;
-			}
-			else {
-				return dead;
-			}
-		}
-		catch(ClassCastException ex) {
-			return alive;
-		}
+		super(par1, Material.iron);
+		setTextureName(Ref.NAME.toLowerCase() + ":gol");
 	}
 	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityGOL();
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-            EntityPlayer player, int metadata, float what, float these, float are) {
-		if(world.isRemote) {
-			return true;
-		}
-		try{
-			((TileEntityGOL)world.getBlockTileEntity(x,y,z)).switchAlive();
-			System.out.println("Switched");
-			TileEntity t=world.getBlockTileEntity(x, y, z);
-			world.setBlock(x, y, z, blockID);
-			t.validate();
-			world.setBlockTileEntity(x, y, z, t);
-			t.validate();
-		}
-		catch(ClassCastException ex) {}
-		catch(NullPointerException ex) {}
-		return false;
 	}
 }

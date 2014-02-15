@@ -18,7 +18,6 @@ public class BlockGOLControler extends Block {
 	private Icon on;
 	@SideOnly(Side.CLIENT)
 	private Icon off;
-	private boolean b;
 
 	public BlockGOLControler(int par1) {
 		super(par1,Material.circuits);

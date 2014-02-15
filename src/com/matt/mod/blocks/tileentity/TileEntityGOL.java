@@ -1,10 +1,14 @@
 package com.matt.mod.blocks.tileentity;
 
 import com.matt.FutureCraft;
+import com.matt.mod.blocks.BlockGOL;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.LinkedList;
 
 public class TileEntityGOL extends TileEntity {
 	private static class Switcher extends Thread {
@@ -22,8 +26,48 @@ public class TileEntityGOL extends TileEntity {
 		TileEntity.addMapping(TileEntityGOL.class,"TileEntityGOL");
 		new Switcher().start();
 	}
-	private boolean alive;
-	private boolean next;
+	
+	public static int countActiveCells(IBlockAccess blocks,int x,int y,int z) {
+		int ret=0;
+		for(int i=-1;i<2;i++) {
+			for(int j=-1;j<2;j++) {
+				for(int k=-1;k<2;k++) {
+					if(i==0&&j==0&&k==0) {}
+					else {
+						if(blocks.getBlockId(x+i, y+j, z+k)==FutureCraft.blockGOLID) {
+							ret++;
+						}
+					}
+				}
+			}
+		}
+		return ret;
+	}
+	
+	private static void apply(World w) {
+		int x,y,z;
+		for(int[] i:activeCoords) {
+			x=i[0];
+			y=i[1];
+			z=i[2];
+			if(w.isAirBlock(x, y, z)) {
+				w.setBlock(x, y, z, FutureCraft.blockGOLID);
+			}
+		}
+		activeCoords.clear();
+		for(int[] i:inactiveCoords) {
+			x=i[0];
+			y=i[1];
+			z=i[2];
+			if(w.getBlockId(x, y, z)==FutureCraft.blockGOLID) {
+				w.setBlockToAir(x, y, z);
+			}
+		}
+		inactiveCoords.clear();
+	}
+	
+	private static LinkedList<int[]> activeCoords=new LinkedList<int[]>();
+	private static LinkedList<int[]> inactiveCoords=new LinkedList<int[]>();
 	private boolean lastChange=true;
 	private static boolean change=false;
 	public static final long timeBetweenFrames=500;
@@ -32,73 +76,43 @@ public class TileEntityGOL extends TileEntity {
 	public static final int maxPop=8;
 	
 
-	public TileEntityGOL(boolean alive) {
-		this.alive=alive;
-	}
-	public TileEntityGOL() {
-		this(false);
-	}
 	
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		nbt.setBoolean("cellalive", alive);
-		nbt.setBoolean("futurecellalive", next);
 	}
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		alive=nbt.getBoolean("cellalive");
-		next=nbt.getBoolean("futurecellalive");
 	}
 	
 	public void run(World w) {
+		if(BlockGOL.halted) {
+			return;
+		}
 		lastChange=change;
 		if(change) {
-			alive=next;
+			apply(w);
 		}
 		else {
-			int count=0;
 			for(int i=-1;i<2;i++) {
 				for(int j=-1;j<2;j++) {
 					for(int k=-1;k<2;k++) {
-						try{
-							if(((TileEntityGOL)w.getBlockTileEntity(xCoord+i, yCoord+j, zCoord+k)).alive) count++;
+						int active=countActiveCells(w,xCoord+i,yCoord+j,zCoord+k);
+						if(active<minPop||active>maxPop) {
+							inactiveCoords.add(new int[]{xCoord+i,yCoord+j,zCoord+k});
 						}
-						catch(ClassCastException ex) {}
-						catch(NullPointerException ex) {}
+						else if(active<switchPop) {
+							activeCoords.add(new int[]{xCoord+i,yCoord+j,zCoord+k});
+						}
 					}
 				}
 			}
-			if(alive) {
-				count--;
-			}
-			if(count<minPop) {
-				next=false;
-			}
-			else if(count<switchPop) {
-				next=true;
-			}
-			else if(count>maxPop) {
-				next=false;
-			}
-			w.setBlock(xCoord, yCoord, zCoord, FutureCraft.blockGOLID);
-			validate();
-			w.setBlockTileEntity(xCoord, yCoord, zCoord, this);
-			validate();
 		}
-	}
-	
-	public boolean isAlive() {
-		return alive;
-	}
-	
-	public void switchAlive() {
-		alive=!alive;
 	}
 	
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		run(getWorldObj());
+		if(canUpdate()) run(getWorldObj());
 	}
 	
 	@Override
