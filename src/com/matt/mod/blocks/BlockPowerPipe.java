@@ -42,8 +42,7 @@ public class BlockPowerPipe extends Block implements ITileEntityProvider{
     public boolean onBlockActivated(World world, int x, int y, int z,
                     EntityPlayer player, int metadata, float what, float these, float are) {
 		if(player.inventory.currentItem == SwagHelper.swaggishWandT3.itemID) {
-			Random r = new Random();
-			this.updateTick(world, x, y, z, r);
+				((TileEntityPowerPipe)world.getBlockTileEntity(x, y, z)).run(world);
 		}
 						return false; 
 		
