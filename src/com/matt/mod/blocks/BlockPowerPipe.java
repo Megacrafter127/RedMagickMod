@@ -1,15 +1,18 @@
 package com.matt.mod.blocks;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 import com.matt.mod.blocks.tileentity.TileEntityPowerPipe;
+import com.matt.mod.swag.SwagHelper;
 
 public class BlockPowerPipe extends Block implements ITileEntityProvider{
 
@@ -27,6 +30,7 @@ public class BlockPowerPipe extends Block implements ITileEntityProvider{
 	
 	@Override
 	public void updateTick(World w,int x,int y,int z,Random r) {
+		w.scheduleBlockUpdate(x,y,z,tickRate(w),1);
 		System.out.println("tick called:");
 		try{
 			((TileEntityPowerPipe)w.getBlockTileEntity(x, y, z)).run(w);
@@ -34,7 +38,16 @@ public class BlockPowerPipe extends Block implements ITileEntityProvider{
 		}
 		catch(ClassCastException ex) {}
 	}
-	
+	@Override
+    public boolean onBlockActivated(World world, int x, int y, int z,
+                    EntityPlayer player, int metadata, float what, float these, float are) {
+		if(player.inventory.currentItem == SwagHelper.swaggishWandT3.itemID) {
+			Random r = new Random();
+			this.updateTick(world, x, y, z, r);
+		}
+						return false; 
+		
+	}
 	@Override
 	public int tickRate(World w) {
 		return 1;
