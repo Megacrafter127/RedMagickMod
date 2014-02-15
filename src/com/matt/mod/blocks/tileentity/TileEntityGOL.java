@@ -1,6 +1,7 @@
 package com.matt.mod.blocks.tileentity;
 
 import com.matt.FutureCraft;
+import com.matt.mod.ModHelper;
 import com.matt.mod.blocks.BlockGOL;
 
 import net.minecraft.tileentity.TileEntity;
@@ -41,7 +42,7 @@ public class TileEntityGOL extends TileEntity {
 				for(int k=-1;k<2;k++) {
 					if(i==0&&j==0&&k==0) {}
 					else {
-						if(blocks.getBlockId(x+i, y+j, z+k)==FutureCraft.blockGOLID) {
+						if(blocks.getBlockId(x+i, y+j, z+k)==ModHelper.gameOfLifeBlock.blockID) {
 							ret++;
 						}
 					}
@@ -58,11 +59,7 @@ public class TileEntityGOL extends TileEntity {
 			y=i[1];
 			z=i[2];
 			if(Block.blocksList[w.getBlockId(x, y, z)]==null) {
-				w.setBlock(x, y, z, FutureCraft.blockGOLID);
-				System.out.println("Spawned cell: "+x+", "+y+", "+z);
-			}
-			else {
-				System.out.println("Block occupied: "+x+", "+y+", "+z+" by: "+getName(Block.blocksList[w.getBlockId(x, y, z)]));
+				w.setBlock(x, y, z, ModHelper.gameOfLifeBlock.blockID);
 			}
 		}
 		activeCoords.clear();
@@ -70,7 +67,7 @@ public class TileEntityGOL extends TileEntity {
 			x=i[0];
 			y=i[1];
 			z=i[2];
-			if(Block.blocksList[w.getBlockId(x, y, z)] instanceof BlockGOL) {
+			if(w.getBlockId(x, y, z)==ModHelper.gameOfLifeBlock.blockID) {
 				w.setBlockToAir(x, y, z);
 			}
 		}
