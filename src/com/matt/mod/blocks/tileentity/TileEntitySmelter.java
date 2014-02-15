@@ -36,10 +36,13 @@ public class TileEntitySmelter extends TileEntity implements Powerable{
 	 * Runs when right-clicked.
 	 * @param p player that clicked
 	 * @param w world object
-	 * @return True if operation was sucessful, false if not
+	 * @return True if operation was successful, false if not
 	 */
 	public boolean run(EntityPlayer p,World w) {
-		if(currentPower<powerUsage) return false; 
+		if(currentPower<powerUsage) {
+			p.addChatMessage("Not Enough Power");
+			return false; 
+		}
 		Item i=smeltHash.get(w.getBlockId(xCoord, yCoord+1, zCoord));
 		if(i==null) {
 			p.addChatMessage("The block cannot be smelted.");
