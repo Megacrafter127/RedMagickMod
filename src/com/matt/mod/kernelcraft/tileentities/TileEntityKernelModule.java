@@ -31,15 +31,19 @@ public class TileEntityKernelModule extends TileEntity {
 			if(t!=null) {
 				if(t instanceof TileEntityKernelStorage) {
 					storage=(TileEntityKernelStorage)t;
+					storage.update(w);
 				}
 				if(t instanceof TileEntityKernelUSV) {
 					power=(TileEntityKernelUSV)t;
+					power.update(w);
 				}
 				if(t instanceof TileEntityKernelIOFace) {
 					range=(TileEntityKernelIOFace)t;
+					range.update(w);
 				}
 				else if(t instanceof TileEntityKernelCPU) {
 					speed=(TileEntityKernelCPU)t;
+					speed.update(w);
 				}
 			}
 		}

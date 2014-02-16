@@ -34,7 +34,7 @@ public class BlockKernelCore extends BlockBeacon {
 	}
 	@Override
 	public boolean renderAsNormalBlock() {
-		return true;
+		return false;
 	}
 	
 	@Override

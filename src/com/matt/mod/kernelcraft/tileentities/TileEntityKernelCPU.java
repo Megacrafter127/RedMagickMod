@@ -28,7 +28,7 @@ public class TileEntityKernelCPU extends TileEntity {
 	}
 	@Override
 	public boolean canUpdate() {
-		return true;
+		return false;
 	}
 	
 	public int getSpeed() {

@@ -30,7 +30,7 @@ public class TileEntityKernelStorage extends TileEntity {
 	}
 	@Override
 	public boolean canUpdate() {
-		return true;
+		return false;
 	}
 	
 	public int getStorageCapacity() {
