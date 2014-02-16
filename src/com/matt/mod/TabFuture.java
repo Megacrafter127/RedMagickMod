@@ -26,7 +26,7 @@ public class TabFuture extends CreativeTabs {
 	} else if(str == "item") {
 		return ModHelper.enderiumStack;
 	} else if(str == "kernel") {
-		return new ItemStack(SwagHelper.blockMagicalBlock);
+		return new ItemStack(KernelCraftCore.Kernel);
 	}
 		return new ItemStack(Block.blockDiamond);
 	}
@@ -39,7 +39,7 @@ public class TabFuture extends CreativeTabs {
 			return "FutureCraft Items";
 		} else if(str == "kernel") 
 			{
-			return "KernelCraft";
+			return "Kernel Craft";
 		}else {
 			return "Either mat or mega derped up somewhere";
 		}
