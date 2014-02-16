@@ -1,5 +1,7 @@
 package com.matt.mod.kernelcraft.tileentities;
 
+import com.matt.mod.kernelcraft.KernelCraftCore;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,8 +44,11 @@ public class TileEntityKernelModule extends TileEntity {
 			}
 		}
 		active=storage!=null&&power!=null&&range!=null&&speed!=null;
-		if(active) {
-			System.out.println("active kernel");
+		if(active&&w.getBlockId(xCoord, yCoord+1, zCoord)!=KernelCraftCore.Kernel.blockID) {
+			w.setBlock(xCoord, yCoord+1, zCoord, KernelCraftCore.Kernel.blockID);
+		}
+		else if(!active&&w.getBlockId(xCoord, yCoord+1, zCoord)==KernelCraftCore.Kernel.blockID) {
+			w.setBlockToAir(xCoord, yCoord+1, zCoord);
 		}
 	}
 	
