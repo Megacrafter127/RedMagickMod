@@ -40,10 +40,10 @@ public class ColumnBlock extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side,int meta) {
-		if(side==0) {
+		if(side==1) {
 			return top;
 		}
-		if(side==1) {
+		if(side==0) {
 			return bottom;
 		}
 		return this.side;

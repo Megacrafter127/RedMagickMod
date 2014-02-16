@@ -12,7 +12,7 @@ import com.matt.mod.kernelcraft.tileentities.TileEntityKernelModule;
 public class BlockKernelModule extends ColumnBlock implements ITileEntityProvider {
 
 	public BlockKernelModule(int id) {
-		super(id, Material.iron,KernelCraftCore.toTextureName("kernelmoduletop"),KernelCraftCore.toTextureName("kernelmodulebottom"),KernelCraftCore.toTextureName("kernelmoduleside"),"Kernel Module");
+		super(id, Material.iron,KernelCraftCore.toTextureName("moduletop"),KernelCraftCore.toTextureName("modulebottom"),KernelCraftCore.toTextureName("moduleside"),"Kernel Module");
 	}
 	
 	public TileEntityKernelModule createNewTileEntity(World w) {
