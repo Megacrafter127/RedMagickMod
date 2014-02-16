@@ -85,6 +85,7 @@ public class FutureCraft {
 		public static int altarCoreId = 757;
 		public static int swagChestId = 758;
 		public static int blockEnhancerId = 759;
+		public static int swagDecoID = 760;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -156,6 +157,7 @@ public class FutureCraft {
             		altarCoreId = FutureCraft.config.getBlock("Altar Core", 757).getInt();
             		swagChestId = FutureCraft.config.getBlock("Swag Chest", 758).getInt();
             		blockEnhancerId = FutureCraft.config.getBlock("Altar Enhancer", 759).getInt();
+            		swagDecoID = FutureCraft.config.getBlock("Swag Decoration Block", 760).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();

@@ -7,6 +7,7 @@ import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 import com.matt.mod.swag.block.SwagBattery;
 import com.matt.mod.swag.block.SwagBlock;
+import com.matt.mod.swag.block.SwagDecoBlock;
 import com.matt.mod.swag.block.tile.TileEntityWandRecharger;
 import com.matt.mod.swag.items.ItemFlyingCatalist;
 import com.matt.mod.swag.items.ItemSwaggishWand;
@@ -26,6 +27,7 @@ public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_
 public static final Block blockMagicalBlockYellow = new SwagBlock(FutureCraft.swag_wall3_id,"magicalwallyel").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
 public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId,"netheriumblock").setUnlocalizedName("Netherium Block");
 public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery");
+public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
 //public static final Block blockMagicalLighter = new SwagLighter(FutureCraft.swag_default_id,"netheriumblock");
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
@@ -49,12 +51,15 @@ public static void register() {
 	GameRegistry.registerItem(swaggishWandT3, "Swaggish Wand T3");
 	//Register mana battery
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
+	GameRegistry.registerBlock(decorationKernelBlock, Ref.NAME.toLowerCase() + ".decoBlock1");
+	
 	GameRegistry.registerBlock(blockAltarCore,Ref.NAME.toLowerCase() + Ref.ID.toLowerCase() + ".altarCore");
 	blockAltarCore.setUnlocalizedName("Altar Core");
+	decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
 	//Register mana battery tile
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	swaggishFlyer.getLogic().setManaLevel(1000);
-	
+	GameRegistry.registerBlock(decorationKernelBlock, Ref.NAME.toLowerCase() + ".decoBlock1");
 	GameRegistry.registerTileEntity(TileEntityAltar.class, "tile.altarCore");
 	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
