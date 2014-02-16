@@ -8,8 +8,4 @@ import net.minecraft.item.*;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class TileEntityKernelChest extends TileEntityChest  {
-	static{
-		TileEntity.addMapping(TileEntityKernelChest.class, "TileEntityKernel");
-	}
-	
 }

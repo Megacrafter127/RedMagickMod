@@ -8,9 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class TileEntityKernelUSV extends TileEntity implements Powerable {
-	static{
-		TileEntity.addMapping(TileEntityKernelUSV.class, "TileEntityKernelUSV");
-	}
 	protected int level;
 	protected int currentPower;
 	

@@ -7,9 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class TileEntityKernelCPU extends TileEntity {
-	static{
-		TileEntity.addMapping(TileEntityKernelCPU.class, "TileEntityKernelCPU");
-	}
 	protected int level;
 	
 	public TileEntityKernelCPU(World w) {

@@ -11,10 +11,15 @@ import com.matt.mod.kernelcraft.tileentities.TileEntityKernelUSV;
 
 public class BlockKernelUSV extends ColumnBlock implements ITileEntityProvider {
 	public BlockKernelUSV(int par1) {
-		super(par1, Material.iron, KernelCraftCore.toTextureName("iofacetop"), KernelCraftCore.toTextureName("iofacebottom"), KernelCraftCore.toTextureName("iofaceside"), "Kernel IOFace");
+		super(par1, Material.iron, KernelCraftCore.toTextureName("usvtop"), KernelCraftCore.toTextureName("usvbottom"), KernelCraftCore.toTextureName("usvside"), "Kernel USV");
 	}
 	
 	public TileEntityKernelUSV createNewTileEntity(World w) {
 		return new TileEntityKernelUSV(w);
+	}
+	@Override
+	public void onBlockAdded(World w,int x,int y,int z) {
+		super.onBlockAdded(w, x, y, z);
+		w.setBlockTileEntity(x, y, z, createNewTileEntity(w));
 	}
 }

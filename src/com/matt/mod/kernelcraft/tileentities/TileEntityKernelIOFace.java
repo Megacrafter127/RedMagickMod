@@ -6,9 +6,6 @@ import net.minecraft.world.World;
 import com.matt.mod.kernelcraft.KernelCraftCore;
 
 public class TileEntityKernelIOFace extends TileEntity {
-	static{
-		TileEntity.addMapping(TileEntityKernelIOFace.class, "TileEntityKernelIOFace");
-	}
 	protected int level;
 	
 	public TileEntityKernelIOFace(World w) {

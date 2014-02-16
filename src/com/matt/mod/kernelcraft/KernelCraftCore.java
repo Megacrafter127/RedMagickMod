@@ -125,11 +125,11 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	
 	public static void registerItems() {}
 	public static void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityKernelModule.class, "tile.kernelModule");
-		GameRegistry.registerTileEntity(TileEntityKernelStorage.class, "tile.kernelStorage");
-		GameRegistry.registerTileEntity(TileEntityKernelUSV.class, "tile.kernelUSV");
-		GameRegistry.registerTileEntity(TileEntityKernelIOFace.class, "tile.kernelIOFace");
-		GameRegistry.registerTileEntity(TileEntityKernelCPU.class, "tile.kernelCPU");
+		GameRegistry.registerTileEntity(TileEntityKernelModule.class, "TileEntityKernelModule");
+		GameRegistry.registerTileEntity(TileEntityKernelStorage.class, "TileEntityKernelStorage");
+		GameRegistry.registerTileEntity(TileEntityKernelUSV.class, "TileEntityKernelUSV");
+		GameRegistry.registerTileEntity(TileEntityKernelIOFace.class, "TileEntityKernelIOFace");
+		GameRegistry.registerTileEntity(TileEntityKernelCPU.class, "TileEntityKernelCPU");
 		//TODO add tileentities
 	}
 	

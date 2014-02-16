@@ -7,9 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class TileEntityKernelStorage extends TileEntity {
-	static{
-		TileEntity.addMapping(TileEntityKernelStorage.class, "TileEntityKernelStorage");
-	}
 	protected int level;
 	//TODO add a real use for this here
 	

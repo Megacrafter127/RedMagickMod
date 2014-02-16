@@ -6,9 +6,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 
 public class TileEntityKernelModule extends TileEntity {
-	static{
-		TileEntity.addMapping(TileEntityKernelModule.class, "TileEntityKernelModule");
-	}
 	protected int distance=3;
 	protected TileEntityKernelStorage storage;
 	protected TileEntityKernelUSV power;
