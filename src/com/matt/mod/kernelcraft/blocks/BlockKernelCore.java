@@ -3,11 +3,13 @@ package com.matt.mod.kernelcraft.blocks;
 import net.minecraft.block.BlockBeacon;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.matt.mod.kernelcraft.KernelCraftCore;
+import com.matt.mod.kernelcraft.items.ItemKernelReference;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 
 import cpw.mods.fml.relauncher.Side;
@@ -59,6 +61,14 @@ public class BlockKernelCore extends BlockBeacon {
 	
 	@Override
 	public boolean onBlockActivated(World w,int x,int y,int z,EntityPlayer player,int meta,float hitx,float hity,float hitz) {
+		if(w.getBlockId(x, y-1, z)==KernelCraftCore.Module.blockID) {
+			ItemKernelReference.linkX=x;
+			ItemKernelReference.linkY=y-1;
+			ItemKernelReference.linkZ=z;
+			if(!player.inventory.hasItem(KernelCraftCore.KernelReference.itemID)) {
+				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelReference,1));
+			}
+		}
 		return false;
 	}
 	

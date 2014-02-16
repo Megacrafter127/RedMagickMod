@@ -2,10 +2,13 @@ package com.matt.mod.kernelcraft;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
+import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
 import com.matt.mod.kernelcraft.blocks.BlockKernelCPU;
 import com.matt.mod.kernelcraft.blocks.BlockKernelCore;
@@ -13,12 +16,14 @@ import com.matt.mod.kernelcraft.blocks.BlockKernelIOFace;
 import com.matt.mod.kernelcraft.blocks.BlockKernelModule;
 import com.matt.mod.kernelcraft.blocks.BlockKernelStorage;
 import com.matt.mod.kernelcraft.blocks.BlockKernelUSV;
+import com.matt.mod.kernelcraft.items.ItemKernelReference;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCPU;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelIOFace;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelModule;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelStorage;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelUSV;
+import com.matt.mod.recipes.QuadSymetricRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -43,6 +48,9 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		public static int IOFaceID=904;
 		public static int CPUID=905;
 		//end base
+		//items
+		public static int KernelReferenceID=950;
+		//end items
 	//end IDs
 	//Blocks
 		//base extenders
@@ -60,6 +68,9 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		public static BlockKernelIOFace IOFace;
 		public static BlockKernelCPU CPU;
 		//end base
+		//items
+		public static ItemKernelReference KernelReference;
+		//end items
 	public static void loadIDs() {
 		FutureCraft.config.load();
 		//base extenders
@@ -76,6 +87,9 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		IOFaceID=FutureCraft.config.getBlock("kernelIOFace", IOFaceID).getInt();
 		CPUID=FutureCraft.config.getBlock("kernelCPU", CPUID).getInt();
 		//end base
+		//items
+		KernelReferenceID=FutureCraft.config.getItem("kernelReference", KernelReferenceID).getInt();
+		//end items
 		FutureCraft.config.save();
 	}
 	
@@ -119,7 +133,11 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		CPU.setCreativeTab(kernelCraft);
 	}
 	
-	public static void registerItems() {}
+	public static void registerItems() {
+		KernelReference=new ItemKernelReference(KernelReferenceID);
+		GameRegistry.registerItem(KernelReference, "KernelReference");
+		LanguageRegistry.addName(KernelReference, "Kernel Reference");
+	}
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityKernelModule.class, "TileEntityKernelModule");
 		GameRegistry.registerTileEntity(TileEntityKernelStorage.class, "TileEntityKernelStorage");
@@ -132,6 +150,11 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	
 	public static void registerRecipes() {
 		//TODO make crafting recipes
+		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(Module,1),ModHelper.netheriumStack,ModHelper.enderiumStack,ModHelper.netherstarStack));
+		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(Storage,1),ModHelper.netheriumStack,ModHelper.enderiumStack,new ItemStack(Item.emerald,1)));
+		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(USV,1),ModHelper.netheriumStack,ModHelper.enderiumStack,new ItemStack(Item.netherQuartz,1)));
+		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(IOFace,1),ModHelper.netheriumStack,ModHelper.enderiumStack,new ItemStack(Item.eyeOfEnder,1)));
+		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(CPU,1),ModHelper.netheriumStack,ModHelper.enderiumStack,ModHelper.diamondStack));
 	}
 
 	@Override
