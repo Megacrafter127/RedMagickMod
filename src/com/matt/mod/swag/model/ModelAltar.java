@@ -25,12 +25,12 @@ public class ModelAltar extends ModelBase
       Shape1.setTextureSize(64, 32);
       Shape1.mirror = true;
       setRotation(Shape1, 0F, 0F, 0F);
-      Shape2 = new ModelRenderer(this, 0, 0);
+     /* Shape2 = new ModelRenderer(this, 0, 0);
       Shape2.addBox(0F, 0F, 0F, 1, 3, 1);
       Shape2.setRotationPoint(1F, -2F, 1F);
       Shape2.setTextureSize(64, 32);
       Shape2.mirror = true;
-      setRotation(Shape2, 0F, 0F, 0F);
+      setRotation(Shape2, 0F, 0F, 0F); */
       Shape3 = new ModelRenderer(this, 0, 0);
       Shape3.addBox(0F, 0F, 0F, 3, 1, 3);
       Shape3.setRotationPoint(0F, -3.066667F, 0F);
@@ -56,7 +56,7 @@ public class ModelAltar extends ModelBase
     super.render(entity, f, f1, f2, f3, f4, f5);
     setRotationAngles(f, f1, f2, f3, f4, f5);
     Shape1.render(f5);
-    Shape2.render(f5);
+  //  Shape2.render(f5);
     Shape3.render(f5);
     Shape4.render(f5);
     Shape5.render(f5);
