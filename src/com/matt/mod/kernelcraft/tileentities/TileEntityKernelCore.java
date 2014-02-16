@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityAuraFX;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.world.World;
 
@@ -38,6 +39,11 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 	            this.setDead();
 	        }
 	    }
+		@Override
+		public void setDead() {
+			super.setDead();
+			//super.worldObj.addWeatherEffect(new EntityLightningBolt(worldObj,posX,posY,posZ));
+		}
 		
 	}
 	static{
