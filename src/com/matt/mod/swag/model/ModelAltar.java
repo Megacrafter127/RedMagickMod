@@ -9,13 +9,13 @@
 
 
 
-package net.minecraft.src;
+package com.matt.mod.swag.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelNew extends ModelBase
+public class ModelAltar extends ModelBase
 {
   //fields
     ModelRenderer Shape1;
@@ -26,7 +26,7 @@ public class ModelNew extends ModelBase
     ModelRenderer Shape6;
     ModelRenderer Shape7;
   
-  public ModelNew()
+  public ModelAltar()
   {
     textureWidth = 64;
     textureHeight = 32;
