@@ -15,6 +15,11 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 			super(par1World, par2, par4, par6, par8, par10, par12);
 			this.particleMaxAge*=100;
 		}
+		public StraightEnchant(World w, double par2, double par4,
+				double par6, double par8, double par10, double par12, int lifeTime) {
+			super(w, par2, par4, par6, par8, par10, par12);
+			this.particleMaxAge=lifeTime;
+		}
 		
 		@Override
 		public void onUpdate()
@@ -51,6 +56,30 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 		
 		Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+0.5,zCoord+1,0,0,0.1));
 		Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+0.5,zCoord,0,0,-0.1));
+		
+		double d=Math.random()*2*Math.PI;
+		double d2=Math.random()*Math.PI/2;
+		double distance=20*Math.random()*Math.random();
+		double[] startcoords=new double[]{Math.sin(d)*Math.cos(d2)*distance,Math.sin(d2)*distance,Math.cos(d)*Math.cos(d2)*distance};
+		for(int i=0;i<6;i++) {
+			double x,y,z;
+			if(i%3==0) {
+				x=startcoords[0];
+				y=startcoords[1]*(i%2==0?1:-1);
+				z=startcoords[2];
+			}
+			else if(i%3==1) {
+				x=startcoords[1]*(i%2==0?1:-1);
+				y=startcoords[2];
+				z=startcoords[0];
+			}
+			else {
+				x=startcoords[2];
+				y=startcoords[0];
+				z=startcoords[1]*(i%2==0?1:-1);
+			}
+			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+x,yCoord+y,zCoord+z,x*0.05,y*0.05,z*0.05,(int)Math.round(distance)*20));
+		}
 	}
 	@Override
 	public boolean canUpdate() {
