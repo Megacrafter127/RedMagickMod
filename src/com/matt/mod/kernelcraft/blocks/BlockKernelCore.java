@@ -28,7 +28,11 @@ public class BlockKernelCore extends BlockBeacon {
 	
 	@Override
 	public boolean isOpaqueCube() {
-		return !super.isOpaqueCube();
+		return true;
+	}
+	@Override
+	public boolean renderAsNormalBlock() {
+		return true;
 	}
 	
 	@Override
