@@ -59,7 +59,7 @@ public static void register() {
 	//Register mana battery tile
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	swaggishFlyer.getLogic().setManaLevel(1000);
-	GameRegistry.registerBlock(decorationKernelBlock, Ref.NAME.toLowerCase() + ".decoBlock1");
+	GameRegistry.registerBlock(decorationKernelBlock, Ref.BLOCKPREFIX + "decoBlock1");
 	GameRegistry.registerTileEntity(TileEntityAltar.class, "tile.altarCore");
 	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
