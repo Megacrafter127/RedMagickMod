@@ -130,7 +130,7 @@ public class FutureCraft {
             		blockGOLID = config.getBlock("GOL", 548).getInt();
             		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
             		
-            		enable_swag = FutureCraft.config.get("Module", "Enable Swag", false).getBoolean(false);
+            		enable_swag = FutureCraft.config.get("Module", "Enable Swag", true).getBoolean(false);
             		
             		swag_wand_id = FutureCraft.config.getItem("Swaggish Wand - Tier 1", 801 ).getInt();
 
