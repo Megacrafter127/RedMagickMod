@@ -16,11 +16,6 @@ public class BlockKernelModule extends ColumnBlock implements ITileEntityProvide
 	}
 	
 	public TileEntityKernelModule createNewTileEntity(World w) {
-		return new TileEntityKernelModule(w);
-	}
-	@Override
-	public void onBlockAdded(World w,int x,int y,int z) {
-		super.onBlockAdded(w, x, y, z);
-		w.setBlockTileEntity(x, y, z, createNewTileEntity(w));
+		return new TileEntityKernelModule();
 	}
 }

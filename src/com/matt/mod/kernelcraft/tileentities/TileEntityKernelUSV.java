@@ -11,9 +11,6 @@ public class TileEntityKernelUSV extends TileEntity implements Powerable {
 	protected int level;
 	protected int currentPower;
 	
-	public TileEntityKernelUSV(World w) {
-		update(w);
-	}
 	
 	public void update(World w) {
 		level=1;
@@ -33,6 +30,10 @@ public class TileEntityKernelUSV extends TileEntity implements Powerable {
 		super.readFromNBT(nbt);
 		level=nbt.getInteger("level");
 		currentPower=nbt.getInteger("currentPower");
+	}
+	@Override
+	public boolean canUpdate() {
+		return true;
 	}
 	
 	public int getStorageCapacity() {

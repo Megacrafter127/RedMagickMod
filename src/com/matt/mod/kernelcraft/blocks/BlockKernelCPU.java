@@ -15,11 +15,6 @@ public class BlockKernelCPU extends ColumnBlock implements ITileEntityProvider {
 	}
 	
 	public TileEntityKernelCPU createNewTileEntity(World w) {
-		return new TileEntityKernelCPU(w);
-	}
-	@Override
-	public void onBlockAdded(World w,int x,int y,int z) {
-		super.onBlockAdded(w, x, y, z);
-		w.setBlockTileEntity(x, y, z, createNewTileEntity(w));
+		return new TileEntityKernelCPU();
 	}
 }

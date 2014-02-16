@@ -10,9 +10,6 @@ public class TileEntityKernelStorage extends TileEntity {
 	protected int level;
 	//TODO add a real use for this here
 	
-	public TileEntityKernelStorage(World w) {
-		update(w);
-	}
 	
 	public void update(World w) {
 		level=1;
@@ -30,6 +27,10 @@ public class TileEntityKernelStorage extends TileEntity {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		level=nbt.getInteger("level");
+	}
+	@Override
+	public boolean canUpdate() {
+		return true;
 	}
 	
 	public int getStorageCapacity() {

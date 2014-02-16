@@ -9,10 +9,6 @@ import net.minecraft.world.World;
 public class TileEntityKernelCPU extends TileEntity {
 	protected int level;
 	
-	public TileEntityKernelCPU(World w) {
-		update(w);
-	}
-	
 	public void update(World w) {
 		level=1;
 		while(w.getBlockId(xCoord, yCoord+level, zCoord)==KernelCraftCore.OverclockerID) {
@@ -29,6 +25,10 @@ public class TileEntityKernelCPU extends TileEntity {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		level=nbt.getInteger("level");
+	}
+	@Override
+	public boolean canUpdate() {
+		return true;
 	}
 	
 	public int getSpeed() {

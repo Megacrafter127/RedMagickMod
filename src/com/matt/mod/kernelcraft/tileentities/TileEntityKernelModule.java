@@ -6,17 +6,15 @@ import net.minecraft.nbt.NBTTagCompound;
 
 
 public class TileEntityKernelModule extends TileEntity {
-	protected int distance=3;
+	protected int distance=2;
 	protected TileEntityKernelStorage storage;
 	protected TileEntityKernelUSV power;
 	protected TileEntityKernelIOFace range;
 	protected TileEntityKernelCPU speed;
 	protected boolean active=false;
-	private long lastUpdate=System.currentTimeMillis();;
+	protected long tick=0;
+	protected long tickRate=5;
 
-	public TileEntityKernelModule(World w) {
-		update(w);
-	}
 	
 	public void update(World w) {
 		if(w.isRemote) {
@@ -61,8 +59,11 @@ public class TileEntityKernelModule extends TileEntity {
 	}
 	@Override
 	public void updateEntity() {
-		lastUpdate=System.currentTimeMillis();
-		update(getWorldObj());
+		tick++;
+		if(tick>tickRate) {
+			tick=0;
+			update(getWorldObj());
+		}
 	}
 	public boolean isActive() {
 		return active;
@@ -70,6 +71,6 @@ public class TileEntityKernelModule extends TileEntity {
 	
 	@Override
 	public boolean canUpdate() {
-		return System.currentTimeMillis()-lastUpdate>250;
+		return true;
 	}
 }

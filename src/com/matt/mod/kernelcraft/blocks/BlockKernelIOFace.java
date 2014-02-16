@@ -15,11 +15,6 @@ public class BlockKernelIOFace extends ColumnBlock implements ITileEntityProvide
 	}
 	
 	public TileEntityKernelIOFace createNewTileEntity(World w) {
-		return new TileEntityKernelIOFace(w);
-	}
-	@Override
-	public void onBlockAdded(World w,int x,int y,int z) {
-		super.onBlockAdded(w, x, y, z);
-		w.setBlockTileEntity(x, y, z, createNewTileEntity(w));
+		return new TileEntityKernelIOFace();
 	}
 }

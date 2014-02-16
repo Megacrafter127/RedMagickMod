@@ -8,9 +8,6 @@ import com.matt.mod.kernelcraft.KernelCraftCore;
 public class TileEntityKernelIOFace extends TileEntity {
 	protected int level;
 	
-	public TileEntityKernelIOFace(World w) {
-		update(w);
-	}
 	
 	public void update(World w) {
 		level=0;
@@ -26,6 +23,10 @@ public class TileEntityKernelIOFace extends TileEntity {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		level=nbt.getInteger("level");
+	}
+	@Override
+	public boolean canUpdate() {
+		return true;
 	}
 	
 	public int getStorageCapacity() {
