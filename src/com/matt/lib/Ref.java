@@ -8,6 +8,7 @@ public class Ref {
 public static final String ID = "FCraft";
 public static final String NAME = "FutureCraft";
 public static final String VERSION = "0.0.1";
+public static final String BLOCKPREFIX = "FutureCraftBlock.tile.";
 public static CreativeTabs getRecommendedTab(String type) {
 	if(type.toLowerCase() == "block") {
 		return FutureCraft.tabFCraft;
