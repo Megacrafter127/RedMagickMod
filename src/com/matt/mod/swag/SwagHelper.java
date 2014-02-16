@@ -11,6 +11,8 @@ import com.matt.mod.swag.block.tile.TileEntityWandRecharger;
 import com.matt.mod.swag.items.ItemFlyingCatalist;
 import com.matt.mod.swag.items.ItemSwaggishWand;
 import com.matt.mod.swag.items.ItemSwaggishWand.tier;
+import com.matt.mod.swag.multiblock.BlockAltar;
+import com.matt.mod.swag.multiblock.TileEntityAltar;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -26,6 +28,7 @@ public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId
 public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery");
 //public static final Block blockMagicalLighter = new SwagLighter(FutureCraft.swag_default_id,"netheriumblock");
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
+public static final Block blockAltarCore = new BlockAltar();
 public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
 	
@@ -46,9 +49,13 @@ public static void register() {
 	GameRegistry.registerItem(swaggishWandT3, "Swaggish Wand T3");
 	//Register mana battery
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
+	GameRegistry.registerBlock(blockAltarCore,Ref.NAME.toLowerCase() + Ref.ID.toLowerCase() + ".altarCore");
+	blockAltarCore.setUnlocalizedName("Altar Core");
 	//Register mana battery tile
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	swaggishFlyer.getLogic().setManaLevel(1000);
+	
+	GameRegistry.registerTileEntity(TileEntityAltar.class, "tile.altarCore");
 	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockMagicalBlockRed, "Magical Wall - Colored");

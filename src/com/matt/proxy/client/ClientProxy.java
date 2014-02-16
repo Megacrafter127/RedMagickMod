@@ -5,7 +5,11 @@ import net.minecraft.world.World;
 
 import com.matt.gui.LoreBookGui;
 import com.matt.mod.ModHelper;
+import com.matt.mod.swag.multiblock.TileEntityAltar;
+import com.matt.mod.swag.multiblock.TileEntityAltarRender;
 import com.matt.proxy.CommonProxy;
+
+import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
         
@@ -32,5 +36,7 @@ public class ClientProxy extends CommonProxy {
         	return null;
         } 
         
-        
+        public static void registerTESR(){
+            ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRender());
+        }
 }

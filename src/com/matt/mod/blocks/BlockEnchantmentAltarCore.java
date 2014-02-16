@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraft;
-import com.matt.mod.blocks.tileentity.TileEntityAltar;
+import com.matt.mod.blocks.tileentity.TileEntityEnchantAltar;
 
 public class BlockEnchantmentAltarCore extends Block implements
 		ITileEntityProvider, IFutureCraft {
@@ -22,12 +22,12 @@ public class BlockEnchantmentAltarCore extends Block implements
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		// TODO Auto-generated method stub
-		return new TileEntityAltar();
+		return new TileEntityEnchantAltar();
 	}
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are) {
-		TileEntityAltar a = (TileEntityAltar)world.getBlockTileEntity(x,y,z);
+		TileEntityEnchantAltar a = (TileEntityEnchantAltar)world.getBlockTileEntity(x,y,z);
 		return a.run(player, world, x, y, z);
 	}
 		

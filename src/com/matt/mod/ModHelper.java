@@ -19,8 +19,8 @@ import com.matt.mod.blocks.BlockGOL;
 import com.matt.mod.blocks.BlockGOLControler;
 import com.matt.mod.blocks.BlockOre;
 import com.matt.mod.blocks.BlockPowerPipe;
-import com.matt.mod.blocks.tileentity.TileEntityAltar;
 import com.matt.mod.blocks.tileentity.TileEntityDimensionalInfuser;
+import com.matt.mod.blocks.tileentity.TileEntityEnchantAltar;
 import com.matt.mod.blocks.tileentity.TileEntityPowerPipe;
 import com.matt.mod.blocks.tileentity.TileEntitySmelter;
 import com.matt.mod.handlers.FutureCraftRegistry;
@@ -31,7 +31,7 @@ import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
 import com.matt.mod.swag.FutureCraftSwag;
-import com.matt.mod.swag.SwagHelper;
+import com.matt.proxy.client.ClientProxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -185,7 +185,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		GameRegistry.registerTileEntity(TileEntitySmelter.class, "tileEntitySmelter");
 		GameRegistry.registerTileEntity(TileEntityPowerPipe.class, "tileeEntityPowerPipe");
 		GameRegistry.registerTileEntity(TileEntityDimensionalInfuser.class, "tileEntityDimensionalInfuser");
-		GameRegistry.registerTileEntity(TileEntityAltar.class, "tileEntityAltarCore");
+		GameRegistry.registerTileEntity(TileEntityEnchantAltar.class, "tileEntityAltarCore");
 	}
 	public static void registerPlugin(Object obj) {
 		if(obj != null && obj instanceof IFutureCraftPlugin) {
@@ -208,7 +208,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		if(FutureCraft.enable_swag) {
 			registerPlugin(new FutureCraftSwag());
 		}
-		
+		ClientProxy.registerTESR();
 		registerPlugin(new KernelCraftCore());
 		
 	}
