@@ -1,5 +1,7 @@
 package com.matt.mod.kernelcraft.blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.BlockBeacon;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,5 +77,20 @@ public class BlockKernelCore extends BlockBeacon {
 	@Override
 	public TileEntityKernelCore createNewTileEntity(World w) {
 		return new TileEntityKernelCore();
+	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World w,int x,int y,int z) {
+		return w.getBlockId(x, y-1, z)==KernelCraftCore.Module.blockID;
+	}
+	
+	@Override
+	public int idDropped(int x,Random r,int z) {
+		return 0;
+	}
+	
+	@Override
+	public int idPicked(World w,int x,int y,int z) {
+		return 0;
 	}
 }

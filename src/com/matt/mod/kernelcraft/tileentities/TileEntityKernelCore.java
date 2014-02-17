@@ -1,16 +1,15 @@
 package com.matt.mod.kernelcraft.tileentities;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityAuraFX;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.world.World;
 
 public class TileEntityKernelCore extends TileEntityBeacon {
-	private int tick;
-	private static final int maxTick=10;
+	private int affectX,affectY,affectZ,affectRemaining;
 	private static class StraightEnchant extends EntityEnchantmentTableParticleFX {
 
 		public StraightEnchant(World par1World, double par2, double par4,
@@ -50,26 +49,15 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 		TileEntityRenderer.instance.specialRendererMap.put(TileEntityKernelCore.class, TileEntityRenderer.instance.getSpecialRendererForClass(TileEntityBeacon.class));
 	}
 	
-	private EntityAuraFX entity;
-
 	public TileEntityKernelCore() {
 	}
 	@Override
 	public void updateEntity() {
-		tick++;
-		if(tick>maxTick) {
-			tick=0;
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+1,zCoord+0.5,0,0.1,0));
-			
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord-1,zCoord+0.5,0,-0.1,0));
-			
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+1,yCoord+0.5,zCoord+0.5,0.1,0,0));
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord,yCoord+0.5,zCoord+0.5,-0.1,0,0));
-			
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+0.5,zCoord+1,0,0,0.1));
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+0.5,zCoord,0,0,-0.1));
-		}
-		
+		addPermanentParticles();
+		addAffectionParticles();
+	}
+	
+	private void addPermanentParticles() {
 		double d=Math.random()*2*Math.PI;
 		double d2=Math.random()*Math.PI/2;
 		double distance=20*Math.random()*Math.random();
@@ -91,12 +79,65 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 				y=startcoords[0];
 				z=startcoords[1]*(i%2==0?1:-1);
 			}
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+0.5,zCoord+0.5,x*0.05,y*0.05,z*0.05,(int)Math.round(distance)*20));
-			Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(getWorldObj(),xCoord+x+0.5,yCoord+y+0.5,zCoord+z+0.5,-x*0.05,-y*0.05,-z*0.05,(int)Math.round(distance)*20));
+			spawnParticle(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+0.5,zCoord+0.5,x*0.05,y*0.05,z*0.05,(int)Math.round(distance)*20));
+			spawnParticle(new StraightEnchant(getWorldObj(),xCoord+x+0.5,yCoord+y+0.5,zCoord+z+0.5,-x*0.05,-y*0.05,-z*0.05,(int)Math.round(distance)*20));
 		}
 	}
+	
+	private void spawnParticle(EntityFX e) {
+		Minecraft.getMinecraft().effectRenderer.addEffect(e);
+	}
+	
+	private void addAffectionParticles() {
+		if(affectRemaining>0) {
+			affectRemaining--;
+			int dX=affectX-xCoord;
+			int dY=affectY-yCoord;
+			int dZ=affectZ-zCoord;
+			double distance=Math.sqrt(dX*dX+dY*dY+dZ*dZ);
+			spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,0.1*dY/distance,0.1*dZ/distance,(int)Math.round(affectRemaining>10*distance?10*distance:affectRemaining)));
+		}
+	}
+	
 	@Override
 	public boolean canUpdate() {
 		return true;
+	}
+	
+	/**
+	 * Activates the block affection effect
+	 * @param x 
+	 * @param y
+	 * @param z
+	 * @param time
+	 * @return true if effect was activated; false if not
+	 */
+	public boolean addBlockAffectEffect(int x,int y,int z,int time) {
+		if(!getWorldObj().isRemote&&affectRemaining==0) {
+			affectRemaining=time;
+			affectX=x;
+			affectY=y;
+			affectZ=z;
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setInteger("affectX", affectX);
+		nbt.setInteger("affectY", affectY);
+		nbt.setInteger("affectZ", affectZ);
+		nbt.setInteger("affectRemaining", affectRemaining);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		affectX=nbt.getInteger("affectX");
+		affectY=nbt.getInteger("affectY");
+		affectZ=nbt.getInteger("affectZ");
+		affectRemaining=nbt.getInteger("affectRemaining");
 	}
 }
