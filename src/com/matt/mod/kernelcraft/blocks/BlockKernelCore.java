@@ -64,12 +64,12 @@ public class BlockKernelCore extends BlockBeacon {
 	@Override
 	public boolean onBlockActivated(World w,int x,int y,int z,EntityPlayer player,int meta,float hitx,float hity,float hitz) {
 		if(w.getBlockId(x, y-1, z)==KernelCraftCore.Module.blockID) {
-			ItemKernelReference.linkX=x;
-			ItemKernelReference.linkY=y-1;
-			ItemKernelReference.linkZ=z;
-			if(!player.inventory.hasItem(KernelCraftCore.KernelReference.itemID)) {
-				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelReference,1));
-			}
+			int id=TileEntityKernelCore.getNextID();
+			ItemStack referenceStack=new ItemStack(KernelCraftCore.KernelReference,1);
+			TileEntityKernelCore.kernelHash.put(id, new int[]{x,y-1,z});
+			referenceStack.setItemDamage(id);
+			player.inventory.addItemStackToInventory(referenceStack);
+			return true;
 		}
 		return false;
 	}

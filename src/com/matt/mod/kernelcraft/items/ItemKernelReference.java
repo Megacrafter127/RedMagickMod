@@ -10,10 +10,6 @@ import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 
 public class ItemKernelReference extends Item {
-	public static int linkX;
-	public static int linkY;
-	public static int linkZ;
-	
 	public ItemKernelReference(int par1) {
 		super(par1);
 		super.setTextureName(KernelCraftCore.toTextureName("kernelreference"));
@@ -23,12 +19,14 @@ public class ItemKernelReference extends Item {
 	@Override
 	public boolean onItemUse(ItemStack stack,EntityPlayer player,World world,int x,int y,int z,int side,float hitX,float hitY,float hitZ) {
 		try{
-			TileEntityKernelCore source=(TileEntityKernelCore)world.getBlockTileEntity(linkX, linkY+1, linkZ);
+			int[] coord=TileEntityKernelCore.kernelHash.get(stack.getItemDamage());
+			TileEntityKernelCore source=(TileEntityKernelCore)world.getBlockTileEntity(coord[0],coord[1]+1,coord[2]);
 			EnumFacing face=EnumFacing.getFront(side);
 			source.addBlockAffectEffect(x+face.getFrontOffsetX(), y+face.getFrontOffsetY(), z+face.getFrontOffsetZ(), 1200);
 		}
 		catch(Exception ex) {
-			while(player.inventory.hasItem(itemID)) player.inventory.consumeInventoryItem(itemID);
+			stack.stackSize=0;
+			player.inventory.inventoryChanged=true;
 		}
 		return true;
 	}

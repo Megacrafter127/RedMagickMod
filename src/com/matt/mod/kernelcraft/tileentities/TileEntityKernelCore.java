@@ -1,5 +1,9 @@
 package com.matt.mod.kernelcraft.tileentities;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
@@ -9,6 +13,38 @@ import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.world.World;
 
 public class TileEntityKernelCore extends TileEntityBeacon {
+	public static final HashMap<Integer,int[]> kernelHash=new HashMap<Integer,int[]>();
+	private static int id=-1;
+	public static int getNextID() {
+		return id++;
+	}
+	protected static void writeHashToNBT(NBTTagCompound nbt) {
+		int size=kernelHash.size();
+		Iterator<Integer> keys=kernelHash.keySet().iterator();
+		nbt.setInteger("size", size);
+		for(int i=0;i<size;i++) {
+			Integer key=keys.next();
+			nbt.setInteger("key."+i, key);
+			nbt.setIntArray("val."+i, kernelHash.get(key));
+		}
+		nbt.setInteger("hashID", id);
+	}
+	protected static void readHashFromNBT(NBTTagCompound nbt) {
+		Set<Integer> keys=((HashMap<Integer,int[]>)kernelHash.clone()).keySet();
+		int size=nbt.getInteger("size");
+		for(int i=0;i<size;i++) {
+			int key=nbt.getInteger("key."+i);
+			keys.remove(key);
+			kernelHash.put(key, nbt.getIntArray("val."+i));
+		}
+		Iterator<Integer> i=keys.iterator();
+		while(i.hasNext()) {
+			kernelHash.remove(i.next());
+		}
+		id=nbt.getInteger("hashID");
+	}
+	
+	
 	private int affectX,affectY,affectZ,affectRemaining;
 	private static class StraightEnchant extends EntityEnchantmentTableParticleFX {
 
@@ -130,6 +166,9 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 		nbt.setInteger("affectY", affectY);
 		nbt.setInteger("affectZ", affectZ);
 		nbt.setInteger("affectRemaining", affectRemaining);
+		NBTTagCompound hash=new NBTTagCompound();
+		writeHashToNBT(hash);
+		nbt.setCompoundTag("hash", hash);
 	}
 	
 	@Override
@@ -139,5 +178,6 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 		affectY=nbt.getInteger("affectY");
 		affectZ=nbt.getInteger("affectZ");
 		affectRemaining=nbt.getInteger("affectRemaining");
+		readHashFromNBT(nbt.getCompoundTag("hash"));
 	}
 }
