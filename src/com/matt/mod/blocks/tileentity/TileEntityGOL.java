@@ -85,6 +85,7 @@ public class TileEntityGOL extends TileEntity {
 	}
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		
 	}
 	
 	public void run(World w) {
