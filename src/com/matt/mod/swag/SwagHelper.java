@@ -53,8 +53,8 @@ public static void register() {
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
 	GameRegistry.registerBlock(decorationKernelBlock, Ref.NAME.toLowerCase() + ".decoBlock1");
 	
-	GameRegistry.registerBlock(blockAltarCore,Ref.NAME.toLowerCase() + Ref.ID.toLowerCase() + ".altarCore");
-	blockAltarCore.setUnlocalizedName("Altar Core");
+	//GameRegistry.registerBlock(blockAltarCore,Ref.NAME.toLowerCase() + Ref.ID.toLowerCase() + ".altarCore");
+	//blockAltarCore.setUnlocalizedName("Altar Core");
 	decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
 	//Register mana battery tile
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
