@@ -2,17 +2,17 @@ package com.matt.mod.kernelcraft.tileentities;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityBeacon;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class TileEntityKernelCore extends TileEntityBeacon {
+public class TileEntityKernelCore extends TileEntity {
 	public static final HashMap<Integer,int[]> kernelHash=new HashMap<Integer,int[]>();
 	private static int id=-1;
 	public static int getNextID() {
@@ -45,7 +45,7 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 	}
 	
 	
-	private int affectX,affectY,affectZ,affectRemaining;
+	private LinkedList<int[]> affectList=new LinkedList<int[]>();
 	private static class StraightEnchant extends EntityEnchantmentTableParticleFX {
 
 		public StraightEnchant(World par1World, double par2, double par4,
@@ -81,10 +81,6 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 		}
 		
 	}
-	static{
-		TileEntityRenderer.instance.specialRendererMap.put(TileEntityKernelCore.class, TileEntityRenderer.instance.getSpecialRendererForClass(TileEntityBeacon.class));
-	}
-	
 	public TileEntityKernelCore() {
 	}
 	@Override
@@ -118,6 +114,12 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 			spawnParticle(new StraightEnchant(getWorldObj(),xCoord+0.5,yCoord+0.5,zCoord+0.5,x*0.05,y*0.05,z*0.05,(int)Math.round(distance)*20));
 			spawnParticle(new StraightEnchant(getWorldObj(),xCoord+x+0.5,yCoord+y+0.5,zCoord+z+0.5,-x*0.05,-y*0.05,-z*0.05,(int)Math.round(distance)*20));
 		}
+		for(int i=0;i<4;i++) {
+			int dX=i%2==0?-2:2;
+			int dZ=i/2==0?-2:2;
+			distance=Math.sqrt(dX*dX+dZ*dZ+1);
+			spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,-0.1/distance,0.1*dZ/distance,(int)Math.round(10*distance)));
+		}
 	}
 	
 	private void spawnParticle(EntityFX e) {
@@ -125,14 +127,19 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 	}
 	
 	private void addAffectionParticles() {
-		if(affectRemaining>0) {
-			affectRemaining--;
-			int dX=affectX-xCoord;
-			int dY=affectY-yCoord;
-			int dZ=affectZ-zCoord;
-			double distance=Math.sqrt(dX*dX+dY*dY+dZ*dZ);
-			spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,0.1*dY/distance,0.1*dZ/distance,(int)Math.round(affectRemaining>10*distance?10*distance:affectRemaining)));
+		LinkedList<int[]> toRemove=new LinkedList<int[]>();
+		for(int[] affect:affectList) {
+			if(affect[3]>0) {
+				affect[3]--;
+				int dX=affect[0]-xCoord;
+				int dY=affect[1]-yCoord;
+				int dZ=affect[2]-zCoord;
+				double distance=Math.sqrt(dX*dX+dY*dY+dZ*dZ);
+				spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,0.1*dY/distance,0.1*dZ/distance,(int)Math.round(affect[3]>10*distance?10*distance:affect[3])));
+			}
+			else toRemove.add(affect);
 		}
+		affectList.removeAll(toRemove);
 	}
 	
 	@Override
@@ -149,11 +156,8 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 	 * @return true if effect was activated; false if not
 	 */
 	public boolean addBlockAffectEffect(int x,int y,int z,int time) {
-		if(!getWorldObj().isRemote&&affectRemaining==0) {
-			affectRemaining=time;
-			affectX=x;
-			affectY=y;
-			affectZ=z;
+		if(!getWorldObj().isRemote&&time!=0) {
+			affectList.add(new int[]{x,y,z,time});
 			return true;
 		}
 		return false;
@@ -162,10 +166,12 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		nbt.setInteger("affectX", affectX);
-		nbt.setInteger("affectY", affectY);
-		nbt.setInteger("affectZ", affectZ);
-		nbt.setInteger("affectRemaining", affectRemaining);
+		nbt.setInteger("size",affectList.size());
+		int c=0;
+		for(int[] i:affectList) {
+			nbt.setIntArray("affect."+c, i);
+			c++;
+		}
 		NBTTagCompound hash=new NBTTagCompound();
 		writeHashToNBT(hash);
 		nbt.setCompoundTag("hash", hash);
@@ -174,10 +180,12 @@ public class TileEntityKernelCore extends TileEntityBeacon {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		affectX=nbt.getInteger("affectX");
-		affectY=nbt.getInteger("affectY");
-		affectZ=nbt.getInteger("affectZ");
-		affectRemaining=nbt.getInteger("affectRemaining");
+		LinkedList<int[]> replacement=new LinkedList<int[]>();
+		int max=nbt.getInteger("size");
+		for(int i=0;i<max;i++) {
+			replacement.add(nbt.getIntArray("affect."+i));
+		}
+		affectList=replacement;
 		readHashFromNBT(nbt.getCompoundTag("hash"));
 	}
 }

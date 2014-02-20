@@ -10,10 +10,13 @@ public class TileEntityKernelCPU extends TileEntity {
 	protected int level;
 	
 	public void update(World w) {
-		level=1;
-		while(w.getBlockId(xCoord, yCoord+level, zCoord)==KernelCraftCore.OverclockerID) {
-			level++;
+		try{
+			level=1;
+			while(w.getBlockId(xCoord, yCoord+level, zCoord)==KernelCraftCore.Overclocker.blockID) {
+				level++;
+			}
 		}
+		catch(NullPointerException ex) {}
 	}
 	
 	@Override

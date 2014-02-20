@@ -14,6 +14,9 @@ public class ItemKernelReference extends Item {
 		super(par1);
 		super.setTextureName(KernelCraftCore.toTextureName("kernelreference"));
 		super.setUnlocalizedName("Kernel Reference");
+		super.setMaxStackSize(1);
+		super.setMaxDamage(Integer.MAX_VALUE);
+		super.setHasSubtypes(true);
 	}
 	
 	@Override

@@ -13,10 +13,13 @@ public class TileEntityKernelUSV extends TileEntity implements Powerable {
 	
 	
 	public void update(World w) {
-		level=1;
-		while(w.getBlockId(xCoord, yCoord+level, zCoord)==KernelCraftCore.BatteryID) {
-			level++;
+		try{
+			level=1;
+			while(w.getBlockId(xCoord, yCoord+level, zCoord)==KernelCraftCore.Battery.blockID) {
+				level++;
+			}
 		}
+		catch(NullPointerException ex) {}
 	}
 	
 	@Override

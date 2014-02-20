@@ -12,10 +12,13 @@ public class TileEntityKernelStorage extends TileEntity {
 	
 	
 	public void update(World w) {
-		level=1;
-		while(w.getBlockId(xCoord, yCoord+level, zCoord)==KernelCraftCore.IOExpanderID) {
-			level++;
+		try{
+			level=1;
+			while(w.getBlockId(xCoord, yCoord+level, zCoord)==KernelCraftCore.IOExpander.blockID) {
+				level++;
+			}
 		}
+		catch(NullPointerException ex) {}
 	}
 	
 	@Override

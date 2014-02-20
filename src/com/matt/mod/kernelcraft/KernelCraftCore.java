@@ -35,21 +35,21 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	protected static CreativeTabs kernelCraft = new TabFuture(CreativeTabs.getNextID(),"KernelCraft","kernel");
 	//IDs
 		//base extenders
-		public static int DriveID=912;
-		public static int BatteryID=913;
-		public static int IOExpanderID=914;
-		public static int OverclockerID=915;
+		private static int DriveID=912;
+		private static int BatteryID=913;
+		private static int IOExpanderID=914;
+		private static int OverclockerID=915;
 		//end base extenders
 		//base
-		public static int KernelID=900;
-		public static int ModuleID=901;
-		public static int StorageID=902;
-		public static int USVID=903;
-		public static int IOFaceID=904;
-		public static int CPUID=905;
+		private static int KernelID=900;
+		private static int ModuleID=901;
+		private static int StorageID=902;
+		private static int USVID=903;
+		private static int IOFaceID=904;
+		private static int CPUID=905;
 		//end base
 		//items
-		public static int KernelReferenceID=950;
+		private static int KernelReferenceID=950;
 		//end items
 	//end IDs
 	//Blocks
@@ -145,11 +145,9 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		GameRegistry.registerTileEntity(TileEntityKernelIOFace.class, "TileEntityKernelIOFace");
 		GameRegistry.registerTileEntity(TileEntityKernelCPU.class, "TileEntityKernelCPU");
 		GameRegistry.registerTileEntity(TileEntityKernelCore.class, "TileEntityKernelCore");
-		//TODO add tileentities
 	}
 	
 	public static void registerRecipes() {
-		//TODO make crafting recipes
 		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(Module,1),ModHelper.netheriumStack,ModHelper.enderiumStack,ModHelper.netherstarStack));
 		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(Storage,1),ModHelper.netheriumStack,ModHelper.enderiumStack,new ItemStack(Item.emerald,1)));
 		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(USV,1),ModHelper.netheriumStack,ModHelper.enderiumStack,new ItemStack(Item.netherQuartz,1)));
@@ -159,7 +157,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "KernelCraft";
 	}
 

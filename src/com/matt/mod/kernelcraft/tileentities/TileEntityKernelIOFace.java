@@ -10,8 +10,11 @@ public class TileEntityKernelIOFace extends TileEntity {
 	
 	
 	public void update(World w) {
-		level=0;
-		for(int i=1;w.getBlockId(xCoord, yCoord+i, zCoord)==KernelCraftCore.IOExpanderID;i++,level++) {}
+		try{
+			level=0;
+			for(int i=1;w.getBlockId(xCoord, yCoord+i, zCoord)==KernelCraftCore.IOExpander.blockID;i++,level++) {}
+		}
+		catch(NullPointerException ex) {}
 	}
 	
 	@Override
