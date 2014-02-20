@@ -1,0 +1,19 @@
+[
+{
+"modid": "FutureCraft",
+"name": "FutureCraft Beta Release",
+"description": "Sweet Sweet Future!",
+"version": "",
+"credits": "Created by Mats000, Updated and maintened by Mats000 and Megacrafter",
+"logoFile": "",
+"mcversion": "",
+"url": "",
+"updateUrl": "",
+"authors": [ "Mats","Mega" ],
+"parent":"",
+"screenshots": [],
+"dependencies": [
+"mod_MinecraftForge"
+]
+}
+]
