@@ -23,6 +23,7 @@ public class BlockKernelCore extends Block implements ITileEntityProvider {
 
 	public BlockKernelCore(int par1) {
 		super(par1,Material.dragonEgg);
+		setBlockUnbreakable();
 	}
 	
 	@Override

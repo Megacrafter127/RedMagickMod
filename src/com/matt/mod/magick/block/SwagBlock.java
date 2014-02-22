@@ -20,16 +20,17 @@ public class SwagBlock extends Block implements IWandAble {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
              EntityPlayer player, int metadata, float what, float these, float are) {
+		try {
 		if(!world.isRemote) {
 			if(!player.isSneaking()) {
 		System.out.println("Activated SwagBlock!");
-		if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID) {
+		if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 0) {
 			onWandRightClick(player,world,x,y,z);
 			return true;
-		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID) {
+		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 1 ) {
 			onWandRightClick(player,world,x,y,z);
 			return true;
-		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID){
+		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 2 ){
 			onWandRightClick(player,world,x,y,z);
 			return true;
 		} 
@@ -46,7 +47,11 @@ public class SwagBlock extends Block implements IWandAble {
 					return true;
 				} */
 			}
+		} 
+		}catch(NullPointerException e) {
+			System.out.println("[Futurecraft][ERRORHANDLER42] " + e.getStackTrace());
 		}
+		
 		return false;	 
 	}
 	

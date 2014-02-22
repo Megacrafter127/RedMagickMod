@@ -12,6 +12,7 @@ import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
+import com.matt.mod.magick.items.ItemWandCore;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
 
@@ -28,7 +29,8 @@ public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_
 public static final Block blockMagicalBlockYellow = new SwagBlock(FutureCraft.swag_wall3_id,"magicalwallyel").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
 public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId,"netheriumblock").setUnlocalizedName("Netherium Block");
 public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery");
-public static final Item magickWand = new ItemMagickWand(FutureCraft.swag_wand_id);
+public static final Item magickWand = new ItemMagickWand(FutureCraft.swag_wand_id).setMaxStackSize(1);
+public static final Item magickCore = new ItemWandCore(FutureCraft.swag_wand_idt2).setMaxStackSize(1);
 public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
 //public static final Block blockMagicalLighter = new SwagLighter(FutureCraft.swag_default_id,"netheriumblock");
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
@@ -55,6 +57,7 @@ public static void register() {
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
 	GameRegistry.registerBlock(decorationKernelBlock, Ref.NAME.toLowerCase() + ".decoBlock1");
 	GameRegistry.registerItem(magickWand,"Magical Wand");
+	GameRegistry.registerItem(magickCore,"Magical Core");
 	//GameRegistry.registerBlock(blockAltarCore,Ref.NAME.toLowerCase() + Ref.ID.toLowerCase() + ".altarCore");
 	//blockAltarCore.setUnlocalizedName("Altar Core");
 	decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
@@ -71,8 +74,11 @@ public static void register() {
 	LanguageRegistry.addName(new ItemStack(magickWand,1,0), ItemMagickWand.names[0]);
 	LanguageRegistry.addName(new ItemStack(magickWand,1,1), ItemMagickWand.names[1]);
 	LanguageRegistry.addName(new ItemStack(magickWand,1,2), ItemMagickWand.names[2]);
-	
-	
-	
+	LanguageRegistry.addName(new ItemStack(magickCore,1,0), ItemWandCore.getNames()[0]);
+	LanguageRegistry.addName(new ItemStack(magickCore,1,1), ItemWandCore.getNames()[1]);
+	LanguageRegistry.addName(new ItemStack(magickCore,1,2), ItemWandCore.getNames()[2]);
+	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,0),new ItemStack(magickCore,1,0),new ItemStack(Item.stick,1,0)));
+	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,1),new ItemStack(magickCore,1,1),new ItemStack(Item.stick,1,0)));
+	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,2),new ItemStack(magickCore,1,2),new ItemStack(Item.stick,1,0)));
 }
 }
