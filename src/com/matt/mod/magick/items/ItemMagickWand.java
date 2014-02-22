@@ -4,14 +4,12 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 import com.matt.lib.Ref;
 
@@ -79,7 +77,7 @@ public class ItemMagickWand extends Item {
 	 */
 	public static int[] levelMax=new int[]{100,1000,10000};
 	@Deprecated
-	public static int currentCharge;
+	public static int currentCharge = 1;
 	public static String[] names=new String[10];
 	/**
 	 * @author Megacrafter127
@@ -177,8 +175,40 @@ public class ItemMagickWand extends Item {
 	            	 par3List.add(stnames[i]);
 	             }
 	        }*/
-	@Override
-	public boolean hasEffect(ItemStack par1ItemStack) {
-		return true;
-	}
+	        @Override
+	        public boolean hasEffect(ItemStack par1ItemStack) {
+	        	return true;
+	        }
+	        @Override
+	        public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10)
+	        {
+				return bFull3D;
+	        	/*try {
+	        	//The pokemon master!
+	        	writeToNBT(par1ItemStack);
+	        	readFromNBT(par1ItemStack);
+	        	return true;
+	        	}catch(Throwable t) {
+	        		t.printStackTrace();
+	        		return false;
+	        	} */
+	        }
+	        public  void writeToNBT(ItemStack par1ItemStack) { 
+	        	if(par1ItemStack.stackTagCompound.getTag("charge") != null) {
+	        		par1ItemStack.stackTagCompound.setInteger("charge", currentCharge);
+	        		System.out.println("NBT CHARGE + " +  par1ItemStack.stackTagCompound.getInteger("charge") );
+	        	} else {
+	        		par1ItemStack.stackTagCompound.setTag("charge",par1ItemStack.stackTagCompound);
+	        		par1ItemStack.stackTagCompound.setInteger("charge", currentCharge);
+	        		System.out.println("NBT CHARGE + " +  par1ItemStack.stackTagCompound.getInteger("charge") );
+	        	}
+	        }
+	        public void readFromNBT(ItemStack par1ItemStack) {
+	        	if(par1ItemStack.stackTagCompound.getTag("charge") != null) {
+	        		currentCharge = par1ItemStack.stackTagCompound.getInteger("charge");
+	        	} else {
+	        		par1ItemStack.stackTagCompound.setTag("charge",par1ItemStack.stackTagCompound);
+	        		currentCharge = par1ItemStack.stackTagCompound.getInteger("charge");
+	        	}
+	        }
 }

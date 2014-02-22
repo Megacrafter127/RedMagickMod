@@ -14,6 +14,7 @@ import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
 import com.matt.mod.handlers.WorldHandlerFuture;
+import com.matt.mod.magick.items.logic.WandTickHandler;
 import com.matt.proxy.CommonProxy;
 
 import cpw.mods.fml.common.Mod;
@@ -26,6 +27,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 /**
  * The futurecraft mod!
@@ -172,6 +175,7 @@ public class FutureCraft {
          	System.out.println("Registering FutureCraft worldgenerator handler!");
          	GameRegistry.registerWorldGenerator(new WorldHandlerFuture());
          	NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
+         	TickRegistry.registerTickHandler(new WandTickHandler(),Side.CLIENT);
      }
  /*@EventHandler
  public void serverLoad(FMLServerStartingEvent event)
