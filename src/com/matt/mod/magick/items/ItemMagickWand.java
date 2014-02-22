@@ -229,19 +229,24 @@ public class ItemMagickWand extends Item {
 	             * update it's contents.
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+	            	tickCount++;
+	            	System.out.println(tickCount);
+	            	if(tickCount == 1) {
+	            		currentCharge++;
+	            		tickCount = 0;
+	            	}
 	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
+	            	  par1ItemStack.stackTagCompound.setInteger("chargeLvl",currentCharge);
+	            	  
 	            }
 
 	        /**
 	             * Called when item is crafted/smelted. Used only by maps so far.
 	             */
 	            public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-	            	tickCount++;
-	            	if(tickCount == 100) {
-	            		currentCharge++;
-	            	}
+	            	
 	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
-	            	  par1ItemStack.stackTagCompound.setInteger("chargeLvl",currentCharge);
+	            	par1ItemStack.stackTagCompound.setInteger("chargeLvl",currentCharge);
 	            	  
 	            }
 
