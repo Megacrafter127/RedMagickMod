@@ -33,17 +33,7 @@ public class TileEntityKernelCore extends TileEntity {
 			}
 			catch(NullPointerException ex) {}
 		}
-		new Thread() {
-			public void run() {
-				try{
-					sleep(1000);
-				}
-				catch(InterruptedException ex) {}
-				annihilateUnused=true;
-			}
-		}.start();
 	}
-	public static boolean annihilateUnused=false;
 	
 	private static int id=-1;
 	public static int getNextID() {
@@ -120,9 +110,9 @@ public class TileEntityKernelCore extends TileEntity {
 	}
 	@Override
 	public void updateEntity() {
+		checkLinks();
 		addPermanentParticles();
 		addAffectionParticles();
-		if(annihilateUnused) checkLinks();
 	}
 	
 	private void checkLinks() {
@@ -130,9 +120,12 @@ public class TileEntityKernelCore extends TileEntity {
 		for(int[] coords:linkedBlocks) {
 			if(coords==null || coords.length!=3) {
 				toRemove.add(coords);
+				Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 			else if(!linkable.contains(getWorldObj().getBlockId(coords[0], coords[1], coords[2]))) {
 				toRemove.add(coords);
+				System.out.println("removed: "+coords[0]+", "+coords[1]+", "+coords[2]);
+				Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
 		linkedBlocks.removeAll(toRemove);
@@ -267,6 +260,7 @@ public class TileEntityKernelCore extends TileEntity {
 	public boolean linkBlock(int x,int y,int z) {
 		if(!linkedBlocks.contains(new int[]{x,y,z})) {
 			linkedBlocks.add(new int[]{x,y,z});
+			Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
 		return false;
