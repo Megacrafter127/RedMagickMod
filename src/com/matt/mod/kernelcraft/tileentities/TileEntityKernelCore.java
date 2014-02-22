@@ -33,7 +33,17 @@ public class TileEntityKernelCore extends TileEntity {
 			}
 			catch(NullPointerException ex) {}
 		}
+		new Thread() {
+			public void run() {
+				try{
+					sleep(1000);
+				}
+				catch(InterruptedException ex) {}
+				annihilateUnused=true;
+			}
+		}.start();
 	}
+	public static boolean annihilateUnused=false;
 	
 	private static int id=-1;
 	public static int getNextID() {
@@ -112,7 +122,7 @@ public class TileEntityKernelCore extends TileEntity {
 	public void updateEntity() {
 		addPermanentParticles();
 		addAffectionParticles();
-		checkLinks();
+		if(annihilateUnused) checkLinks();
 	}
 	
 	private void checkLinks() {

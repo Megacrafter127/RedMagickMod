@@ -22,6 +22,7 @@ public class ItemCoordReference extends Item {
 	
 	@Override
 	public boolean onItemUse(ItemStack stack,EntityPlayer player,World world,int x,int y,int z,int side,float hitX,float hitY,float hitZ) {
+		if(world.isRemote) return false;
 		if(player.isSneaking()) {
 			EnumFacing face=EnumFacing.getFront(side);
 			x+=face.getFrontOffsetX();
