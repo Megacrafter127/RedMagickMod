@@ -29,8 +29,10 @@ public class BlockKernelCoordMemory extends ColumnBlock implements ITileEntityPr
 				int[] coords=TileEntityKernelCoordMemory.coords.get(player.inventory.getCurrentItem().getItemDamage());
 				TileEntityKernelCoordMemory t=(TileEntityKernelCoordMemory)w.getBlockTileEntity(x, y, z);
 				t.setCoords(coords);
+				TileEntityKernelCoordMemory.coords.remove(player.inventory.getCurrentItem().getItemDamage());
 				player.inventory.getCurrentItem().stackSize=0;
 				player.inventory.inventoryChanged=true;
+				player.addChatMessage("Transmitted: "+coords[0]+", "+coords[1]+", "+coords[2]);
 			}
 			else {
 				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.CoordReference,1,TileEntityKernelCoordMemory.getNextID()));

@@ -112,7 +112,20 @@ public class TileEntityKernelCore extends TileEntity {
 	public void updateEntity() {
 		addPermanentParticles();
 		addAffectionParticles();
-		
+		checkLinks();
+	}
+	
+	private void checkLinks() {
+		LinkedList<int[]> toRemove=new LinkedList<int[]>();
+		for(int[] coords:linkedBlocks) {
+			if(coords==null || coords.length!=3) {
+				toRemove.add(coords);
+			}
+			else if(!linkable.contains(getWorldObj().getBlockId(coords[0], coords[1], coords[2]))) {
+				toRemove.add(coords);
+			}
+		}
+		linkedBlocks.removeAll(toRemove);
 	}
 	
 	private void addPermanentParticles() {
@@ -239,5 +252,13 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		linkedBlocks=replacement;
 		readHashFromNBT(nbt.getCompoundTag("hash"));
+	}
+	
+	public boolean linkBlock(int x,int y,int z) {
+		if(!linkedBlocks.contains(new int[]{x,y,z})) {
+			linkedBlocks.add(new int[]{x,y,z});
+			return true;
+		}
+		return false;
 	}
 }

@@ -19,12 +19,14 @@ public class ItemKernelReference extends Item {
 	}
 	
 	@Override
-	public boolean onItemUse(ItemStack stack,EntityPlayer player,World world,int x,int y,int z,int side,float hitX,float hitY,float hitZ) {
+	public boolean onItemUseFirst(ItemStack stack,EntityPlayer player,World world,int x,int y,int z,int side,float hitX,float hitY,float hitZ) {
 		try{
 			int[] coord=TileEntityKernelCore.kernelHash.get(stack.getItemDamage());
 			TileEntityKernelCore source=(TileEntityKernelCore)world.getBlockTileEntity(coord[0],coord[1]+1,coord[2]);
-			EnumFacing face=EnumFacing.getFront(side);
-			source.addBlockAffectEffect(x+face.getFrontOffsetX(), y+face.getFrontOffsetY(), z+face.getFrontOffsetZ(), 1200);
+			if(TileEntityKernelCore.linkable.contains(world.getBlockId(x, y, z))) {
+				source.linkBlock(x, y, z);
+				player.addChatMessage("Link established");
+			}
 		}
 		catch(Exception ex) {
 			stack.stackSize=0;
