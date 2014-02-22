@@ -230,8 +230,8 @@ public class ItemMagickWand extends Item {
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
 	            	tickCount++;
-	            	System.out.println(tickCount);
-	            	if(tickCount == 1) {
+	            
+	            	if(tickCount == 10000) {
 	            		currentCharge++;
 	            		tickCount = 0;
 	            	}
@@ -264,6 +264,13 @@ public class ItemMagickWand extends Item {
 	            	   if (itemStack.stackTagCompound != null) { 
 	            		   list.add(EnumChatFormatting.RED + "Current owner :  " + player.getDisplayName());
 	            		   list.add(EnumChatFormatting.BLUE + "Current power :  " +itemStack.stackTagCompound.getInteger("chargeLvl"));
+	            		   if(itemStack.getItemDamage() == 0) {
+	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 10");
+	            		   }else  if(itemStack.getItemDamage() == 1) {
+	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 100");
+	            		   } if(itemStack.getItemDamage() == 2) {
+	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 500");
+	            		   }
 	            	   }
 	            }
 
