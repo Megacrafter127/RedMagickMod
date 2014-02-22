@@ -2,6 +2,8 @@ package com.matt.mod.magick.items;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -261,9 +263,10 @@ public class ItemMagickWand extends Item {
 	            public void addInformation(ItemStack itemStack, EntityPlayer player,
                         
 	            		List list, boolean par4) {
+	            	if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 	            	   if (itemStack.stackTagCompound != null) { 
-	            		   list.add(EnumChatFormatting.RED + "Current owner :  " + player.getDisplayName());
-	            		   list.add(EnumChatFormatting.BLUE + "Current power :  " +itemStack.stackTagCompound.getInteger("chargeLvl"));
+	            		 
+	            		   list.add(EnumChatFormatting.BLUE + "Current magickal power :  " +itemStack.stackTagCompound.getInteger("chargeLvl"));
 	            		   if(itemStack.getItemDamage() == 0) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 10");
 	            		   }else  if(itemStack.getItemDamage() == 1) {
@@ -271,7 +274,14 @@ public class ItemMagickWand extends Item {
 	            		   } if(itemStack.getItemDamage() == 2) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 500");
 	            		   }
+	            		   list.add(EnumChatFormatting.GRAY + "Tick count : " + tickCount);
+	            	   }} else
+	            	   {
+	            		   if (itemStack.stackTagCompound != null) { 
+	            			   list.add(EnumChatFormatting.GRAY + "Hold shift to see details");
+	            		   }
 	            	   }
+	            	
 	            }
 
 	        /**
