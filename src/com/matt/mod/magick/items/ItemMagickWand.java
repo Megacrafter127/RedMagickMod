@@ -18,16 +18,84 @@ import com.matt.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemMagickWand extends Item{
+public class ItemMagickWand extends Item {
+	/**
+	 * @author Megacrafter127
+	 * @param damage - the damage value of the wand
+	 * @return the level of the wand
+	 */
+	public static int getLevel(int damage) {
+		int level=0;
+		for(;0>=damage||levelMax[level]<damage;level++) {
+			try{
+				damage-=levelMax[level];
+			}
+			catch(ArrayIndexOutOfBoundsException ex) {
+				level++;
+				break;
+			}
+		}
+		return level;
+	}
+	/**
+	 * @author Megacrafter127
+	 * @param level - the level of the wand
+	 * @return the damage of an empty wand of this level
+	 */
+	public static int getDamageForEmpty(int level) {
+		int dmg=0;
+		for(int i=0;i<level;i++) {
+			try{
+				dmg+=levelMax[i];
+			}
+			catch(ArrayIndexOutOfBoundsException ex) {}
+		}
+		return dmg;
+	}
+	/**
+	 * @author Megacrafter127
+	 * @param damage - the damage value of the wand
+	 * @return the charge of the wand
+	 */
+	public static int getCharge(int damage) {
+		for(int level=0;true;level++) {
+			try{
+				if(0<=damage&&damage<levelMax[level]) {
+					return damage;
+				}
+				else {
+					damage-=levelMax[level];
+				}
+				
+			}
+			catch(ArrayIndexOutOfBoundsException ex) {
+				return damage;
+			}
+		}
+	}
+	/**
+	 * the level maximum charges(the index is the level)
+	 * @author Megacrafter127
+	 */
+	public static int[] levelMax=new int[]{100,1000,10000};
+	@Deprecated
 	public static int currentCharge;
-	public static String[] names;
-	public static final String[] stnames = new String[]{"Lesser","Medium","Greater"};
-	public ItemMagickWand(int par1) {
-		super(par1);
-		names = new String[10];
+	public static String[] names=new String[10];
+	/**
+	 * @author Megacrafter127
+	 */
+	static{
 		names[0] = "Iron-Cored Birch Magical Staff";
 		names[1] = "Golden-Cored Oak Magical Staff";
 		names[2] = "Netherium-Adorned Enderium-Cored Oldwood Magical Staff";
+	}
+	public static final String[] stnames = new String[]{"Lesser","Medium","Greater"};
+	public ItemMagickWand(int par1) {
+		super(par1);
+		//names = new String[10]; why should the static variable be overritten by a constructor, that might be called multiple times
+		/*names[0] = "Iron-Cored Birch Magical Staff";
+		names[1] = "Golden-Cored Oak Magical Staff";
+		names[2] = "Netherium-Adorned Enderium-Cored Oldwood Magical Staff";*/
 		
 		this.setUnlocalizedName(getUnlocalizedName(new ItemStack(this)));
 		setHasSubtypes(true);
@@ -36,54 +104,56 @@ public class ItemMagickWand extends Item{
 	}
 	@SideOnly(Side.CLIENT)
 	Icon[] icons;
-	  @SideOnly(Side.CLIENT)
-
-	    /**
-	     * @author Matheus
-	     * @param par1 - The item's damage value
-	     */
-	    public Icon getIconFromDamage(int par1)
-	    {
-	        return this.icons[par1];
-	    }
-	    
-	        public String getUnlocalizedName(ItemStack par1ItemStack){
-	                int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(),0,15);
-					return super.getUnlocalizedName() + "." + names[i];
-	        }
-	        @SideOnly(Side.CLIENT)
-	        public void getSubItems(int itemID, CreativeTabs tabs, List list){
-	             
-	                for(int i = 0; i < 3; ++i){
-	                        list.add(new ItemStack(itemID, 1, i));
-	                 }
-	         }
-	        @SideOnly(Side.CLIENT)
-	        public void registerIcons(IconRegister r) {
-	        icons = new Icon[4];
-	        	for(int i = 0;i < icons.length; i++) {
-	        		String[] texturenames = new String[]{"iron","gold","nethend","shizzle"};
-					Icon ic = r.registerIcon(Ref.NAME.toLowerCase() + ":" + texturenames[i]);
-					icons[i] = ic;
-				
-	        	}
-	        }
-	        @SideOnly(Side.CLIENT)
-	        public Icon getItemIconFromDamage(int par1IconIndex) {
-	        	return icons[par1IconIndex];
-	        }
-	        public int getMagickStorage(int par1ItemDamage) {
-			if(par1ItemDamage == 0 ) {
-				return 100;
-			} else if(par1ItemDamage == 1) {
-				return 1000;
-			} else if(par1ItemDamage == 2 ) {
-				return 10000;
-			}
-			return par1ItemDamage;
-	        	
-	        }
-	       /* @Override
+	@SideOnly(Side.CLIENT)
+	
+	/**
+	 * @author Matheus
+	 * @param par1 - The item's damage value
+	 */
+	public Icon getIconFromDamage(int par1)
+	{
+		//return this.icons[par1];
+		return this.icons[getLevel(par1)];
+	}
+	
+	public String getUnlocalizedName(ItemStack par1ItemStack){
+		int i = MathHelper.clamp_int(getLevel(par1ItemStack.getItemDamage()),0,15);
+		return super.getUnlocalizedName() + "." + names[i];
+	}
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(int itemID, CreativeTabs tabs, List list){
+		
+		for(int i = 0; i < 3; ++i){
+			list.add(new ItemStack(itemID, 1, getDamageForEmpty(i)));
+		}
+	}
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister r) {
+		icons = new Icon[4];
+		for(int i = 0;i < icons.length; i++) {
+			String[] texturenames = new String[]{"iron","gold","nethend","shizzle"};
+			Icon ic = r.registerIcon(Ref.NAME.toLowerCase() + ":" + texturenames[i]);
+			icons[i] = ic;
+			
+		}
+	}
+	@SideOnly(Side.CLIENT)
+	public Icon getItemIconFromDamage(int par1IconIndex) {
+		return this.getIconFromDamage(par1IconIndex);
+	}
+	public int getMagickStorage(int par1ItemDamage) {
+		par1ItemDamage=getLevel(par1ItemDamage);
+		if(par1ItemDamage == 0 ) {
+			return 100;
+		} else if(par1ItemDamage == 1) {
+			return 1000;
+		} else if(par1ItemDamage == 2 ) {
+			return 10000;
+		}
+		return par1ItemDamage;
+		
+	}
+	/* @Override
 	        @SideOnly(Side.CLIENT)
 	        public void addInformation(ItemStack par1ItemStack,
 	                  EntityPlayer par2EntityPlayer,
@@ -107,8 +177,8 @@ public class ItemMagickWand extends Item{
 	            	 par3List.add(stnames[i]);
 	             }
 	        }*/
-	        @Override
-	        public boolean hasEffect(ItemStack par1ItemStack) {
-	        	return true;
-	        }
+	@Override
+	public boolean hasEffect(ItemStack par1ItemStack) {
+		return true;
+	}
 }
