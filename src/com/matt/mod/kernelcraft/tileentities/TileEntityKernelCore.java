@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
+import com.matt.mod.kernelcraft.KernelCraftCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
@@ -24,6 +26,13 @@ public class TileEntityKernelCore extends TileEntity {
 		linkable.add(Block.hopperBlock.blockID);
 		linkable.add(Block.dispenser.blockID);
 		linkable.add(Block.dropper.blockID);
+		while(true) {
+			try{
+				linkable.add(KernelCraftCore.CoordMemory.blockID);
+				break;
+			}
+			catch(NullPointerException ex) {}
+		}
 	}
 	
 	private static int id=-1;

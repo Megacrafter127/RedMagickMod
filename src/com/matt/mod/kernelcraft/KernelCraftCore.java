@@ -11,13 +11,16 @@ import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
 import com.matt.mod.kernelcraft.blocks.BlockKernelCPU;
+import com.matt.mod.kernelcraft.blocks.BlockKernelCoordMemory;
 import com.matt.mod.kernelcraft.blocks.BlockKernelCore;
 import com.matt.mod.kernelcraft.blocks.BlockKernelIOFace;
 import com.matt.mod.kernelcraft.blocks.BlockKernelModule;
 import com.matt.mod.kernelcraft.blocks.BlockKernelStorage;
 import com.matt.mod.kernelcraft.blocks.BlockKernelUSV;
+import com.matt.mod.kernelcraft.items.ItemCoordReference;
 import com.matt.mod.kernelcraft.items.ItemKernelReference;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCPU;
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCoordMemory;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelIOFace;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelModule;
@@ -48,8 +51,12 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		private static int IOFaceID=904;
 		private static int CPUID=905;
 		//end base
+		//extenders
+		private static int CoordMemoryID=910;
+		//end extenders
 		//items
 		private static int KernelReferenceID=950;
+		private static int CoordReferenceID=951;
 		//end items
 	//end IDs
 	//Blocks
@@ -68,8 +75,12 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		public static BlockKernelIOFace IOFace;
 		public static BlockKernelCPU CPU;
 		//end base
+		//extenders
+		public static BlockKernelCoordMemory CoordMemory;
+		//end extenders
 		//items
 		public static ItemKernelReference KernelReference;
+		public static ItemCoordReference CoordReference;
 		//end items
 	public static void loadIDs() {
 		FutureCraft.config.load();
@@ -87,8 +98,12 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		IOFaceID=FutureCraft.config.getBlock("kernelIOFace", IOFaceID).getInt();
 		CPUID=FutureCraft.config.getBlock("kernelCPU", CPUID).getInt();
 		//end base
+		//extenders
+		CoordMemoryID=FutureCraft.config.getBlock("kernelCoordMemory", CoordMemoryID).getInt();
+		//end extenders
 		//items
 		KernelReferenceID=FutureCraft.config.getItem("kernelReference", KernelReferenceID).getInt();
+		CoordReferenceID=FutureCraft.config.getItem("coordReference", CoordReferenceID).getInt();
 		//end items
 		FutureCraft.config.save();
 	}
@@ -110,19 +125,25 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		CPU=new BlockKernelCPU(CPUID);
 		GameRegistry.registerBlock(CPU, "kernelCPU");
 		//end base
+		//extenders
+		CoordMemory=new BlockKernelCoordMemory(CoordMemoryID);
+		GameRegistry.registerBlock(CoordMemory, "coordMemory");
+		//end extenders
 		//languages
 		Kernel.setUnlocalizedName("Kernel Core");
 		LanguageRegistry.addName(Kernel, "KernelCore");
-		Module.setUnlocalizedName("Kernel Module");
+		
 		LanguageRegistry.addName(Module, "Kernel Module");
-		Storage.setUnlocalizedName("Kernel Storage");
+		
 		LanguageRegistry.addName(Storage, "Kernel Storage");
-		USV.setUnlocalizedName("Kernel USV");
+		
 		LanguageRegistry.addName(USV, "Kernel USV");
-		IOFace.setUnlocalizedName("Kernel IO Face");
+		
 		LanguageRegistry.addName(IOFace, "Kernel IOFace");
-		CPU.setUnlocalizedName("Kernel CPU");
+		
 		LanguageRegistry.addName(CPU, "Kernel CPU");
+		
+		LanguageRegistry.addName(CoordMemory, "Kernel Coordinate Memory");
 	}
 	
 	public static void registerCreativeTabs() {
@@ -131,12 +152,16 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		USV.setCreativeTab(kernelCraft);
 		IOFace.setCreativeTab(kernelCraft);
 		CPU.setCreativeTab(kernelCraft);
+		CoordMemory.setCreativeTab(kernelCraft);
 	}
 	
 	public static void registerItems() {
 		KernelReference=new ItemKernelReference(KernelReferenceID);
 		GameRegistry.registerItem(KernelReference, "KernelReference");
 		LanguageRegistry.addName(KernelReference, "Kernel Reference");
+		CoordReference=new ItemCoordReference(CoordReferenceID);
+		GameRegistry.registerItem(CoordReference, "CoordReference");
+		LanguageRegistry.addName(CoordReference, "Coordinate Reference");
 	}
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityKernelModule.class, "TileEntityKernelModule");
@@ -145,6 +170,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		GameRegistry.registerTileEntity(TileEntityKernelIOFace.class, "TileEntityKernelIOFace");
 		GameRegistry.registerTileEntity(TileEntityKernelCPU.class, "TileEntityKernelCPU");
 		GameRegistry.registerTileEntity(TileEntityKernelCore.class, "TileEntityKernelCore");
+		GameRegistry.registerTileEntity(TileEntityKernelCoordMemory.class, "TileEntityKernelCoordMemory");
 	}
 	
 	public static void registerRecipes() {

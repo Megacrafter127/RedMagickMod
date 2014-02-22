@@ -27,6 +27,7 @@ public class ColumnBlock extends Block {
 		topName=top;
 		bottomName=bottom;
 		sideName=side;
+		super.setUnlocalizedName(name);
 	}
 	
 	@Override
