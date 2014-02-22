@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
@@ -14,6 +15,17 @@ import net.minecraft.world.World;
 
 public class TileEntityKernelCore extends TileEntity {
 	public static final HashMap<Integer,int[]> kernelHash=new HashMap<Integer,int[]>();
+	public static final LinkedList<Integer> linkable=new LinkedList<Integer>();
+	static{
+		linkable.add(Block.chest.blockID);
+		linkable.add(Block.chestTrapped.blockID);
+		linkable.add(Block.furnaceIdle.blockID);
+		linkable.add(Block.furnaceBurning.blockID);
+		linkable.add(Block.hopperBlock.blockID);
+		linkable.add(Block.dispenser.blockID);
+		linkable.add(Block.dropper.blockID);
+	}
+	
 	private static int id=-1;
 	public static int getNextID() {
 		return id++;
@@ -46,6 +58,8 @@ public class TileEntityKernelCore extends TileEntity {
 	
 	
 	private LinkedList<int[]> affectList=new LinkedList<int[]>();
+	private LinkedList<int[]> linkedBlocks=new LinkedList<int[]>();
+	
 	private static class StraightEnchant extends EntityEnchantmentTableParticleFX {
 
 		public StraightEnchant(World par1World, double par2, double par4,
@@ -81,12 +95,15 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		
 	}
+	
+	
 	public TileEntityKernelCore() {
 	}
 	@Override
 	public void updateEntity() {
 		addPermanentParticles();
 		addAffectionParticles();
+		
 	}
 	
 	private void addPermanentParticles() {
@@ -120,6 +137,20 @@ public class TileEntityKernelCore extends TileEntity {
 			distance=Math.sqrt(dX*dX+dZ*dZ+1);
 			spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,-0.1/distance,0.1*dZ/distance,(int)Math.round(10*distance)));
 		}
+		LinkedList<int[]> toRemove=new LinkedList<int[]>();
+		for(int[] link:linkedBlocks) {
+			if(linkable.contains(getWorldObj().getBlockId(link[0], link[1], link[2]))) {
+				int dX=link[0]-xCoord;
+				int dY=link[1]-yCoord;
+				int dZ=link[2]-zCoord;
+				distance=Math.sqrt(dX*dX+dY*dY+dZ*dZ);
+				spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,0.1*dY/distance,0.1*dZ/distance,(int)Math.round(10*distance)));
+			}
+			else {
+				toRemove.add(link);
+			}
+		}
+		linkedBlocks.removeAll(toRemove);
 	}
 	
 	private void spawnParticle(EntityFX e) {
@@ -156,7 +187,7 @@ public class TileEntityKernelCore extends TileEntity {
 	 * @return true if effect was activated; false if not
 	 */
 	public boolean addBlockAffectEffect(int x,int y,int z,int time) {
-		if(!getWorldObj().isRemote&&time!=0) {
+		if(!getWorldObj().isRemote&&time>0) {
 			affectList.add(new int[]{x,y,z,time});
 			return true;
 		}
@@ -166,10 +197,16 @@ public class TileEntityKernelCore extends TileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		nbt.setInteger("size",affectList.size());
+		nbt.setInteger("affectsize",affectList.size());
 		int c=0;
 		for(int[] i:affectList) {
 			nbt.setIntArray("affect."+c, i);
+			c++;
+		}
+		nbt.setInteger("linksize", linkedBlocks.size());
+		c=0;
+		for(int[] i:linkedBlocks) {
+			nbt.setIntArray("link."+c, i);
 			c++;
 		}
 		NBTTagCompound hash=new NBTTagCompound();
@@ -181,11 +218,17 @@ public class TileEntityKernelCore extends TileEntity {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		LinkedList<int[]> replacement=new LinkedList<int[]>();
-		int max=nbt.getInteger("size");
+		int max=nbt.getInteger("affectsize");
 		for(int i=0;i<max;i++) {
 			replacement.add(nbt.getIntArray("affect."+i));
 		}
 		affectList=replacement;
+		max=nbt.getInteger("linksize");
+		replacement=new LinkedList<int[]>();
+		for(int i=0;i<max;i++) {
+			replacement.add(nbt.getIntArray("link."+i));
+		}
+		linkedBlocks=replacement;
 		readHashFromNBT(nbt.getCompoundTag("hash"));
 	}
 }
