@@ -2,8 +2,6 @@ package com.matt.mod.magick.items;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -16,6 +14,9 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import org.lwjgl.input.Keyboard;
+
+import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 
 import cpw.mods.fml.relauncher.Side;
@@ -232,11 +233,13 @@ public class ItemMagickWand extends Item {
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
 	            	tickCount++;
-	            
+	        
 	            	if(tickCount == 10000) {
 	            		currentCharge++;
 	            		tickCount = 0;
 	            	}
+	            
+	            	
 	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
 	            	  par1ItemStack.stackTagCompound.setInteger("chargeLvl",currentCharge);
 	            	  

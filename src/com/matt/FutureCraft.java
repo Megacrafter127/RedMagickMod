@@ -88,6 +88,7 @@ public class FutureCraft {
 		public static int swagChestId = 758;
 		public static int blockEnhancerId = 759;
 		public static int swagDecoID = 760;
+		public static boolean enable_debug_wands;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -138,8 +139,8 @@ public class FutureCraft {
             		blockGOLID = config.getBlock("GOL", 548).getInt();
             		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
             		
-            		enable_swag = FutureCraft.config.get("Module", "Enable Swag", true).getBoolean(false);
-            		
+            		enable_swag = FutureCraft.config.get("Module", "Enable Magick", true).getBoolean(true);
+            		enable_swag = FutureCraft.config.get("Debug", "Enable Magick - Wands Debug", false).getBoolean(false);
             		swag_wand_id = FutureCraft.config.getItem("Swaggish Wand - Tier 1", 801 ).getInt();
 
             		swag_wand_idt2 = FutureCraft.config.getItem("Swaggish Wand - Tier 2", 802 ).getInt();
