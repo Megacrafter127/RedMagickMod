@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import com.matt.FutureCraft;
 import com.matt.mod.kernelcraft.KernelCraftCore;
-import com.matt.mod.swag.SwagHelper;
+import com.matt.mod.magick.SwagHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

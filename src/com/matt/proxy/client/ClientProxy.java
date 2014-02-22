@@ -5,8 +5,8 @@ import net.minecraft.world.World;
 
 import com.matt.gui.LoreBookGui;
 import com.matt.mod.ModHelper;
-import com.matt.mod.swag.multiblock.TileEntityAltar;
-import com.matt.mod.swag.multiblock.TileEntityAltarRender;
+import com.matt.mod.magick.multiblock.TileEntityAltar;
+import com.matt.mod.magick.multiblock.TileEntityAltarRender;
 import com.matt.proxy.CommonProxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
