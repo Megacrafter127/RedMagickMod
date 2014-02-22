@@ -38,7 +38,7 @@ public class ItemFutureNote extends Item {
 	  @Override
 	    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	    {
-		  System.out.println("Lorebook had compound!");
+		 
 		  if( par1ItemStack.stackTagCompound == null ) {
               par1ItemStack.setTagCompound( new NBTTagCompound( )); 
 	        if (par1ItemStack.hasTagCompound())
