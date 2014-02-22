@@ -24,12 +24,17 @@ public class BlockKernelCoordMemory extends ColumnBlock implements ITileEntityPr
 	
 	@Override
 	public boolean onBlockActivated(World w,int x,int y,int z,EntityPlayer player,int meta,float hitx,float hity,float hitz) {
-		if(player.inventory.getCurrentItem()==null || player.inventory.getCurrentItem().itemID==KernelCraftCore.CoordReference.itemID) {
-			int[] coords=TileEntityKernelCoordMemory.coords.get(player.inventory.getCurrentItem().getItemDamage());
-			TileEntityKernelCoordMemory t=(TileEntityKernelCoordMemory)w.getBlockTileEntity(x, y, z);
-			t.setCoords(coords);
-			player.inventory.getCurrentItem().stackSize=0;
-			player.inventory.inventoryChanged=true;
+		if(player.inventory.getCurrentItem()!=null) {
+			if(player.inventory.getCurrentItem().itemID==KernelCraftCore.CoordReference.itemID) {
+				int[] coords=TileEntityKernelCoordMemory.coords.get(player.inventory.getCurrentItem().getItemDamage());
+				TileEntityKernelCoordMemory t=(TileEntityKernelCoordMemory)w.getBlockTileEntity(x, y, z);
+				t.setCoords(coords);
+				player.inventory.getCurrentItem().stackSize=0;
+				player.inventory.inventoryChanged=true;
+			}
+			else {
+				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.CoordReference,1,TileEntityKernelCoordMemory.getNextID()));
+			}
 		}
 		else {
 			player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.CoordReference,1,TileEntityKernelCoordMemory.getNextID()));
