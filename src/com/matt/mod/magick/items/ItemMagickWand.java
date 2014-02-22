@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMagickWand extends Item{
-
+	public static int currentCharge;
 	public static String[] names;
 	public static final String[] stnames = new String[]{"Lesser","Medium","Greater"};
 	public ItemMagickWand(int par1) {
