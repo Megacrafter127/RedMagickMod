@@ -5,7 +5,7 @@ import java.util.HashMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-import com.matt.mod.swag.infusion.InfusionRecipe;
+import com.matt.mod.magick.infusion.InfusionRecipe;
 
 public class FutureCraftRecipeHandler {
 	 public static final FutureCraftRecipeHandler instance = new  FutureCraftRecipeHandler();

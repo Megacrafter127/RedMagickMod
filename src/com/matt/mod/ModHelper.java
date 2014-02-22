@@ -28,9 +28,9 @@ import com.matt.mod.item.ItemFutureNote;
 import com.matt.mod.item.ItemIngot;
 import com.matt.mod.item.ItemModPickaxe;
 import com.matt.mod.kernelcraft.KernelCraftCore;
+import com.matt.mod.magick.FutureCraftSwag;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
-import com.matt.mod.swag.FutureCraftSwag;
 import com.matt.proxy.client.ClientProxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
