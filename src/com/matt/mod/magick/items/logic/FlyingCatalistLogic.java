@@ -7,7 +7,7 @@ public class FlyingCatalistLogic extends ItemLogic {
 	public static boolean canFly;
 	public static int mana;
 	public static  boolean run(EntityPlayer p) {
-		System.out.println("p right clicked ItemCatalist");
+		System.out.println(p.getDisplayName() +" right clicked ItemCatalist");
 		canFly = p.capabilities.allowFlying;
 		isFlying = p.isAirBorne;
 		/* if(canFly == false && isFlying == false) {
@@ -32,6 +32,9 @@ public class FlyingCatalistLogic extends ItemLogic {
 			return canFly == isFlying;
 		}
 		return canFly == isFlying; */
+		if(p.capabilities.allowFlying) {
+			p.capabilities.allowFlying = false;
+		}
 		p.capabilities.allowFlying = true;
 		return true;
 

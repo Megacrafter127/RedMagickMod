@@ -192,7 +192,8 @@ public class ItemMagickWand extends Item {
 	        		t.printStackTrace();
 	        		return false;
 	        	} */
-	        }
+	        }	      
+	        @Deprecated
 	        public  void writeToNBT(ItemStack par1ItemStack) { 
 	        	if(par1ItemStack.stackTagCompound.getTag("charge") != null) {
 	        		par1ItemStack.stackTagCompound.setInteger("charge", currentCharge);
@@ -203,6 +204,7 @@ public class ItemMagickWand extends Item {
 	        		System.out.println("NBT CHARGE + " +  par1ItemStack.stackTagCompound.getInteger("charge") );
 	        	}
 	        }
+	        @Deprecated
 	        public void readFromNBT(ItemStack par1ItemStack) {
 	        	if(par1ItemStack.stackTagCompound.getTag("charge") != null) {
 	        		currentCharge = par1ItemStack.stackTagCompound.getInteger("charge");
