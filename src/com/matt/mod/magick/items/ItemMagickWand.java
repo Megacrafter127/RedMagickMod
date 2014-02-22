@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -19,11 +20,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMagickWand extends Item {
+	int tickCount;
 	/**
 	 * @author Megacrafter127
 	 * @param damage - the damage value of the wand
 	 * @return the level of the wand
 	 */
+	
+
 	public static int getLevel(int damage) {
 		int level=0;
 		for(;0>=damage||levelMax[level]<damage;level++) {
@@ -78,7 +82,6 @@ public class ItemMagickWand extends Item {
 	 * @author Megacrafter127
 	 */
 	public static int[] levelMax=new int[]{100,1000,10000};
-	@Deprecated
 	public static int currentCharge = 1;
 	public static String[] names=new String[10];
 	/**
@@ -233,8 +236,12 @@ public class ItemMagickWand extends Item {
 	             * Called when item is crafted/smelted. Used only by maps so far.
 	             */
 	            public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-	            	  par1ItemStack.stackTagCompound = new NBTTagCompound();
-	            	  par1ItemStack.stackTagCompound.setInteger("chargeLvl",getCharge(this.getDamage(par3EntityPlayer.inventory.getCurrentItem())));
+	            	tickCount++;
+	            	if(tickCount == 100) {
+	            		currentCharge++;
+	            	}
+	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
+	            	  par1ItemStack.stackTagCompound.setInteger("chargeLvl",currentCharge);
 	            	  
 	            }
 
@@ -247,9 +254,11 @@ public class ItemMagickWand extends Item {
 	             * allows items to add custom lines of information to the mouseover description
 	             */
 	            public void addInformation(ItemStack itemStack, EntityPlayer player,
-                        List list, boolean par4) {
+                        
+	            		List list, boolean par4) {
 	            	   if (itemStack.stackTagCompound != null) { 
-	            		   list.add("Current owner :  " + player.getDisplayName());
+	            		   list.add(EnumChatFormatting.RED + "Current owner :  " + player.getDisplayName());
+	            		   list.add(EnumChatFormatting.BLUE + "Current power :  " +itemStack.stackTagCompound.getInteger("chargeLvl"));
 	            	   }
 	            }
 
