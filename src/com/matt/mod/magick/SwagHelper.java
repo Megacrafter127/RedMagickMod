@@ -2,6 +2,7 @@ package com.matt.mod.magick;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
@@ -11,17 +12,16 @@ import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
-import com.matt.mod.magick.items.ItemSwaggishWand;
-import com.matt.mod.magick.items.ItemSwaggishWand.tier;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class SwagHelper {
-public static final Item swaggishWand = new ItemSwaggishWand(FutureCraft.swag_wand_id,"swaggishwand",tier.BASIC).setFull3D().setUnlocalizedName("Swaggish Wand").setCreativeTab(Ref.getRecommendedTab("block"));
+/*public static final Item swaggishWand = new ItemSwaggishWand(FutureCraft.swag_wand_id,"swaggishwand",tier.BASIC).setFull3D().setUnlocalizedName("Swaggish Wand").setCreativeTab(Ref.getRecommendedTab("block"));
 public static final Item swaggishWandT2 = new ItemSwaggishWand(FutureCraft.swag_wand_idt2,"swaggishwand",tier.NETHERIUM).setFull3D().setUnlocalizedName("Swaggish Wand - T2").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Item swaggishWandT3 = new ItemSwaggishWand(FutureCraft.swag_wand_idt3,"swaggishwand",tier.ENDERIUM).setFull3D().setUnlocalizedName("Swaggish Wand - T3").setCreativeTab(Ref.getRecommendedTab("block"));
+public static final Item swaggishWandT3 = new ItemSwaggishWand(FutureCraft.swag_wand_idt3,"swaggishwand",tier.ENDERIUM).setFull3D().setUnlocalizedName("Swaggish Wand - T3").setCreativeTab(Ref.getRecommendedTab("block")); */
 public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
 public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
 public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
@@ -68,5 +68,11 @@ public static void register() {
 	LanguageRegistry.addName(blockMagicalBlockRed, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockMagicalBlockYellow, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockNetherald, "Netherium Block"); */
+	LanguageRegistry.addName(new ItemStack(magickWand,1,0), ItemMagickWand.names[0]);
+	LanguageRegistry.addName(new ItemStack(magickWand,1,1), ItemMagickWand.names[1]);
+	LanguageRegistry.addName(new ItemStack(magickWand,1,2), ItemMagickWand.names[2]);
+	
+	
+	
 }
 }

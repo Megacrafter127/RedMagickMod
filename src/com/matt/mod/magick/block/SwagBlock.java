@@ -23,13 +23,13 @@ public class SwagBlock extends Block implements IWandAble {
 		if(!world.isRemote) {
 			if(!player.isSneaking()) {
 		System.out.println("Activated SwagBlock!");
-		if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID) {
+		if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID) {
 			onWandRightClick(player,world,x,y,z);
 			return true;
-		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID) {
+		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID) {
 			onWandRightClick(player,world,x,y,z);
 			return true;
-		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.swaggishWandT3.itemID){
+		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID){
 			onWandRightClick(player,world,x,y,z);
 			return true;
 		} 
