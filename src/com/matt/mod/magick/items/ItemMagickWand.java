@@ -69,8 +69,8 @@ public class ItemMagickWand extends Item{
 	        	}
 	        }
 	        @SideOnly(Side.CLIENT)
-	        public Icon getItemIconFromDamage(int gotFromWuppy) {
-	        	return icons[gotFromWuppy];
+	        public Icon getItemIconFromDamage(int par1IconIndex) {
+	        	return icons[par1IconIndex];
 	        }
 	        public int getMagickStorage(int par1ItemDamage) {
 			if(par1ItemDamage == 0 ) {

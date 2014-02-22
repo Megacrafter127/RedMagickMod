@@ -57,8 +57,8 @@ public class ItemWandCore  extends Item{
 	        	}
 	        }
 	        @SideOnly(Side.CLIENT)
-	        public Icon getItemIconFromDamage(int gotFromWuppy) {
-	        	return icons[gotFromWuppy];
+	        public Icon getItemIconFromDamage(int par1IconIndex) {
+	        	return icons[par1IconIndex];
 	        }
 
 			/**

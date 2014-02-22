@@ -20,9 +20,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class SwagHelper {
-/*public static final Item swaggishWand = new ItemSwaggishWand(FutureCraft.swag_wand_id,"swaggishwand",tier.BASIC).setFull3D().setUnlocalizedName("Swaggish Wand").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Item swaggishWandT2 = new ItemSwaggishWand(FutureCraft.swag_wand_idt2,"swaggishwand",tier.NETHERIUM).setFull3D().setUnlocalizedName("Swaggish Wand - T2").setCreativeTab(Ref.getRecommendedTab("block"));
-public static final Item swaggishWandT3 = new ItemSwaggishWand(FutureCraft.swag_wand_idt3,"swaggishwand",tier.ENDERIUM).setFull3D().setUnlocalizedName("Swaggish Wand - T3").setCreativeTab(Ref.getRecommendedTab("block")); */
 public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
 public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
 public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
@@ -32,7 +29,6 @@ public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryI
 public static final Item magickWand = new ItemMagickWand(FutureCraft.swag_wand_id).setMaxStackSize(1);
 public static final Item magickCore = new ItemWandCore(FutureCraft.swag_wand_idt2).setMaxStackSize(1);
 public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
-//public static final Block blockMagicalLighter = new SwagLighter(FutureCraft.swag_default_id,"netheriumblock");
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
 public static void register() {
@@ -47,30 +43,20 @@ public static void register() {
 	GameRegistry.registerItem(swaggishFlyer, "Swaggish Flyer");
 	
 	GameRegistry.registerBlock(blockNetherald,"netheriumBlock");
-	//Register wand 
-	//GameRegistry.registerItem(swaggishWand, "swaggishWand");
-	//Register wand t2
-	//GameRegistry.registerItem(swaggishWandT2, "Swaggish Wand T2");
-	//Register wand t3
-	//GameRegistry.registerItem(swaggishWandT3, "Swaggish Wand T3");
-	//Register mana battery
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
 	GameRegistry.registerBlock(decorationKernelBlock, Ref.NAME.toLowerCase() + ".decoBlock1");
 	GameRegistry.registerItem(magickWand,"Magical Wand");
 	GameRegistry.registerItem(magickCore,"Magical Core");
-	//GameRegistry.registerBlock(blockAltarCore,Ref.NAME.toLowerCase() + Ref.ID.toLowerCase() + ".altarCore");
-	//blockAltarCore.setUnlocalizedName("Altar Core");
 	decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
-	//Register mana battery tile
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	swaggishFlyer.getLogic().setManaLevel(1000);
 	GameRegistry.registerBlock(decorationKernelBlock, Ref.BLOCKPREFIX + "decorationKernelBlock");
 	GameRegistry.registerTileEntity(TileEntityAltar.class, "tile.altarCore");
-	/*LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
+	LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockMagicalBlockRed, "Magical Wall - Colored");
 	LanguageRegistry.addName(blockMagicalBlockYellow, "Magical Wall - Colored");
-	LanguageRegistry.addName(blockNetherald, "Netherium Block"); */
+	LanguageRegistry.addName(blockNetherald, "Netherium Block");
 	LanguageRegistry.addName(new ItemStack(magickWand,1,0), ItemMagickWand.names[0]);
 	LanguageRegistry.addName(new ItemStack(magickWand,1,1), ItemMagickWand.names[1]);
 	LanguageRegistry.addName(new ItemStack(magickWand,1,2), ItemMagickWand.names[2]);
