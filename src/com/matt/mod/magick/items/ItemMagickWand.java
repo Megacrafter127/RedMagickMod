@@ -110,19 +110,19 @@ public class ItemMagickWand extends Item {
 	 */
 	public Icon getIconFromDamage(int par1)
 	{
-		//return this.icons[par1];
-		return this.icons[getLevel(par1)];
+		return this.icons[par1];
+		//return this.icons[getLevel(par1)];
 	}
 	
 	public String getUnlocalizedName(ItemStack par1ItemStack){
-		int i = MathHelper.clamp_int(getLevel(par1ItemStack.getItemDamage()),0,15);
+		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(),0,15);
 		return super.getUnlocalizedName() + "." + names[i];
 	}
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int itemID, CreativeTabs tabs, List list){
 		
 		for(int i = 0; i < 3; ++i){
-			list.add(new ItemStack(itemID, 1, getDamageForEmpty(i)));
+			list.add(new ItemStack(itemID, 1, i));
 		}
 	}
 	@SideOnly(Side.CLIENT)
@@ -140,7 +140,6 @@ public class ItemMagickWand extends Item {
 		return this.getIconFromDamage(par1IconIndex);
 	}
 	public int getMagickStorage(int par1ItemDamage) {
-		par1ItemDamage=getLevel(par1ItemDamage);
 		if(par1ItemDamage == 0 ) {
 			return 100;
 		} else if(par1ItemDamage == 1) {
