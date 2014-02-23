@@ -11,6 +11,12 @@ public static final String VERSION = "0.0.1";
 public static final String ALPHA = "a0.0.1";
 public static final String BUILD = "b884rev98";
 public static final String BLOCKPREFIX = "FutureCraftBlock.tile.";
+/**
+ * Gets the recommended futurecraft tab for type.
+ * @author Matheus
+ * @param type - block or item
+ * @return return item or bloc tab
+ */
 public static CreativeTabs getRecommendedTab(String type) {
 	if(type.toLowerCase() == "block") {
 		return FutureCraft.tabFCraft;
