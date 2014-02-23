@@ -1,19 +1,23 @@
 package com.matt.mod.kernelcraft.tileentities;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.LinkedList;
-import java.util.Set;
-
-import com.matt.mod.kernelcraft.KernelCraftCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.matt.mod.kernelcraft.KernelCraftCore;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityKernelCore extends TileEntity {
 	public static final LinkedList<Integer> linkable=new LinkedList<Integer>();
@@ -89,7 +93,6 @@ public class TileEntityKernelCore extends TileEntity {
 		for(int[] coords:linkedBlocks) {
 			if(coords==null || coords.length!=3) {
 				toRemove.add(coords);
-				Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 			else if(!linkable.contains(getWorldObj().getBlockId(coords[0], coords[1], coords[2]))) {
 				toRemove.add(coords);
@@ -97,7 +100,10 @@ public class TileEntityKernelCore extends TileEntity {
 				Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
-		linkedBlocks.removeAll(toRemove);
+		if(!toRemove.isEmpty()) {
+			linkedBlocks.removeAll(toRemove);
+			sendChangeToServer();
+		}
 	}
 	
 	private void addPermanentParticles() {
@@ -226,8 +232,29 @@ public class TileEntityKernelCore extends TileEntity {
 		if(!linkedBlocks.contains(new int[]{x,y,z})) {
 			linkedBlocks.add(new int[]{x,y,z});
 			Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
+			sendChangeToServer();
 			return true;
 		}
 		return false;
+	}
+	@SideOnly(Side.CLIENT)
+	public void sendChangeToServer(){
+	    ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+	    DataOutputStream outputStream = new DataOutputStream(bos);
+	    try {
+	        outputStream.writeInt(xCoord);
+	        outputStream.writeInt(yCoord);
+	        outputStream.writeInt(zCoord);
+	        
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	               
+	    Packet250CustomPayload packet = new Packet250CustomPayload();
+	    packet.channel = "GenericRandom";
+	    packet.data = bos.toByteArray();
+	    packet.length = bos.size();
+
+	    PacketDispatcher.sendPacketToServer(packet);
 	}
 }
