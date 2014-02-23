@@ -1,48 +1,23 @@
 package com.matt.mod.kernelcraft.tileentities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.LinkedList;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.matt.mod.kernelcraft.KernelCraftCore;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.matt.mod.kernelcraft.tasks.KernelTask;
 
 public class TileEntityKernelCore extends TileEntity {
-	public static final LinkedList<Integer> linkable=new LinkedList<Integer>();
-	static{
-		linkable.add(Block.chest.blockID);
-		linkable.add(Block.chestTrapped.blockID);
-		linkable.add(Block.furnaceIdle.blockID);
-		linkable.add(Block.furnaceBurning.blockID);
-		linkable.add(Block.hopperBlock.blockID);
-		linkable.add(Block.dispenser.blockID);
-		linkable.add(Block.dropper.blockID);
-		while(true) {
-			try{
-				linkable.add(KernelCraftCore.CoordMemory.blockID);
-				break;
-			}
-			catch(NullPointerException ex) {}
-		}
-	}
-	
-	
 	private LinkedList<int[]> affectList=new LinkedList<int[]>();
-	private LinkedList<int[]> linkedBlocks=new LinkedList<int[]>();
+	private LinkedList<KernelTask> tasks=new LinkedList<KernelTask>();
 	
 	private static class StraightEnchant extends EntityEnchantmentTableParticleFX {
+		public boolean enlight;
 
 		public StraightEnchant(World par1World, double par2, double par4,
 				double par6, double par8, double par10, double par12) {
@@ -73,37 +48,25 @@ public class TileEntityKernelCore extends TileEntity {
 		@Override
 		public void setDead() {
 			super.setDead();
-			//super.worldObj.addWeatherEffect(new EntityLightningBolt(worldObj,posX,posY,posZ));
+			if(enlight) super.worldObj.addWeatherEffect(new EntityLightningBolt(worldObj,posX,posY,posZ));
 		}
 		
 	}
 	
+	private TileEntityKernelModule module;
 	
 	public TileEntityKernelCore() {
 	}
 	@Override
 	public void updateEntity() {
-		checkLinks();
+		try{
+			if(module==null) module=(TileEntityKernelModule)getWorldObj().getBlockTileEntity(xCoord, yCoord-1, zCoord);
+		}
+		catch(ClassCastException ex) {
+			System.err.println(ex);
+		}
 		addPermanentParticles();
 		addAffectionParticles();
-	}
-	
-	private void checkLinks() {
-		LinkedList<int[]> toRemove=new LinkedList<int[]>();
-		for(int[] coords:linkedBlocks) {
-			if(coords==null || coords.length!=3) {
-				toRemove.add(coords);
-			}
-			else if(!linkable.contains(getWorldObj().getBlockId(coords[0], coords[1], coords[2]))) {
-				toRemove.add(coords);
-				System.out.println("removed: "+coords[0]+", "+coords[1]+", "+coords[2]);
-				Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
-			}
-		}
-		if(!toRemove.isEmpty()) {
-			linkedBlocks.removeAll(toRemove);
-			sendChangeToServer();
-		}
 	}
 	
 	private void addPermanentParticles() {
@@ -137,20 +100,6 @@ public class TileEntityKernelCore extends TileEntity {
 			distance=Math.sqrt(dX*dX+dZ*dZ+1);
 			spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,-0.1/distance,0.1*dZ/distance,(int)Math.round(10*distance)));
 		}
-		LinkedList<int[]> toRemove=new LinkedList<int[]>();
-		for(int[] link:linkedBlocks) {
-			if(linkable.contains(getWorldObj().getBlockId(link[0], link[1], link[2]))) {
-				int dX=link[0]-xCoord;
-				int dY=link[1]-yCoord;
-				int dZ=link[2]-zCoord;
-				distance=Math.sqrt(dX*dX+dY*dY+dZ*dZ);
-				spawnParticle(new StraightEnchant(getWorldObj(),0.5+xCoord,0.5+yCoord,0.5+zCoord,0.1*dX/distance,0.1*dY/distance,0.1*dZ/distance,(int)Math.round(10*distance)));
-			}
-			else {
-				toRemove.add(link);
-			}
-		}
-		linkedBlocks.removeAll(toRemove);
 	}
 	
 	private void spawnParticle(EntityFX e) {
@@ -203,10 +152,12 @@ public class TileEntityKernelCore extends TileEntity {
 			nbt.setIntArray("affect."+c, i);
 			c++;
 		}
-		nbt.setInteger("linksize", linkedBlocks.size());
+		nbt.setInteger("tasksize", tasks.size());
 		c=0;
-		for(int[] i:linkedBlocks) {
-			nbt.setIntArray("link."+c, i);
+		for(KernelTask t:tasks) {
+			NBTTagCompound taskNBT=new NBTTagCompound();
+			t.writeToNBT(taskNBT);
+			nbt.setCompoundTag("task."+c, taskNBT);
 			c++;
 		}
 	}
@@ -219,42 +170,21 @@ public class TileEntityKernelCore extends TileEntity {
 		for(int i=0;i<max;i++) {
 			replacement.add(nbt.getIntArray("affect."+i));
 		}
-		affectList=replacement;
-		max=nbt.getInteger("linksize");
+		LinkedList<KernelTask> taskReplacement=new LinkedList<KernelTask>();
+		max=nbt.getInteger("tasksize");
 		replacement=new LinkedList<int[]>();
 		for(int i=0;i<max;i++) {
-			replacement.add(nbt.getIntArray("link."+i));
+			KernelTask t=KernelTask.loadTaskFromNBT(nbt.getCompoundTag("task."+i));
+			if(t!=null) {
+				taskReplacement.add(t);
+			}
 		}
-		linkedBlocks=replacement;
+		tasks=taskReplacement;
 	}
 	
-	public boolean linkBlock(int x,int y,int z) {
-		if(!linkedBlocks.contains(new int[]{x,y,z})) {
-			linkedBlocks.add(new int[]{x,y,z});
-			Minecraft.getMinecraft().theWorld.markBlockForUpdate(xCoord, yCoord, zCoord);
-			sendChangeToServer();
-			return true;
-		}
-		return false;
-	}
-	@SideOnly(Side.CLIENT)
-	public void sendChangeToServer(){
-	    ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-	    DataOutputStream outputStream = new DataOutputStream(bos);
-	    try {
-	        outputStream.writeInt(xCoord);
-	        outputStream.writeInt(yCoord);
-	        outputStream.writeInt(zCoord);
-	        
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	    }
-	               
-	    Packet250CustomPayload packet = new Packet250CustomPayload();
-	    packet.channel = "GenericRandom";
-	    packet.data = bos.toByteArray();
-	    packet.length = bos.size();
-
-	    PacketDispatcher.sendPacketToServer(packet);
+	public void enqueueTask(KernelTask t) {
+		if(t==null) return;
+		if(t.finished()) return;
+		tasks.add(t);
 	}
 }

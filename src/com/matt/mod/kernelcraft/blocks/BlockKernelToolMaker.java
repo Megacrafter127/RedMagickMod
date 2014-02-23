@@ -14,7 +14,7 @@ public class BlockKernelToolMaker extends Block {
 	public static final int[] mineToolMaterial=new int[]{Item.pickaxeWood.itemID,Item.pickaxeStone.itemID,Item.pickaxeIron.itemID,Item.pickaxeGold.itemID,Item.pickaxeDiamond.itemID,Item.shovelWood.itemID,Item.shovelStone.itemID,Item.shovelIron.itemID,Item.shovelGold.itemID,Item.shovelDiamond.itemID};
 	public static final int[] hoeToolMaterial=new int[]{Item.hoeWood.itemID,Item.hoeStone.itemID,Item.hoeIron.itemID,Item.hoeGold.itemID,Item.hoeDiamond.itemID};
 	public static final int[] harvestToolMaterial=new int[]{Item.axeWood.itemID,Item.axeStone.itemID,Item.axeIron.itemID,Item.axeGold.itemID,Item.axeDiamond.itemID};
-	
+	public static final int[] countToolMaterial=new int[]{Item.comparator.itemID,Block.redstoneComparatorActive.blockID,Block.redstoneComparatorIdle.blockID};
 	public BlockKernelToolMaker(int par1) {
 		super(par1, Material.iron);
 		super.setTextureName(KernelCraftCore.toTextureName("kerneltoolmaker"));
@@ -25,11 +25,6 @@ public class BlockKernelToolMaker extends Block {
 	public boolean onBlockActivated(World w,int x,int y,int z,EntityPlayer player,int side,float hitx,float hity,float hitz) {
 		ItemStack itemStack=player.inventory.getCurrentItem();
 		if(itemStack!=null) {
-			if(Block.blocksList[itemStack.itemID]!=null) {
-				itemStack.stackSize--;
-				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.fillToolMeta));
-				return true;
-			}
 			for(int i:mineToolMaterial) {
 				if(itemStack.itemID==i) {
 					itemStack.stackSize=0;
@@ -48,7 +43,20 @@ public class BlockKernelToolMaker extends Block {
 				if(itemStack.itemID==i) {
 					itemStack.stackSize=0;
 					player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.harvestToolMeta));
+					return true;
 				}
+			}
+			for(int i:countToolMaterial) {
+				if(itemStack.itemID==i) {
+					itemStack.stackSize--;
+					player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.countToolMeta));
+					return true;
+				}
+			}
+			if(Block.blocksList[itemStack.itemID]!=null) {
+				itemStack.stackSize--;
+				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.fillToolMeta));
+				return true;
 			}
 		}
 		return false;
