@@ -285,16 +285,16 @@ public class ItemMagickWand extends Item {
 	            public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 	            	
 	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
-	             	par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
-	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
-	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
-	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3]); 
-	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4]);
-	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5]); 
-	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6]);
-	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
-	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
-	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
+	             	par1ItemStack.stackTagCompound.setInteger("light",0);
+	            	par1ItemStack.stackTagCompound.setInteger("dark",0); 
+	            	par1ItemStack.stackTagCompound.setInteger("magic",0);
+	            	par1ItemStack.stackTagCompound.setInteger("null",0); 
+	            	par1ItemStack.stackTagCompound.setInteger("fire",0);
+	            	par1ItemStack.stackTagCompound.setInteger("water",0); 
+	            	par1ItemStack.stackTagCompound.setInteger("air",0);
+	            	par1ItemStack.stackTagCompound.setInteger("earth",0); 
+	            	par1ItemStack.stackTagCompound.setInteger("life",0);
+	            	par1ItemStack.stackTagCompound.setInteger("death",0);
 	            }
 
 	        /**
