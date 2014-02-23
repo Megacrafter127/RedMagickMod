@@ -13,10 +13,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 import org.lwjgl.input.Keyboard;
 
-import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 
 import cpw.mods.fml.relauncher.Side;
@@ -24,6 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMagickWand extends Item {
 	int tickCount;
+	static int[] mana = new int[10];
 	/**
 	 * @author Megacrafter127
 	 * @param damage - the damage value of the wand
@@ -94,6 +97,20 @@ public class ItemMagickWand extends Item {
 		names[0] = "Iron-Cored Birch Magical Staff";
 		names[1] = "Golden-Cored Oak Magical Staff";
 		names[2] = "Netherium-Adorned Enderium-Cored Oldwood Magical Staff";
+	}
+	static {
+		mana[0] = 10; // Fos - Light
+		mana[1] = 10; // Skotádi - Dark
+		mana[2] = 10; // Magéia - Magic
+		mana[3] = 10; // Akýrosi - Nullmagics
+		mana[4] = 10; // Fotia - Fire
+		mana[5] = 10; // Neró - Water
+		mana[6] = 10; // Aerás - Air
+		mana[7] = 10; // Gaiás - Earth
+		mana[8] = 0; // Zoi - Life
+		mana[9] = 0; // Deisidaimonía - Death
+	    /*mana[10] =0; //
+	    mana[11] =0; // */
 	}
 	public static final String[] stnames = new String[]{"Lesser","Medium","Greater"};
 	public ItemMagickWand(int par1) {
@@ -200,30 +217,11 @@ public class ItemMagickWand extends Item {
 	        		t.printStackTrace();
 	        		return false;
 	        	} *
-	        }	    */  
-	        @Deprecated
-	        public  void writeToNBT(ItemStack par1ItemStack) { 
-	        	if(par1ItemStack.stackTagCompound.getTag("charge") != null) {
-	        		par1ItemStack.stackTagCompound.setInteger("charge", currentCharge);
-	        		System.out.println("NBT CHARGE + " +  par1ItemStack.stackTagCompound.getInteger("charge") );
-	        	} else {
-	        		par1ItemStack.stackTagCompound.setTag("charge",par1ItemStack.stackTagCompound);
-	        		par1ItemStack.stackTagCompound.setInteger("charge", currentCharge);
-	        		System.out.println("NBT CHARGE + " +  par1ItemStack.stackTagCompound.getInteger("charge") );
-	        	}
-	        }
-	        @Deprecated
-	        public void readFromNBT(ItemStack par1ItemStack) {
-	        	if(par1ItemStack.stackTagCompound.getTag("charge") != null) {
-	        		currentCharge = par1ItemStack.stackTagCompound.getInteger("charge");
-	        	} else {
-	        		par1ItemStack.stackTagCompound.setTag("charge",par1ItemStack.stackTagCompound);
-	        		currentCharge = par1ItemStack.stackTagCompound.getInteger("charge");
-	        	}
-	        }
+	        }	    */ 
 	      //called when the item is used (right click) return true if something happens, false if nothing happens (if something happens the animation will trigger)
-	        public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
-				return false; 
+	        public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10) {
+			
+	        	return false; 
 	        	
 	        }
 
@@ -233,17 +231,51 @@ public class ItemMagickWand extends Item {
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
 	            	tickCount++;
-	        
-	            	if(tickCount == 10000) {
-	            		currentCharge++;
+	            	Entity e = par3Entity;
+	            	BiomeGenBase b = par2World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
+	            	if(tickCount == 1000) {
+	            			Type[] t = BiomeDictionary.getTypesForBiome(b);
+	            			for(Type type : t) {
+	            				if(type == Type.WATER) {
+	            					mana[5]++;
+	            				} else if(type == Type.DESERT) {
+	            					mana[4]++;
+	            				} else if(type == Type.HILLS){
+	            					mana[6]++;
+	            				} else if( type == Type.FOREST) {
+	            					mana[6] = mana[6] + 2;
+	            				} else if( type == Type.SWAMP ) {
+	            					mana[6]++;
+	            					mana[5]++;
+	            				} else {
+	            					if(par2World.isDaytime()) {	      
+	            						mana[0]++;
+	            						mana[2]++;
+	            					}else{
+	            						mana[1]++;
+	            						mana[3]++;
+	            					}
+	            					
+	            				}
+	            			}
+	            			mana[8] = mana[8] + 10;
+	            		
+	          
 	            		tickCount = 0;
 	            	}
-	            
-	            	
 	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
-	            	  par1ItemStack.stackTagCompound.setInteger("chargeLvl",currentCharge);
-	            	  
+	            	par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
+	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
+	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
+	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3]); 
+	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4]);
+	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5]); 
+	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6]);
+	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
+	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
+	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
 	            }
+	            
 
 	        /**
 	             * Called when item is crafted/smelted. Used only by maps so far.
@@ -251,8 +283,16 @@ public class ItemMagickWand extends Item {
 	            public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 	            	
 	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
-	            	par1ItemStack.stackTagCompound.setInteger("chargeLvl",currentCharge);
-	            	  
+	             	par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
+	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
+	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
+	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3]); 
+	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4]);
+	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5]); 
+	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6]);
+	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
+	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
+	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
 	            }
 
 	        /**
@@ -269,7 +309,17 @@ public class ItemMagickWand extends Item {
 	            	if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 	            	   if (itemStack.stackTagCompound != null) { 
 	            		 
-	            		   list.add(EnumChatFormatting.BLUE + "Current magickal power :  " +itemStack.stackTagCompound.getInteger("chargeLvl"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Fos level :  " +itemStack.stackTagCompound.getInteger("light"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Skotádi level :  " +itemStack.stackTagCompound.getInteger("dark"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Magéia level:  " +itemStack.stackTagCompound.getInteger("magic"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Akyrosi level :  " +itemStack.stackTagCompound.getInteger("null"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Fotia power :  " +itemStack.stackTagCompound.getInteger("fire"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Neró power :  " +itemStack.stackTagCompound.getInteger("water"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Aéras power :  " +itemStack.stackTagCompound.getInteger("air"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Gaias power :  " +itemStack.stackTagCompound.getInteger("earth"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Zoi power :  " +itemStack.stackTagCompound.getInteger("life"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Deisidaimonía power :  " +itemStack.stackTagCompound.getInteger("death"));
+	            		   
 	            		   if(itemStack.getItemDamage() == 0) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 10");
 	            		   }else  if(itemStack.getItemDamage() == 1) {
