@@ -73,5 +73,6 @@ public class SwagBlock extends Block implements IWandAble {
 	public void onWandSneakRightClick(EntityPlayer p, World w, int x, int y, int z) {
 		
 	}
+	
 
 }
