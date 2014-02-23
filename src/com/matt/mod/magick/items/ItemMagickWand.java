@@ -186,7 +186,7 @@ public class ItemMagickWand extends Item {
 	            	//Get current biome
 	            	BiomeGenBase b = par2World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
 	            	//Increments mana by niome
-	            	if(tickCount == 10) {
+	            	if(tickCount == 10000) {
 	            			Type[] t = BiomeDictionary.getTypesForBiome(b);
 	            			for(Type type : t) {
 	            				if(type == Type.WATER) {
@@ -201,16 +201,17 @@ public class ItemMagickWand extends Item {
 	            					mana[6]++;
 	            					mana[5]++;
 	            				} else {
-	            					if(par2World.isDaytime()) {	      
-	            						mana[0]++;
-	            						mana[2]++;
-	            					}else{
-	            						mana[1]++;
-	            						mana[3]++;
-	            					}
+	            					
 	            					
 	            				}
 	            			}
+	            			if(par2World.isDaytime()) {	      
+        						mana[0]++;
+        						mana[2]++;
+        					}else{
+        						mana[1]++;
+        						mana[3]++;
+        					}
 	            			mana[8]+=1;
 	            		
 	          
