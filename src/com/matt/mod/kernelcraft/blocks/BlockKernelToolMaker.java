@@ -51,12 +51,15 @@ public class BlockKernelToolMaker extends Block {
 					return true;
 				}
 			}
-			if(Block.blocksList[itemStack.itemID]!=null) {
-				itemStack.stackSize--;
-				if(itemStack.stackSize==0) player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.fillToolMeta));
-				else player.inventory.setCurrentItem(KernelCraftCore.KernelTool.itemID, ItemKernelTool.mineToolMeta, true, true);
-				return true;
+			try{
+				if(Block.blocksList[itemStack.itemID]!=null) {
+					itemStack.stackSize--;
+					if(itemStack.stackSize==0) player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.fillToolMeta));
+					else player.inventory.setCurrentItem(KernelCraftCore.KernelTool.itemID, ItemKernelTool.mineToolMeta, true, true);
+					return true;
+				}
 			}
+			catch(ArrayIndexOutOfBoundsException ex) {}
 		}
 		return false;
 	}
