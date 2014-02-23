@@ -205,6 +205,8 @@ public class ItemMagickWand extends Item {
 	            				
 	            				} else if(type == Type.END) {
 	            					mana[2]+=10;
+	            				} else {
+	            					mana[3]++;
 	            				}
 	            			}
 	            			if(par2World.isDaytime()) {	      
