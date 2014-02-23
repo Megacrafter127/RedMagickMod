@@ -27,68 +27,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemMagickWand extends Item {
 	int tickCount;
 	static int[] mana = new int[10];
-	
-	/**
-	 * @author Megacrafter127
-	 * @param damage - the damage value of the wand
-	 * @return the level of the wand
-	 */
-	
-
-	public static int getLevel(int damage) {
-		int level=0;
-		for(;0>=damage||levelMax[level]<damage;level++) {
-			try{
-				damage-=levelMax[level];
-			}
-			catch(ArrayIndexOutOfBoundsException ex) {
-				level++;
-				break;
-			}
-		}
-		return level;
-	}
-	/**
-	 * @author Megacrafter127
-	 * @param level - the level of the wand
-	 * @return the damage of an empty wand of this level
-	 */
-	public static int getDamageForEmpty(int level) {
-		int dmg=0;
-		for(int i=0;i<level;i++) {
-			try{
-				dmg+=levelMax[i];
-			}
-			catch(ArrayIndexOutOfBoundsException ex) {}
-		}
-		return dmg;
-	}
-	/**
-	 * @author Megacrafter127
-	 * @param damage - the damage value of the wand
-	 * @return the charge of the wand
-	 */
-	public static int getCharge(int damage) {
-		for(int level=0;true;level++) {
-			try{
-				if(0<=damage&&damage<levelMax[level]) {
-					return damage;
-				}
-				else {
-					damage-=levelMax[level];
-				}
-				
-			}
-			catch(ArrayIndexOutOfBoundsException ex) {
-				return damage;
-			}
-		}
-	}
-	/**
-	 * the level maximum charges(the index is the level)
-	 * @author Megacrafter127
-	 */
-	public static int[] levelMax=new int[]{100,1000,10000};
 	public static int currentCharge = 1;
 	public static String[] names=new String[10];
 	/**
