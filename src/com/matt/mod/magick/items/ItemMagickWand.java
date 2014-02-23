@@ -211,7 +211,7 @@ public class ItemMagickWand extends Item {
 	            					
 	            				}
 	            			}
-	            			mana[8] = (int) (mana[8] + 0.01);
+	            			mana[8]+=1;
 	            		
 	          
 	            		tickCount = 0;
