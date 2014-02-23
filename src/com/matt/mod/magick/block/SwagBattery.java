@@ -1,14 +1,11 @@
 package com.matt.mod.magick.block;
 
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.mod.magick.SwagHelper;
-import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
-import com.matt.mod.magick.items.ItemFlyingCatalist;
-import com.matt.mod.magick.items.logic.ItemLogic;
+import com.matt.mod.magick.items.ItemMagickWand;
 import com.matt.mod.magick.lib.IWandAble;
 
 public class SwagBattery extends SwagBlock implements IWandAble {
@@ -21,20 +18,23 @@ public class SwagBattery extends SwagBlock implements IWandAble {
              EntityPlayer player, int metadata, float what, float these, float are) {
 				
 				if(!world.isRemote) {
-					if(!player.isSneaking()) {
-				System.out.println("Activated SwagBlock!");
-				if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID) {
-					onWandRightClick(player,world,x,y,z);
-					return true; 
+					System.out.println("Entity walked on block!");
+					if(player instanceof EntityPlayer) {
+						
+						if(player.inventory.getCurrentItem().itemID == SwagHelper.magickWand.itemID) {
+							ItemMagickWand wand = (ItemMagickWand) player.inventory.getCurrentItem().getItem();
+							if(wand.isInWandRecharger) {
+								wand.isInWandRecharger = false;
+									
+								} else {
+									wand.isInWandRecharger = true;
+							}
+						} else {
+							return false;
+						}
+					} else {
+						return false;
 					}
-				}
-				if(player.inventory.getCurrentItem().itemID == SwagHelper.swaggishFlyer.itemID) {
-					ItemFlyingCatalist f = (ItemFlyingCatalist)player.inventory.getCurrentItem().getItem();
-					ItemLogic logic = f.getLogic();
-					TileEntityWandRecharger r = (TileEntityWandRecharger)world.getBlockTileEntity(x, y, z);
-					r.run(player,world,x,y,z);
-				}
-				return false; 
 				}
 				return false;
 		
@@ -47,5 +47,8 @@ public class SwagBattery extends SwagBlock implements IWandAble {
 	@Override
 	public void onWandSneakRightClick(EntityPlayer p, World w, int x, int y, int z) {
 		
+	}
+	@Override
+	 public void onEntityWalking(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 	}
 }

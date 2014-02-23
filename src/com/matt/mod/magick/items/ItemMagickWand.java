@@ -26,6 +26,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMagickWand extends Item {
+	public static boolean isInWandRecharger = false;
 	int tickCount;
 	static int[] mana = new int[10];
 	public static int currentCharge = 1;
@@ -213,6 +214,85 @@ public class ItemMagickWand extends Item {
 	            	Entity e = par3Entity;
 	            	BiomeGenBase b = par2World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
 	            	
+	            	if(isInWandRecharger) {
+	            		try {
+		            		if(par1ItemStack.stackTagCompound != null) {
+		            		mana[0] = 0;
+		            		mana[1] = 0;
+		            		mana[2] = 0;
+		            		mana[3] = 0;
+		            		mana[4] = 0;
+		            		mana[5] = 0;
+		            		mana[6] = 0;
+		            		mana[7] = 0;
+		            		mana[8] = 0;
+		            		mana[9] = 0;
+		            		// Load all manas
+		            	mana[0] = par1ItemStack.stackTagCompound.getInteger("light");
+		            	mana[1] = par1ItemStack.stackTagCompound.getInteger("dark");
+		            	mana[2] = par1ItemStack.stackTagCompound.getInteger("magic");
+		            	mana[3] = par1ItemStack.stackTagCompound.getInteger("null");
+		            	mana[4] = par1ItemStack.stackTagCompound.getInteger("fire");
+		            	mana[5] = par1ItemStack.stackTagCompound.getInteger("water");
+		            	mana[6] = par1ItemStack.stackTagCompound.getInteger("air");
+		            	mana[7] = par1ItemStack.stackTagCompound.getInteger("earth");
+		            	mana[8] = par1ItemStack.stackTagCompound.getInteger("life");
+		            	mana[9] = par1ItemStack.stackTagCompound.getInteger("death");
+		            	//Tick
+		            	tickCount++;
+		            	// Get a static entity
+		            	
+		            	//Get current biome
+		            	
+		            	//Increments mana by niome
+		            	
+		            	if(tickCount == 10) {
+		            			Type[] t = BiomeDictionary.getTypesForBiome(b);
+		            			for(Type type : t) {
+		            				if(type == Type.WATER) {
+		            					mana[5]++;
+		            				} else if(type == Type.DESERT) {
+		            					mana[4]++;
+		            				} else if(type == Type.HILLS){
+		            					mana[6]++;
+		            				} else if( type == Type.FOREST) {
+		            					mana[6] = mana[6] + 2;
+		            				} else if( type == Type.SWAMP ) {
+		            					mana[6]++;
+		            					mana[5]++;
+		            				} else if ( type == Type.NETHER){
+		            					mana[4]+=5;
+		            				
+		            				} else if(type == Type.END) {
+		            					mana[2]+=10;
+		            				} else {
+		            					mana[3]++;
+		            				}
+		            			}
+		            			if(par2World.isDaytime()) {	      
+	        						mana[0]++;
+	        						//mana[2]++;
+	        					}else{
+	        						mana[1]++;
+	        						//mana[3]++;
+	        					}
+		            			mana[8]+=1;
+		            			par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
+		    	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
+		    	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
+		    	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3]); 
+		    	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4]);
+		    	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5]); 
+		    	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6]);
+		    	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
+		    	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
+		    	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
+		          
+		            		tickCount = 0;
+		            	}
+		            		}}catch(Throwable t) {
+		            			
+		            		}}else {
 	            	
 	            	try {
 	            		if(par1ItemStack.stackTagCompound != null) {
@@ -244,6 +324,7 @@ public class ItemMagickWand extends Item {
 	            	//Get current biome
 	            	
 	            	//Increments mana by niome
+	            	
 	            	if(tickCount == 1000) {
 	            			Type[] t = BiomeDictionary.getTypesForBiome(b);
 	            			for(Type type : t) {
@@ -311,11 +392,18 @@ public class ItemMagickWand extends Item {
 	    	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
 	    	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
 	    	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
-	            		}
+	            		} 
+	            	
 	            		}catch(Throwable t){
 	            	t.printStackTrace();
+	            }finally {
+	            	return;
 	            }
 	            	}
+	            		
+	            		} 	            	
+	            		
+	            	
 
 	            
 
@@ -371,7 +459,8 @@ public class ItemMagickWand extends Item {
 	            		   } if(itemStack.getItemDamage() == 2) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 500");
 	            		   }
-	            		   list.add(EnumChatFormatting.GRAY + "Tick count : " + tickCount);
+	            		  // list.add(EnumChatFormatting.GRAY + "Tick count : " + tickCount);
+	            		
 	            	   }} else
 	            	   {
 	            		   if (itemStack.stackTagCompound != null) { 
