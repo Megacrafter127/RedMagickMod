@@ -27,7 +27,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemMagickWand extends Item {
 	int tickCount;
 	static int[] mana = new int[10];
-	@Deprecated //is applied on all items
 	public static int currentCharge = 1;
 	public static String[] names=new String[10];
 	/**
@@ -42,6 +41,11 @@ public class ItemMagickWand extends Item {
 	public static final String[] stnames = new String[]{"Lesser","Medium","Greater"};
 	public ItemMagickWand(int par1) {
 		super(par1);
+		//names = new String[10]; why should the static variable be overritten by a constructor, that might be called multiple times
+		/*names[0] = "Iron-Cored Birch Magical Staff";
+		names[1] = "Golden-Cored Oak Magical Staff";
+		names[2] = "Netherium-Adorned Enderium-Cored Oldwood Magical Staff";*/
+		
 		this.setUnlocalizedName(getUnlocalizedName(new ItemStack(this)));
 		setHasSubtypes(true);
 		setMaxDamage(0);
@@ -152,7 +156,19 @@ public class ItemMagickWand extends Item {
 	             * update it's contents.
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
-	            	// Load all manas // what if par1ItemStack.stackTagCompound is null for some unknown reason=
+	            	try {
+	            		if(par1ItemStack.stackTagCompound != null) {
+	            		mana[0] = 0;
+	            		mana[1] = 0;
+	            		mana[2] = 0;
+	            		mana[3] = 0;
+	            		mana[4] = 0;
+	            		mana[5] = 0;
+	            		mana[6] = 0;
+	            		mana[7] = 0;
+	            		mana[8] = 0;
+	            		mana[9] = 0;
+	            		// Load all manas
 	            	mana[0] = par1ItemStack.stackTagCompound.getInteger("light");
 	            	mana[1] = par1ItemStack.stackTagCompound.getInteger("dark");
 	            	mana[2] = par1ItemStack.stackTagCompound.getInteger("magic");
@@ -170,7 +186,7 @@ public class ItemMagickWand extends Item {
 	            	//Get current biome
 	            	BiomeGenBase b = par2World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
 	            	//Increments mana by niome
-	            	if(tickCount == 10) {
+	            	if(tickCount == 10000) {
 	            			Type[] t = BiomeDictionary.getTypesForBiome(b);
 	            			for(Type type : t) {
 	            				if(type == Type.WATER) {
@@ -185,22 +201,23 @@ public class ItemMagickWand extends Item {
 	            					mana[6]++;
 	            					mana[5]++;
 	            				} else {
-	            					if(par2World.isDaytime()) {	      
-	            						mana[0]++;
-	            						mana[2]++;
-	            					}else{
-	            						mana[1]++;
-	            						mana[3]++;
-	            					}
+	            					
 	            					
 	            				}
 	            			}
-	            			mana[8] = (int) (mana[8] + 0.01);
+	            			if(par2World.isDaytime()) {	      
+        						mana[0]++;
+        						mana[2]++;
+        					}else{
+        						mana[1]++;
+        						mana[3]++;
+        					}
+	            			mana[8]+=1;
 	            		
 	          
 	            		tickCount = 0;
 	            	}
-	            	par1ItemStack.stackTagCompound = new NBTTagCompound();//should only be called if par1ItemStack.hasTagCompound() returns false
+	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
 	            	par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
 	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
 	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
@@ -211,25 +228,43 @@ public class ItemMagickWand extends Item {
 	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
 	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
 	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
+	            		}else {
+	            			par1ItemStack.stackTagCompound = new NBTTagCompound();
+	    	            	par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
+	            		}
+	            		}catch(Throwable t){
+	            	t.printStackTrace();
 	            }
+	            	}
+	            
 	            
 
 	        /**
 	             * Called when item is crafted/smelted. Used only by maps so far.
 	             */
 	            public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+	            	super.onCreated(par1ItemStack,par2World, par3EntityPlayer);
+	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
 	            	
-	            	par1ItemStack.stackTagCompound = new NBTTagCompound();//don'T forget to call super.onCreated
-	             	par1ItemStack.stackTagCompound.setInteger("light",0);
-	            	par1ItemStack.stackTagCompound.setInteger("dark",0); 
-	            	par1ItemStack.stackTagCompound.setInteger("magic",0);
-	            	par1ItemStack.stackTagCompound.setInteger("null",0); 
-	            	par1ItemStack.stackTagCompound.setInteger("fire",0);
-	            	par1ItemStack.stackTagCompound.setInteger("water",0); 
-	            	par1ItemStack.stackTagCompound.setInteger("air",0);
-	            	par1ItemStack.stackTagCompound.setInteger("earth",0); 
-	            	par1ItemStack.stackTagCompound.setInteger("life",0);
-	            	par1ItemStack.stackTagCompound.setInteger("death",0);
+	            	par1ItemStack.stackTagCompound.setInteger("light",mana[0] + 1);
+	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1] + 1); 
+	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2] + 1);
+	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3] + 1); 
+	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4] + 1);
+	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5] + 1); 
+	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6] + 1);
+	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7] + 1); 
+	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8] + 1);
+	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9] + 1);
 	            }
 
 	        /**
@@ -247,15 +282,15 @@ public class ItemMagickWand extends Item {
 	            	   if (itemStack.stackTagCompound != null) { 
 	            		 
 	            		   list.add(EnumChatFormatting.BLUE + "Current Fos level :  " +itemStack.stackTagCompound.getInteger("light"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Skotï¿½di level :  " +itemStack.stackTagCompound.getInteger("dark"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Magï¿½ia level:  " +itemStack.stackTagCompound.getInteger("magic"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Skotádi level :  " +itemStack.stackTagCompound.getInteger("dark"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Magéia level:  " +itemStack.stackTagCompound.getInteger("magic"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Akyrosi level :  " +itemStack.stackTagCompound.getInteger("null"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Fotia power :  " +itemStack.stackTagCompound.getInteger("fire"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Nerï¿½ power :  " +itemStack.stackTagCompound.getInteger("water"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Aï¿½ras power :  " +itemStack.stackTagCompound.getInteger("air"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Neró power :  " +itemStack.stackTagCompound.getInteger("water"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Aéras power :  " +itemStack.stackTagCompound.getInteger("air"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Gaias power :  " +itemStack.stackTagCompound.getInteger("earth"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Zoi power :  " +itemStack.stackTagCompound.getInteger("life"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Deisidaimonï¿½a power :  " +itemStack.stackTagCompound.getInteger("death"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Deisidaimonía power :  " +itemStack.stackTagCompound.getInteger("death"));
 	            		   
 	            		   if(itemStack.getItemDamage() == 0) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 10");
