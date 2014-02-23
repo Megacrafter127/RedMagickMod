@@ -98,20 +98,7 @@ public class ItemMagickWand extends Item {
 		names[1] = "Golden-Cored Oak Magical Staff";
 		names[2] = "Netherium-Adorned Enderium-Cored Oldwood Magical Staff";
 	}
-	static {
-		mana[0] = 10; // Fos - Light
-		mana[1] = 10; // Skotádi - Dark
-		mana[2] = 10; // Magéia - Magic
-		mana[3] = 10; // Akýrosi - Nullmagics
-		mana[4] = 10; // Fotia - Fire
-		mana[5] = 10; // Neró - Water
-		mana[6] = 10; // Aerás - Air
-		mana[7] = 10; // Gaiás - Earth
-		mana[8] = 0; // Zoi - Life
-		mana[9] = 0; // Deisidaimonía - Death
-	    /*mana[10] =0; //
-	    mana[11] =0; // */
-	}
+
 	public static final String[] stnames = new String[]{"Lesser","Medium","Greater"};
 	public ItemMagickWand(int par1) {
 		super(par1);
@@ -230,10 +217,25 @@ public class ItemMagickWand extends Item {
 	             * update it's contents.
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+	            	// Load all manas
+	            	mana[0] = par1ItemStack.stackTagCompound.getInteger("light");
+	            	mana[1] = par1ItemStack.stackTagCompound.getInteger("dark");
+	            	mana[2] = par1ItemStack.stackTagCompound.getInteger("magic");
+	            	mana[3] = par1ItemStack.stackTagCompound.getInteger("null");
+	            	mana[4] = par1ItemStack.stackTagCompound.getInteger("fire");
+	            	mana[5] = par1ItemStack.stackTagCompound.getInteger("water");
+	            	mana[6] = par1ItemStack.stackTagCompound.getInteger("air");
+	            	mana[7] = par1ItemStack.stackTagCompound.getInteger("earth");
+	            	mana[8] = par1ItemStack.stackTagCompound.getInteger("life");
+	            	mana[9] = par1ItemStack.stackTagCompound.getInteger("death");
+	            	//Tick
 	            	tickCount++;
+	            	// Get a static entity
 	            	Entity e = par3Entity;
+	            	//Get current biome
 	            	BiomeGenBase b = par2World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
-	            	if(tickCount == 1000) {
+	            	//Increments mana by niome
+	            	if(tickCount == 10) {
 	            			Type[] t = BiomeDictionary.getTypesForBiome(b);
 	            			for(Type type : t) {
 	            				if(type == Type.WATER) {
@@ -258,7 +260,7 @@ public class ItemMagickWand extends Item {
 	            					
 	            				}
 	            			}
-	            			mana[8] = mana[8] + 10;
+	            			mana[8] = (int) (mana[8] + 0.01);
 	            		
 	          
 	            		tickCount = 0;
