@@ -200,17 +200,19 @@ public class ItemMagickWand extends Item {
 	            				} else if( type == Type.SWAMP ) {
 	            					mana[6]++;
 	            					mana[5]++;
-	            				} else {
-	            					
-	            					
+	            				} else if ( type == Type.NETHER){
+	            					mana[4]+=5;
+	            				
+	            				} else if(type == Type.END) {
+	            					mana[2]+=10;
 	            				}
 	            			}
 	            			if(par2World.isDaytime()) {	      
         						mana[0]++;
-        						mana[2]++;
+        						//mana[2]++;
         					}else{
         						mana[1]++;
-        						mana[3]++;
+        						//mana[3]++;
         					}
 	            			mana[8]+=1;
 	            		
