@@ -14,6 +14,7 @@ import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
 import com.matt.mod.handlers.WorldHandlerFuture;
+import com.matt.mod.kernelcraft.KernelCoreUpdatePacketHandler;
 import com.matt.mod.magick.items.logic.WandTickHandler;
 import com.matt.proxy.CommonProxy;
 
@@ -36,7 +37,7 @@ import cpw.mods.fml.relauncher.Side;
  *
  */
 @Mod(modid = Ref.ID, name = Ref.NAME, version = Ref.VERSION + Ref.ALPHA + Ref.BUILD)
-@NetworkMod( channels = {""}, clientSideRequired = true, serverSideRequired = true )
+@NetworkMod( channels = {"KernelCoreUpdate"}, clientSideRequired = true, serverSideRequired = true, packetHandler=KernelCoreUpdatePacketHandler.class )
 public class FutureCraft {
 	 @Instance(Ref.ID)
 	    public static FutureCraft instance;

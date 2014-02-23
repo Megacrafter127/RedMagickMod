@@ -9,11 +9,9 @@ public class KernelMiningTask extends KernelTask {
 	private int x2,y2,z2,ax,ay,az;
 	private boolean finished=false;
 	private boolean first=true;
-	private boolean silk=false;
-	private boolean forceSilk=false;
 
 	public KernelMiningTask() {}
-	public KernelMiningTask(int x,int y,int z,int x2,int y2,int z2,int ticksPerBlock, Boolean silk) {
+	public KernelMiningTask(int x,int y,int z,int x2,int y2,int z2,int ticksPerBlock) {
 		super(Math.abs(ticksPerBlock*(x2-x)*(y2-y)*(z2-z)),x,y,z);
 	}
 
@@ -26,9 +24,10 @@ public class KernelMiningTask extends KernelTask {
 				ay=y>y2?y2:y;
 				az=z>z2?z2:z;
 				executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock);
+				first=false;
 				return;
 			}
-			executor.destroyBlock(ax, ay, az, forceSilk?true:(silk?null:false));
+			executor.destroyBlock(ax, ay, az);
 			ax++;
 			if(ax>x2&&x2>x) {
 				ax=x;
@@ -71,8 +70,6 @@ public class KernelMiningTask extends KernelTask {
 		az=nbt.getInteger("az");
 		finished=nbt.getBoolean("finished");
 		first=nbt.getBoolean("first");
-		silk=nbt.getBoolean("silk");
-		forceSilk=nbt.getBoolean("forceSilk");
 	}
 	
 	@Override
@@ -87,7 +84,5 @@ public class KernelMiningTask extends KernelTask {
 		nbt.setInteger("az", az);
 		nbt.setBoolean("finished", finished);
 		nbt.setBoolean("first", first);
-		nbt.setBoolean("silk", silk);
-		nbt.setBoolean("forceSilk", forceSilk);
 	}
 }

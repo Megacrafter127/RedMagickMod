@@ -101,41 +101,16 @@ public class ItemKernelTool extends Item {
 			int[] coord2=item.stackTagCompound.getIntArray("2coord");
 			if(coord2==null || coord2.length!=3) {
 				item.stackTagCompound.setIntArray("2coord", new int[]{x,y,z});
-				player.addChatMessage("Saved second coordinate: "+x+", "+y+", "+z+"\nTo start the task, right-click an active Kernel-Core, right-clicking anything else will cause the silk option to be changed");
+				player.addChatMessage("Saved second coordinate: "+x+", "+y+", "+z+"\nTo start the task, right-click an active Kernel-Core.");
 				return true;
-			}
-			Boolean silk=false;
-			try{
-				silk=item.stackTagCompound.getBoolean("forceSilk");
-				if(Boolean.FALSE.equals(silk)) {
-					silk=item.stackTagCompound.getBoolean("silk")?null:false;
-				}
-			}
-			catch(NullPointerException ex) {
-				item.stackTagCompound.setBoolean("forceSilk", false);
-				item.stackTagCompound.setBoolean("silk", false);
 			}
 			TileEntity t=w.getBlockTileEntity(x, y, z);
 			if(t!=null && t instanceof TileEntityKernelCore) {
-				((TileEntityKernelCore)t).enqueueTask(new KernelMiningTask(coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],5,silk));
+				((TileEntityKernelCore)t).enqueueTask(new KernelMiningTask(coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],5));
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				player.addChatMessage("Miningtask enqueued!");
 				return true;
 			}
-			if(silk==null) {
-				item.stackTagCompound.setBoolean("forceSilk", true);
-				player.addChatMessage("Silk mode: force silk");
-			}
-			else if(silk) {
-				item.stackTagCompound.setBoolean("forceSilk", false);
-				item.stackTagCompound.setBoolean("silk", false);
-				player.addChatMessage("Silk mode: none");
-			}
-			else {
-				item.stackTagCompound.setBoolean("silk", true);
-				player.addChatMessage("Silk mode: silk touch");
-			}
-			return true;
 		}
 		return false;
 	}

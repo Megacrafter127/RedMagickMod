@@ -1,5 +1,8 @@
 package com.matt.mod.kernelcraft.tileentities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
@@ -11,12 +14,17 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.mod.kernelcraft.tasks.KernelTask;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class TileEntityKernelCore extends TileEntity {
 	private LinkedList<int[]> affectList=new LinkedList<int[]>();
@@ -73,15 +81,20 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		addPermanentParticles();
 		addAffectionParticles();
+		boolean send=false;
 		while(!tasks.isEmpty()) {
 			KernelTask t=tasks.element();
 			if(t.finished()) {
 				tasks.removeFirst();
+				send=true;
 			}
 			else {
 				t.run(this);
 				break;
 			}
+		}
+		if(send) {
+			sendChangeToServer();
 		}
 	}
 	
@@ -202,46 +215,36 @@ public class TileEntityKernelCore extends TileEntity {
 		if(t==null) return;
 		if(t.finished()) return;
 		tasks.add(t);
+		sendChangeToServer();
 	}
 	
-	public void destroyBlock(int x,int y,int z,Boolean silk) {
-		if(getWorldObj().isRemote) return;
-		ItemStack[] ret=new ItemStack[0];
-		Block b=Block.blocksList[getWorldObj().getBlockId(x, y, z)];
-		if(silk==null) {
-			try{
-				ret=new ItemStack[]{b.getPickBlock(null, getWorldObj(), x, y, z)};
-			}
-			catch(NullPointerException ex) {
-				ret=new ItemStack[]{new ItemStack(b.idPicked(getWorldObj(), x, y, z),1,getWorldObj().getBlockMetadata(x, y, z))};
+	public void destroyBlock(int x,int y,int z) {
+		ItemStack ret=new ItemStack(getWorldObj().getBlockId(x, y, z),1,getWorldObj().getBlockMetadata(x, y, z));
+		try{
+			if(Item.itemsList[ret.itemID]==null) {
+				return;
 			}
 		}
-		else if(silk) {
-			ArrayList<ItemStack> list=b.getBlockDropped(getWorldObj(), x, y, z, getWorldObj().getBlockMetadata(x, y, z), new Random().nextInt());
-			ret=list.toArray(new ItemStack[list.size()]);
+		catch(ArrayIndexOutOfBoundsException ex) {
+			return;
 		}
-		else {
-			ret=new ItemStack[]{new ItemStack(getWorldObj().getBlockId(x, y, z),1,getWorldObj().getBlockMetadata(x, y, z))};
-		}
-		for(int i=-1;i<2;i++) {
+		L:for(int i=-1;i<2;i++) {
 			for(int j=-1;j<2;j++) {
 				for(int k=-2;k<2;k++) {
 					try{
 						IInventory inv=(IInventory)getWorldObj().getBlockTileEntity(xCoord+i, yCoord+k, zCoord+j);
-						for(ItemStack stack:ret) {
-							for(int l=0;l<inv.getSizeInventory();l++) {
-								if(stack==null) break;
-								if(inv.isItemValidForSlot(l, stack)) {
-									ItemStack stack2=inv.getStackInSlot(l);
-									if(stack2.itemID==stack.itemID&&stack2.getItemDamage()==stack.getItemDamage()) {
-										stack2.stackSize+=stack.stackSize;
-										if(stack2.stackSize>stack2.getMaxStackSize()) {
-											stack.stackSize=stack2.stackSize-stack2.getMaxStackSize();
-											stack2.stackSize=stack2.getMaxStackSize();
-										}
-										else {
-											stack=null;
-										}
+						for(int l=0;l<inv.getSizeInventory();l++) {
+							if(inv.isItemValidForSlot(l, ret)) {
+								ItemStack stack2=inv.getStackInSlot(l);
+								if(stack2.itemID==ret.itemID&&stack2.getItemDamage()==ret.getItemDamage()) {
+									stack2.stackSize+=ret.stackSize;
+									if(stack2.stackSize>stack2.getMaxStackSize()) {
+										ret.stackSize=stack2.stackSize-stack2.getMaxStackSize();
+										stack2.stackSize=stack2.getMaxStackSize();
+									}
+									else {
+										ret=null;
+										break L;
 									}
 								}
 							}
@@ -252,9 +255,32 @@ public class TileEntityKernelCore extends TileEntity {
 				}
 			}
 		}
-		for(ItemStack stack:ret) {
-			if(stack!=null) getWorldObj().spawnEntityInWorld(new EntityItem(getWorldObj(),x+0.5,y+0.5,z+0.5,stack));
-		}
+		if(ret!=null) getWorldObj().spawnEntityInWorld(new EntityItem(getWorldObj(),x+0.5,y+0.5,z+0.5,ret));
 		getWorldObj().setBlockToAir(x, y, z);
+		System.out.println("mining");
+	}
+	
+	public void sendChangeToServer() {
+		Packet250CustomPayload packet=new Packet250CustomPayload();
+		packet.channel="KernelCoreUpdate";
+		NBTTagCompound nbt=new NBTTagCompound();
+		writeToNBT(nbt);
+		ByteArrayOutputStream out=new ByteArrayOutputStream();
+		DataOutputStream output=new DataOutputStream(out);
+		try{
+			output.writeInt(xCoord);
+			output.writeInt(yCoord);
+			output.writeInt(zCoord);
+			byte[] b=CompressedStreamTools.compress(nbt);
+			output.writeInt(b.length);
+			output.write(b);
+			output.close();
+		}
+		catch(IOException ex) {
+			System.err.println(ex);
+		}
+		packet.data=out.toByteArray();
+		packet.length=out.size();
+		PacketDispatcher.sendPacketToServer(packet);
 	}
 }
