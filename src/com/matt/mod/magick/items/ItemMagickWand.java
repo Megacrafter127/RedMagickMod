@@ -27,67 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemMagickWand extends Item {
 	int tickCount;
 	static int[] mana = new int[10];
-	/**
-	 * @author Megacrafter127
-	 * @param damage - the damage value of the wand
-	 * @return the level of the wand
-	 */
-	
-
-	public static int getLevel(int damage) {
-		int level=0;
-		for(;0>=damage||levelMax[level]<damage;level++) {
-			try{
-				damage-=levelMax[level];
-			}
-			catch(ArrayIndexOutOfBoundsException ex) {
-				level++;
-				break;
-			}
-		}
-		return level;
-	}
-	/**
-	 * @author Megacrafter127
-	 * @param level - the level of the wand
-	 * @return the damage of an empty wand of this level
-	 */
-	public static int getDamageForEmpty(int level) {
-		int dmg=0;
-		for(int i=0;i<level;i++) {
-			try{
-				dmg+=levelMax[i];
-			}
-			catch(ArrayIndexOutOfBoundsException ex) {}
-		}
-		return dmg;
-	}
-	/**
-	 * @author Megacrafter127
-	 * @param damage - the damage value of the wand
-	 * @return the charge of the wand
-	 */
-	public static int getCharge(int damage) {
-		for(int level=0;true;level++) {
-			try{
-				if(0<=damage&&damage<levelMax[level]) {
-					return damage;
-				}
-				else {
-					damage-=levelMax[level];
-				}
-				
-			}
-			catch(ArrayIndexOutOfBoundsException ex) {
-				return damage;
-			}
-		}
-	}
-	/**
-	 * the level maximum charges(the index is the level)
-	 * @author Megacrafter127
-	 */
-	public static int[] levelMax=new int[]{100,1000,10000};
+	@Deprecated //is applied on all items
 	public static int currentCharge = 1;
 	public static String[] names=new String[10];
 	/**
@@ -102,11 +42,6 @@ public class ItemMagickWand extends Item {
 	public static final String[] stnames = new String[]{"Lesser","Medium","Greater"};
 	public ItemMagickWand(int par1) {
 		super(par1);
-		//names = new String[10]; why should the static variable be overritten by a constructor, that might be called multiple times
-		/*names[0] = "Iron-Cored Birch Magical Staff";
-		names[1] = "Golden-Cored Oak Magical Staff";
-		names[2] = "Netherium-Adorned Enderium-Cored Oldwood Magical Staff";*/
-		
 		this.setUnlocalizedName(getUnlocalizedName(new ItemStack(this)));
 		setHasSubtypes(true);
 		setMaxDamage(0);
@@ -217,7 +152,7 @@ public class ItemMagickWand extends Item {
 	             * update it's contents.
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
-	            	// Load all manas
+	            	// Load all manas // what if par1ItemStack.stackTagCompound is null for some unknown reason=
 	            	mana[0] = par1ItemStack.stackTagCompound.getInteger("light");
 	            	mana[1] = par1ItemStack.stackTagCompound.getInteger("dark");
 	            	mana[2] = par1ItemStack.stackTagCompound.getInteger("magic");
@@ -265,7 +200,7 @@ public class ItemMagickWand extends Item {
 	          
 	            		tickCount = 0;
 	            	}
-	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
+	            	par1ItemStack.stackTagCompound = new NBTTagCompound();//should only be called if par1ItemStack.hasTagCompound() returns false
 	            	par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
 	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
 	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
@@ -284,7 +219,7 @@ public class ItemMagickWand extends Item {
 	             */
 	            public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 	            	
-	            	par1ItemStack.stackTagCompound = new NBTTagCompound();
+	            	par1ItemStack.stackTagCompound = new NBTTagCompound();//don'T forget to call super.onCreated
 	             	par1ItemStack.stackTagCompound.setInteger("light",0);
 	            	par1ItemStack.stackTagCompound.setInteger("dark",0); 
 	            	par1ItemStack.stackTagCompound.setInteger("magic",0);
@@ -312,15 +247,15 @@ public class ItemMagickWand extends Item {
 	            	   if (itemStack.stackTagCompound != null) { 
 	            		 
 	            		   list.add(EnumChatFormatting.BLUE + "Current Fos level :  " +itemStack.stackTagCompound.getInteger("light"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Skotádi level :  " +itemStack.stackTagCompound.getInteger("dark"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Magéia level:  " +itemStack.stackTagCompound.getInteger("magic"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Skotï¿½di level :  " +itemStack.stackTagCompound.getInteger("dark"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Magï¿½ia level:  " +itemStack.stackTagCompound.getInteger("magic"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Akyrosi level :  " +itemStack.stackTagCompound.getInteger("null"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Fotia power :  " +itemStack.stackTagCompound.getInteger("fire"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Neró power :  " +itemStack.stackTagCompound.getInteger("water"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Aéras power :  " +itemStack.stackTagCompound.getInteger("air"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Nerï¿½ power :  " +itemStack.stackTagCompound.getInteger("water"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Aï¿½ras power :  " +itemStack.stackTagCompound.getInteger("air"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Gaias power :  " +itemStack.stackTagCompound.getInteger("earth"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Zoi power :  " +itemStack.stackTagCompound.getInteger("life"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Deisidaimonía power :  " +itemStack.stackTagCompound.getInteger("death"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Deisidaimonï¿½a power :  " +itemStack.stackTagCompound.getInteger("death"));
 	            		   
 	            		   if(itemStack.getItemDamage() == 0) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 10");
