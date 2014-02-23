@@ -19,6 +19,7 @@ import com.matt.mod.kernelcraft.blocks.BlockKernelStorage;
 import com.matt.mod.kernelcraft.blocks.BlockKernelUSV;
 import com.matt.mod.kernelcraft.items.ItemCoordReference;
 import com.matt.mod.kernelcraft.items.ItemKernelReference;
+import com.matt.mod.kernelcraft.items.ItemKernelTool;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCPU;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCoordMemory;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
@@ -57,6 +58,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		//items
 		private static int KernelReferenceID=950;
 		private static int CoordReferenceID=951;
+		private static int KernelToolID=952;
 		//end items
 	//end IDs
 	//Blocks
@@ -81,6 +83,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		//items
 		public static ItemKernelReference KernelReference;
 		public static ItemCoordReference CoordReference;
+		public static ItemKernelTool KernelTool;
 		//end items
 	public static void loadIDs() {
 		FutureCraft.config.load();
