@@ -31,6 +31,7 @@ import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.magick.FutureCraftSwag;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
+import com.matt.mod.tweaks.FutureCraftTweaks;
 import com.matt.proxy.client.ClientProxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -210,6 +211,6 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		}
 		ClientProxy.registerTESR();
 		registerPlugin(new KernelCraftCore());
-		
+		registerPlugin(FutureCraftTweaks.instance);
 	}
 }
