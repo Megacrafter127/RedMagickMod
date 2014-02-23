@@ -217,7 +217,16 @@ public class ItemMagickWand extends Item {
         						//mana[3]++;
         					}
 	            			mana[8]+=1;
-	            		
+	            			par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
 	          
 	            		tickCount = 0;
 	            	}
