@@ -1,11 +1,13 @@
 package com.matt.mod.kernelcraft.tasks;
 
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 /**
  * @author Megacrafter127
  *
  */
-public abstract class KernelTask implements Runnable {
+public abstract class KernelTask {
 	public static KernelTask loadTaskFromNBT(NBTTagCompound nbt) {
 		try{
 			Class c=Class.forName(nbt.getString("type"));
@@ -24,6 +26,14 @@ public abstract class KernelTask implements Runnable {
 	protected int x;
 	protected int y;
 	protected int z;
+	
+	public KernelTask() {}
+	public KernelTask(int ticksLeft,int x,int y,int z) {
+		this.ticksLeft=ticksLeft;
+		this.x=x;
+		this.y=y;
+		this.z=z;
+	}
 	
 	/**
 	 * (Re-)Loads this task(from scratch).
@@ -59,10 +69,9 @@ public abstract class KernelTask implements Runnable {
 		return ticksLeft==0;
 	}
 	
-	@Override
-	public final void run() {
+	public final void run(TileEntityKernelCore executor) {
 		if(!finished()) {
-			runTaskTick();
+			runTaskTick(executor);
 			ticksPassed++;
 			ticksLeft--;
 		}
@@ -73,5 +82,5 @@ public abstract class KernelTask implements Runnable {
 	 * Runs a single tick of the task(no task should have only one tick).
 	 * If {@link finished()} returns true, this method will not be invoked anymore.
 	 */
-	public abstract void runTaskTick();
+	public abstract void runTaskTick(TileEntityKernelCore executor);
 }

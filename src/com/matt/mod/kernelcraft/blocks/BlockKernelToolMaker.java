@@ -27,35 +27,34 @@ public class BlockKernelToolMaker extends Block {
 		if(itemStack!=null) {
 			for(int i:mineToolMaterial) {
 				if(itemStack.itemID==i) {
-					itemStack.stackSize=0;
-					player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.mineToolMeta));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.mineToolMeta));
 					return true;
 				}
 			}
 			for(int i:hoeToolMaterial) {
 				if(itemStack.itemID==i) {
-					itemStack.stackSize=0;
-					player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.hoeToolMeta));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.hoeToolMeta));
 					return true;
 				}
 			}
 			for(int i:harvestToolMaterial) {
 				if(itemStack.itemID==i) {
-					itemStack.stackSize=0;
-					player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.harvestToolMeta));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.harvestToolMeta));
 					return true;
 				}
 			}
 			for(int i:countToolMaterial) {
 				if(itemStack.itemID==i) {
 					itemStack.stackSize--;
-					player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.countToolMeta));
+					if(itemStack.stackSize==0) player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.countToolMeta));
+					else player.inventory.setCurrentItem(KernelCraftCore.KernelTool.itemID, ItemKernelTool.mineToolMeta, true, true);
 					return true;
 				}
 			}
 			if(Block.blocksList[itemStack.itemID]!=null) {
 				itemStack.stackSize--;
-				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.KernelTool,1,ItemKernelTool.fillToolMeta));
+				if(itemStack.stackSize==0) player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.fillToolMeta));
+				else player.inventory.setCurrentItem(KernelCraftCore.KernelTool.itemID, ItemKernelTool.mineToolMeta, true, true);
 				return true;
 			}
 		}

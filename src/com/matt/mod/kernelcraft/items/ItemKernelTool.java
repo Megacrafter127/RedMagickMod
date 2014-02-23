@@ -10,6 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.matt.mod.kernelcraft.KernelCraftCore;
+import com.matt.mod.kernelcraft.tasks.KernelMiningTask;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 
 import cpw.mods.fml.relauncher.Side;
@@ -86,39 +87,55 @@ public class ItemKernelTool extends Item {
 	}
 	
 	@Override
-	public boolean onItemUse(ItemStack item,EntityPlayer player,World w,int x,int y,int z,int side,float hitx,float hity,float hitz) {
+	public boolean onItemUseFirst(ItemStack item,EntityPlayer player,World w,int x,int y,int z,int side,float hitx,float hity,float hitz) {
 		if(w.isRemote) return false;
-		if(!item.hasTagCompound()) {
+		int dmg=item.getItemDamage();
+		if(!item.hasTagCompound()) item.stackTagCompound=new NBTTagCompound();
+		if(dmg==mineToolMeta) {
+			int[] coord1=item.stackTagCompound.getIntArray("1coord");
+			if(coord1==null || coord1.length!=3) {
+				item.stackTagCompound.setIntArray("1coord", new int[]{x,y,z});
+				player.addChatMessage("Saved first coordinate: "+x+", "+y+", "+z);
+				return true;
+			}
+			int[] coord2=item.stackTagCompound.getIntArray("2coord");
+			if(coord2==null || coord2.length!=3) {
+				item.stackTagCompound.setIntArray("2coord", new int[]{x,y,z});
+				player.addChatMessage("Saved second coordinate: "+x+", "+y+", "+z+"\nTo start the task, right-click an active Kernel-Core, right-clicking anything else will cause the silk option to be changed");
+				return true;
+			}
+			Boolean silk=false;
+			try{
+				silk=item.stackTagCompound.getBoolean("forceSilk");
+				if(Boolean.FALSE.equals(silk)) {
+					silk=item.stackTagCompound.getBoolean("silk")?null:false;
+				}
+			}
+			catch(NullPointerException ex) {
+				item.stackTagCompound.setBoolean("forceSilk", false);
+				item.stackTagCompound.setBoolean("silk", false);
+			}
 			TileEntity t=w.getBlockTileEntity(x, y, z);
 			if(t!=null && t instanceof TileEntityKernelCore) {
-				item.stackTagCompound=new NBTTagCompound();
-				item.stackTagCompound.setIntArray("coords", new int[]{x,y,z});
-				player.addChatMessage("Tool-Link established");
+				((TileEntityKernelCore)t).enqueueTask(new KernelMiningTask(coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],5,silk));
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+				player.addChatMessage("Miningtask enqueued!");
 				return true;
 			}
-			player.addChatMessage("Tool-Links can only be established to active kernel-cores");
-			return false;
-		}
-		int dmg=item.getItemDamage();
-		int[] coord=item.stackTagCompound.getIntArray("coords");
-		TileEntityKernelCore t=null;
-		try{
-			t=(TileEntityKernelCore)w.getBlockTileEntity(coord[0],coord[1],coord[2]);
-		}
-		catch(NullPointerException ex) {}
-		catch(ArrayIndexOutOfBoundsException ex) {}
-		catch(ClassCastException ex) {}
-		if(t==null) {
-			item.stackTagCompound=null;
-			return onItemUse(item,player,w,x,y,z,side,hitx,hity,hitz);
-		}
-		if(dmg==mineToolMeta) {
-			coord=item.stackTagCompound.getIntArray("1coord");
-			if(coord==null) {
-				item.stackTagCompound.setIntArray("1coord", new int[]{x,y,z});
-				return true;
+			if(silk==null) {
+				item.stackTagCompound.setBoolean("forceSilk", true);
+				player.addChatMessage("Silk mode: force silk");
 			}
-			
+			else if(silk) {
+				item.stackTagCompound.setBoolean("forceSilk", false);
+				item.stackTagCompound.setBoolean("silk", false);
+				player.addChatMessage("Silk mode: none");
+			}
+			else {
+				item.stackTagCompound.setBoolean("silk", true);
+				player.addChatMessage("Silk mode: silk touch");
+			}
+			return true;
 		}
 		return false;
 	}

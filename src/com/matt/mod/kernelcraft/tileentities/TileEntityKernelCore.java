@@ -1,11 +1,17 @@
 package com.matt.mod.kernelcraft.tileentities;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -67,6 +73,16 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		addPermanentParticles();
 		addAffectionParticles();
+		while(!tasks.isEmpty()) {
+			KernelTask t=tasks.element();
+			if(t.finished()) {
+				tasks.removeFirst();
+			}
+			else {
+				t.run(this);
+				break;
+			}
+		}
 	}
 	
 	private void addPermanentParticles() {
@@ -186,5 +202,59 @@ public class TileEntityKernelCore extends TileEntity {
 		if(t==null) return;
 		if(t.finished()) return;
 		tasks.add(t);
+	}
+	
+	public void destroyBlock(int x,int y,int z,Boolean silk) {
+		if(getWorldObj().isRemote) return;
+		ItemStack[] ret=new ItemStack[0];
+		Block b=Block.blocksList[getWorldObj().getBlockId(x, y, z)];
+		if(silk==null) {
+			try{
+				ret=new ItemStack[]{b.getPickBlock(null, getWorldObj(), x, y, z)};
+			}
+			catch(NullPointerException ex) {
+				ret=new ItemStack[]{new ItemStack(b.idPicked(getWorldObj(), x, y, z),1,getWorldObj().getBlockMetadata(x, y, z))};
+			}
+		}
+		else if(silk) {
+			ArrayList<ItemStack> list=b.getBlockDropped(getWorldObj(), x, y, z, getWorldObj().getBlockMetadata(x, y, z), new Random().nextInt());
+			ret=list.toArray(new ItemStack[list.size()]);
+		}
+		else {
+			ret=new ItemStack[]{new ItemStack(getWorldObj().getBlockId(x, y, z),1,getWorldObj().getBlockMetadata(x, y, z))};
+		}
+		for(int i=-1;i<2;i++) {
+			for(int j=-1;j<2;j++) {
+				for(int k=-2;k<2;k++) {
+					try{
+						IInventory inv=(IInventory)getWorldObj().getBlockTileEntity(xCoord+i, yCoord+k, zCoord+j);
+						for(ItemStack stack:ret) {
+							for(int l=0;l<inv.getSizeInventory();l++) {
+								if(stack==null) break;
+								if(inv.isItemValidForSlot(l, stack)) {
+									ItemStack stack2=inv.getStackInSlot(l);
+									if(stack2.itemID==stack.itemID&&stack2.getItemDamage()==stack.getItemDamage()) {
+										stack2.stackSize+=stack.stackSize;
+										if(stack2.stackSize>stack2.getMaxStackSize()) {
+											stack.stackSize=stack2.stackSize-stack2.getMaxStackSize();
+											stack2.stackSize=stack2.getMaxStackSize();
+										}
+										else {
+											stack=null;
+										}
+									}
+								}
+							}
+						}
+					}
+					catch(ClassCastException ex) {}
+					catch(NullPointerException ex) {}
+				}
+			}
+		}
+		for(ItemStack stack:ret) {
+			if(stack!=null) getWorldObj().spawnEntityInWorld(new EntityItem(getWorldObj(),x+0.5,y+0.5,z+0.5,stack));
+		}
+		getWorldObj().setBlockToAir(x, y, z);
 	}
 }
