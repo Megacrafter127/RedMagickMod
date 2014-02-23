@@ -11,7 +11,7 @@ import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.logic.ItemLogic;
 import com.matt.mod.magick.lib.IWandAble;
 
-public class SwagBattery extends SwagBlock implements IWandAble, ITileEntityProvider {
+public class SwagBattery extends SwagBlock implements IWandAble {
 
 	public SwagBattery(int id, String str) {
 		super(id, str);
@@ -25,14 +25,7 @@ public class SwagBattery extends SwagBlock implements IWandAble, ITileEntityProv
 				System.out.println("Activated SwagBlock!");
 				if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID) {
 					onWandRightClick(player,world,x,y,z);
-					return true;
-				} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID) {
-					onWandRightClick(player,world,x,y,z);
-					return true;
-				} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID){
-					onWandRightClick(player,world,x,y,z);
-					return true;
-				} 
+					return true; 
 					}
 				}
 				if(player.inventory.getCurrentItem().itemID == SwagHelper.swaggishFlyer.itemID) {
@@ -40,6 +33,8 @@ public class SwagBattery extends SwagBlock implements IWandAble, ITileEntityProv
 					ItemLogic logic = f.getLogic();
 					TileEntityWandRecharger r = (TileEntityWandRecharger)world.getBlockTileEntity(x, y, z);
 					r.run(player,world,x,y,z);
+				}
+				return false; 
 				}
 				return false;
 		
@@ -53,9 +48,4 @@ public class SwagBattery extends SwagBlock implements IWandAble, ITileEntityProv
 	public void onWandSneakRightClick(EntityPlayer p, World w, int x, int y, int z) {
 		
 	}
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityWandRecharger();
-	}
-	
 }

@@ -20,6 +20,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import org.lwjgl.input.Keyboard;
 
 import com.matt.lib.Ref;
+import com.matt.mod.magick.SwagHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -145,17 +146,74 @@ public class ItemMagickWand extends Item {
 	        	} *
 	        }	    */ 
 	      //called when the item is used (right click) return true if something happens, false if nothing happens (if something happens the animation will trigger)
-	        public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10) {
-			
+	       /* public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10) {
+	        	if(par3World.getBlockId(x,y,z) == SwagHelper.manaBattery.blockID) {
+	        		tickCount++;
+	            	// Get a static entity
+	            	//Get current biome
+	        		Entity e = (Entity)par2EntityPlayer;
+	            	BiomeGenBase b = par3World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
+	            	//Increments mana by niome
+	            	if(tickCount == 1) {
+	            			Type[] t = BiomeDictionary.getTypesForBiome( b );
+	            			for(Type type : t) {
+	            				if(type == Type.WATER) {
+	            					mana[5]++;
+	            				} else if(type == Type.DESERT) {
+	            					mana[4]++;
+	            				} else if(type == Type.HILLS){
+	            					mana[6]++;
+	            				} else if( type == Type.FOREST) {
+	            					mana[6] = mana[6] + 2;
+	            				} else if( type == Type.SWAMP ) {
+	            					mana[6]++;
+	            					mana[5]++;
+	            				} else if ( type == Type.NETHER){
+	            					mana[4]+=5;
+	            				
+	            				} else if(type == Type.END) {
+	            					mana[2]+=10;
+	            				} else {
+	            					mana[3]++;
+	            				}
+	            			}
+	            			if(par3World.isDaytime()) {	      
+        						mana[0]++;
+        						//mana[2]++;
+        					}else{
+        						mana[1]++;
+        						//mana[3]++;
+        					}
+	            			mana[8]+=1;
+	            			par1ItemStack.stackTagCompound.setInteger("light",mana[0]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("dark",mana[1]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("magic",mana[2]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("null",mana[3]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("fire",mana[4]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("water",mana[5]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("air",mana[6]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("earth",mana[7]); 
+	    	            	par1ItemStack.stackTagCompound.setInteger("life",mana[8]);
+	    	            	par1ItemStack.stackTagCompound.setInteger("death",mana[9]);
+	          
+	            		tickCount = 0;
+	            	}
+	        	}
 	        	return false; 
 	        	
-	        }
+	        } */
 
 	        /**
 	             * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
 	             * update it's contents.
 	             */
 	            public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+	            	tickCount++;
+	            	
+	            	Entity e = par3Entity;
+	            	BiomeGenBase b = par2World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
+	            	
+	            	
 	            	try {
 	            		if(par1ItemStack.stackTagCompound != null) {
 	            		mana[0] = 0;
@@ -182,9 +240,9 @@ public class ItemMagickWand extends Item {
 	            	//Tick
 	            	tickCount++;
 	            	// Get a static entity
-	            	Entity e = par3Entity;
+	            	
 	            	//Get current biome
-	            	BiomeGenBase b = par2World.provider.worldChunkMgr.getBiomeGenAt((int)e.posX, (int)e.posZ);
+	            	
 	            	//Increments mana by niome
 	            	if(tickCount == 1000) {
 	            			Type[] t = BiomeDictionary.getTypesForBiome(b);
@@ -258,7 +316,7 @@ public class ItemMagickWand extends Item {
 	            	t.printStackTrace();
 	            }
 	            	}
-	            
+
 	            
 
 	        /**
@@ -307,6 +365,7 @@ public class ItemMagickWand extends Item {
 	            		   
 	            		   if(itemStack.getItemDamage() == 0) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 10");
+	            			  
 	            		   }else  if(itemStack.getItemDamage() == 1) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 100");
 	            		   } if(itemStack.getItemDamage() == 2) {
