@@ -4,6 +4,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -27,20 +28,24 @@ public class BlockKernelCoordMemory extends ColumnBlock implements ITileEntityPr
 		if(w.isRemote) return false;
 		if(player.inventory.getCurrentItem()!=null) {
 			if(player.inventory.getCurrentItem().itemID==KernelCraftCore.CoordReference.itemID) {
-				int[] coords=TileEntityKernelCoordMemory.coords.get(player.inventory.getCurrentItem().getItemDamage());
+				if(!player.inventory.getCurrentItem().hasTagCompound()) return false;
+				int[] coords=player.inventory.getCurrentItem().stackTagCompound.getIntArray("coords");
 				TileEntityKernelCoordMemory t=(TileEntityKernelCoordMemory)w.getBlockTileEntity(x, y, z);
 				t.setCoords(coords);
-				TileEntityKernelCoordMemory.coords.remove(player.inventory.getCurrentItem().getItemDamage());
 				player.inventory.getCurrentItem().stackSize=0;
 				player.inventory.inventoryChanged=true;
 				player.addChatMessage("Transmitted: "+coords[0]+", "+coords[1]+", "+coords[2]);
 			}
 			else {
-				player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.CoordReference,1,TileEntityKernelCoordMemory.getNextID()));
+				ItemStack i=new ItemStack(KernelCraftCore.CoordReference,1);
+				i.stackTagCompound=new NBTTagCompound();
+				player.inventory.addItemStackToInventory(i);
 			}
 		}
 		else {
-			player.inventory.addItemStackToInventory(new ItemStack(KernelCraftCore.CoordReference,1,TileEntityKernelCoordMemory.getNextID()));
+			ItemStack i=new ItemStack(KernelCraftCore.CoordReference,1);
+			i.stackTagCompound=new NBTTagCompound();
+			player.inventory.addItemStackToInventory(i);
 		}
 		return true;
 	}

@@ -16,7 +16,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class TileEntityKernelCore extends TileEntity {
-	public static final HashMap<Integer,int[]> kernelHash=new HashMap<Integer,int[]>();
 	public static final LinkedList<Integer> linkable=new LinkedList<Integer>();
 	static{
 		linkable.add(Block.chest.blockID);
@@ -33,36 +32,6 @@ public class TileEntityKernelCore extends TileEntity {
 			}
 			catch(NullPointerException ex) {}
 		}
-	}
-	
-	private static int id=-1;
-	public static int getNextID() {
-		return id++;
-	}
-	protected static void writeHashToNBT(NBTTagCompound nbt) {
-		int size=kernelHash.size();
-		Iterator<Integer> keys=kernelHash.keySet().iterator();
-		nbt.setInteger("size", size);
-		for(int i=0;i<size;i++) {
-			Integer key=keys.next();
-			nbt.setInteger("key."+i, key);
-			nbt.setIntArray("val."+i, kernelHash.get(key));
-		}
-		nbt.setInteger("hashID", id);
-	}
-	protected static void readHashFromNBT(NBTTagCompound nbt) {
-		Set<Integer> keys=((HashMap<Integer,int[]>)kernelHash.clone()).keySet();
-		int size=nbt.getInteger("size");
-		for(int i=0;i<size;i++) {
-			int key=nbt.getInteger("key."+i);
-			keys.remove(key);
-			kernelHash.put(key, nbt.getIntArray("val."+i));
-		}
-		Iterator<Integer> i=keys.iterator();
-		while(i.hasNext()) {
-			kernelHash.remove(i.next());
-		}
-		id=nbt.getInteger("hashID");
 	}
 	
 	
@@ -234,9 +203,6 @@ public class TileEntityKernelCore extends TileEntity {
 			nbt.setIntArray("link."+c, i);
 			c++;
 		}
-		NBTTagCompound hash=new NBTTagCompound();
-		writeHashToNBT(hash);
-		nbt.setCompoundTag("hash", hash);
 	}
 	
 	@Override
@@ -254,7 +220,6 @@ public class TileEntityKernelCore extends TileEntity {
 			replacement.add(nbt.getIntArray("link."+i));
 		}
 		linkedBlocks=replacement;
-		readHashFromNBT(nbt.getCompoundTag("hash"));
 	}
 	
 	public boolean linkBlock(int x,int y,int z) {

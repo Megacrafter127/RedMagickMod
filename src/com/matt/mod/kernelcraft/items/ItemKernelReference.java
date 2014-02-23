@@ -20,17 +20,21 @@ public class ItemKernelReference extends Item {
 	
 	@Override
 	public boolean onItemUseFirst(ItemStack stack,EntityPlayer player,World world,int x,int y,int z,int side,float hitX,float hitY,float hitZ) {
+		if(world.isRemote) return false;
 		try{
-			int[] coord=TileEntityKernelCore.kernelHash.get(stack.getItemDamage());
-			TileEntityKernelCore source=(TileEntityKernelCore)world.getBlockTileEntity(coord[0],coord[1]+1,coord[2]);
+			int[] coord=stack.stackTagCompound.getIntArray("coords");
+			TileEntityKernelCore source=(TileEntityKernelCore)world.getBlockTileEntity(coord[0],coord[1],coord[2]);
 			if(TileEntityKernelCore.linkable.contains(world.getBlockId(x, y, z))) {
 				source.linkBlock(x, y, z);
 				player.addChatMessage("Link established");
+				return true;
 			}
+			else return false;
 		}
 		catch(Exception ex) {
 			stack.stackSize=0;
 			player.inventory.inventoryChanged=true;
+			player.addChatMessage("Reference damaged; self destruction active!");
 		}
 		return true;
 	}

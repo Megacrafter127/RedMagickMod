@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -70,15 +71,10 @@ public class BlockKernelCore extends Block implements ITileEntityProvider {
 	
 	@Override
 	public boolean onBlockActivated(World w,int x,int y,int z,EntityPlayer player,int meta,float hitx,float hity,float hitz) {
-		if(w.getBlockId(x, y-1, z)==KernelCraftCore.Module.blockID) {
-			int id=TileEntityKernelCore.getNextID();
-			ItemStack referenceStack=new ItemStack(KernelCraftCore.KernelReference,1);
-			TileEntityKernelCore.kernelHash.put(id, new int[]{x,y-1,z});
-			referenceStack.setItemDamage(id);
-			player.inventory.addItemStackToInventory(referenceStack);
-			return true;
-		}
-		return false;
+		ItemStack referenceStack=new ItemStack(KernelCraftCore.KernelReference,1);
+		(referenceStack.stackTagCompound=new NBTTagCompound()).setIntArray("coords", new int[]{x,y,z});
+		player.inventory.addItemStackToInventory(referenceStack);
+		return true;
 	}
 	
 	@Override

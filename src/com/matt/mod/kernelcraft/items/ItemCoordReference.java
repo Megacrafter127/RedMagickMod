@@ -29,7 +29,7 @@ public class ItemCoordReference extends Item {
 			y+=face.getFrontOffsetY();
 			z+=face.getFrontOffsetZ();
 		}
-		TileEntityKernelCoordMemory.coords.put(stack.getItemDamage(), new int[]{x,y,z});
+		stack.stackTagCompound.setIntArray("coords", new int[]{x,y,z});
 		player.addChatMessage("Saved: "+x+", "+y+", "+z);
 		return true;
 	}
