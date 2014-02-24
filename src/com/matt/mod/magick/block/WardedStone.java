@@ -42,18 +42,24 @@ public class WardedStone extends Block implements ITileEntityProvider {
 	}
 
 
-	@Override
-	 public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer) {
-		if(par6EntityPlayer.getDisplayName() == ((TileEntityProtected)par1World.getBlockTileEntity(par2,par3,par4)).owner)
-		{
-			par1World.setBlockToAir(par2,par3,par4);
-		}else{
-			setBlockUnbreakable();
-		}
-	}
+	
 	@Override
 	 public int idDropped(int par1, Random par2Random, int par3)
     {
         return this.blockID;
+    }
+	  /**
+     * Gets the hardness of block at the given coordinates in the given world, relative to the ability of the given
+     * EntityPlayer.
+     */
+	@Override
+    public float getPlayerRelativeBlockHardness(EntityPlayer par1EntityPlayer, World par2World, int par3, int par4, int par5)
+    {if(par1EntityPlayer.getDisplayName() == ((TileEntityProtected)par2World.getBlockTileEntity(par3,par3,par4)).owner)
+	{
+		return 0.1F;
+	}else{
+		setBlockUnbreakable();
+		return -1.0F;
+	}
     }
 }
