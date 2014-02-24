@@ -88,6 +88,8 @@ public class TileEntityKernelCore extends TileEntity {
 		while(!tasks.isEmpty()) {
 			KernelTask t=tasks.element();
 			if(t.finished()) {
+				System.out.println("task marked as finished");
+				sendChangeToServer();
 				tasks.removeFirst();
 			}
 			else {
@@ -95,7 +97,6 @@ public class TileEntityKernelCore extends TileEntity {
 				break;
 			}
 		}
-		sendChangeToServer();
 	}
 	
 	private void addPermanentParticles() {
@@ -167,6 +168,7 @@ public class TileEntityKernelCore extends TileEntity {
 	public boolean addBlockAffectEffect(int x,int y,int z,int time) {
 		if(!getWorldObj().isRemote&&time>0) {
 			affectList.add(new int[]{x,y,z,time});
+			sendChangeToServer();
 			return true;
 		}
 		return false;
@@ -231,36 +233,46 @@ public class TileEntityKernelCore extends TileEntity {
 		L:for(int i=-1;i<2;i++) {
 			for(int j=-1;j<2;j++) {
 				for(int k=-2;k<2;k++) {
-					try{
-						IInventory inv=(IInventory)getWorldObj().getBlockTileEntity(xCoord+i, yCoord+k, zCoord+j);
-						for(int l=0;l<inv.getSizeInventory();l++) {
-							if(inv.isItemValidForSlot(l, ret)) {
-								ItemStack stack2=inv.getStackInSlot(l);
-								if(stack2.itemID==ret.itemID&&stack2.getItemDamage()==ret.getItemDamage()) {
-									stack2.stackSize+=ret.stackSize;
-									if(stack2.stackSize>stack2.getMaxStackSize()) {
-										ret.stackSize=stack2.stackSize-stack2.getMaxStackSize();
-										stack2.stackSize=stack2.getMaxStackSize();
-									}
-									else {
+					if((k==-1||k==0)&&i==0&&j==0) {}
+					else {
+						try{
+							IInventory inv=(IInventory)getWorldObj().getBlockTileEntity(xCoord+i, yCoord+k, zCoord+j);
+							for(int l=0;l<inv.getSizeInventory();l++) {
+								if(inv.isItemValidForSlot(l, ret)) {
+									ItemStack stack2=inv.getStackInSlot(l);
+									if(stack2==null) {
+										inv.setInventorySlotContents(l, ret);
 										ret=null;
 										break L;
+									}
+									if(stack2.itemID==ret.itemID&&stack2.getItemDamage()==ret.getItemDamage()) {
+										stack2.stackSize+=ret.stackSize;
+										if(stack2.stackSize>stack2.getMaxStackSize()) {
+											ret.stackSize=stack2.stackSize-stack2.getMaxStackSize();
+											stack2.stackSize=stack2.getMaxStackSize();
+										}
+										else {
+											ret=null;
+											break L;
+										}
 									}
 								}
 							}
 						}
+						catch(ClassCastException ex) {
+							ex.printStackTrace(System.err);
+						}
+						catch(NullPointerException ex) {}
 					}
-					catch(ClassCastException ex) {}
-					catch(NullPointerException ex) {}
 				}
 			}
 		}
 		if(ret!=null) getWorldObj().spawnEntityInWorld(new EntityItem(getWorldObj(),x+0.5,y+0.5,z+0.5,ret));
 		getWorldObj().setBlockToAir(x, y, z);
-		System.out.println("mining: "+x+", "+y+", "+z);
 	}
 	
 	public void sendChangeToServer() {
+		if(!getWorldObj().isRemote) return;
 		Packet250CustomPayload packet=new Packet250CustomPayload();
 		packet.channel="KernelCoreUpdate";
 		NBTTagCompound nbt=new NBTTagCompound();

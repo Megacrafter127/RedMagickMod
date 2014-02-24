@@ -30,20 +30,22 @@ public class KernelMiningTask extends KernelTask {
 			return;
 		}
 		if(ticksPerBlock<=0) ticksPerBlock=1;
-		if(super.ticksPassed%ticksPerBlock==0) {
+		if(super.ticksPassed%(ticksPerBlock*10)==0) {
 			if(first) {
 				executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock);
 				first=false;
 				return;
 			}
 			executor.destroyBlock(ax, ay, az);
-			increment();
+			do{
+				increment();
+			} while(executor.getWorldObj().getBlockId(ax, ay, az)==0);
 			if(ay>y2) {
 				finished=true;
 				System.out.println("Task finished");
 				return;
 			}
-			executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock/10);
+			executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock);
 		}
 	}
 	
