@@ -441,15 +441,15 @@ public class ItemMagickWand extends Item {
 	            	   if (itemStack.stackTagCompound != null) { 
 	            		 
 	            		   list.add(EnumChatFormatting.BLUE + "Current Fos level :  " +itemStack.stackTagCompound.getInteger("light"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Skotádi level :  " +itemStack.stackTagCompound.getInteger("dark"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Magéia level:  " +itemStack.stackTagCompound.getInteger("magic"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Skotadi level :  " +itemStack.stackTagCompound.getInteger("dark"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Mageia level:  " +itemStack.stackTagCompound.getInteger("magic"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Akyrosi level :  " +itemStack.stackTagCompound.getInteger("null"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Fotia power :  " +itemStack.stackTagCompound.getInteger("fire"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Neró power :  " +itemStack.stackTagCompound.getInteger("water"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Aéras power :  " +itemStack.stackTagCompound.getInteger("air"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Nero power :  " +itemStack.stackTagCompound.getInteger("water"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Aeras power :  " +itemStack.stackTagCompound.getInteger("air"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Gaias power :  " +itemStack.stackTagCompound.getInteger("earth"));
 	            		   list.add(EnumChatFormatting.BLUE + "Current Zoi power :  " +itemStack.stackTagCompound.getInteger("life"));
-	            		   list.add(EnumChatFormatting.BLUE + "Current Deisidaimonía power :  " +itemStack.stackTagCompound.getInteger("death"));
+	            		   list.add(EnumChatFormatting.BLUE + "Current Deisidaimonia power :  " +itemStack.stackTagCompound.getInteger("death"));
 	            		   
 	            		   if(itemStack.getItemDamage() == 0) {
 	            			   list.add(EnumChatFormatting.GREEN + "Maximum discharge : 10");
