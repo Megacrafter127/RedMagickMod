@@ -10,9 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
 import com.matt.lib.Ref;
+import com.matt.mod.magick.SwagHelper;
 import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 
@@ -41,7 +41,13 @@ public class WardedStone extends Block implements ITileEntityProvider {
 		
 	}
 
-
+	/*@Override
+	public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer) {
+		if(par6EntityPlayer.capabilities.isCreativeMode) { 
+			par1World.setBlock(par2,par3,par4,SwagHelper.blockProtectedStone.blockID);
+			}
+	}	
+	*/
 	
 	@Override
 	 public int idDropped(int par1, Random par2Random, int par3)
@@ -62,4 +68,5 @@ public class WardedStone extends Block implements ITileEntityProvider {
 		return -1.0F;
 	}
     }
+	
 }
