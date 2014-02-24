@@ -206,9 +206,9 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		registerRecipesShapeless();
 		registerRecipesShaped();
 		registerTileEntities();
-		if(FutureCraft.enable_swag) {
+	
 			registerPlugin(new FutureCraftSwag());
-		}
+		
 		ClientProxy.registerTESR();
 		registerPlugin(new KernelCraftCore());
 		registerPlugin(FutureCraftTweaks.instance);
