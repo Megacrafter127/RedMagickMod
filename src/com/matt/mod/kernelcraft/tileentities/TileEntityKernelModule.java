@@ -52,7 +52,7 @@ public class TileEntityKernelModule extends TileEntity {
 			w.setBlock(xCoord, yCoord+1, zCoord, KernelCraftCore.Kernel.blockID);
 		}
 		else if(!active&&w.getBlockId(xCoord, yCoord+1, zCoord)==KernelCraftCore.Kernel.blockID) {
-			w.setBlockToAir(xCoord, yCoord+1, zCoord);
+			w.setBlockToAir(xCoord, yCoord+1, zCoord);	
 		}
 	}
 	
