@@ -70,6 +70,6 @@ public static void register() {
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,1),new ItemStack(magickCore,1,1),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,2),new ItemStack(magickCore,1,2),new ItemStack(Item.stick,1,0)));
 	GameRegistry.registerBlock(blockProtectedStone,ItemBlockProtectedStone.class,"Warded Stone");
-	LanguageRegistry.addName(blockProtectedStone,"Robber's Stone");
+	LanguageRegistry.addName(blockProtectedStone,"Protected Stone");
 }
 }
