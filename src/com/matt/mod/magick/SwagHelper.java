@@ -9,7 +9,9 @@ import com.matt.lib.Ref;
 import com.matt.mod.magick.block.SwagBattery;
 import com.matt.mod.magick.block.SwagBlock;
 import com.matt.mod.magick.block.SwagDecoBlock;
+import com.matt.mod.magick.block.WardedStone;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
+import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
 import com.matt.mod.magick.items.ItemWandCore;
@@ -31,6 +33,7 @@ public static final Item magickCore = new ItemWandCore(FutureCraft.swag_wand_idt
 public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
+public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
 public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
 	
@@ -66,5 +69,7 @@ public static void register() {
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,0),new ItemStack(magickCore,1,0),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,1),new ItemStack(magickCore,1,1),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,2),new ItemStack(magickCore,1,2),new ItemStack(Item.stick,1,0)));
+	GameRegistry.registerBlock(blockProtectedStone,ItemBlockProtectedStone.class,"Warded Stone");
+	LanguageRegistry.addName(blockProtectedStone,"Robber's Stone");
 }
 }
