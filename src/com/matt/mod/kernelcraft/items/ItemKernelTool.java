@@ -10,6 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.matt.mod.kernelcraft.KernelCraftCore;
+import com.matt.mod.kernelcraft.tasks.KernelFillingTask;
 import com.matt.mod.kernelcraft.tasks.KernelMiningTask;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 
@@ -91,6 +92,7 @@ public class ItemKernelTool extends Item {
 		if(w.isRemote) return false;
 		int dmg=item.getItemDamage();
 		if(!item.hasTagCompound()) item.stackTagCompound=new NBTTagCompound();
+		boolean enqueued=false;
 		if(dmg==mineToolMeta) {
 			int[] coord1=item.stackTagCompound.getIntArray("1coord");
 			if(coord1==null || coord1.length!=3) {
@@ -107,10 +109,43 @@ public class ItemKernelTool extends Item {
 			TileEntity t=w.getBlockTileEntity(x, y, z);
 			if(t!=null && t instanceof TileEntityKernelCore) {
 				((TileEntityKernelCore)t).enqueueTask(new KernelMiningTask(coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],1));
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-				player.addChatMessage("Miningtask enqueued!");
+				enqueued=true;
+			}
+		}
+		else if(dmg==fillToolMeta) {
+			int fillid,fillmeta;
+			if(item.stackTagCompound.hasKey("fillID")&&item.stackTagCompound.hasKey("fillMeta")) {
+				fillid=item.stackTagCompound.getInteger("fillID");
+				fillmeta=item.stackTagCompound.getInteger("fillMeta");
+			}
+			else {
+				item.stackTagCompound.setInteger("fillID", w.getBlockId(x, y, z));
+				item.stackTagCompound.setInteger("fillMeta", w.getBlockMetadata(x, y, z));
+				player.addChatMessage("Block to replace with selected.\nRight-click the 2 border edges of the area to fill");
 				return true;
 			}
+			int[] coord1=item.stackTagCompound.getIntArray("1coord");
+			if(coord1==null || coord1.length!=3) {
+				item.stackTagCompound.setIntArray("1coord", new int[]{x,y,z});
+				player.addChatMessage("Saved first coordinate: "+x+", "+y+", "+z);
+				return true;
+			}
+			int[] coord2=item.stackTagCompound.getIntArray("2coord");
+			if(coord2==null || coord2.length!=3) {
+				item.stackTagCompound.setIntArray("2coord", new int[]{x,y,z});
+				player.addChatMessage("Saved second coordinate: "+x+", "+y+", "+z+"\nTo start the task, right-click an active Kernel-Core.");
+				return true;
+			}
+			TileEntity t=w.getBlockTileEntity(x, y, z);
+			if(t!=null && t instanceof TileEntityKernelCore) {
+				((TileEntityKernelCore)t).enqueueTask(new KernelFillingTask(fillid,fillmeta,coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],1));
+				enqueued=true;
+			}
+		}
+		if(enqueued) {
+			item.stackTagCompound=null;
+			player.addChatMessage("Task enqueued! Resetting Kerneltool");
+			return true;
 		}
 		return false;
 	}
