@@ -36,8 +36,11 @@ public class KernelCoreUpdatePacketHandler implements IPacketHandler {
 			NBTTagCompound nbt=CompressedStreamTools.decompress(b);
 			World w;
 			w=FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(dim);
-			w.getBlockTileEntity(x, y, z).readFromNBT(nbt);
-			w.markBlockForUpdate(x, y, z);
+			try{
+				w.getBlockTileEntity(x, y, z).readFromNBT(nbt);
+				w.markBlockForUpdate(x, y, z);
+			}
+			catch(NullPointerException ex) {}
 		}
 		catch(IOException ex) {
 			System.err.println(ex.toString());

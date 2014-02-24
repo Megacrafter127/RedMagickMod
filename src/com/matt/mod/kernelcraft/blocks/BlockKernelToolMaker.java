@@ -48,6 +48,7 @@ public class BlockKernelToolMaker extends Block {
 					itemStack.stackSize--;
 					if(itemStack.stackSize==0) player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.countToolMeta));
 					else player.inventory.setCurrentItem(KernelCraftCore.KernelTool.itemID, ItemKernelTool.mineToolMeta, true, true);
+					player.inventory.inventoryChanged=true;
 					return true;
 				}
 			}
@@ -56,6 +57,7 @@ public class BlockKernelToolMaker extends Block {
 					itemStack.stackSize--;
 					if(itemStack.stackSize==0) player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool.itemID, 1, ItemKernelTool.fillToolMeta));
 					else player.inventory.setCurrentItem(KernelCraftCore.KernelTool.itemID, ItemKernelTool.mineToolMeta, true, true);
+					player.inventory.inventoryChanged=true;
 					return true;
 				}
 			}

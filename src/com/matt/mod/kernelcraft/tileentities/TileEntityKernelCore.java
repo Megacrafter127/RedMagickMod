@@ -22,6 +22,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.kernelcraft.tasks.KernelTask;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -78,6 +79,9 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		catch(ClassCastException ex) {
 			System.err.println(ex);
+		}
+		if(!KernelCraftCore.Kernel.canPlaceBlockAt(getWorldObj(), xCoord, yCoord, zCoord)) {
+			getWorldObj().setBlockToAir(xCoord, yCoord, zCoord);
 		}
 		addPermanentParticles();
 		addAffectionParticles();

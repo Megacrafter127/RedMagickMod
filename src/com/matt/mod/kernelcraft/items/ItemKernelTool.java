@@ -106,7 +106,7 @@ public class ItemKernelTool extends Item {
 			}
 			TileEntity t=w.getBlockTileEntity(x, y, z);
 			if(t!=null && t instanceof TileEntityKernelCore) {
-				((TileEntityKernelCore)t).enqueueTask(new KernelMiningTask(coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],5));
+				((TileEntityKernelCore)t).enqueueTask(new KernelMiningTask(coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],60));
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				player.addChatMessage("Miningtask enqueued!");
 				return true;

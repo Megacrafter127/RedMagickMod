@@ -16,9 +16,9 @@ public class KernelMiningTask extends KernelTask {
 		this.x2=x>x2?x:x2;
 		this.y2=y>y2?y:y2;
 		this.z2=z>z2?z:z2;
-		ax=x;
-		ay=y;
-		az=z;
+		ax=this.x;
+		ay=this.y;
+		az=this.z;
 		this.ticksPerBlock=ticksPerBlock;
 	}
 
@@ -37,22 +37,13 @@ public class KernelMiningTask extends KernelTask {
 				return;
 			}
 			executor.destroyBlock(ax, ay, az);
-			ax++;
-			if(ax>x2) {
-				ax=x;
-				az++;
-			}
-			
-			if(az>z2) {
-				az=z;
-				ay++;
-			}
+			increment();
 			if(ay>y2) {
 				finished=true;
 				System.out.println("Task finished");
 				return;
 			}
-			executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock);
+			executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock/10);
 		}
 	}
 	
@@ -87,5 +78,18 @@ public class KernelMiningTask extends KernelTask {
 		nbt.setInteger("az", az);
 		nbt.setBoolean("finished", finished);
 		nbt.setBoolean("first", first);
+	}
+	
+	private void increment() {
+		ax++;
+		if(ax>x2) {
+			ax=x;
+			az++;
+		}
+		
+		if(az>z2) {
+			az=z;
+			ay++;
+		}
 	}
 }
