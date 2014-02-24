@@ -12,41 +12,44 @@ public class KernelMiningTask extends KernelTask {
 
 	public KernelMiningTask() {}
 	public KernelMiningTask(int x,int y,int z,int x2,int y2,int z2,int ticksPerBlock) {
-		super(Math.abs(ticksPerBlock*(x2-x)*(y2-y)*(z2-z)),x,y,z);
+		super(Math.abs(ticksPerBlock*(x2-x)*(y2-y)*(z2-z)),x>x2?x2:x,y>y2?y2:y,z>z2?z2:z);
+		this.x2=x>x2?x:x2;
+		this.y2=y>y2?y:y2;
+		this.z2=z>z2?z:z2;
+		ax=x;
+		ay=y;
+		az=z;
+		this.ticksPerBlock=ticksPerBlock;
 	}
 
 	@Override
 	public void runTaskTick(TileEntityKernelCore executor) {
+		if(executor.getWorldObj().isRemote) return;
+		if(finished) {
+			System.out.println("IllegalCall");
+			return;
+		}
 		if(ticksPerBlock<=0) ticksPerBlock=1;
 		if(super.ticksPassed%ticksPerBlock==0) {
 			if(first) {
-				ax=x>x2?x2:x;
-				ay=y>y2?y2:y;
-				az=z>z2?z2:z;
 				executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock);
 				first=false;
 				return;
 			}
 			executor.destroyBlock(ax, ay, az);
 			ax++;
-			if(ax>x2&&x2>x) {
+			if(ax>x2) {
 				ax=x;
 				az++;
 			}
-			else if(ax>x) {
-				ax=x2;
-				az++;
-			}
-			if(az>z2&&z2>z) {
+			
+			if(az>z2) {
 				az=z;
 				ay++;
 			}
-			else if(az>z) {
-				az=z2;
-				ay++;
-			}
-			if(ay>y&&ay>y2) {
+			if(ay>y2) {
 				finished=true;
+				System.out.println("Task finished");
 				return;
 			}
 			executor.addBlockAffectEffect(ax, ay, az, ticksPerBlock);

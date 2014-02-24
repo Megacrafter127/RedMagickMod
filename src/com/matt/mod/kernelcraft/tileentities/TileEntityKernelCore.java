@@ -81,21 +81,17 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		addPermanentParticles();
 		addAffectionParticles();
-		boolean send=false;
 		while(!tasks.isEmpty()) {
 			KernelTask t=tasks.element();
 			if(t.finished()) {
 				tasks.removeFirst();
-				send=true;
 			}
 			else {
 				t.run(this);
 				break;
 			}
 		}
-		if(send) {
-			sendChangeToServer();
-		}
+		sendChangeToServer();
 	}
 	
 	private void addPermanentParticles() {
@@ -257,7 +253,7 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		if(ret!=null) getWorldObj().spawnEntityInWorld(new EntityItem(getWorldObj(),x+0.5,y+0.5,z+0.5,ret));
 		getWorldObj().setBlockToAir(x, y, z);
-		System.out.println("mining");
+		System.out.println("mining: "+x+", "+y+", "+z);
 	}
 	
 	public void sendChangeToServer() {
@@ -268,6 +264,7 @@ public class TileEntityKernelCore extends TileEntity {
 		ByteArrayOutputStream out=new ByteArrayOutputStream();
 		DataOutputStream output=new DataOutputStream(out);
 		try{
+			output.writeInt(getWorldObj().provider.dimensionId);
 			output.writeInt(xCoord);
 			output.writeInt(yCoord);
 			output.writeInt(zCoord);

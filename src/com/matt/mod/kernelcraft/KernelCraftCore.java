@@ -10,6 +10,7 @@ import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
+import com.matt.mod.handlers.MultiPacketHandler;
 import com.matt.mod.kernelcraft.blocks.BlockKernelCPU;
 import com.matt.mod.kernelcraft.blocks.BlockKernelCore;
 import com.matt.mod.kernelcraft.blocks.BlockKernelIOFace;
@@ -189,6 +190,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 
 	@Override
 	public void register() {
+		MultiPacketHandler.addPacketHandler(new KernelCoreUpdatePacketHandler(), "KernelCoreUpdate");
 		loadIDs();
 		registerBlocks();
 		registerItems();
