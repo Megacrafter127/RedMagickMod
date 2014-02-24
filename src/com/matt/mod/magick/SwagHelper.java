@@ -3,6 +3,7 @@ package com.matt.mod.magick;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
@@ -10,6 +11,7 @@ import com.matt.mod.magick.block.SwagBattery;
 import com.matt.mod.magick.block.SwagBlock;
 import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.WardedStone;
+import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
@@ -71,5 +73,7 @@ public static void register() {
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,2),new ItemStack(magickCore,1,2),new ItemStack(Item.stick,1,0)));
 	GameRegistry.registerBlock(blockProtectedStone,ItemBlockProtectedStone.class,"Warded Stone");
 	LanguageRegistry.addName(blockProtectedStone,"Protected Stone");
+	TileEntity.addMapping(TileEntityProtected.class, "Protected Block");
+	Block[] blocks = {Block.stoneBrick, SwagHelper.blockProtectedStone, Block.stone, Block.cobblestoneMossy,  Block.blockNetherQuartz};
 }
-}
+}	
