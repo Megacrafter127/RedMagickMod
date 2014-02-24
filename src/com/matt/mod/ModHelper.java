@@ -60,8 +60,8 @@ public class ModHelper {
 		GameRegistry.registerBlock(oreRoent, "oreRoentgenium");
 		GameRegistry.registerBlock(dimensionalInfuser, "dimensionalInfuser");
 		GameRegistry.registerBlock(altarCore, "altarCore");
-		GameRegistry.registerBlock(gameOfLifeBlock, "gameOfLifeBlock");
-		GameRegistry.registerBlock(controlerGOL, "gameOfLifeControler");
+		//GameRegistry.registerBlock(gameOfLifeBlock, "gameOfLifeBlock");
+		//GameRegistry.registerBlock(controlerGOL, "gameOfLifeControler");
 		}
 	public static void registerBlockNames() {
 		LanguageRegistry.addName(basicFutureBlock, "Iron Machine Handler");

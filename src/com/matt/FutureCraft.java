@@ -137,7 +137,7 @@ public class FutureCraft {
             		jetpackId = config.getItem("jetpack", 594).getInt();
             		loreBookId = config.getItem("loreBook", 650).getInt();
             		altarCoreID = config.getBlock("Altar Core", 547).getInt();
-            		blockGOLID = config.getBlock("GOL", 548).getInt();
+            		blockGOLID = config.getBlock("Magick","Warded Stone", 548).getInt();
             		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
             		
             		enable_swag = FutureCraft.config.get("Module", "Enable Magick", true).getBoolean(true);
