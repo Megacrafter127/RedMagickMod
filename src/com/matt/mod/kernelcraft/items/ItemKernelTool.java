@@ -1,14 +1,20 @@
 package com.matt.mod.kernelcraft.items;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
+import org.lwjgl.input.Keyboard;
+
+import com.matt.mod.generic.helpers.ChatHelper;
 import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.kernelcraft.tasks.KernelFillingTask;
 import com.matt.mod.kernelcraft.tasks.KernelMiningTask;
@@ -16,14 +22,22 @@ import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+/**
+ * 
+ * @author Megacrafter127
+ *
+ */
 public class ItemKernelTool extends Item {
-	public static final int mineToolMeta=0;
-	public static final int fillToolMeta=1;
-	public static final int hoeToolMeta=2;
-	public static final int harvestToolMeta=3;
-	public static final int countToolMeta=4;
+	public static final int commandToolMeta=0;
+	public static final int mineToolMeta=1;
+	public static final int fillToolMeta=2;
+	public static final int hoeToolMeta=3;
+	public static final int harvestToolMeta=4;
+	public static final int countToolMeta=5;
 	
+	
+	@SideOnly(Side.CLIENT)
+	private Icon commandTool;
 	@SideOnly(Side.CLIENT)
 	private Icon mineTool;
 	@SideOnly(Side.CLIENT)
@@ -47,6 +61,7 @@ public class ItemKernelTool extends Item {
 	@Override
 	public void registerIcons(IconRegister r) {
 		super.registerIcons(r);
+		commandTool=r.registerIcon(KernelCraftCore.toTextureName("commandkerneltool"));
 		mineTool=r.registerIcon(KernelCraftCore.toTextureName("minekerneltool"));
 		fillTool=r.registerIcon(KernelCraftCore.toTextureName("fillkerneltool"));
 		hoeTool=r.registerIcon(KernelCraftCore.toTextureName("hoekerneltool"));
@@ -57,29 +72,71 @@ public class ItemKernelTool extends Item {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getIconFromDamage(int dmg) {
-		if(dmg==mineToolMeta) return mineTool;
-		if(dmg==fillToolMeta) return fillTool;
-		if(dmg==hoeToolMeta) return hoeTool;
-		if(dmg==harvestToolMeta) return harvestTool;
-		if(dmg==countToolMeta) return countTool;
-		return super.getIconFromDamage(dmg);
+		switch(dmg) {
+		case commandToolMeta: return commandTool;
+		case mineToolMeta: return mineTool;
+		case fillToolMeta: return fillTool;
+		case hoeToolMeta: return hoeTool;
+		case harvestToolMeta: return harvestTool;
+		case countToolMeta: return countTool;
+		default: return super.getIconFromDamage(dmg);
+		}
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		int dmg=stack.getItemDamage();
-		if(dmg==mineToolMeta) return "Kernel Mining Tool";
-		if(dmg==fillToolMeta) return "Kernel Filling Tool";
-		if(dmg==hoeToolMeta) return "Kernel Hoeing Tool";
-		if(dmg==harvestToolMeta) return "Kernel Harvesting Tool";
-		if(dmg==countToolMeta) return "Kernel Counting Tool";
-		return super.getUnlocalizedName(stack);
+		switch(stack.getItemDamage()) {
+		case commandToolMeta: return "Kernel Command Tool";
+		case mineToolMeta: return "Kernel Mining Tool";
+		case fillToolMeta: return "Kernel Filling Tool";
+		case hoeToolMeta: return "Kernel Hoeing Tool";
+		case harvestToolMeta: return "Kernel Harvesting Tool";
+		case countToolMeta: return "Kernel Counting Tool";
+		default: return super.getUnlocalizedName(stack);
+		}
 	}
 	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getIcon(ItemStack stack,int pass) {
 		return getIconFromDamage(stack.getItemDamage());
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack,EntityPlayer player,List list, boolean b) {
+		super.addInformation(stack, player, list, b);
+		boolean shift=Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)||Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+		NBTTagCompound nbt=stack.stackTagCompound;
+		if(nbt==null) {
+			nbt=stack.stackTagCompound=new NBTTagCompound();
+			player.inventory.inventoryChanged=true;
+		}
+		EnumChatFormatting[] stdformat=new EnumChatFormatting[]{EnumChatFormatting.GRAY};
+		EnumChatFormatting[] hintformat=new EnumChatFormatting[]{EnumChatFormatting.GREEN};
+		EnumChatFormatting[] numberformat=new EnumChatFormatting[]{EnumChatFormatting.AQUA};
+		EnumChatFormatting[] errorformat=new EnumChatFormatting[]{EnumChatFormatting.BOLD,EnumChatFormatting.RED,EnumChatFormatting.UNDERLINE};
+		switch(stack.getItemDamage()) {
+		case commandToolMeta:
+			list.add(stdformat+nbt.toString());
+			break;
+		case mineToolMeta:
+			if(nbt.hasKey("1coord")) {
+				int[] c=nbt.getIntArray("1coord");
+				list.add(ChatHelper.acf("1st coords: ",stdformat)+ChatHelper.acf(""+c[0], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[1], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[2], numberformat));
+				if(nbt.hasKey("2coord")) {
+					c=nbt.getIntArray("2coord");
+					list.add(ChatHelper.acf("2nd coords: ",stdformat)+ChatHelper.acf(""+c[0], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[1], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[2], numberformat));
+					list.add(ChatHelper.acf("Right-click on a Kernel-Core", hintformat));
+					list.add(ChatHelper.acf("to enqueue this task.", hintformat));
+				}
+				else {list.add(hintformat+"mark the end of area to mine out");list.add(hintformat+"by right-clicking on the block,");list.add(hintformat+"that shall limit it.");}
+			}
+			else {list.add(hintformat+"mark the area to mine out");list.add(hintformat+"by right-clicking on the blocks,");list.add(hintformat+"that shall limit it.");}
+			break;
+		default:
+			list.add(ChatHelper.acf("Unknown Tool, no data available",errorformat));
+			break;
+		}
 	}
 	
 	@Override
@@ -90,29 +147,39 @@ public class ItemKernelTool extends Item {
 	@Override
 	public boolean onItemUseFirst(ItemStack item,EntityPlayer player,World w,int x,int y,int z,int side,float hitx,float hity,float hitz) {
 		if(w.isRemote) return false;
-		int dmg=item.getItemDamage();
 		if(!item.hasTagCompound()) item.stackTagCompound=new NBTTagCompound();
 		boolean enqueued=false;
-		if(dmg==mineToolMeta) {
-			int[] coord1=item.stackTagCompound.getIntArray("1coord");
+		TileEntity t=w.getBlockTileEntity(x, y, z);
+		int[] coord1,coord2;
+		switch(item.getItemDamage()) {
+		case commandToolMeta:
+			t=w.getBlockTileEntity(x, y, z);
+			if(t!=null && t instanceof TileEntityKernelCore) {
+				NBTTagCompound newtasks=new NBTTagCompound();
+				TileEntityKernelCore c=(TileEntityKernelCore)t;
+				c.writeTasksToNBT(newtasks);
+				c.readTasksFromNBT(item.stackTagCompound);
+				item.stackTagCompound=newtasks;
+				player.addChatMessage("Tasklist exchanged");
+			}
+			break;
+		case mineToolMeta:
+			coord1=item.stackTagCompound.getIntArray("1coord");
 			if(coord1==null || coord1.length!=3) {
 				item.stackTagCompound.setIntArray("1coord", new int[]{x,y,z});
-				player.addChatMessage("Saved first coordinate: "+x+", "+y+", "+z);
 				return true;
 			}
-			int[] coord2=item.stackTagCompound.getIntArray("2coord");
+			coord2=item.stackTagCompound.getIntArray("2coord");
 			if(coord2==null || coord2.length!=3) {
 				item.stackTagCompound.setIntArray("2coord", new int[]{x,y,z});
-				player.addChatMessage("Saved second coordinate: "+x+", "+y+", "+z+"\nTo start the task, right-click an active Kernel-Core.");
 				return true;
 			}
-			TileEntity t=w.getBlockTileEntity(x, y, z);
 			if(t!=null && t instanceof TileEntityKernelCore) {
 				((TileEntityKernelCore)t).enqueueTask(new KernelMiningTask(coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],1));
 				enqueued=true;
 			}
-		}
-		else if(dmg==fillToolMeta) {
+			break;
+		case fillToolMeta:
 			int fillid,fillmeta;
 			if(item.stackTagCompound.hasKey("fillID")&&item.stackTagCompound.hasKey("fillMeta")) {
 				fillid=item.stackTagCompound.getInteger("fillID");
@@ -121,29 +188,27 @@ public class ItemKernelTool extends Item {
 			else {
 				item.stackTagCompound.setInteger("fillID", w.getBlockId(x, y, z));
 				item.stackTagCompound.setInteger("fillMeta", w.getBlockMetadata(x, y, z));
-				player.addChatMessage("Block to replace with selected.\nRight-click the 2 border edges of the area to fill");
 				return true;
 			}
-			int[] coord1=item.stackTagCompound.getIntArray("1coord");
+			coord1=item.stackTagCompound.getIntArray("1coord");
 			if(coord1==null || coord1.length!=3) {
 				item.stackTagCompound.setIntArray("1coord", new int[]{x,y,z});
-				player.addChatMessage("Saved first coordinate: "+x+", "+y+", "+z);
 				return true;
 			}
-			int[] coord2=item.stackTagCompound.getIntArray("2coord");
+			coord2=item.stackTagCompound.getIntArray("2coord");
 			if(coord2==null || coord2.length!=3) {
 				item.stackTagCompound.setIntArray("2coord", new int[]{x,y,z});
-				player.addChatMessage("Saved second coordinate: "+x+", "+y+", "+z+"\nTo start the task, right-click an active Kernel-Core.");
 				return true;
 			}
-			TileEntity t=w.getBlockTileEntity(x, y, z);
 			if(t!=null && t instanceof TileEntityKernelCore) {
 				((TileEntityKernelCore)t).enqueueTask(new KernelFillingTask(fillid,fillmeta,coord1[0],coord1[1],coord1[2],coord2[0],coord2[1],coord2[2],1));
 				enqueued=true;
 			}
+			break;
 		}
 		if(enqueued) {
 			item.stackTagCompound=null;
+			player.inventory.inventoryChanged=true;
 			player.addChatMessage("Task enqueued! Resetting Kerneltool");
 			return true;
 		}

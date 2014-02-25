@@ -3,11 +3,8 @@ package com.matt.mod.kernelcraft.tileentities;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
@@ -17,13 +14,16 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.kernelcraft.tasks.KernelTask;
+import com.matt.mod.kernelcraft.tasks.TaskTypeException;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -177,40 +177,68 @@ public class TileEntityKernelCore extends TileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		nbt.setInteger("affectsize",affectList.size());
-		int c=0;
-		for(int[] i:affectList) {
-			nbt.setIntArray("affect."+c, i);
-			c++;
-		}
-		nbt.setInteger("tasksize", tasks.size());
-		c=0;
-		for(KernelTask t:tasks) {
-			NBTTagCompound taskNBT=new NBTTagCompound();
-			t.writeToNBT(taskNBT);
-			nbt.setCompoundTag("task."+c, taskNBT);
-			c++;
-		}
+		writeEffectsToNBT(nbt);
+		writeTasksToNBT(nbt);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		LinkedList<int[]> replacement=new LinkedList<int[]>();
-		int max=nbt.getInteger("affectsize");
-		for(int i=0;i<max;i++) {
-			replacement.add(nbt.getIntArray("affect."+i));
+		readEffectsFromNBT(nbt);
+		readTasksFromNBT(nbt);
+	}
+	
+	public void writeTasksToNBT(NBTTagCompound nbt) {
+		NBTTagList nbtList=new NBTTagList();
+		for(KernelTask t:tasks) {
+			NBTTagCompound nbt2=new NBTTagCompound();
+			t.writeToNBT(nbt2);
+			nbtList.appendTag(nbt2);
 		}
-		LinkedList<KernelTask> taskReplacement=new LinkedList<KernelTask>();
-		max=nbt.getInteger("tasksize");
-		replacement=new LinkedList<int[]>();
-		for(int i=0;i<max;i++) {
-			KernelTask t=KernelTask.loadTaskFromNBT(nbt.getCompoundTag("task."+i));
-			if(t!=null) {
-				taskReplacement.add(t);
+		nbt.setTag("tasklist", nbtList);
+	}
+	
+	public void writeEffectsToNBT(NBTTagCompound nbt) {
+		NBTTagList nbtList=new NBTTagList();
+		for(int[] effectData:affectList) {
+			NBTTagCompound nbt2=new NBTTagCompound();
+			nbt2.setIntArray("effect", effectData);
+			nbtList.appendTag(nbt2);
+		}
+		nbt.setTag("affectlist", nbtList);
+	}
+	
+	public void readTasksFromNBT(NBTTagCompound nbt) {
+		NBTTagList nbtList=nbt.getTagList("tasks");
+		LinkedList<KernelTask> toRemove=new LinkedList<KernelTask>();
+		for(KernelTask t:tasks) {
+			boolean remove=true;
+			for(int i=0;i<nbtList.tagCount();i++) {
+				try{
+					t.readFromNBT((NBTTagCompound)nbtList.tagAt(i));
+					nbtList.removeTag(i);
+					remove=false;
+					break;
+				}
+				catch(TaskTypeException ex) {}
+			}
+			if(remove) {
+				toRemove.add(t);
 			}
 		}
-		tasks=taskReplacement;
+		tasks.removeAll(toRemove);
+		while(nbtList.tagCount()>0) {
+			tasks.add(KernelTask.loadTaskFromNBT((NBTTagCompound)nbtList.tagAt(0)));
+		}
+	}
+	
+	public void readEffectsFromNBT(NBTTagCompound nbt) {
+		LinkedList<int[]> replacement=new LinkedList<int[]>();
+		NBTTagList nbtList=nbt.getTagList("affectlist");
+		while(nbtList.tagCount()>0) {
+			replacement.add(((NBTTagCompound)nbtList.removeTag(0)).getIntArray("effect"));
+		}
+		affectList=replacement;
 	}
 	
 	public void enqueueTask(KernelTask t) {

@@ -41,7 +41,7 @@ public abstract class KernelTask {
 	 * @param nbt - the tag compound to read from
 	 */
 	public void readFromNBT(NBTTagCompound nbt) {
-		if(!getClass().getName().equals(nbt.getString("type"))) System.err.println("type mismatch: tasktype: "+getClass().getName()+" read-type: "+nbt.getString("type"));
+		if(!getClass().getName().equals(nbt.getString("type"))) throw new TaskTypeException("type mismatch: tasktype: "+getClass().getName()+" read-type: "+nbt.getString("type"));
 		ticksLeft=nbt.getInteger("ticksLeft");
 		ticksPassed=nbt.getInteger("ticksPassed");
 		x=nbt.getInteger("x");

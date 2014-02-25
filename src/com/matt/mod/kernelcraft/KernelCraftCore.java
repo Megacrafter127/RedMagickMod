@@ -16,7 +16,6 @@ import com.matt.mod.kernelcraft.blocks.BlockKernelCore;
 import com.matt.mod.kernelcraft.blocks.BlockKernelIOFace;
 import com.matt.mod.kernelcraft.blocks.BlockKernelModule;
 import com.matt.mod.kernelcraft.blocks.BlockKernelStorage;
-import com.matt.mod.kernelcraft.blocks.BlockKernelToolMaker;
 import com.matt.mod.kernelcraft.blocks.BlockKernelUSV;
 import com.matt.mod.kernelcraft.items.ItemKernelTool;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCPU;
@@ -51,7 +50,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		private static int CPUID=905;
 		//end base
 		//misc
-		private static int KernelToolMakerID=911;
 		//end misc
 		//items
 		private static int KernelToolID=951;
@@ -74,7 +72,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		public static BlockKernelCPU CPU;
 		//end base
 		//misc
-		public static BlockKernelToolMaker KernelToolMaker;
 		//end misc
 		//items
 		public static ItemKernelTool KernelTool;
@@ -97,7 +94,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		CPUID=FutureCraft.config.getBlock("kernelCPU", CPUID).getInt();
 		//end base
 		//misc
-		KernelToolMakerID=FutureCraft.config.getBlock("kernelToolMaker", KernelToolMakerID).getInt();
 		//end misc
 		//items
 		KernelToolID=FutureCraft.config.getItem("kernelTool", KernelToolID).getInt();
@@ -123,8 +119,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		GameRegistry.registerBlock(CPU, "kernelCPU");
 		//end base
 		//misc
-		KernelToolMaker=new BlockKernelToolMaker(KernelToolMakerID);
-		GameRegistry.registerBlock(KernelToolMaker, "kernelToolMaker");
 		//end misc
 		//languages
 		LanguageRegistry.addName(Kernel, "Kernel Core");
@@ -138,8 +132,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		LanguageRegistry.addName(IOFace, "Kernel IOFace");
 		
 		LanguageRegistry.addName(CPU, "Kernel CPU");
-		
-		LanguageRegistry.addName(KernelToolMaker, "Kernel Tool Maker");
 	}
 	
 	public static void registerCreativeTabs() {
@@ -148,7 +140,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		USV.setCreativeTab(kernelCraft);
 		IOFace.setCreativeTab(kernelCraft);
 		CPU.setCreativeTab(kernelCraft);
-		KernelToolMaker.setCreativeTab(kernelCraft);
 	}
 	
 	public static void registerItems() {
@@ -156,6 +147,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		GameRegistry.registerItem(KernelTool, "kernelTool");
 		
 		//langs
+		LanguageRegistry.addName(new ItemStack(KernelTool,1,ItemKernelTool.commandToolMeta), "Kenel Command Tool");
 		LanguageRegistry.addName(new ItemStack(KernelTool,1,ItemKernelTool.mineToolMeta), "Kernel Mining Tool");
 		LanguageRegistry.addName(new ItemStack(KernelTool,1,ItemKernelTool.fillToolMeta), "Kernel Filling Tool");
 		LanguageRegistry.addName(new ItemStack(KernelTool,1,ItemKernelTool.hoeToolMeta), "Kernel Hoeing Tool");
