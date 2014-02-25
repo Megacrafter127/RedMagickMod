@@ -74,6 +74,6 @@ public static void register() {
 	GameRegistry.registerBlock(blockProtectedStone,ItemBlockProtectedStone.class,"Warded Stone");
 	LanguageRegistry.addName(blockProtectedStone,"Protected Stone");
 	TileEntity.addMapping(TileEntityProtected.class, "Protected Block");
-	
+	ArmorHelper.register();
 }
 }	
