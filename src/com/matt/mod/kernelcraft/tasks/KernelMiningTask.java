@@ -39,7 +39,7 @@ public class KernelMiningTask extends KernelTask {
 			executor.destroyBlock(ax, ay, az);
 			do{
 				increment();
-			} while(executor.getWorldObj().getBlockId(ax, ay, az)==0);
+			} while(executor.getWorldObj().getBlockId(ax, ay, az)==0&&ay<=y2);
 			if(ay>y2) {
 				finished=true;
 				System.out.println("Task finished");

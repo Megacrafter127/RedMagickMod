@@ -34,6 +34,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		return Ref.NAME.toLowerCase()+":"+name;
 	}
 	protected static CreativeTabs kernelCraft = new TabFuture(CreativeTabs.getNextID(),"KernelCraft","kernel");
+	protected static final KernelCoreUpdatePacketHandler handler=new KernelCoreUpdatePacketHandler();
 	//IDs
 		//base extenders
 		private static int DriveID=912;
@@ -182,7 +183,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 
 	@Override
 	public void register() {
-		MultiPacketHandler.addPacketHandler(new KernelCoreUpdatePacketHandler(), "KernelCoreUpdate");
+		MultiPacketHandler.addPacketHandler(handler, "KernelCoreUpdate", "KernelCoreEffectUpdate", "KernelCoreTaskUpdate");
 		loadIDs();
 		registerBlocks();
 		registerItems();

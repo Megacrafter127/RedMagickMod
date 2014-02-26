@@ -129,9 +129,28 @@ public class ItemKernelTool extends Item {
 					list.add(ChatHelper.acf("Right-click on a Kernel-Core", hintformat));
 					list.add(ChatHelper.acf("to enqueue this task.", hintformat));
 				}
-				else {list.add(hintformat+"mark the end of area to mine out");list.add(hintformat+"by right-clicking on the block,");list.add(hintformat+"that shall limit it.");}
+				else {list.add(ChatHelper.acf("mark the end of area to fill in",hintformat));list.add(ChatHelper.acf("by right-clicking on the block,",hintformat));list.add(ChatHelper.acf("that shall limit it.",hintformat));}
 			}
-			else {list.add(hintformat+"mark the area to mine out");list.add(hintformat+"by right-clicking on the blocks,");list.add(hintformat+"that shall limit it.");}
+			else {list.add(ChatHelper.acf("mark the area to fill in",hintformat));list.add(ChatHelper.acf("by right-clicking on the blocks,",hintformat));list.add(ChatHelper.acf("that shall limit it.",hintformat));}
+			break;
+		case fillToolMeta:
+			if(nbt.hasKey("fillID")&&nbt.hasKey("fillMeta")) {
+				list.add(ChatHelper.acf("BlockID: ", stdformat)+ChatHelper.acf(""+nbt.getInteger("fillID"), numberformat));
+				list.add(ChatHelper.acf("BlockMeta: ", stdformat)+ChatHelper.acf(""+nbt.getInteger("fillMeta"), numberformat));
+				if(nbt.hasKey("1coord")) {
+					int[] c=nbt.getIntArray("1coord");
+					list.add(ChatHelper.acf("1st coords: ",stdformat)+ChatHelper.acf(""+c[0], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[1], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[2], numberformat));
+					if(nbt.hasKey("2coord")) {
+						c=nbt.getIntArray("2coord");
+						list.add(ChatHelper.acf("2nd coords: ",stdformat)+ChatHelper.acf(""+c[0], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[1], numberformat)+ChatHelper.acf(", ", stdformat)+ChatHelper.acf(""+c[2], numberformat));
+						list.add(ChatHelper.acf("Right-click on a Kernel-Core", hintformat));
+						list.add(ChatHelper.acf("to enqueue this task.", hintformat));
+					}
+					else {list.add(ChatHelper.acf("mark the end of area to fill in",hintformat));list.add(ChatHelper.acf("by right-clicking on the block,",hintformat));list.add(ChatHelper.acf("that shall limit it.",hintformat));}
+				}
+				else {list.add(ChatHelper.acf("mark the area to fill in",hintformat));list.add(ChatHelper.acf("by right-clicking on the blocks,",hintformat));list.add(ChatHelper.acf("that shall limit it.",hintformat));}
+			}
+			else {list.add(ChatHelper.acf("select the block,",hintformat));list.add(ChatHelper.acf(" to fill an area with.",hintformat));}
 			break;
 		default:
 			list.add(ChatHelper.acf("Unknown Tool, no data available",errorformat));

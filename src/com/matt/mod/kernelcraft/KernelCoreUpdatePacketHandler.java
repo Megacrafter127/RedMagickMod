@@ -9,15 +9,15 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
+
+import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 public class KernelCoreUpdatePacketHandler implements IPacketHandler {
 
 	@Override
@@ -35,12 +35,24 @@ public class KernelCoreUpdatePacketHandler implements IPacketHandler {
 			}
 			NBTTagCompound nbt=CompressedStreamTools.decompress(b);
 			World w;
-			w=FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(dim);
-			try{
-				w.getBlockTileEntity(x, y, z).readFromNBT(nbt);
-				w.markBlockForUpdate(x, y, z);
+			if(FMLCommonHandler.instance().getEffectiveSide()==Side.SERVER) {
+				w=FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(dim);
 			}
-			catch(NullPointerException ex) {}
+			else {
+				w=Minecraft.getMinecraft().theWorld;
+			}
+			if(packet.channel.equals("KernelCoreTaskUpdate")) {
+				updateTasks(w,x,y,z,nbt);
+			}
+			else if(packet.channel.equals("KernelCoreEffectUpdate")) {
+				updateEffects(w,x,y,z,nbt);
+			}
+			else if(packet.channel.equals("KernelCoreUpdate")) {
+				w.getBlockTileEntity(x, y, z).readFromNBT(nbt);
+			}
+			else return;
+			if(w.isRemote) return;
+			PacketDispatcher.sendPacketToAllInDimension(packet, dim);
 		}
 		catch(IOException ex) {
 			System.err.println(ex.toString());
@@ -50,4 +62,21 @@ public class KernelCoreUpdatePacketHandler implements IPacketHandler {
 		}
 	}
 	
+	private void updateTasks(World w,int x,int y,int z,NBTTagCompound nbt) {
+		try{
+			((TileEntityKernelCore)w.getBlockTileEntity(x, y, z)).readTasksFromNBT(nbt);
+			w.markBlockForUpdate(x, y, z);
+		}
+		catch(ClassCastException ex) {}
+		catch(NullPointerException ex) {}
+	}
+	
+	private void updateEffects(World w,int x,int y,int z,NBTTagCompound nbt) {
+		try{
+			((TileEntityKernelCore)w.getBlockTileEntity(x, y, z)).readEffectsFromNBT(nbt);
+			w.markBlockForUpdate(x, y, z);
+		}
+		catch(ClassCastException ex) {}
+		catch(NullPointerException ex) {}
+	}
 }

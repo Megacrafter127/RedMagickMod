@@ -9,6 +9,7 @@ public class KernelFillingTask extends KernelTask {
 	private int id,meta,x2,y2,z2,ax,ay,az;
 	private boolean finished=false;
 	private boolean first=true;
+	private boolean success=true;
 
 	public KernelFillingTask() {}
 	public KernelFillingTask(int id,int meta,int x,int y,int z,int x2,int y2,int z2,int ticksPerBlock) {
@@ -38,11 +39,11 @@ public class KernelFillingTask extends KernelTask {
 				first=false;
 				return;
 			}
-			//executor.placeBlock(id, meta, ax, ay, az);
+			success=executor.placeBlock(id, meta, ax, ay, az);
 			System.out.println("TODO");
 			do{
 				increment();
-			} while(executor.getWorldObj().getBlockId(ax, ay, az)!=0);
+			} while(executor.getWorldObj().getBlockId(ax, ay, az)!=0&&ay<=y2);
 			if(ay>y2) {
 				finished=true;
 				System.out.println("Task finished");
@@ -90,6 +91,7 @@ public class KernelFillingTask extends KernelTask {
 	}
 	
 	private void increment() {
+		if(!success) return;
 		ax++;
 		if(ax>x2) {
 			ax=x;

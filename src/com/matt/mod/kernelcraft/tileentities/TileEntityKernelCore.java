@@ -14,7 +14,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -297,6 +296,40 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		if(ret!=null) getWorldObj().spawnEntityInWorld(new EntityItem(getWorldObj(),x+0.5,y+0.5,z+0.5,ret));
 		getWorldObj().setBlockToAir(x, y, z);
+	}
+	
+	public boolean placeBlock(int id,int meta,int x,int y,int z) {
+		boolean found=false;
+		L:for(int i=-1;i<2;i++) {
+			for(int j=-1;j<2;j++) {
+				for(int k=-2;k<2;k++) {
+					if((k==-1||k==0)&&i==0&&j==0) {}
+					else {
+						try{
+							IInventory inv=(IInventory)getWorldObj().getBlockTileEntity(xCoord+i, yCoord+k, zCoord+j);
+							for(int l=0;l<inv.getSizeInventory();l++) {
+								ItemStack stack2=inv.getStackInSlot(l);
+								if(stack2!=null) {
+									if(stack2.itemID==id&&(stack2.getItemDamage()==meta||!stack2.getHasSubtypes())) {
+										stack2.splitStack(1);
+										found=true;
+										break L;
+									}
+								}
+								
+							}
+						}
+						catch(ClassCastException ex) {
+							ex.printStackTrace(System.err);
+						}
+						catch(NullPointerException ex) {}
+					}
+				}
+			}
+		}
+		if(!found) return false;
+		getWorldObj().setBlock(x, y, z, id, meta, 1);
+		return true;
 	}
 	
 	public void sendChangeToServer() {
