@@ -1,7 +1,6 @@
 package com.matt.mod.magick;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -15,12 +14,13 @@ import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.WardedStone;
 import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
-import com.matt.mod.magick.generics.MagickalBlockG;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
 import com.matt.mod.magick.items.ItemManaDust;
 import com.matt.mod.magick.items.ItemWandCore;
+import com.matt.mod.magick.items.MinerTool;
+import com.matt.mod.magick.lib.MagickLib;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
 
@@ -32,6 +32,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  *
  */
 public class MagickHelper {
+	
 public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
 public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
 public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
@@ -46,6 +47,7 @@ public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
 //public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
 public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Skoni");
+public static final Item minerTool = new MinerTool(FutureCraft.manaQuarryID).setUnlocalizedName("manaMiner").setTextureName(MagickLib.toTextureName("manaminer"));
 public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald"));
 public static void register() {
 		
@@ -92,6 +94,7 @@ public static void register() {
 	ArmorHelper.register();
 	GameRegistry.registerItem(manaDust, ItemManaDust.name);
 	GameRegistry.registerItem(manaDiamond, Ref.toItemName("manadiamond"));
+	GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
 	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
 }

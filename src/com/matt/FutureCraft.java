@@ -96,6 +96,7 @@ public class FutureCraft {
 		public static int blockLampID = 761;
 		public static int manaDustID = 799;
 		public static int magickDiamondID = 800;
+		public static int manaQuarryID = 801;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -111,6 +112,7 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
+		
 		
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
@@ -174,6 +176,7 @@ public class FutureCraft {
             		armor_3 = FutureCraft.config.get("Mana Armor","Leg Piece",1002).getInt();
             		armor_4 = FutureCraft.config.get("Mana Armor","Feet Piece",1003).getInt();
             		magickDiamondID = FutureCraft.config.getItem("Magick Diamond", 800).getInt();
+            		manaQuarryID = FutureCraft.config.getItem("Mana Miner",801).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
