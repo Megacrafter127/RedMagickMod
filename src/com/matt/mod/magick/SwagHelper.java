@@ -1,20 +1,19 @@
 package com.matt.mod.magick;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
+import com.matt.mod.magick.armor.MagickRecipes;
 import com.matt.mod.magick.block.SwagBattery;
 import com.matt.mod.magick.block.SwagBlock;
 import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.WardedStone;
 import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
-import com.matt.mod.magick.generics.MagickalBlockG;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
@@ -82,5 +81,6 @@ public static void register() {
 	TileEntity.addMapping(TileEntityProtected.class, "Protected Block");
 	ArmorHelper.register();
 	GameRegistry.registerItem(manaDust, ItemManaDust.name);
+	MagickRecipes.init();
 }
 }	
