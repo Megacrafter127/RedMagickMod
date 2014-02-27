@@ -76,7 +76,7 @@ public static void register() {
 	LanguageRegistry.addName(new ItemStack(magickCore,1,2), ItemWandCore.getNames()[2]);
 	LanguageRegistry.addName(manaDust,"Mageia Skoni");
 	LanguageRegistry.addName(manaDiamond,"Mageia Diamanti");
-	
+	LanguageRegistry.addName(swaggishFlyer,"Mageia Aeroporos");
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,0),new ItemStack(magickCore,1,0),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,1),new ItemStack(magickCore,1,1),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,2),new ItemStack(magickCore,1,2),new ItemStack(Item.stick,1,0)));

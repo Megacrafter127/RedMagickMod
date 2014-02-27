@@ -25,12 +25,13 @@ public class MagickRecipes {
 	public static final ItemStack diamond = new ItemStack(Item.diamond,1,0);
 	public static final ItemStack catalyst = new ItemStack(SwagHelper.swaggishFlyer,1,0);
 	public static final ItemStack feather = new ItemStack(Item.feather,1,0);
-public static ShapedRecipes recipeHead = new ShapedRecipes(3, 3, new ItemStack[]{foscos,foscos,foscos,foscos,headPieceL,foscos,foscos,foscos,foscos}, headPiece);
-public static ShapedRecipes recipeChest = new ShapedRecipes(3, 3, new ItemStack[]{foscos,foscos,foscos,foscos,chestPieceL,foscos,foscos,foscos,foscos}, chestPiece);
-public static ShapedRecipes recipeLegs = new ShapedRecipes(3, 3, new ItemStack[]{foscos,foscos,foscos,foscos,legPieceL,foscos,foscos,foscos,foscos}, legPiece);
-public static ShapedRecipes recipeBoots = new ShapedRecipes(3, 3, new ItemStack[]{foscos,foscos,foscos,foscos,bootPieceL,foscos,foscos,foscos,foscos}, bootPiece);
-public static ShapedRecipes recipeDiamond = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,diamond,foscos,foscos,foscos,foscos}, new ItemStack(SwagHelper.manaDiamond,1,0));
-public static ShapedRecipes recipeCatalyst = new ShapedRecipes(3,3, new ItemStack[]{foscos,diamond,foscos,diamond,feather,diamond,foscos,diamond,foscos},catalyst);
+	public static final ItemStack dia =  new ItemStack(SwagHelper.manaDiamond,1,0);
+	public static ShapedRecipes recipeHead = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,headPieceL,dia,foscos,dia,foscos}, headPiece);
+public static ShapedRecipes recipeChest = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,chestPieceL,dia,foscos,dia,foscos}, chestPiece);
+public static ShapedRecipes recipeLegs = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,legPieceL,dia,foscos,dia,foscos}, legPiece);
+public static ShapedRecipes recipeBoots = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,bootPieceL,dia,foscos,dia,foscos}, bootPiece);
+public static ShapedRecipes recipeDiamond = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,diamond,foscos,foscos,foscos,foscos},dia);
+public static ShapedRecipes recipeCatalyst = new ShapedRecipes(3,3, new ItemStack[]{foscos,dia,foscos,dia,feather,dia,foscos,dia,foscos},catalyst);
 public static void init() {	
 	
 	GameRegistry.addShapelessRecipe(foscos, new ItemStack[]{coal,redstone,glowstone,lapis});
