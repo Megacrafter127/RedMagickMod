@@ -1,6 +1,7 @@
 package com.matt.mod.magick;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -10,9 +11,11 @@ import com.matt.lib.Ref;
 import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.magick.block.SwagBattery;
 import com.matt.mod.magick.block.SwagBlock;
+import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.WardedStone;
 import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
+import com.matt.mod.magick.generics.MagickalBlockG;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
@@ -37,11 +40,11 @@ public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId
 public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery");
 public static final Item magickWand = new ItemMagickWand(FutureCraft.swag_wand_id).setMaxStackSize(1);
 public static final Item magickCore = new ItemWandCore(FutureCraft.swag_wand_idt2).setMaxStackSize(1);
-//public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
+public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
-//public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
+public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
 public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Skoni");
 public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald"));
 public static void register() {
@@ -61,10 +64,10 @@ public static void register() {
 	
 	GameRegistry.registerItem(magickWand,"Magical Wand");
 	GameRegistry.registerItem(magickCore,"Magical Core");
-	//decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
+	decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	swaggishFlyer.getLogic().setManaLevel(1000);
-	//GameRegistry.registerBlock(decorationKernelBlock, Ref.BLOCKPREFIX + "decorationKernelBlock");
+	GameRegistry.registerBlock(decorationKernelBlock, Ref.BLOCKPREFIX + "decorationKernelBlock");
 	GameRegistry.registerTileEntity(TileEntityAltar.class, "tile.altarCore");
 	LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
