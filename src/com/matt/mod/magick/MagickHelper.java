@@ -41,7 +41,7 @@ public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId
 public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery");
 public static final Item magickWand = new ItemMagickWand(FutureCraft.swag_wand_id).setMaxStackSize(1);
 public static final Item magickCore = new ItemWandCore(FutureCraft.swag_wand_idt2).setMaxStackSize(1);
-public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
+//public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID);
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
@@ -62,13 +62,13 @@ public static void register() {
 	
 	GameRegistry.registerBlock(blockNetherald,"netheriumBlock");
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
-	GameRegistry.registerBlock(decorationKernelBlock, Ref.NAME.toLowerCase() + ".decoBlock1");
+	
 	GameRegistry.registerItem(magickWand,"Magical Wand");
 	GameRegistry.registerItem(magickCore,"Magical Core");
-	decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
+	//decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
 	swaggishFlyer.getLogic().setManaLevel(1000);
-	GameRegistry.registerBlock(decorationKernelBlock, Ref.BLOCKPREFIX + "decorationKernelBlock");
+	//GameRegistry.registerBlock(decorationKernelBlock, Ref.BLOCKPREFIX + "decorationKernelBlock");
 	GameRegistry.registerTileEntity(TileEntityAltar.class, "tile.altarCore");
 	LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
 	LanguageRegistry.addName(blockMagicalBlockBlue, "Magical Wall - Colored");
