@@ -10,7 +10,6 @@ import com.matt.lib.Ref;
 import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.magick.block.SwagBattery;
 import com.matt.mod.magick.block.SwagBlock;
-import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.WardedStone;
 import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
@@ -21,12 +20,9 @@ import com.matt.mod.magick.items.ItemManaDust;
 import com.matt.mod.magick.items.ItemWandCore;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
-import com.matt.mod.magick.tick.ArmorTickHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 /**
  * 
  * @author Matheus

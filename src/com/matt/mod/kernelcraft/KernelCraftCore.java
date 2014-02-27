@@ -3,6 +3,7 @@ package com.matt.mod.kernelcraft;
 import java.io.File;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -66,10 +67,10 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	//end IDs
 	//Instances
 		//base extenders
-		public static final Block Drive=new Block(DriveID,null);
-		public static final Block Battery=new Block(BatteryID,null);
-		public static final Block IOExpander=new Block(IOExpanderID,null);
-		public static final Block Overclocker=new Block(OverclockerID,null);
+		public static final Block Drive=new Block(DriveID,Material.iron);
+		public static final Block Battery=new Block(BatteryID,Material.iron);
+		public static final Block IOExpander=new Block(IOExpanderID,Material.iron);
+		public static final Block Overclocker=new Block(OverclockerID,Material.iron);
 		
 		//end base extenders
 		//base
