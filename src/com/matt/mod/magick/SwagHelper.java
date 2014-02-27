@@ -18,6 +18,7 @@ import com.matt.mod.magick.generics.MagickalBlockG;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
+import com.matt.mod.magick.items.ItemManaDust;
 import com.matt.mod.magick.items.ItemWandCore;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
@@ -39,7 +40,7 @@ public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
 public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
-
+public static final Item manaDust = new ItemManaDust();
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -80,6 +81,6 @@ public static void register() {
 	LanguageRegistry.addName(blockProtectedStone,"Protected Stone");
 	TileEntity.addMapping(TileEntityProtected.class, "Protected Block");
 	ArmorHelper.register();
-	GameRegistry.registerBlock(blockMagicalLamp,"MagicalLamp");
+	GameRegistry.registerItem(manaDust, ItemManaDust.name);
 }
 }	

@@ -93,6 +93,8 @@ public class FutureCraft {
 		public static int armor_2 = 1002;
 		public static int armor_3 = 1003;
 		public static int armor_4 = 1004;
+		private int blockLampID;
+		public static int manaDustID = 799;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -108,10 +110,6 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
-		
-		
-		
-		 
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
@@ -141,7 +139,7 @@ public class FutureCraft {
             		loreBookId = config.getItem("loreBook", 650).getInt();
             		altarCoreID = config.getBlock("Altar Core", 547).getInt();
             		blockGOLID = config.getBlock("Magick","Warded Stone", 548).getInt();
-            		blockGOLControlerID = config.getBlock("Magickal Lamp", 549).getInt();
+            		
             		
             		//enable_swag = FutureCraft.config.get("Module", "Enable Magick", true).getBoolean(true);
             		enable_debug_wands = FutureCraft.config.get("Debug", "Enable Magick - Wands Debug", false).getBoolean(false);
@@ -160,13 +158,20 @@ public class FutureCraft {
             		
             		swag_catalist_id = FutureCraft.config.getItem("Flying Catalist", 804).getInt();
             		
+            		 manaDustID = FutureCraft.config.getItem(" manaDustID", 799).getInt();
+            		
             		netheraldId = FutureCraft.config.getBlock("Netherium Block", 755).getInt();
             		manaBatteryId = FutureCraft.config.getBlock("Mana Battery", 756).getInt();
             		altarCoreId = FutureCraft.config.getBlock("Altar Core", 757).getInt();
             		swagChestId = FutureCraft.config.getBlock("Swag Chest", 758).getInt();
             		blockEnhancerId = FutureCraft.config.getBlock("Altar Enhancer", 759).getInt();
             		swagDecoID = FutureCraft.config.getBlock("Swag Decoration Block", 760).getInt();
-            		//mana_1 = FutureCraft.config.get("Mana Armor");
+            		blockLampID = config.getBlock("Magickal Lamp", 761).getInt();
+            		armor_1 = FutureCraft.config.get("Mana Armor","Head Piece",1000).getInt();
+            		armor_2 = FutureCraft.config.get("Mana Armor","Chest Piece",1001).getInt();
+            		armor_3 = FutureCraft.config.get("Mana Armor","Leg Piece",1002).getInt();
+            		armor_4 = FutureCraft.config.get("Mana Armor","Feet Piece",1003).getInt();
+            		
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
