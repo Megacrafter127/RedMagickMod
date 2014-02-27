@@ -16,11 +16,14 @@ public class MinerTool extends Item {
      */
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
     {
-    	for(int i = x; i <= 3; i++) {
-    		for(int j = y; j <= 3; i++) {
-    			for(int k = z; k <= 3; i++) {
-    				world.setBlockToAir(i,j,k);
+    	for(int i = x; i <= x+3; i++) {
+    		for(int j = y; j <= y+3; i++) {
+    			try {
+    				world.setBlockToAir(i,j,z);
+    			}catch(OutOfMemoryError e) {
+    				e.printStackTrace();
     			}
+    		
     		}
     	}
         return false;

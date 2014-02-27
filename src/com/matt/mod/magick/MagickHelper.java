@@ -94,7 +94,7 @@ public static void register() {
 	ArmorHelper.register();
 	GameRegistry.registerItem(manaDust, ItemManaDust.name);
 	GameRegistry.registerItem(manaDiamond, Ref.toItemName("manadiamond"));
-	GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
+	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
 	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
 }
