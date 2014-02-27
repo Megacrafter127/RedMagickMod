@@ -21,9 +21,12 @@ import com.matt.mod.magick.items.ItemManaDust;
 import com.matt.mod.magick.items.ItemWandCore;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
+import com.matt.mod.magick.tick.ArmorTickHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 /**
  * 
  * @author Matheus
@@ -91,5 +94,6 @@ public static void register() {
 	GameRegistry.registerItem(manaDust, ItemManaDust.name);
 	GameRegistry.registerItem(manaDiamond, Ref.toItemName("manadiamond"));
 	MagickRecipes.init();
+	TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
 }
 }	

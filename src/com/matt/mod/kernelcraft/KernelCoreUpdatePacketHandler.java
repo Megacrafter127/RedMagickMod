@@ -57,7 +57,7 @@ public class KernelCoreUpdatePacketHandler implements IPacketHandler {
 		catch(IOException ex) {
 			System.err.println(ex.toString());
 		}
-		catch(NullPointerException ex) {
+		catch(NullPointerException ex) {	
 			ex.printStackTrace(System.err);
 		}
 	}

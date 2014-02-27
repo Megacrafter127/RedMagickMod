@@ -47,55 +47,58 @@ public class ItemArmorMana extends ItemArmor {
 		return 11751612;
 		 
 	 }
-	 /*
+	 
 	 @Override
 	 public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemstack) {
+		 ItemStack[] armor = new ItemStack[4];
+		 armor[0] = player.getCurrentArmor(0);
+		 armor[1] = player.getCurrentArmor(1);
+		 armor[2] = player.getCurrentArmor(2);
+		 armor[3] = player.getCurrentArmor(3);
 		 
-		ItemStack helmPiece = player.getCurrentArmor(0);
-		ItemStack chestPiece = player.getCurrentArmor(1);
-		ItemStack legPiece = player.getCurrentArmor(2);
-		ItemStack bootPiece = player.getCurrentArmor(3);
-		if(bootPiece != null) {
-			System.out.println("Helm piece id" + helmPiece.itemID);
-			if(bootPiece.itemID == ArmorHelper.manaBoots.itemID) {
-				System.out.println("Armor Tick - Bootpiece was called!");
-				player.fallDistance = 0;
-				} else {
-					return;
-				}
-			
-		}
-		if(legPiece != null) {
-			System.out.println("Leg piece id" + legPiece.itemID);
-			if(legPiece.itemID == ArmorHelper.manaLegs.itemID) {
-				System.out.println("Armor Tick - Legpiece was called!");
-			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 0, 200)); 
-			} else {
-				return;
-			}
-		}
-		if(chestPiece != null) {
-			System.out.println("Chest piece id" + chestPiece.itemID);
-			if(chestPiece.itemID == ArmorHelper.manaChest.itemID) {
-				System.out.println("Armor Tick - Chestpiece was called!");
-				player.capabilities.allowFlying = true;
-				} else {
-					player.capabilities.allowFlying = false;
-				}
-		}
-		if(helmPiece != null) {
-			System.out.println("Helm piece id" + helmPiece.itemID);
-			if(helmPiece.itemID == ArmorHelper.manaHelm.itemID) {
-				if(player.isInWater()) {
-					System.out.println("Armor Tick - Helmpiece was called!");
-					player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(),0,1));
+		 for(ItemStack stack : armor) {
+			if(stack != null && world.isRemote) {
+			 if(stack.itemID == ArmorHelper.manaHelm.itemID) {
+				 boolean isHelm = stack.itemID == ArmorHelper.manaHelm.itemID;
+				 if(isHelm) {
+					 player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(),1,0));
+					 
+				 }else{
+					 player.removePotionEffect(Potion.nightVision.getId());
+				 }
+				 
+			 }
+			 if(stack.itemID == ArmorHelper.manaChest.itemID) {
+				 boolean isPlate = stack.itemID == ArmorHelper.manaChest.itemID;
+				if(isPlate) {
+					player.setHealth(player.getMaxHealth() *2);
+				
 				}else{
-					player.removePotionEffect(Potion.nightVision.getId());
-				}
-				} else {
+					player.setHealth(player.getMaxHealth());
+				}	
+			 }
+			 if(stack.itemID == ArmorHelper.manaLegs.itemID) {
+				 boolean isLeg = stack.itemID == ArmorHelper.manaLegs.itemID;
+				 if(isLeg) {
+					 player.capabilities.setPlayerWalkSpeed(2.0F);
+				 }else{
+					 player.capabilities.setPlayerWalkSpeed(0.1F);
+				 }
+			 }	
+			 if(stack.itemID == ArmorHelper.manaBoots.itemID) {
+				 boolean isBoot = stack.itemID == ArmorHelper.manaBoots.itemID;
+				 if(isBoot) {
+					 player.fallDistance = 0.0F;
 					
-				} */
-		
-}
+
+				 }else{
+					 player.fallDistance = player.fallDistance;
+				 }
+			 }		
+		 }
+		 }
+		 
+	 }
+	 }
 	 
 
