@@ -1,9 +1,12 @@
 package com.matt.mod.kernelcraft;
 
+import java.io.File;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
@@ -33,90 +36,65 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	public static String toTextureName(String name) {
 		return Ref.NAME.toLowerCase()+":"+name;
 	}
-	protected static CreativeTabs kernelCraft = new TabFuture(CreativeTabs.getNextID(),"KernelCraft","kernel");
+	protected static final CreativeTabs kernelCraft = new TabFuture(CreativeTabs.getNextID(),"KernelCraft","kernel");
 	protected static final KernelCoreUpdatePacketHandler handler=new KernelCoreUpdatePacketHandler();
+	public static final File configFile=new File(FutureCraft.config.get("moduleConfigs", "KCCC", new File(FutureCraft.configPatch.getParentFile(),"kernelcraftconfig.cfg").getPath()).getString());
+	public static final Configuration c=new Configuration(configFile);
+	static{
+		c.load();
+	}
 	//IDs
 		//base extenders
-		private static int DriveID=912;
-		private static int BatteryID=913;
-		private static int IOExpanderID=914;
-		private static int OverclockerID=915;
+		public static final int DriveID=c.getBlock("drive", 912).getInt();
+		public static final int BatteryID=c.getBlock("battery", 913).getInt();
+		public static final int IOExpanderID=c.getBlock("ioexpander", 914).getInt();
+		public static final int OverclockerID=c.getBlock("overclocker", 915).getInt();
 		//end base extenders
 		//base
-		private static int KernelID=900;
-		private static int ModuleID=901;
-		private static int StorageID=902;
-		private static int USVID=903;
-		private static int IOFaceID=904;
-		private static int CPUID=905;
+		public static final int KernelID=c.getBlock("kernelcore", 900).getInt();
+		public static final int ModuleID=c.getBlock("module", 901).getInt();
+		public static final int StorageID=c.getBlock("storage", 902).getInt();
+		public static final int USVID=c.getBlock("usv", 903).getInt();
+		public static final int IOFaceID=c.getBlock("ioface", 904).getInt();
+		public static final int CPUID=c.getBlock("cpu", 905).getInt();
 		//end base
 		//misc
 		//end misc
 		//items
-		private static int KernelToolID=951;
+		public static final int KernelToolID=c.getItem("ktool", 951).getInt();
 		//end items
 	//end IDs
 	//Instances
 		//base extenders
-		public static Block Drive;
-		public static Block Battery;
-		public static Block IOExpander;
-		public static Block Overclocker;
+		public static final Block Drive=new Block(DriveID,null);
+		public static final Block Battery=new Block(BatteryID,null);
+		public static final Block IOExpander=new Block(IOExpanderID,null);
+		public static final Block Overclocker=new Block(OverclockerID,null);
 		
 		//end base extenders
 		//base
-		public static BlockKernelCore Kernel;
-		public static BlockKernelModule Module;
-		public static BlockKernelStorage Storage;
-		public static BlockKernelUSV  USV;
-		public static BlockKernelIOFace IOFace;
-		public static BlockKernelCPU CPU;
+		public static final BlockKernelCore Kernel=new BlockKernelCore(KernelID);
+		public static final BlockKernelModule Module=new BlockKernelModule(ModuleID);
+		public static final BlockKernelStorage Storage=new BlockKernelStorage(StorageID);
+		public static final BlockKernelUSV  USV=new BlockKernelUSV(USVID);
+		public static final BlockKernelIOFace IOFace=new BlockKernelIOFace(IOFaceID);
+		public static final BlockKernelCPU CPU=new BlockKernelCPU(CPUID);
 		//end base
 		//misc
 		//end misc
 		//items
-		public static ItemKernelTool KernelTool;
+		public static final ItemKernelTool KernelTool=new ItemKernelTool(KernelToolID);
 		//end items
 	//end Instances
-	public static void loadIDs() {
-		FutureCraft.config.load();
-		//base extenders
-		DriveID=FutureCraft.config.getBlock("kernelDrive", DriveID).getInt();
-		BatteryID=FutureCraft.config.getBlock("kernelBattery", BatteryID).getInt();
-		IOExpanderID=FutureCraft.config.getBlock("kernelIOExpander", IOExpanderID).getInt();
-		OverclockerID=FutureCraft.config.getBlock("kernelOverclocker", OverclockerID).getInt();
-		//end base extenders
-		//base
-		KernelID=FutureCraft.config.getBlock("kernelCore", KernelID).getInt();
-		ModuleID=FutureCraft.config.getBlock("kernelModule", ModuleID).getInt();
-		StorageID=FutureCraft.config.getBlock("kernelStorage", StorageID).getInt();
-		USVID=FutureCraft.config.getBlock("kernelUSV", USVID).getInt();
-		IOFaceID=FutureCraft.config.getBlock("kernelIOFace", IOFaceID).getInt();
-		CPUID=FutureCraft.config.getBlock("kernelCPU", CPUID).getInt();
-		//end base
-		//misc
-		//end misc
-		//items
-		KernelToolID=FutureCraft.config.getItem("kernelTool", KernelToolID).getInt();
-		//end items
-		FutureCraft.config.save();
-	}
-	
 	public static void registerBlocks() {
 		//base extenders
 		//end base extenders
 		//base
-		Kernel=new BlockKernelCore(KernelID);
 		GameRegistry.registerBlock(Kernel, "kernelCore");
-		Module=new BlockKernelModule(ModuleID);
 		GameRegistry.registerBlock(Module, "kernelModule");
-		Storage=new BlockKernelStorage(StorageID);
 		GameRegistry.registerBlock(Storage, "kernelStorage");
-		USV=new BlockKernelUSV(USVID);
 		GameRegistry.registerBlock(USV, "kernelUSV");
-		IOFace=new BlockKernelIOFace(IOFaceID);
 		GameRegistry.registerBlock(IOFace, "kernelIOFace");
-		CPU=new BlockKernelCPU(CPUID);
 		GameRegistry.registerBlock(CPU, "kernelCPU");
 		//end base
 		//misc
@@ -144,7 +122,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	}
 	
 	public static void registerItems() {
-		KernelTool=new ItemKernelTool(KernelToolID);
 		GameRegistry.registerItem(KernelTool, "kernelTool");
 		
 		//langs
@@ -184,7 +161,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 	@Override
 	public void register() {
 		MultiPacketHandler.addPacketHandler(handler, "KernelCoreUpdate", "KernelCoreEffectUpdate", "KernelCoreTaskUpdate");
-		loadIDs();
 		registerBlocks();
 		registerItems();
 		registerTileEntities();

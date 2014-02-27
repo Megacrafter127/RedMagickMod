@@ -36,7 +36,7 @@ import cpw.mods.fml.relauncher.Side;
  *
  */
 @Mod(modid = Ref.ID, name = Ref.NAME, version = Ref.VERSION + Ref.ALPHA + Ref.BUILD)
-@NetworkMod( channels = {"KernelCoreUpdate"}, clientSideRequired = true, serverSideRequired = true, packetHandler=MultiPacketHandler.class )
+@NetworkMod( channels = {"KernelCoreUpdate", "KernelCoreEffectUpdate", "KernelCoreTaskUpdate"}, clientSideRequired = true, serverSideRequired = true, packetHandler=MultiPacketHandler.class )
 public class FutureCraft {
 	 @Instance(Ref.ID)
 	    public static FutureCraft instance;
