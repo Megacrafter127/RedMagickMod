@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import com.matt.mod.magick.SwagHelper;
+import com.matt.mod.magick.MagickHelper;
 import com.matt.mod.magick.items.ItemMagickWand;
 import com.matt.mod.magick.lib.IWandAble;
 
@@ -21,7 +21,7 @@ public class SwagBattery extends SwagBlock implements IWandAble {
 					System.out.println("Entity walked on block!");
 					if(player instanceof EntityPlayer) {
 						
-						if(player.inventory.getCurrentItem().itemID == SwagHelper.magickWand.itemID) {
+						if(player.inventory.getCurrentItem().itemID == MagickHelper.magickWand.itemID) {
 							ItemMagickWand wand = (ItemMagickWand) player.inventory.getCurrentItem().getItem();
 							if(wand.isInWandRecharger) {
 								wand.isInWandRecharger = false;

@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.matt.lib.Ref;
-import com.matt.mod.magick.SwagHelper;
+import com.matt.mod.magick.MagickHelper;
 import com.matt.mod.magick.model.ModelAltar;
 
 
@@ -23,7 +23,7 @@ public class TileEntityAltarRender extends TileEntitySpecialRenderer {
          GL11.glTranslatef((float)d, (float)d1, (float)d2);
          TileEntityAltar tileEntityYour = (TileEntityAltar)tileEntity;
          /*Note that true tile entity coordinates (tileEntity.xCoord, etc) do not match to render coordinates (d, etc) that are calculated as [true coordinates] - [player coordinates (camera coordinates)]*/
-         renderBlockYour(tileEntityYour, tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, SwagHelper.blockAltarCore);
+         renderBlockYour(tileEntityYour, tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, MagickHelper.blockAltarCore);
         GL11.glPopMatrix();
     }
     //And this method actually renders your tile entity

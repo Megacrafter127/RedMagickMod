@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MagickRecipes {
 	static List foscosList;
-	public static final ItemStack foscos = new ItemStack(SwagHelper.manaDust,1,0);
+	public static final ItemStack foscos = new ItemStack(MagickHelper.manaDust,1,0);
 	public static final ItemStack headPiece = new ItemStack(ArmorHelper.manaHelm,1,0);
 	public static final ItemStack headPieceL = new ItemStack(Item.helmetLeather,1,0);
 	public static final ItemStack chestPiece = new ItemStack(ArmorHelper.manaChest,1,0);
@@ -24,9 +24,9 @@ public class MagickRecipes {
 	public static final ItemStack glowstone = new ItemStack(Item.glowstone,1,0);
 	public static final ItemStack lapis = new ItemStack(Item.dyePowder,1,4);
 	public static final ItemStack diamond = new ItemStack(Item.diamond,1,0);
-	public static final ItemStack catalyst = new ItemStack(SwagHelper.swaggishFlyer,1,0);
+	public static final ItemStack catalyst = new ItemStack(MagickHelper.swaggishFlyer,1,0);
 	public static final ItemStack feather = new ItemStack(Item.feather,1,0);
-	public static final ItemStack dia =  new ItemStack(SwagHelper.manaDiamond,1,0);
+	public static final ItemStack dia =  new ItemStack(MagickHelper.manaDiamond,1,0);
 	public static ShapedRecipes recipeHead = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,headPieceL,dia,foscos,dia,foscos}, headPiece);
 public static ShapedRecipes recipeChest = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,chestPieceL,dia,foscos,dia,foscos}, chestPiece);
 public static ShapedRecipes recipeLegs = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,legPieceL,dia,foscos,dia,foscos}, legPiece);

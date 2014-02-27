@@ -1,5 +1,7 @@
 package com.matt.mod.magick.armor;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
@@ -10,13 +12,17 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumHelper;
 
+import org.lwjgl.input.Keyboard;
+
 import com.matt.lib.Ref;
 import com.matt.mod.magick.ArmorHelper;
+import com.matt.mod.magick.MagickHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemArmorMana extends ItemArmor {
+	 private float walkSpeed = 0.1F;
 	  public static final String[] armorNames = new String[] {"manaHelm", "manaChest", "manaLegs", "manaBoots"};
 	public static final EnumArmorMaterial mana = EnumHelper.addArmorMaterial("Mana", 100000, new int[]{300,800,600,300}, 1000);
 	public ItemArmorMana(int par1, 
@@ -57,7 +63,7 @@ public class ItemArmorMana extends ItemArmor {
 		 armor[3] = player.getCurrentArmor(3);
 		 
 		 for(ItemStack stack : armor) {
-			if(stack != null && world.isRemote) {
+			if(stack != null && !world.isRemote) {
 			 if(stack.itemID == ArmorHelper.manaHelm.itemID) {
 				 boolean isHelm = stack.itemID == ArmorHelper.manaHelm.itemID;
 				 if(isHelm) {
@@ -80,9 +86,14 @@ public class ItemArmorMana extends ItemArmor {
 			 if(stack.itemID == ArmorHelper.manaLegs.itemID) {
 				 boolean isLeg = stack.itemID == ArmorHelper.manaLegs.itemID;
 				 if(isLeg) {
-					 player.capabilities.setPlayerWalkSpeed(2.0F);
+					 if(player.inventory.hasItemStack(new ItemStack(MagickHelper.manaDust,0,1))) {
+						 player.capabilities.setPlayerWalkSpeed(0.5F);
+					 }else {
+						 player.capabilities.setPlayerWalkSpeed(walkSpeed);
+					 }
+					
 				 }else{
-					 player.capabilities.setPlayerWalkSpeed(0.1F);
+					 player.capabilities.setPlayerWalkSpeed(walkSpeed);
 				 }
 			 }	
 			 if(stack.itemID == ArmorHelper.manaBoots.itemID) {
@@ -99,6 +110,36 @@ public class ItemArmorMana extends ItemArmor {
 		 }
 		 
 	 }
+	 @Override
+	 @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack par1ItemStack,
+               EntityPlayer par2EntityPlayer,
+               List par3List,
+               boolean par4) {
+		 if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+		if(par1ItemStack.getItem() instanceof ItemArmorMana) {
+			ItemArmorMana m = (ItemArmorMana) par1ItemStack.getItem();
+			if(m.armorType == 0) {
+				par3List.add("Magical Helmet? Night Vision? F. Yea.");
+				
+			}else if(m.armorType == 1) {
+				par3List.add("Magical Chestplate? Invulnerable? F. Yea.");
+				
+			}else if(m.armorType == 2) {
+				par3List.add("Magical Legs? Run super fast? F. Yea.");
+				
+			}else if(m.armorType == 3) {
+				par3List.add("Magical Boots? Never take fall damage? F. Yea.");
+				
+			}
+			
+		}
+			
+		}else{
+			par3List.add("Hold shift to see witty comment.");
+		}
+	 }
+	 
 	 }
 	 
 

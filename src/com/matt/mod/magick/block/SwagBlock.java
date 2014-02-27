@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
-import com.matt.mod.magick.SwagHelper;
+import com.matt.mod.magick.MagickHelper;
 import com.matt.mod.magick.lib.IWandAble;
 
 public class SwagBlock extends Block implements IWandAble {
@@ -24,13 +24,13 @@ public class SwagBlock extends Block implements IWandAble {
 		if(!world.isRemote) {
 			if(!player.isSneaking()) {
 		System.out.println("Activated SwagBlock!");
-		if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 0) {
+		if(player.inventory.getCurrentItem().itemID ==MagickHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 0) {
 			onWandRightClick(player,world,x,y,z);
 			return true;
-		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 1 ) {
+		} else if(player.inventory.getCurrentItem().itemID ==MagickHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 1 ) {
 			onWandRightClick(player,world,x,y,z);
 			return true;
-		} else if(player.inventory.getCurrentItem().itemID ==SwagHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 2 ){
+		} else if(player.inventory.getCurrentItem().itemID ==MagickHelper.magickWand.itemID && player.inventory.getCurrentItem().getItemDamage() == 2 ){
 			onWandRightClick(player,world,x,y,z);
 			return true;
 		} 

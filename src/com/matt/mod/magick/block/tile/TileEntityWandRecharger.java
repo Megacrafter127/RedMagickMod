@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.matt.mod.magick.SwagHelper;
+import com.matt.mod.magick.MagickHelper;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.logic.FlyingCatalistLogic;
 import com.matt.mod.magick.items.logic.ItemLogic;
@@ -21,7 +21,7 @@ public class TileEntityWandRecharger extends TileEntity {
 	}
 	public void run(EntityPlayer p, World w, int x, int y, int z) {
 		if(!p.isSneaking()) {
-		if(p.inventory.getCurrentItem().itemID == SwagHelper.swaggishFlyer.itemID) {
+		if(p.inventory.getCurrentItem().itemID == MagickHelper.swaggishFlyer.itemID) {
 			FlyingCatalistLogic logic = (FlyingCatalistLogic)ItemFlyingCatalist.getLogic();
 			if(manalevel <= 10) {
 				manalevel = manalevel - 10;
@@ -29,7 +29,7 @@ public class TileEntityWandRecharger extends TileEntity {
 			}
 		}
 		}else {
-			if(p.inventory.getCurrentItem().itemID == SwagHelper.swaggishFlyer.itemID) {
+			if(p.inventory.getCurrentItem().itemID == MagickHelper.swaggishFlyer.itemID) {
 				ItemFlyingCatalist f = (ItemFlyingCatalist)p.inventory.getCurrentItem().getItem();
 				ItemLogic logic = f.getLogic();
 				deposite(logic);
