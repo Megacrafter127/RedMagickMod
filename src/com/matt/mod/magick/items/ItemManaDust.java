@@ -9,6 +9,7 @@ import net.minecraft.util.EnumChatFormatting;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
+import com.matt.mod.generic.helpers.ChatHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,7 +26,7 @@ public void addInformation(ItemStack par1ItemStack,
           EntityPlayer par2EntityPlayer,
           List par3List,
           boolean par4) {
-	 par3List.add(EnumChatFormatting.GOLD +"The primordial source of all magick in this world..");
+	 par3List.add(ChatHelper.acf("The primordial source of all magick in this world..", new EnumChatFormatting[]{EnumChatFormatting.GOLD,EnumChatFormatting.UNDERLINE}));
 }
 
 }
