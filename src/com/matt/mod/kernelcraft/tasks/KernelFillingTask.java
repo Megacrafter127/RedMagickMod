@@ -40,7 +40,6 @@ public class KernelFillingTask extends KernelTask {
 				return;
 			}
 			success=executor.placeBlock(id, meta, ax, ay, az);
-			System.out.println("TODO");
 			do{
 				increment();
 			} while(executor.getWorldObj().getBlockId(ax, ay, az)!=0&&ay<=y2);

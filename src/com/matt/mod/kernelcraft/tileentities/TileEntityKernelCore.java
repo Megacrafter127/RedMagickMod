@@ -329,6 +329,7 @@ public class TileEntityKernelCore extends TileEntity {
 		}
 		if(!found) return false;
 		getWorldObj().setBlock(x, y, z, id, meta, 1);
+		getWorldObj().notifyBlockChange(x, y, z, 1);
 		return true;
 	}
 	

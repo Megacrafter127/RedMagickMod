@@ -27,7 +27,6 @@ import com.matt.mod.handlers.FutureCraftRegistry;
 import com.matt.mod.item.ItemFutureNote;
 import com.matt.mod.item.ItemIngot;
 import com.matt.mod.item.ItemModPickaxe;
-import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.magick.FutureCraftSwag;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
@@ -210,7 +209,19 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 			registerPlugin(new FutureCraftSwag());
 		
 		ClientProxy.registerTESR();
-		registerPlugin(new KernelCraftCore());
+		try{
+			registerPlugin(Class.forName("com.matt.mod.kernelcraft.KernelCraftCore").newInstance());
+		}
+		catch(ClassNotFoundException ex) {
+			System.out.println("Unable to load kernelcraft; it will be ignored");
+			}
+		catch(IllegalAccessException ex) {
+			System.out.println("Unable to load kernelcraft; it will be ignored");
+			}
+		catch(InstantiationException ex) {
+			System.out.println("Unable to load kernelcraft; it will be ignored");
+		}
+		
 		registerPlugin(FutureCraftTweaks.instance);
 	}
 }
