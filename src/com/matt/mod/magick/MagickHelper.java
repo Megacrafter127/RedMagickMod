@@ -94,6 +94,6 @@ public static void register() {
 	GameRegistry.registerItem(manaDust, ItemManaDust.name);
 	GameRegistry.registerItem(manaDiamond, Ref.toItemName("manadiamond"));
 	MagickRecipes.init();
-	TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
+	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
 }
 }	
