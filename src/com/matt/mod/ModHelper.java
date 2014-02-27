@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
@@ -113,8 +114,10 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 	public static final Item loreBook = new ItemFutureNote().setUnlocalizedName("Lore Book").setCreativeTab(Ref.getRecommendedTab("item")).setTextureName(Ref.NAME.toLowerCase()+ ":lorebook");
 	public static void registerAllItems() {
 		GameRegistry.registerItem(neth, "ingotNetherium");
+		OreDictionary.registerOre("ingotNetherium", neth);
 		
 		GameRegistry.registerItem(endh, "ingotEnderium");
+		OreDictionary.registerOre("ingotEnderium", endh);
 		
 		GameRegistry.registerItem(ingotIndium, "ingotIndium");
 		
