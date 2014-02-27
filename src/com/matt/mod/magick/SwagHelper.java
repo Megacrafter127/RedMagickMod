@@ -40,7 +40,7 @@ public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
 //public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
 public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Foscos");
-public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("magickdiamond"));
+public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald"));
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
