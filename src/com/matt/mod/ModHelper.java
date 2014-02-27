@@ -212,6 +212,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 			registerPlugin(new FutureCraftSwag());
 		
 		ClientProxy.registerTESR();
+		
 		try{
 			registerPlugin(Class.forName("com.matt.mod.kernelcraft.KernelCraftCore").newInstance());
 		}

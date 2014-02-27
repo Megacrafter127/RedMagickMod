@@ -88,12 +88,12 @@ public class FutureCraft {
 		public static int swagChestId = 758;
 		public static int blockEnhancerId = 759;
 		public static int swagDecoID = 760;
-		public static boolean enable_debug_wands;
+		public static boolean enable_debug_wands;	
 		public static int armor_1 = 1001;
 		public static int armor_2 = 1002;
 		public static int armor_3 = 1003;
 		public static int armor_4 = 1004;
-		private int blockLampID;
+		public static int blockLampID = 761;
 		public static int manaDustID = 799;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
