@@ -160,7 +160,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 
 	@Override
 	public void register() {
-		MultiPacketHandler.addPacketHandler(handler, "KernelCoreUpdate", "KernelCoreEffectUpdate", "KernelCoreTaskUpdate");
+		MultiPacketHandler.addPacketHandler(handler, "KCU", "KCEU", "KCTU");
 		registerBlocks();
 		registerItems();
 		registerTileEntities();
