@@ -7,7 +7,7 @@ public class FutureCraftSwag implements IFutureCraftPlugin{
 
 public void register() {
 System.out.println("Registering FutureCraftMagick plugin!");
-SwagHelper.register();
+MagickHelper.register();
 }
 @Override
 public String getName() {

@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.lib.Ref;
-import com.matt.mod.magick.SwagHelper;
+import com.matt.mod.magick.MagickHelper;
 import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 

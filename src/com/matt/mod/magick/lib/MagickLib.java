@@ -3,7 +3,7 @@ package com.matt.mod.magick.lib;
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 
-public class SwagLib {
+public class MagickLib {
 	public static int getIdFor(String str, int defaultid) {
 		if(str != null) {
 			FutureCraft.config.load();

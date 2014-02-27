@@ -20,7 +20,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import org.lwjgl.input.Keyboard;
 
 import com.matt.lib.Ref;
-import com.matt.mod.magick.SwagHelper;
+import com.matt.mod.magick.MagickHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
