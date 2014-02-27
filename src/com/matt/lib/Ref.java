@@ -12,6 +12,7 @@ public static final String ALPHA = "a0.0.1";
 public static final String BUILD = "b884rev98";
 public static final String BLOCKPREFIX = "FutureCraftBlock.tile.";
 public static final String ITEMPREFIX = ".FutureCraftItem.item.";
+public static final String STRING_WITTY_COMMENT = "Press shift to see witty comment.";
 /**
  * Gets the recommended futurecraft tab for type.
  * @author Matheus

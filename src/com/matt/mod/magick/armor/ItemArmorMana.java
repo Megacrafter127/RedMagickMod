@@ -9,12 +9,14 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumHelper;
 
 import org.lwjgl.input.Keyboard;
 
 import com.matt.lib.Ref;
+import com.matt.mod.generic.helpers.ChatHelper;
 import com.matt.mod.magick.ArmorHelper;
 import com.matt.mod.magick.MagickHelper;
 
@@ -116,28 +118,28 @@ public class ItemArmorMana extends ItemArmor {
                EntityPlayer par2EntityPlayer,
                List par3List,
                boolean par4) {
-		 if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+		
 		if(par1ItemStack.getItem() instanceof ItemArmorMana) {
 			ItemArmorMana m = (ItemArmorMana) par1ItemStack.getItem();
 			if(m.armorType == 0) {
-				par3List.add("Magical Helmet? Night Vision? F. Yea.");
+				par3List.add(ChatHelper.customHTT("Magical Helmet? Night Vision? F. Yea.",Ref.STRING_WITTY_COMMENT,Keyboard.KEY_LSHIFT,EnumChatFormatting.GOLD));
 				
 			}else if(m.armorType == 1) {
-				par3List.add("Magical Chestplate? Invulnerable? F. Yea.");
+				par3List.add(ChatHelper.customHTT("Magical Chestplate? Invulnerable? F. Yea.",Ref.STRING_WITTY_COMMENT,Keyboard.KEY_LSHIFT,EnumChatFormatting.GOLD));
+				
 				
 			}else if(m.armorType == 2) {
-				par3List.add("Magical Legs? Run super fast? F. Yea.");
 				
+				par3List.add(ChatHelper.customHTT("Magical Legs? Run super fast? F. Yea.",Ref.STRING_WITTY_COMMENT,Keyboard.KEY_LSHIFT,EnumChatFormatting.GOLD));
 			}else if(m.armorType == 3) {
-				par3List.add("Magical Boots? Never take fall damage? F. Yea.");
+				par3List.add(ChatHelper.customHTT("Magical Boots? Never take fall damage? F. Yea.",Ref.STRING_WITTY_COMMENT,Keyboard.KEY_LSHIFT,EnumChatFormatting.GOLD));
+				
 				
 			}
 			
 		}
 			
-		}else{
-			par3List.add("Hold shift to see witty comment.");
-		}
+	
 	 }
 	 
 	 }

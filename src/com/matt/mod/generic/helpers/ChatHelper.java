@@ -24,9 +24,10 @@ public class ChatHelper {
 		return ret+s+EnumChatFormatting.RESET;
 	} 
 	/**
-	 * Applied the given format to the string, resetting it at the end.
+	 * Applies the given format to the string, resetting it at the end.
 	 * Also applies the key down to see details of most tooltips.
 	 * htt stands for hide-tool-tip.
+	 * @author Matheus
 	 * @param s - the string to apply the formats to
 	 * @param key_id - the key to check for
 	 * @param formats - the formats to apply
@@ -37,6 +38,26 @@ public class ChatHelper {
 		return acf(s,formats);
 		}else{
 			return acf("Press shift to see details", new EnumChatFormatting[]{EnumChatFormatting.GRAY});
+		}
+	}
+	/**
+	 * Applies the given format to the string, resetting it at the end.
+	 * Also applies the key down to see details of most tooltips.
+	 * You can specify a custom hidden tooltip.
+	 * htt stands for hide-tool-tip.
+	 * @author Matheus
+	 * @param s - the string to apply the formats to
+	 * @param defToolTip - the default tooltip to display
+	 * @param key_id - the key to check for
+	 * @param formats - the formats to apply
+	 * 
+	 * @return the formatted string, or if key is not down, shift to see details in gray.
+	 */
+	public static String customHTT(String s,String defToolTip,int key_id, EnumChatFormatting... formats) {
+		if(Keyboard.isKeyDown(key_id)) {
+		return acf(s,formats);
+		}else{
+			return acf(defToolTip, new EnumChatFormatting[]{EnumChatFormatting.GRAY});
 		}
 	}
 }
