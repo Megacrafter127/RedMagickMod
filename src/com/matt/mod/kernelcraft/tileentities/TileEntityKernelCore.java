@@ -336,7 +336,7 @@ public class TileEntityKernelCore extends TileEntity {
 	public void sendChangeToServer() {
 		if(!getWorldObj().isRemote) return;
 		Packet250CustomPayload packet=new Packet250CustomPayload();
-		packet.channel="KernelCoreUpdate";
+		packet.channel="KCU";
 		NBTTagCompound nbt=new NBTTagCompound();
 		writeToNBT(nbt);
 		ByteArrayOutputStream out=new ByteArrayOutputStream();
