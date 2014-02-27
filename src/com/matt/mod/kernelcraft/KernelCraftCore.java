@@ -97,7 +97,7 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		//misc
 		//end misc
 		//items
-		KernelToolID=FutureCraft.config.getItem("kernelTool", 951).getInt();
+		KernelToolID=FutureCraft.config.getItem("kernelTool", KernelToolID).getInt();
 		//end items
 		FutureCraft.config.save();
 	}
