@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
-import com.matt.generic.helpers.FutureCraftConfig;
 import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
@@ -122,7 +121,7 @@ public class FutureCraft {
               * FutureCraft Config file
               */
              config = new Configuration(FutureCraft.configPatch);     
-             FutureCraftConfig.cfg = config;
+             
              config.load();
              		basicFBlockID = config.getBlock("basicMachineHandler", 538).getInt();
              		goldenFBlockID = config.getBlock("advancedMachineHandler", 539).getInt();
@@ -142,7 +141,7 @@ public class FutureCraft {
             		loreBookId = config.getItem("loreBook", 650).getInt();
             		altarCoreID = config.getBlock("Altar Core", 547).getInt();
             		blockGOLID = config.getBlock("Magick","Warded Stone", 548).getInt();
-            		blockGOLControlerID = config.getBlock("GOLControler", 549).getInt();
+            		blockGOLControlerID = config.getBlock("Magickal Lamp", 549).getInt();
             		
             		//enable_swag = FutureCraft.config.get("Module", "Enable Magick", true).getBoolean(true);
             		enable_debug_wands = FutureCraft.config.get("Debug", "Enable Magick - Wands Debug", false).getBoolean(false);
@@ -167,6 +166,7 @@ public class FutureCraft {
             		swagChestId = FutureCraft.config.getBlock("Swag Chest", 758).getInt();
             		blockEnhancerId = FutureCraft.config.getBlock("Altar Enhancer", 759).getInt();
             		swagDecoID = FutureCraft.config.getBlock("Swag Decoration Block", 760).getInt();
+            		//mana_1 = FutureCraft.config.get("Mana Armor");
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();

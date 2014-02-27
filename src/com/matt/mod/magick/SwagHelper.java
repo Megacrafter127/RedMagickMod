@@ -1,6 +1,7 @@
 package com.matt.mod.magick;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -13,6 +14,7 @@ import com.matt.mod.magick.block.SwagDecoBlock;
 import com.matt.mod.magick.block.WardedStone;
 import com.matt.mod.magick.block.tile.TileEntityProtected;
 import com.matt.mod.magick.block.tile.TileEntityWandRecharger;
+import com.matt.mod.magick.generics.MagickalBlockG;
 import com.matt.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.matt.mod.magick.items.ItemFlyingCatalist;
 import com.matt.mod.magick.items.ItemMagickWand;
@@ -36,7 +38,10 @@ public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.
 public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
+public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
+
 public static void register() {
+		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
 	
 	GameRegistry.registerBlock(blockMagicalBlockBlue,"magicalWallBlue");
@@ -75,5 +80,6 @@ public static void register() {
 	LanguageRegistry.addName(blockProtectedStone,"Protected Stone");
 	TileEntity.addMapping(TileEntityProtected.class, "Protected Block");
 	ArmorHelper.register();
+	GameRegistry.registerBlock(blockMagicalLamp,"MagicalLamp");
 }
 }	
