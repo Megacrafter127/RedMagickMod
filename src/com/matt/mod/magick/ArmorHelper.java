@@ -7,6 +7,7 @@ import com.matt.lib.Ref;
 import com.matt.mod.magick.armor.ItemArmorMana;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ArmorHelper {
 	public static final Item manaHelm = new ItemArmorMana(FutureCraft.armor_1,0,0).setUnlocalizedName(Ref.ID.toLowerCase() + ".armor.manaHelmet");;
@@ -19,6 +20,10 @@ public static void register()
 	GameRegistry.registerItem(manaChest,Ref.ID.toLowerCase() + ".armor.manaChestplate");
 	GameRegistry.registerItem(manaLegs,Ref.ID.toLowerCase() + ".armor.manaLeggins");
 	GameRegistry.registerItem(manaBoots,Ref.ID.toLowerCase() + ".armor.manaBoots");
+	LanguageRegistry.addName(manaHelm,"Mana Helmet");
+	LanguageRegistry.addName(manaChest,"Mana Chestplate");
+	LanguageRegistry.addName(manaLegs,"Mana Leggings");
+	LanguageRegistry.addName(manaBoots,"Mana Boots");
 	
 }
 }
