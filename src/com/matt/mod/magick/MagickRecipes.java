@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MagickRecipes {
@@ -30,7 +29,7 @@ public static ShapedRecipes recipeHead = new ShapedRecipes(3, 3, new ItemStack[]
 public static ShapedRecipes recipeChest = new ShapedRecipes(3, 3, new ItemStack[]{foscos,foscos,foscos,foscos,chestPieceL,foscos,foscos,foscos,foscos}, chestPiece);
 public static ShapedRecipes recipeLegs = new ShapedRecipes(3, 3, new ItemStack[]{foscos,foscos,foscos,foscos,legPieceL,foscos,foscos,foscos,foscos}, legPiece);
 public static ShapedRecipes recipeBoots = new ShapedRecipes(3, 3, new ItemStack[]{foscos,foscos,foscos,foscos,bootPieceL,foscos,foscos,foscos,foscos}, bootPiece);
-
+public static ShapedRecipes recipeDiamond = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,diamond,foscos,foscos,foscos,foscos}, new ItemStack(SwagHelper.manaDiamond,1,0));
 public static ShapedRecipes recipeCatalyst = new ShapedRecipes(3,3, new ItemStack[]{foscos,diamond,foscos,diamond,feather,diamond,foscos,diamond,foscos},catalyst);
 public static void init() {	
 	
@@ -41,6 +40,7 @@ public static void init() {
 	GameRegistry.addRecipe(recipeChest);
 	GameRegistry.addRecipe(recipeLegs);
 	GameRegistry.addRecipe(recipeBoots);
+	GameRegistry.addRecipe(recipeDiamond);
 	
 }
 }

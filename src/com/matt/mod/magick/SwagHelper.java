@@ -39,7 +39,7 @@ public static final ItemFlyingCatalist swaggishFlyer = new ItemFlyingCatalist();
 public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
 //public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
-public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Foscos");
+public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Skoni");
 public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald"));
 public static void register() {
 		
@@ -74,6 +74,9 @@ public static void register() {
 	LanguageRegistry.addName(new ItemStack(magickCore,1,0), ItemWandCore.getNames()[0]);
 	LanguageRegistry.addName(new ItemStack(magickCore,1,1), ItemWandCore.getNames()[1]);
 	LanguageRegistry.addName(new ItemStack(magickCore,1,2), ItemWandCore.getNames()[2]);
+	LanguageRegistry.addName(manaDust,"Mageia Skoni");
+	LanguageRegistry.addName(manaDiamond,"Mageia Diamanti");
+	
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,0),new ItemStack(magickCore,1,0),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,1),new ItemStack(magickCore,1,1),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,2),new ItemStack(magickCore,1,2),new ItemStack(Item.stick,1,0)));
