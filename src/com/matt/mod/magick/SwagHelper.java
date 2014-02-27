@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
-import com.matt.mod.magick.armor.MagickRecipes;
+import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.magick.block.SwagBattery;
 import com.matt.mod.magick.block.SwagBlock;
 import com.matt.mod.magick.block.SwagDecoBlock;
@@ -40,6 +40,7 @@ public static final Block blockAltarCore = new BlockAltar();
 public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID);
 //public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
 public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Foscos");
+public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("magickdiamond"));
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -81,6 +82,7 @@ public static void register() {
 	TileEntity.addMapping(TileEntityProtected.class, "Protected Block");
 	ArmorHelper.register();
 	GameRegistry.registerItem(manaDust, ItemManaDust.name);
+	GameRegistry.registerItem(manaDiamond, Ref.toItemName("manadiamond"));
 	MagickRecipes.init();
 }
 }	

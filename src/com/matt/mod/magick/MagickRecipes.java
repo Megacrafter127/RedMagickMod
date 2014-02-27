@@ -1,4 +1,4 @@
-package com.matt.mod.magick.armor;
+package com.matt.mod.magick;
 
 import java.util.List;
 
@@ -6,10 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
-
-import com.matt.mod.magick.ArmorHelper;
-import com.matt.mod.magick.SwagHelper;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MagickRecipes {
