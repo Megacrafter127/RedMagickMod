@@ -1,8 +1,11 @@
 package com.matt.mod.magick.items;
 
+import com.matt.mod.generic.helpers.ChatHelper;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class MinerTool extends Item {
@@ -16,7 +19,7 @@ public class MinerTool extends Item {
      */
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
     {
-    	for(int i = x; i <= x+3; i++) {
+    	/*for(int i = x; i <= x+3; i++) {
     		for(int j = y; j <= y+3; i++) {
     			try {
     				world.setBlockToAir(i,j,z);
@@ -25,7 +28,9 @@ public class MinerTool extends Item {
     			}
     		
     		}
-    	}
+    	}*/
+    	if(!world.isRemote)
+    	player.addChatMessage(ChatHelper.acf("Nope, dire, mega, me, anyone. This not ready yet!",EnumChatFormatting.GOLD,EnumChatFormatting.UNDERLINE,EnumChatFormatting.BOLD));
         return false;
     }
 }

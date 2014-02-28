@@ -112,6 +112,7 @@ public class FutureCraft {
 		// Creative Tabs
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
+		public static int manaBlockCrafter = 802;
 		
 		
 		@EventHandler
@@ -159,7 +160,7 @@ public class FutureCraft {
             		swag_wall2_id = FutureCraft.config.getBlock("magicWall2", 753 ).getInt();
             	
             		swag_wall3_id = FutureCraft.config.getBlock("magicWall3", 754 ).getInt();
-            		
+            		manaBlockCrafter = FutureCraft.config.getBlock("Magick Crafter", 801 ).getInt();
             		swag_catalist_id = FutureCraft.config.getItem("Flying Catalist", 804).getInt();
             		
             		 manaDustID = FutureCraft.config.getItem(" manaDustID", 799).getInt();
@@ -185,6 +186,7 @@ public class FutureCraft {
      @EventHandler // used in 1.6.2
      //@Init       // used in 1.5.2
      public void load(FMLInitializationEvent event) {
+    	 	System.out.println("Max integer value " + Integer.MAX_VALUE);
              proxy.registerRenderers();
              System.out.println("Registering FutureCraft blocks!");
              ModHelper.registerAll();
