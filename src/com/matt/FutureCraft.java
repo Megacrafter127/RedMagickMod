@@ -97,6 +97,7 @@ public class FutureCraft {
 		public static int manaDustID = 799;
 		public static int magickDiamondID = 800;
 		public static int manaQuarryID = 801;
+		public static int blockOldwoodID = 802;
 		// ItemStacks -- For crafting.
 		public static ItemStack dirtStack = new ItemStack(Block.dirt);
 		public static ItemStack seedStack = new ItemStack(Item.seeds);
@@ -178,6 +179,7 @@ public class FutureCraft {
             		armor_4 = FutureCraft.config.get("Mana Armor","Feet Piece",1003).getInt();
             		magickDiamondID = FutureCraft.config.getItem("Magick Diamond", 800).getInt();
             		manaQuarryID = FutureCraft.config.getItem("Mana Miner",801).getInt();
+            		blockOldwoodID = FutureCraft.config.getBlock("Oldwood",801).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();

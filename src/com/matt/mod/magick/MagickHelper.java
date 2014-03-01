@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 import com.matt.mod.kernelcraft.KernelCraftCore;
+import com.matt.mod.magick.block.BlockOldwood;
 import com.matt.mod.magick.block.SwagBattery;
 import com.matt.mod.magick.block.SwagBlock;
 import com.matt.mod.magick.block.SwagDecoBlock;
@@ -49,6 +50,7 @@ public static final Block blockProtectedStone = new WardedStone(FutureCraft.bloc
 public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Skoni");
 public static final Item minerTool = new MinerTool(FutureCraft.manaQuarryID).setUnlocalizedName("manaMiner").setTextureName(MagickLib.toTextureName("manaminer"));
 public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald"));
+public static final Block blockOldwood = new BlockOldwood().setUnlocalizedName("Oldwood");
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -94,6 +96,7 @@ public static void register() {
 	ArmorHelper.register();
 	GameRegistry.registerItem(manaDust, ItemManaDust.name);
 	GameRegistry.registerItem(manaDiamond, Ref.toItemName("manadiamond"));
+	GameRegistry.registerBlock(blockOldwood,"futurecraft.block.oldWood");
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
 	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
