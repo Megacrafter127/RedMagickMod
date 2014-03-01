@@ -16,7 +16,7 @@ public class BlockOldwood extends Block {
 	Icon norm;
 	public BlockOldwood() {
 	super(getRecommendedID(),Material.wood);
-
+	setTextureName(MagickLib.toTextureName("oldwood"));
 	}
 
 	private static int getRecommendedID() {
@@ -26,27 +26,8 @@ public class BlockOldwood extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
     { 
-		norm = par1IconRegister.registerIcon(MagickLib.toTextureName("oldwood"));
-		top = par1IconRegister.registerIcon(MagickLib.toTextureName("oldwoodtop"));
+		
     }
-	  @SideOnly(Side.CLIENT)
-
-	    /**
-	     * The icon for the side of the block.
-	     */
-	    protected Icon getSideIcon(int par1)
-	    {
-	        return this.norm;
-	    }
-
-	    @SideOnly(Side.CLIENT)
-
-	    /**
-	     * The icon for the tops and bottoms of the block.
-	     */
-	    protected Icon getEndIcon(int par1)
-	    {
-	        return this.top;
-	    }
+	
 
 }

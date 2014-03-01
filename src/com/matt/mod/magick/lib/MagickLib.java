@@ -14,6 +14,11 @@ public class MagickLib {
 		}
 		return 0;
 	}
+	/**
+	 * 
+	 * @param name
+	 * @return a concatenated string with the mod's name and a <bold>':'</bold> signal.
+	 */
 	public static String toTextureName(String name) {
 		return Ref.NAME.toLowerCase()+":"+name;
 	}
