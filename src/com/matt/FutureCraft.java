@@ -114,6 +114,7 @@ public class FutureCraft {
 		 public static CreativeTabs tabFCraft = new TabFuture(CreativeTabs.getNextID(), "FutureCraft","block");
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
 		public static int manaBlockCrafter = 802;
+		public static int manaColllectorID = 805;
 		
 		
 		@EventHandler
@@ -180,6 +181,7 @@ public class FutureCraft {
             		magickDiamondID = FutureCraft.config.getItem("Magick Diamond", 800).getInt();
             		manaQuarryID = FutureCraft.config.getItem("Mana Miner",801).getInt();
             		blockOldwoodID = FutureCraft.config.getBlock("Oldwood",801).getInt();
+            		manaColllectorID = FutureCraft.config.getBlock("Mana Collector",805).getInt();
          	 	System.out.println("[FC]Saving futurecraft config!");
          	 	System.out.println();
              config.save();
