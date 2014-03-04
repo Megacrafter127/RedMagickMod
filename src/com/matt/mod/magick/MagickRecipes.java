@@ -2,10 +2,10 @@ package com.matt.mod.magick;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.src.ModLoader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MagickRecipes {
@@ -27,12 +27,15 @@ public class MagickRecipes {
 	public static final ItemStack catalyst = new ItemStack(MagickHelper.swaggishFlyer,1,0);
 	public static final ItemStack feather = new ItemStack(Item.feather,1,0);
 	public static final ItemStack dia =  new ItemStack(MagickHelper.manaDiamond,1,0);
+	public  static final ItemStack oak = new ItemStack(Block.planks,0,0);
 	public static ShapedRecipes recipeHead = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,headPieceL,dia,foscos,dia,foscos}, headPiece);
 public static ShapedRecipes recipeChest = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,chestPieceL,dia,foscos,dia,foscos}, chestPiece);
 public static ShapedRecipes recipeLegs = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,legPieceL,dia,foscos,dia,foscos}, legPiece);
 public static ShapedRecipes recipeBoots = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,bootPieceL,dia,foscos,dia,foscos}, bootPiece);
 public static ShapedRecipes recipeDiamond = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,diamond,foscos,foscos,foscos,foscos},dia);
 public static ShapedRecipes recipeCatalyst = new ShapedRecipes(3,3, new ItemStack[]{foscos,dia,foscos,dia,feather,dia,foscos,dia,foscos},catalyst);
+
+public static ShapedRecipes recipeOldwood = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,oak,foscos,foscos,foscos,foscos}, new ItemStack(MagickHelper.blockOldwood,0,0));
 public static void init() {	
 	
 	GameRegistry.addShapelessRecipe(foscos, new ItemStack[]{coal,redstone,glowstone,lapis});
@@ -43,6 +46,6 @@ public static void init() {
 	GameRegistry.addRecipe(recipeLegs);
 	GameRegistry.addRecipe(recipeBoots);
 	GameRegistry.addRecipe(recipeDiamond);
-	
+	GameRegistry.addRecipe(recipeOldwood);
 }
 }
