@@ -22,7 +22,7 @@ public class ClientProxy extends CommonProxy {
         public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
         {
         	if(player.inventory.getCurrentItem().itemID == ModHelper.loreBook.itemID && ID == 0) {
-        		return new LoreBookGui("Welcome to the beautiful world of futurecraft!");
+        		return new LoreBookGui("Welcome to the /n beautiful world of /n futurecraft!");
         	}
         	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         	if (tileEntity != null)
