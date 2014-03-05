@@ -1,6 +1,9 @@
 package com.matt.generic.helpers;
 
+import net.minecraft.crash.CrashReport;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ReportedException;
 
 public class EntityPlayerHelper {
 static final public EntityPlayerHelper instance = new EntityPlayerHelper();
@@ -21,4 +24,14 @@ static final public EntityPlayerHelper instance = new EntityPlayerHelper();
 		public boolean isArmorEquipped(EntityPlayer p, int armorId, int armorType) {
 			return p.getCurrentArmor(armorType).itemID == armorId;
 		}
+		public static void writeStringTagToEntityPlayer(EntityPlayer p, String k, String v) {
+			Entity base = (Entity)p;
+			if(base.getEntityData() != null) {
+				base.getEntityData().setString(k,v);
+			}else {
+				throw new ReportedException(new CrashReport("Tried to add a string into a null nbt", null));
+			}
+			
+		}
+		
 }
