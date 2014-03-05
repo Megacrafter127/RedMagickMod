@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
+import com.futurecraft.api.FutureCraftAPI;
 import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
 import com.matt.mod.TabFuture;
@@ -115,6 +116,10 @@ public class FutureCraft {
 		 public static CreativeTabs tabFCraftItems = new TabFuture(CreativeTabs.getNextID(), "FutureCraft Items","item");
 		public static int manaBlockCrafter = 802;
 		public static int manaColllectorID = 805;
+		/**
+		 * The commonly-used API instance.
+		 */
+		public static FutureCraftAPI apiInstance;
 		
 		
 		@EventHandler

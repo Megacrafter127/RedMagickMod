@@ -8,11 +8,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.matt.FutureCraft;
-import com.matt.generic.helpers.IFutureCraft;
 import com.matt.mod.blocks.tileentity.TileEntityEnchantAltar;
 
 public class BlockEnchantmentAltarCore extends Block implements
-		ITileEntityProvider, IFutureCraft {
+		ITileEntityProvider{
 
 	public BlockEnchantmentAltarCore() {
 		super(FutureCraft.altarCoreID, Material.dragonEgg);

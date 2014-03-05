@@ -8,10 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 
-import com.matt.generic.helpers.IFutureCraft;
 import com.matt.mod.ModHelper;
 
-public class TileEntityEnchantAltar extends TileEntity implements IFutureCraft {
+public class TileEntityEnchantAltar extends TileEntity  {
 
 	
 	public boolean run(EntityPlayer p, World w, int x, int y, int z) {

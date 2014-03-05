@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.futurecraft.api.FutureCraftAPI;
 import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
@@ -227,5 +228,6 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		}
 		
 		registerPlugin(FutureCraftTweaks.instance);
+		registerPlugin(new FutureCraftAPI());
 	}
 }

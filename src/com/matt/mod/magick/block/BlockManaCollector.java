@@ -64,7 +64,7 @@ public class BlockManaCollector extends Block implements ITileEntityProvider {
 	}
 	 public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	    {
-		 System.out.println("Dug");
+		 System.out.println("[Debugger]");
 		 Minecraft.getMinecraft().effectRenderer.addEffect(new StraightEnchant(par1World,par2,par3,par4,10,0,10));
 		 return true;
 	    }

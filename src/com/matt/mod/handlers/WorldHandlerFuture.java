@@ -62,7 +62,7 @@ public class WorldHandlerFuture implements IWorldGenerator {
 			int roentgeniumY = random.nextInt(15);
 			int roentgeniumZ = j + random.nextInt(16);
 			(new WorldGenMinable(ModHelper.oreIndium.blockID, 13)).generate(world, random, indiumX, indiumY,indiumZ);
-			(new WorldGenMinable(ModHelper.oreRoent.blockID, 13)).generate(world, random, indiumX, indiumY,indiumZ);
+			(new WorldGenMinable(ModHelper.oreRoent.blockID, 13)).generate(world, random, roentgeniumX, roentgeniumY,roentgeniumZ);
 		}
 	}
 	/**
@@ -84,7 +84,6 @@ public class WorldHandlerFuture implements IWorldGenerator {
 	 * @param j
 	 */
 	private void generateEnd(World world, Random random, int i, int j) {
-		// USELESS
 		
 	}
 

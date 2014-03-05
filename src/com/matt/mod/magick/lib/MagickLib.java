@@ -4,6 +4,12 @@ import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 
 public class MagickLib {
+	/**
+	 * 
+	 * @param str - block or item's name
+	 * @param defaultid - the default id
+	 * @return An id, present or generated, in the FutureCraft cfg file.
+	 */
 	public static int getIdFor(String str, int defaultid) {
 		if(str != null) {
 			FutureCraft.config.load();
