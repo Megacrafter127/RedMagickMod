@@ -10,6 +10,10 @@ import org.lwjgl.input.Keyboard;
  */
 public class ChatHelper {
 	/**
+	 * A enum[] for warning messages.
+	 */
+	public static final EnumChatFormatting[] ENUMARRAY_WARNING = new EnumChatFormatting[]{EnumChatFormatting.RED,EnumChatFormatting.UNDERLINE,EnumChatFormatting.BOLD};
+	/**
 	 * Applies the given formats to the string, resetting it at the string's end.
 	 * afc stands for apply-chat-formattings.
 	 * @param s - the string to apply the formats to

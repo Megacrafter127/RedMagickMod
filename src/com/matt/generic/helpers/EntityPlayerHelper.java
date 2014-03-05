@@ -24,6 +24,12 @@ static final public EntityPlayerHelper instance = new EntityPlayerHelper();
 		public boolean isArmorEquipped(EntityPlayer p, int armorId, int armorType) {
 			return p.getCurrentArmor(armorType).itemID == armorId;
 		}
+		/**
+		 * Writes a string to a player's NBTTagCompound.
+		 * @param p the entity player
+		 * @param k the key
+		 * @param v the value
+		 */
 		public static void writeStringTagToEntityPlayer(EntityPlayer p, String k, String v) {
 			Entity base = (Entity)p;
 			if(base.getEntityData() != null) {
