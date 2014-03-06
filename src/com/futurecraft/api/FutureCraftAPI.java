@@ -7,6 +7,7 @@ import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
 
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FutureCraftAPI implements IFutureCraftPlugin {
@@ -37,4 +38,6 @@ public class FutureCraftAPI implements IFutureCraftPlugin {
 		}
 		
 	}
+	
+	public void registerCommands(FMLServerStartingEvent e) {}
 }

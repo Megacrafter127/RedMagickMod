@@ -25,6 +25,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -204,11 +205,11 @@ public class FutureCraft {
          	NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
          	TickRegistry.registerTickHandler(new WandTickHandler(),Side.CLIENT);
      }
- /*@EventHandler
- public void serverLoad(FMLServerStartingEvent event)
- {
-   event.registerServerCommand(new FutureCraftCommand());
- }*/
+     @EventHandler
+     public void serverLoad(FMLServerStartingEvent event)
+     {
+    	 ModHelper.registerCommands(event);
+     }
      
      @EventHandler // used in 1.6.2
      public void postInit(FMLPostInitializationEvent event) {

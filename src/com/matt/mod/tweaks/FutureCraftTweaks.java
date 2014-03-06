@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 
 import com.matt.generic.helpers.IFutureCraftPlugin;
 
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+
 public class FutureCraftTweaks implements IFutureCraftPlugin {
 	
 	public static FutureCraftTweaks instance = new FutureCraftTweaks();
@@ -17,5 +19,8 @@ public class FutureCraftTweaks implements IFutureCraftPlugin {
 	public void register() {
 		Block.bedrock.setHardness(99.5F);
 	}
+	
+	@Override
+	public void registerCommands(FMLServerStartingEvent e) {}
 
 }

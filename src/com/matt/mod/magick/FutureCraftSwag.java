@@ -1,7 +1,8 @@
 package com.matt.mod.magick;
 
-import com.matt.FutureCraft;
 import com.matt.generic.helpers.IFutureCraftPlugin;
+
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class FutureCraftSwag implements IFutureCraftPlugin{
 
@@ -14,5 +15,7 @@ public String getName() {
 	return "FutureCraft Magick";
 }
 
+@Override
+public void registerCommands(FMLServerStartingEvent e) {}
 
 }

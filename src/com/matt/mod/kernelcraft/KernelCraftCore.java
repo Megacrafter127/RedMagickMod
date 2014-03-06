@@ -21,6 +21,7 @@ import com.matt.mod.kernelcraft.blocks.BlockKernelIOFace;
 import com.matt.mod.kernelcraft.blocks.BlockKernelModule;
 import com.matt.mod.kernelcraft.blocks.BlockKernelStorage;
 import com.matt.mod.kernelcraft.blocks.BlockKernelUSV;
+import com.matt.mod.kernelcraft.commands.KernelToolCommand;
 import com.matt.mod.kernelcraft.items.ItemKernelTool;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCPU;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
@@ -30,6 +31,7 @@ import com.matt.mod.kernelcraft.tileentities.TileEntityKernelStorage;
 import com.matt.mod.kernelcraft.tileentities.TileEntityKernelUSV;
 import com.matt.mod.recipes.QuadSymetricRecipe;
 
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -152,6 +154,11 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(USV,1),ModHelper.netheriumStack,ModHelper.enderiumStack,new ItemStack(Item.netherQuartz,1)));
 		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(IOFace,1),ModHelper.netheriumStack,ModHelper.enderiumStack,new ItemStack(Item.eyeOfEnder,1)));
 		GameRegistry.addRecipe(new QuadSymetricRecipe(new ItemStack(CPU,1),ModHelper.netheriumStack,ModHelper.enderiumStack,ModHelper.diamondStack));
+	}
+	
+	@Override
+	public void registerCommands(FMLServerStartingEvent e) {
+		e.registerServerCommand(new KernelToolCommand());
 	}
 
 	@Override

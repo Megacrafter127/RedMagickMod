@@ -35,6 +35,7 @@ import com.matt.mod.recipes.QuadSymetricRecipe;
 import com.matt.mod.tweaks.FutureCraftTweaks;
 import com.matt.proxy.client.ClientProxy;
 
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -229,5 +230,20 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		
 		registerPlugin(FutureCraftTweaks.instance);
 		registerPlugin(new FutureCraftAPI());
+	}
+	
+	public static void registerCommands(FMLServerStartingEvent e) {
+		try{
+			((IFutureCraftPlugin)Class.forName("com.matt.mod.kernelcraft.KernelCraftCore").newInstance()).registerCommands(e);
+		}
+		catch(ClassNotFoundException ex) {
+			System.out.println("Unable to load kernelcraft; it will be ignored");
+			}
+		catch(IllegalAccessException ex) {
+			System.out.println("Unable to load kernelcraft; it will be ignored");
+			}
+		catch(InstantiationException ex) {
+			System.out.println("Unable to load kernelcraft; it will be ignored");
+		}
 	}
 }

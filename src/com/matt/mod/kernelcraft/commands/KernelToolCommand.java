@@ -8,6 +8,9 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.EnumChatFormatting;
+
+import com.matt.mod.generic.helpers.ChatHelper;
 
 /**
  * 
@@ -60,10 +63,13 @@ public class KernelToolCommand implements ICommand {
 		ItemStack stack=player.inventory.getCurrentItem();
 		switch(astring.length) {
 		case 0:
-			if(stack.hasTagCompound()) {
-				player.addChatMessage(stack.stackTagCompound.toString());
-			}
+			break;
 		case 1:
+			if(stack.hasTagCompound()) {
+				if(stack.stackTagCompound.hasKey(astring[0])) {
+					player.addChatMessage(ChatHelper.acf(astring[0]+": ", EnumChatFormatting.AQUA)+ChatHelper.acf(""+stack.stackTagCompound.getString(astring[0]), EnumChatFormatting.BLUE));
+				}
+			}
 		case 2:
 		default:		
 		}
