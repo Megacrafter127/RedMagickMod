@@ -32,9 +32,9 @@ public class MinerTool extends ItemTool {
 		Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, 
 		Block.mycelium, Block.bedrock,Block.netherBrick,Block.blockRedstone,Block.netherFence,
 		Block.fenceGate,ModHelper.oreRoent, ModHelper.oreIndium};
-	static EnumToolMaterial Magick = EnumHelper.addToolMaterial("magickMaterial", 5, Integer.MAX_VALUE, 70.5F, 50.0F, 100);
+	static final EnumToolMaterial Magick = EnumHelper.addToolMaterial("magickMaterial", 5, Integer.MAX_VALUE, 70.5F, 50.0F, 100);
 	public MinerTool(int par1) {
-		super(par1,10F, Magick,Block.blocksList);
+		super(par1,1000F, Magick, Block.blocksList);
 	}
     /**
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -160,6 +160,10 @@ public class MinerTool extends ItemTool {
     		}
     		
     	}
+    }
+    @Override
+    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
+    	return 100.0F;
     }
     
 }
