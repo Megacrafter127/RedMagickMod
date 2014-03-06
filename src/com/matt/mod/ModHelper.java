@@ -29,7 +29,7 @@ import com.matt.mod.handlers.FutureCraftRegistry;
 import com.matt.mod.item.ItemFutureNote;
 import com.matt.mod.item.ItemIngot;
 import com.matt.mod.item.ItemModPickaxe;
-import com.matt.mod.magick.FutureCraftSwag;
+import com.matt.mod.magick.FutureCraftMagick;
 import com.matt.mod.recipes.PickRecipe;
 import com.matt.mod.recipes.QuadSymetricRecipe;
 import com.matt.mod.tweaks.FutureCraftTweaks;
@@ -211,7 +211,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		registerRecipesShaped();
 		registerTileEntities();
 	
-			registerPlugin(new FutureCraftSwag());
+			registerPlugin(new FutureCraftMagick());
 		
 		ClientProxy.registerTESR();
 		

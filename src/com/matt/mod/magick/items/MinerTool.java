@@ -103,7 +103,7 @@ public class MinerTool extends ItemTool {
     		par3List.add(ChatHelper.acf("On right click, will mine in a 3x3x3 wall.",EnumChatFormatting.RED));
     		par3List.add(ChatHelper.acf("The wall starts from the bottom right corner",EnumChatFormatting.RED));
     		par3List.add(ChatHelper.customHTT("!!WARNING!! THIS TOOL DOES NOT DROP ITEMS!","Press shift to see IMPORTANT details.", Keyboard.KEY_LSHIFT, ChatHelper.ENUMARRAY_WARNING));
-    		par3List.add(ChatHelper.acf("Gaias Magick Count : " + earthMana, EnumChatFormatting.GREEN));
+    			par3List.add(ChatHelper.acf("Gaias Magick Count : " + earthMana, EnumChatFormatting.GREEN));
     		par3List.add(ChatHelper.acf("Mageia Magick Count : " + magick, EnumChatFormatting.DARK_PURPLE));
     		par3List.add(ChatHelper.acf("!!WARNING!!",ChatHelper.ENUMARRAY_WARNING));
     		par3List.add(ChatHelper.acf("This is what can be considered a GLITCHFEST",ChatHelper.ENUMARRAY_WARNING));
