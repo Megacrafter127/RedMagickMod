@@ -32,9 +32,9 @@ public class MinerTool extends ItemTool {
 		Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, 
 		Block.mycelium, Block.bedrock,Block.netherBrick,Block.blockRedstone,Block.netherFence,
 		Block.fenceGate,ModHelper.oreRoent, ModHelper.oreIndium};
-	static EnumToolMaterial Magick = EnumHelper.addToolMaterial("magickMaterial", 5, Integer.MAX_VALUE, 7.5F, 5.0F, 100);
+	static EnumToolMaterial Magick = EnumHelper.addToolMaterial("magickMaterial", 5, Integer.MAX_VALUE, 70.5F, 50.0F, 100);
 	public MinerTool(int par1) {
-		super(par1,10F, EnumHelper.addToolMaterial("magickMaterial", 5, Integer.MAX_VALUE, 7.5F, 5.0F, 100),arrayOfBlocks);
+		super(par1,10F, Magick,Block.blocksList);
 	}
     /**
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -43,18 +43,21 @@ public class MinerTool extends ItemTool {
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
     {
     	if(!player.isSneaking()) {
+    		if(!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
     	for(int i = x; i < x + 3; i++) {
     		for(int j = y; j < y + 3; j++) {
     			for(int k = z; k < z + 3; k++) {
     				try {
     					for(Block b : arrayOfBlocks) {
-    						if(world.getBlockId(i,j,k) == b.blockID) {
-    							player.inventory.addItemStackToInventory(new ItemStack(Block.blocksList[world.getBlockId(i,j,k)]));
-    		    				world.setBlockToAir(i,j,k);
-    		    				stack.damageItem(9,player);
-    						}else {
-    							
-    						}
+    						
+	    						if(world.getBlockId(i,j,k) == b.blockID) {
+	    							player.inventory.addItemStackToInventory(new ItemStack(Block.blocksList[world.getBlockId(i,j,k)]));
+	    		    				world.setBlockToAir(i,j,k);
+	    		    				stack.damageItem(9,player);
+	    						}else {
+	    							
+	    						}
+    						
     					}
     				
     				System.out.println("Coord X " + i + " Coord Y " + j + "Coord Z " + k);
@@ -65,12 +68,25 @@ public class MinerTool extends ItemTool {
     			
     		}
     	}
-    	}else {
+    		}else {
+    			for(Block b : arrayOfBlocks) {
+					
+					if(world.getBlockId(x,y,z) == b.blockID) {
+						player.inventory.addItemStackToInventory(new ItemStack(Block.blocksList[world.getBlockId(x,y,z)]));
+	    				world.setBlockToAir(x,y,z);
+	    				stack.damageItem(9,player);
+					}else {
+						
+					}
+				
+    		}
+    		}}else {
     		if(player.inventory.hasItemStack(new ItemStack(Block.glowStone)) ) {
     			world.setBlock(x,y,z,Block.glowStone.blockID);
     			player.inventory.consumeInventoryItem(Block.glowStone.blockID);
     		}
     	}
+    	
     	
   
     	
@@ -82,9 +98,11 @@ public class MinerTool extends ItemTool {
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
     	if(par1ItemStack != null) {
     		par3List.add("Can mine almost every block.");
+    		par3List.add("Wont mine normally, just with right-click.");
+    	 	par3List.add("When control rightclick will break 1 block.");
     		par3List.add(ChatHelper.acf("On right click, will mine in a 3x3x3 wall.",EnumChatFormatting.RED));
     		par3List.add(ChatHelper.acf("The wall starts from the bottom right corner",EnumChatFormatting.RED));
-    		par3List.add(ChatHelper.htt("!!WARNING!! THIS TOOL DOES NOT DROP ITEMS!",Keyboard.KEY_LSHIFT, ChatHelper.ENUMARRAY_WARNING));
+    		par3List.add(ChatHelper.customHTT("!!WARNING!! THIS TOOL DOES NOT DROP ITEMS!","Press shift to see IMPORTANT details.", Keyboard.KEY_LSHIFT, ChatHelper.ENUMARRAY_WARNING));
     		par3List.add(ChatHelper.acf("Gaias Magick Count : " + earthMana, EnumChatFormatting.GREEN));
     		par3List.add(ChatHelper.acf("Mageia Magick Count : " + magick, EnumChatFormatting.DARK_PURPLE));
     	}

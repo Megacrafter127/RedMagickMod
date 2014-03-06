@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
 import com.matt.mod.kernelcraft.KernelCraftCore;
+import com.matt.mod.magick.block.BlockManaBomb;
 import com.matt.mod.magick.block.BlockManaCollector;
 import com.matt.mod.magick.block.BlockManaCollector.TileEntityCollector;
 import com.matt.mod.magick.block.BlockOldwood;
@@ -54,6 +55,7 @@ public static final Item minerTool = new MinerTool(FutureCraft.manaQuarryID).set
 public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald"));
 public static final Block blockOldwood = new BlockOldwood().setUnlocalizedName("Oldwood");
 public static final Block manaColl = new BlockManaCollector().setUnlocalizedName("Collector");
+public static final Block blockManaBomb = new BlockManaBomb();
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -103,6 +105,8 @@ public static void register() {
 	LanguageRegistry.addName(blockOldwood,"Oldwood");
 	GameRegistry.registerBlock(manaColl,"collector");
 	GameRegistry.registerTileEntity(TileEntityCollector.class,"tileEntityCollector");
+	LanguageRegistry.addName(minerTool,"Mana Omniminer");
+	GameRegistry.registerBlock(blockManaBomb,"MANABOMB");
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
 	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
