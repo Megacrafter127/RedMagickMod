@@ -55,7 +55,7 @@ public static final Item minerTool = new MinerTool(FutureCraft.manaQuarryID).set
 public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald"));
 public static final Block blockOldwood = new BlockOldwood().setUnlocalizedName("Oldwood");
 public static final Block manaColl = new BlockManaCollector().setUnlocalizedName("Collector");
-public static final Block blockManaBomb = new BlockManaBomb();
+public static final Block blockManaBomb = new BlockManaBomb().setTextureName(MagickLib.toTextureName("manabomb"));
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
