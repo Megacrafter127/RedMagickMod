@@ -99,12 +99,15 @@ public class MinerTool extends ItemTool {
     	if(par1ItemStack != null) {
     		par3List.add("Can mine almost every block.");
     		par3List.add("Wont mine normally, just with right-click.");
-    	 	par3List.add("When control rightclick will break 1 block.");
+    	 	par3List.add(ChatHelper.acf("When shift+right click, will consume and place glowstone.",EnumChatFormatting.YELLOW));
     		par3List.add(ChatHelper.acf("On right click, will mine in a 3x3x3 wall.",EnumChatFormatting.RED));
     		par3List.add(ChatHelper.acf("The wall starts from the bottom right corner",EnumChatFormatting.RED));
     		par3List.add(ChatHelper.customHTT("!!WARNING!! THIS TOOL DOES NOT DROP ITEMS!","Press shift to see IMPORTANT details.", Keyboard.KEY_LSHIFT, ChatHelper.ENUMARRAY_WARNING));
     		par3List.add(ChatHelper.acf("Gaias Magick Count : " + earthMana, EnumChatFormatting.GREEN));
     		par3List.add(ChatHelper.acf("Mageia Magick Count : " + magick, EnumChatFormatting.DARK_PURPLE));
+    		par3List.add(ChatHelper.acf("!!WARNING!!",ChatHelper.ENUMARRAY_WARNING));
+    		par3List.add(ChatHelper.acf("This is what can be considered a GLITCHFEST",ChatHelper.ENUMARRAY_WARNING));
+    		
     	}
     	
     	

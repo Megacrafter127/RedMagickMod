@@ -107,6 +107,7 @@ public static void register() {
 	GameRegistry.registerTileEntity(TileEntityCollector.class,"tileEntityCollector");
 	LanguageRegistry.addName(minerTool,"Mana Omniminer");
 	GameRegistry.registerBlock(blockManaBomb,"MANABOMB");
+	LanguageRegistry.addName(blockManaBomb,"Nova Catalyst");
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
 	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
