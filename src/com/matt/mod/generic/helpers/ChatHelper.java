@@ -12,7 +12,12 @@ public class ChatHelper {
 	/**
 	 * A enum[] for warning messages.
 	 */
-	public static final EnumChatFormatting[] ENUMARRAY_WARNING = new EnumChatFormatting[]{EnumChatFormatting.RED,EnumChatFormatting.UNDERLINE,EnumChatFormatting.BOLD};
+	public static final EnumChatFormatting[] ENUMARRAY_WARNING = new EnumChatFormatting[]{EnumChatFormatting.RED,EnumChatFormatting.UNDERLINE};
+	public static final EnumChatFormatting[] ENUMARRAY_ERROR =  new EnumChatFormatting[]{EnumChatFormatting.DARK_RED,EnumChatFormatting.UNDERLINE,EnumChatFormatting.BOLD};
+	public static final EnumChatFormatting[] ENUMARRAY_TEXT =  new EnumChatFormatting[]{EnumChatFormatting.GRAY};
+	public static final EnumChatFormatting[] ENUMARRAY_KEY = new EnumChatFormatting[]{EnumChatFormatting.AQUA};
+	public static final EnumChatFormatting[] ENUMARRAY_NUMBER = new EnumChatFormatting[]{EnumChatFormatting.BLUE};
+	public static final EnumChatFormatting[] ENUMARRAY_HINT = new EnumChatFormatting[]{EnumChatFormatting.GREEN};
 	/**
 	 * Applies the given formats to the string, resetting it at the string's end.
 	 * afc stands for apply-chat-formattings.

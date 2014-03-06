@@ -111,10 +111,10 @@ public class ItemKernelTool extends Item {
 			nbt=stack.stackTagCompound=new NBTTagCompound();
 			player.inventory.inventoryChanged=true;
 		}
-		EnumChatFormatting[] stdformat=new EnumChatFormatting[]{EnumChatFormatting.GRAY};
-		EnumChatFormatting[] hintformat=new EnumChatFormatting[]{EnumChatFormatting.GREEN};
-		EnumChatFormatting[] numberformat=new EnumChatFormatting[]{EnumChatFormatting.AQUA};
-		EnumChatFormatting[] errorformat=new EnumChatFormatting[]{EnumChatFormatting.BOLD,EnumChatFormatting.RED,EnumChatFormatting.UNDERLINE};
+		EnumChatFormatting[] stdformat=ChatHelper.ENUMARRAY_TEXT;
+		EnumChatFormatting[] hintformat=ChatHelper.ENUMARRAY_HINT;
+		EnumChatFormatting[] numberformat=ChatHelper.ENUMARRAY_NUMBER;
+		EnumChatFormatting[] errorformat=ChatHelper.ENUMARRAY_ERROR;
 		switch(stack.getItemDamage()) {
 		case commandToolMeta:
 			list.add(stdformat+nbt.toString());

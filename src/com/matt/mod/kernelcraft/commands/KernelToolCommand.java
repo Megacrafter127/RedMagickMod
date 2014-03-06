@@ -8,7 +8,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatMessageComponent;
-import net.minecraft.util.EnumChatFormatting;
 
 import com.matt.mod.generic.helpers.ChatHelper;
 
@@ -67,9 +66,16 @@ public class KernelToolCommand implements ICommand {
 		case 1:
 			if(stack.hasTagCompound()) {
 				if(stack.stackTagCompound.hasKey(astring[0])) {
-					player.addChatMessage(ChatHelper.acf(astring[0]+": ", EnumChatFormatting.AQUA)+ChatHelper.acf(""+stack.stackTagCompound.getString(astring[0]), EnumChatFormatting.BLUE));
+					player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(stack.stackTagCompound.getString(astring[0]), ChatHelper.ENUMARRAY_NUMBER));
+				}
+				else {
+					player.addChatMessage(ChatHelper.acf("The specified tag couldn't be found.", ChatHelper.ENUMARRAY_WARNING));
 				}
 			}
+			else {
+				player.addChatMessage(ChatHelper.acf("the tool has no tags", ChatHelper.ENUMARRAY_WARNING));
+			}
+			break;
 		case 2:
 		default:		
 		}
