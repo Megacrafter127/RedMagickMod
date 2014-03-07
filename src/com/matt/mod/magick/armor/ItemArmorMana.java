@@ -79,10 +79,10 @@ public class ItemArmorMana extends ItemArmor {
 			 if(stack.itemID == ArmorHelper.manaChest.itemID) {
 				 boolean isPlate = stack.itemID == ArmorHelper.manaChest.itemID;
 				if(isPlate) {
-					player.setHealth(player.getMaxHealth() *2);
+					player.setAbsorptionAmount(20.0F);
 				
 				}else{
-					player.setHealth(player.getMaxHealth());
+					player.setAbsorptionAmount(0F);
 				}	
 			 }
 			 if(stack.itemID == ArmorHelper.manaLegs.itemID) {
