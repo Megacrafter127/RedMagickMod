@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import com.matt.FutureCraft;
+import com.matt.generic.helpers.IFutureCraftPlugin;
 import com.matt.lib.Ref;
 import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.magick.block.BlockManaBomb;
@@ -24,6 +25,7 @@ import com.matt.mod.magick.items.ItemMagickWand;
 import com.matt.mod.magick.items.ItemManaDust;
 import com.matt.mod.magick.items.ItemWandCore;
 import com.matt.mod.magick.items.MinerTool;
+import com.matt.mod.magick.items.runic.ItemRune;
 import com.matt.mod.magick.lib.MagickLib;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
@@ -56,6 +58,7 @@ public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).set
 public static final Block blockOldwood = new BlockOldwood().setUnlocalizedName("Oldwood");
 public static final Block manaColl = new BlockManaCollector().setUnlocalizedName("Collector");
 public static final Block blockManaBomb = new BlockManaBomb().setTextureName(MagickLib.toTextureName("manabomb"));
+public static final Item rune = new ItemRune();
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -108,6 +111,7 @@ public static void register() {
 	LanguageRegistry.addName(minerTool,"Mana Omniminer");
 	GameRegistry.registerBlock(blockManaBomb,"MANABOMB");
 	LanguageRegistry.addName(blockManaBomb,"Nova Catalyst");
+	GameRegistry.registerItem(rune,((ItemRune) rune).getName());
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
 	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
