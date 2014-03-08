@@ -8,12 +8,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.matt.mod.ModHelper;
+import com.matt.mod.magick.items.runic.RunicHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MagickRecipes {
 	static List foscosList;
+	public static final ItemStack headPieceE = new ItemStack(ArmorHelper.manaHelm,1,0);
+	
+	public static final ItemStack chestPieceE = new ItemStack(ArmorHelper.manaChest,1,0);
+	public static final ItemStack legPieceE = new ItemStack(ArmorHelper.manaLegs,1,0);
+	public static final ItemStack bootPieceE = new ItemStack(ArmorHelper.manaBoots,1,0);
 	public static final ItemStack foscos = new ItemStack(MagickHelper.manaDust,1,0);
 	public static final ItemStack headPiece = new ItemStack(ArmorHelper.manaHelm,1,0);
 	public static final ItemStack headPieceL = new ItemStack(Item.helmetDiamond,1,0);
@@ -34,6 +39,7 @@ public class MagickRecipes {
 	public static final ItemStack dia =  new ItemStack(MagickHelper.manaDiamond,1,0);
 	public  static final ItemStack oak = new ItemStack(Block.planks,0,0);
 	public static final ItemStack stoneStack = new ItemStack(Block.stone,0,0);
+	public static final ItemStack rune = new ItemStack(MagickHelper.rune);
 	public static ShapedRecipes recipeHead = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,headPieceL,dia,foscos,dia,foscos}, headPiece);
 public static ShapedRecipes recipeChest = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,chestPieceL,dia,foscos,dia,foscos}, chestPiece);
 public static ShapedRecipes recipeLegs = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,legPieceL,dia,foscos,dia,foscos}, legPiece);
@@ -41,9 +47,18 @@ public static ShapedRecipes recipeBoots = new ShapedRecipes(3, 3, new ItemStack[
 public static ShapedRecipes recipeDiamond = new ShapedRecipes(3,3,new ItemStack[]{foscos,diamondBlock,foscos,diamondBlock,diamond,diamondBlock,foscos,diamondBlock,foscos},dia);
 public static ShapedRecipes recipeCatalyst = new ShapedRecipes(3,3, new ItemStack[]{foscos,dia,foscos,dia,feather,dia,foscos,dia,foscos},catalyst);
 public static ShapedRecipes recipeRune = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,stoneStack,foscos,foscos,foscos,foscos,},new ItemStack(MagickHelper.rune));
-public static ShapedRecipes recipeOldwood = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,oak,foscos,foscos,foscos,foscos}, new ItemStack(MagickHelper.blockOldwood,0,0));
+
+public static ShapedRecipes recipeOldwood = new ShapedRecipes(3,3,new ItemStack[]{foscos,foscos,foscos,foscos,oak,foscos,foscos,foscos,foscos}, new ItemStack(MagickHelper.blockOldwood));
+public static ShapedRecipes recipeEnchantH  = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,headPiece,rune,foscos,rune,foscos},  headPieceE); 
+public static ShapedRecipes recipeEnchantC   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,chestPiece,rune,foscos,rune,foscos},  chestPieceE);
+public static ShapedRecipes recipeEnchantL   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,legPiece,rune,foscos,rune,foscos},  legPieceE);
+public static ShapedRecipes recipeEnchantB   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,bootPiece,rune,foscos,rune,foscos}, bootPieceE);
+
 public static void init() {	
-	
+	headPieceE.addEnchantment(RunicHelper.eRunic,3);
+	chestPieceE.addEnchantment(RunicHelper.eRunic,3);
+	legPieceE.addEnchantment(RunicHelper.eRunic,3);
+	bootPieceE.addEnchantment(RunicHelper.eRunic,3);
 	GameRegistry.addShapelessRecipe(foscos, new ItemStack[]{coal,redstone,glowstone,lapis});
 	
 	GameRegistry.addRecipe(recipeCatalyst);
@@ -54,5 +69,9 @@ public static void init() {
 	GameRegistry.addRecipe(recipeDiamond);
 	GameRegistry.addRecipe(recipeOldwood);
 	GameRegistry.addRecipe(recipeRune);
+	GameRegistry.addRecipe(recipeEnchantH);
+	GameRegistry.addRecipe(recipeEnchantC);
+	GameRegistry.addRecipe(recipeEnchantL);
+	GameRegistry.addRecipe(recipeEnchantB);
 }
 }
