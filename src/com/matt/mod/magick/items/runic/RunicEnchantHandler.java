@@ -15,6 +15,7 @@ public class RunicEnchantHandler {
 	{
 		LivingEvent e = (LivingEvent)event;
 		if(e.entity instanceof EntityPlayer) {
+			try {
 			if(EntityPlayerHelper.isArmorEquipped((EntityPlayer)e.entity,ArmorHelper.manaChest.itemID,2))  {
 			{
 				System.out.println("Has armor!");
@@ -27,9 +28,13 @@ public class RunicEnchantHandler {
 				}
 			
 		}
+			}
+			}catch(Throwable t) {
+				t.printStackTrace();
+			}
 		
 		
-	} }
+	} 
 	}
 }
 

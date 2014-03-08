@@ -5,8 +5,11 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
@@ -64,7 +67,7 @@ public class ItemArmorMana extends ItemArmor {
 		 armor[1] = player.getCurrentArmor(1);
 		 armor[2] = player.getCurrentArmor(2);
 		 armor[3] = player.getCurrentArmor(3);
-		 
+		 if(player.inventory.hasItem(MagickHelper.manaDust.itemID)) {
 		 for(ItemStack stack : armor) {
 			if(stack != null && !world.isRemote) {
 			 if(stack.itemID == ArmorHelper.manaHelm.itemID) {
@@ -89,7 +92,7 @@ public class ItemArmorMana extends ItemArmor {
 			 if(stack.itemID == ArmorHelper.manaLegs.itemID) {
 				 boolean isLeg = stack.itemID == ArmorHelper.manaLegs.itemID;
 				 if(isLeg) {
-					 if(player.inventory.hasItemStack(new ItemStack(MagickHelper.manaDust,0,1))) {
+					
 						 player.capabilities.setPlayerWalkSpeed(0.5F);
 					 }else {
 						 player.capabilities.setPlayerWalkSpeed(walkSpeed);
@@ -111,8 +114,9 @@ public class ItemArmorMana extends ItemArmor {
 			 }		
 		 }
 		 }
+		 }
 		 
-	 }
+	 
 	 @Override
 	 @SideOnly(Side.CLIENT)
      public void addInformation(ItemStack par1ItemStack,
@@ -142,6 +146,28 @@ public class ItemArmorMana extends ItemArmor {
 			
 	
 	 }
+	 /**
+	  * Callback for item usage
+	  */
+	 @Override
+	
+	 public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+	    {
+		 ItemStack tomeStack = new ItemStack(Item.writableBook);
+		 NBTTagList bookPages = new NBTTagList("pages");
+		 bookPages.appendTag(new NBTTagString("1", "The Mana Armor, a very powerful armor, is crafted from Mageia Skoni, and can be upgraded using runes.."));
+		 bookPages.appendTag(new NBTTagString("2", "This armor makes you run super fast, and basically invulnerable, if you have Skoni on your inventory. ."));
+		 bookPages.appendTag(new NBTTagString("3", "The runic upgrade also protects you from withering."));
+		 tomeStack.setTagInfo("pages", bookPages);
+		 tomeStack.setTagInfo("author", new NBTTagString("author", "The Creator"));
+		 tomeStack.setTagInfo("title", new NBTTagString("title", "Mana Armor! - All about it."));
+		 tomeStack.itemID = Item.writtenBook.itemID;
+		 if(par2EntityPlayerr.isSneaking() && par2EntityPlayer.inventory.hasItemStack( tomeStack)) {
+		 
+		 par2EntityPlayer.inventory.addItemStackToInventory(tomeStack);
+		 return false;
+		 }
+	 	}
 	 
 	 }
 	 
