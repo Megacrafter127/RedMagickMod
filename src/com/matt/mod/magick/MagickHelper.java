@@ -81,7 +81,7 @@ public static void register() {
 	GameRegistry.registerItem(magickCore,"Magical Core");
 	decorationKernelBlock.setUnlocalizedName("Kernel Deco Block");
 	GameRegistry.registerTileEntity(TileEntityWandRecharger.class, "tile.FutureCraftBattery");
-	swaggishFlyer.getLogic().setManaLevel(1000);
+	((ItemFlyingCatalist)swaggishFlyer).getLogic().setManaLevel(1000);
 	GameRegistry.registerBlock(decorationKernelBlock, Ref.BLOCKPREFIX + "decorationKernelBlock");
 	GameRegistry.registerTileEntity(TileEntityAltar.class, "tile.altarCore");
 	LanguageRegistry.addName(blockMagicalBlock, "Magical Wall");
