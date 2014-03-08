@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
+import com.matt.lib.Ref;
 import com.matt.mod.generic.helpers.ChatHelper;
 import com.matt.mod.magick.items.IMagickObject;
 import com.matt.mod.magick.items.INBTItem;
@@ -24,6 +25,7 @@ public class ItemRune extends Item implements IMagickObject, INBTItem{
 		super(MagickLib.getIdFor("Rune", 30001));
 		setTextureName(MagickLib.toTextureName("dullRune"));
 		setUnlocalizedName("rune");
+		setCreativeTab(Ref.getRecommendedTab("item"));
 	}
 
 	@Override

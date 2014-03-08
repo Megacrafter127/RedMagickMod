@@ -21,7 +21,7 @@ static final public EntityPlayerHelper instance = new EntityPlayerHelper();
 		 *
 		 * @return True if the armor in slot armorType has the same id as armorID.
 		 */
-		public boolean isArmorEquipped(EntityPlayer p, int armorId, int armorType) {
+		public static boolean isArmorEquipped(EntityPlayer p, int armorId, int armorType) {
 			return p.getCurrentArmor(armorType).itemID == armorId;
 		}
 		/**
