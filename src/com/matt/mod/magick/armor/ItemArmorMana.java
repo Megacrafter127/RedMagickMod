@@ -162,11 +162,12 @@ public class ItemArmorMana extends ItemArmor {
 		 tomeStack.setTagInfo("author", new NBTTagString("author", "The Creator"));
 		 tomeStack.setTagInfo("title", new NBTTagString("title", "Mana Armor! - All about it."));
 		 tomeStack.itemID = Item.writtenBook.itemID;
-		 if(par2EntityPlayerr.isSneaking() && par2EntityPlayer.inventory.hasItemStack( tomeStack)) {
+		 if(par2EntityPlayer.isSneaking() && par2EntityPlayer.inventory.hasItemStack( tomeStack)) {
 		 
 		 par2EntityPlayer.inventory.addItemStackToInventory(tomeStack);
 		 return false;
 		 }
+		 return true;
 	 	}
 	 
 	 }
