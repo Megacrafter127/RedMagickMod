@@ -45,6 +45,8 @@ public class ItemRune extends Item implements IMagickObject, INBTItem{
 	}
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List inflist, boolean par4) {
+		inflist.add(ChatHelper.acf("Runic scribblings are a important piece of magic.",EnumChatFormatting.BOLD,EnumChatFormatting.DARK_GRAY));
+		
 		if(magickTypes[currentManaType] == "air") {
 			inflist.add(STRING_RUNIC_TYPE + ChatHelper.acf("Aera",EnumChatFormatting.YELLOW));
 		}else if(magickTypes[currentManaType] == "fire") {
@@ -58,7 +60,7 @@ public class ItemRune extends Item implements IMagickObject, INBTItem{
 		}else if(magickTypes[currentManaType] == "dull" ) {
 			inflist.add(STRING_RUNIC_TYPE  + ChatHelper.acf("Thampo",EnumChatFormatting.DARK_GRAY));
 		} else if(magickTypes[currentManaType] == "null") {
-			inflist.add(STRING_RUNIC_TYPE  + ChatHelper.acf("Miden",EnumChatFormatting.DARK_GRAY));
+			inflist.add(STRING_RUNIC_TYPE  + ChatHelper.acf("Miden",EnumChatFormatting.GRAY));
 		}
 		
 	}

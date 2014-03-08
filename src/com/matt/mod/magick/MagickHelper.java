@@ -112,6 +112,7 @@ public static void register() {
 	GameRegistry.registerBlock(blockManaBomb,"MANABOMB");
 	LanguageRegistry.addName(blockManaBomb,"Nova Catalyst");
 	GameRegistry.registerItem(rune,((ItemRune) rune).getName());
+	LanguageRegistry.addName(rune,"Piece of Runic Scribblings");
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
 	//TickRegistry.registerTickHandler(new ArmorTickHandler(), Side.CLIENT);
