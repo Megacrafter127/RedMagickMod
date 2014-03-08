@@ -1,5 +1,6 @@
 package com.matt.mod.kernelcraft.commands;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatMessageComponent;
 
 import com.matt.mod.generic.helpers.ChatHelper;
@@ -31,7 +34,7 @@ public class KernelToolCommand implements ICommand {
 
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender) {
-		return "accessTool <key> <value>\naccessTool <key>\naccessTool";
+		return "accessTool <key> <type> <value>\naccessTool <key> <type>\naccessTool\nLegal types are:\n    string\n    int\n    double\n    byte\n    short\n    float";
 	}
 
 	@Override
@@ -60,13 +63,23 @@ public class KernelToolCommand implements ICommand {
 			icommandsender.sendChatToPlayer(p);
 		}
 		ItemStack stack=player.inventory.getCurrentItem();
+		NBTTagCompound nbt=stack.stackTagCompound;
 		switch(astring.length) {
 		case 0:
+			player.addChatMessage(analyze(nbt,0));
 			break;
-		case 1:
+		case 2:
 			if(stack.hasTagCompound()) {
-				if(stack.stackTagCompound.hasKey(astring[0])) {
-					player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(stack.stackTagCompound.getString(astring[0]), ChatHelper.ENUMARRAY_NUMBER));
+				if(nbt.hasKey(astring[0])) {
+					if(astring[1].equalsIgnoreCase("string")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(nbt.getString(astring[0]), ChatHelper.ENUMARRAY_NUMBER));
+					else if(astring[1].equalsIgnoreCase("int")||astring[1].equalsIgnoreCase("integer")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(nbt.getInteger(astring[0])+"", ChatHelper.ENUMARRAY_NUMBER));
+					else if(astring[1].equalsIgnoreCase("double")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(nbt.getDouble(astring[0])+"", ChatHelper.ENUMARRAY_NUMBER));
+					else if(astring[1].equalsIgnoreCase("float")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(nbt.getFloat(astring[0])+"", ChatHelper.ENUMARRAY_NUMBER));
+					else if(astring[1].equalsIgnoreCase("byte")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(nbt.getByte(astring[0])+"", ChatHelper.ENUMARRAY_NUMBER));
+					else if(astring[1].equalsIgnoreCase("short")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(nbt.getShort(astring[0])+"", ChatHelper.ENUMARRAY_NUMBER));
+					else if(astring[1].equalsIgnoreCase("int[]")||astring[1].equalsIgnoreCase("integer[]")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(list(nbt.getIntArray(astring[0])), ChatHelper.ENUMARRAY_NUMBER));
+					else if(astring[1].equalsIgnoreCase("byte[]")) player.addChatMessage(ChatHelper.acf(astring[0], ChatHelper.ENUMARRAY_KEY)+ChatHelper.acf(": ", ChatHelper.ENUMARRAY_TEXT)+ChatHelper.acf(list(nbt.getByteArray(astring[0])), ChatHelper.ENUMARRAY_NUMBER));
+					else player.addChatMessage(ChatHelper.acf("Illegal type", ChatHelper.ENUMARRAY_WARNING));
 				}
 				else {
 					player.addChatMessage(ChatHelper.acf("The specified tag couldn't be found.", ChatHelper.ENUMARRAY_WARNING));
@@ -76,10 +89,40 @@ public class KernelToolCommand implements ICommand {
 				player.addChatMessage(ChatHelper.acf("the tool has no tags", ChatHelper.ENUMARRAY_WARNING));
 			}
 			break;
-		case 2:
+		case 3:
 		default:		
 		}
 	}
+	
+	private String list(int[] i) {
+		String ret="";
+		return ret;
+	}
+	
+	private String list(byte[] i) {
+		String ret="";
+		return ret;
+	}
+	
+	 private String analyze(NBTBase b,int iteration) {
+		 String ret="";
+		 String pause="";
+		 for(int i=0;i<iteration;i++) {
+			 pause+=" ";
+		 }
+		 if(b instanceof NBTTagCompound) {
+			 Collection c=((NBTTagCompound)b).getTags();
+			 for(Object o:c) {
+				 if(o instanceof NBTBase) {
+					 ret+=analyze(b,iteration+1)+"\n";
+				 }
+				 else {
+					 ret+=ChatHelper.acf(pause+o.toString()+"\n",ChatHelper.ENUMARRAY_NUMBER);
+				 }
+			 }
+		 }
+		 return ret;
+	 }
 
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender icommandsender) {

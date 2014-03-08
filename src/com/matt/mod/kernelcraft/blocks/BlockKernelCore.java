@@ -18,7 +18,7 @@ import com.matt.mod.kernelcraft.tileentities.TileEntityKernelCore;
 public class BlockKernelCore extends Block implements ITileEntityProvider {
 	public static final int[] commandToolMaterial=new int[]{Item.compass.itemID,Item.pocketSundial.itemID,Item.nameTag.itemID};
 	public static final int[] mineToolMaterial=new int[]{Item.pickaxeWood.itemID,Item.pickaxeStone.itemID,Item.pickaxeIron.itemID,Item.pickaxeGold.itemID,Item.pickaxeDiamond.itemID,Item.shovelWood.itemID,Item.shovelStone.itemID,Item.shovelIron.itemID,Item.shovelGold.itemID,Item.shovelDiamond.itemID};
-	public static final int[] fillToolMaterial=new int[]{Item.brick.itemID,Item.netherrackBrick.itemID};
+	public static final int[] fillToolMaterial=new int[]{Item.brick.itemID,Block.brick.blockID,Item.netherrackBrick.itemID,Block.netherBrick.blockID};
 	public static final int[] hoeToolMaterial=new int[]{Item.hoeWood.itemID,Item.hoeStone.itemID,Item.hoeIron.itemID,Item.hoeGold.itemID,Item.hoeDiamond.itemID};
 	public static final int[] harvestToolMaterial=new int[]{Item.axeWood.itemID,Item.axeStone.itemID,Item.axeIron.itemID,Item.axeGold.itemID,Item.axeDiamond.itemID};
 	public static final int[] countToolMaterial=new int[]{Item.comparator.itemID,Block.redstoneComparatorActive.blockID,Block.redstoneComparatorIdle.blockID};
@@ -61,7 +61,13 @@ public class BlockKernelCore extends Block implements ITileEntityProvider {
 		if(itemStack!=null) {
 			for(int i:commandToolMaterial) {
 				if(itemStack.itemID==i) {
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool, 1, ItemKernelTool.mineToolMeta));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool, 1, ItemKernelTool.commandToolMeta));
+					return true;
+				}
+			}
+			for(int i:fillToolMaterial) {
+				if(itemStack.itemID==i) {
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool, 1, ItemKernelTool.fillToolMeta));
 					return true;
 				}
 			}
@@ -73,9 +79,7 @@ public class BlockKernelCore extends Block implements ITileEntityProvider {
 			}
 			for(int i:harvestToolMaterial) {
 				if(itemStack.itemID==i) {
-					itemStack.stackSize--;
-					if(itemStack.stackSize==0) player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool, 1, ItemKernelTool.fillToolMeta));
-					else player.inventory.setCurrentItem(KernelCraftCore.KernelTool.itemID, ItemKernelTool.mineToolMeta, true, true);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(KernelCraftCore.KernelTool, 1, ItemKernelTool.harvestToolMeta));
 					return true;
 				}
 			}
