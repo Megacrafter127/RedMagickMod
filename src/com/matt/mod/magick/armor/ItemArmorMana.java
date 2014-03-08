@@ -34,6 +34,7 @@ public class ItemArmorMana extends ItemArmor {
 	}
 	public ItemArmorMana(int id) {
 		super(id,mana,0,0);
+		setCreativeTab(Ref.getRecommendedTab("item"));
 	}
 	 @SideOnly(Side.CLIENT)
 	    public void registerIcons(IconRegister par1IconRegister)

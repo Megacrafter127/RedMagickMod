@@ -1,6 +1,7 @@
 package com.matt.mod.magick;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -8,6 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.matt.FutureCraft;
 import com.matt.lib.Ref;
+import com.matt.mod.TabFuture;
 import com.matt.mod.kernelcraft.KernelCraftCore;
 import com.matt.mod.magick.block.BlockManaBomb;
 import com.matt.mod.magick.block.BlockManaCollector;
@@ -40,26 +42,27 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  *
  */
 public class MagickHelper {
-	
-public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
-public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
-public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);;
-public static final Block blockMagicalBlockYellow = new SwagBlock(FutureCraft.swag_wall3_id,"magicalwallyel").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(Ref.getRecommendedTab("block")).setLightOpacity(0);
-public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId,"netheriumblock").setUnlocalizedName("Netherium Block").setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery").setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Item magickWand = new ItemMagickWand(FutureCraft.swag_wand_id).setMaxStackSize(1).setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Item magickCore = new ItemWandCore(FutureCraft.swag_wand_idt2).setMaxStackSize(1).setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID).setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Item swaggishFlyer = new ItemFlyingCatalist().setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Block blockAltarCore = new BlockAltar().setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID).setCreativeTab(Ref.getRecommendedTab("item"));
+	private static final CreativeTabs tabMagick = new TabFuture(CreativeTabs.getNextID(), "FutureCraftMagick", "magick");
+public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(tabMagick).setLightOpacity(0);
+public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(tabMagick).setLightOpacity(0);;
+public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(tabMagick).setLightOpacity(0);;
+public static final Block blockMagicalBlockYellow = new SwagBlock(FutureCraft.swag_wall3_id,"magicalwallyel").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(tabMagick).setLightOpacity(0);
+public static final Block blockNetherald = new SwagBlock(FutureCraft.netheraldId,"netheriumblock").setUnlocalizedName("Netherium Block").setCreativeTab(tabMagick);
+public static final Block manaBattery = new SwagBattery(FutureCraft.manaBatteryId,"manabattery").setUnlocalizedName("Mana Battery").setCreativeTab(tabMagick);
+public static final Item magickWand = new ItemMagickWand(FutureCraft.swag_wand_id).setMaxStackSize(1).setCreativeTab(tabMagick);
+
+public static final Item magickCore = new ItemWandCore(FutureCraft.swag_wand_idt2).setMaxStackSize(1).setCreativeTab(tabMagick);
+public static final Block decorationKernelBlock = new SwagDecoBlock(FutureCraft.swagDecoID).setCreativeTab(tabMagick);
+public static final Item swaggishFlyer = new ItemFlyingCatalist().setCreativeTab(tabMagick);
+public static final Block blockAltarCore = new BlockAltar().setCreativeTab(tabMagick);
+public static final Block blockProtectedStone = new WardedStone(FutureCraft.blockGOLID).setCreativeTab(tabMagick);
 //public static Block blockMagicalLamp =  new MagickalBlockG(FutureCraft.blockGOLControlerID,Material.dragonEgg).setTextureFile("magickLamp");
-public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Skoni").setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Item minerTool = new MinerTool(FutureCraft.manaQuarryID).setUnlocalizedName("manaMiner").setTextureName(MagickLib.toTextureName("manaminer")).setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald")).setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Block blockOldwood = new BlockOldwood().setUnlocalizedName("Oldwood").setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Block manaColl = new BlockManaCollector().setUnlocalizedName("Collector").setCreativeTab(Ref.getRecommendedTab("item"));
-public static final Block blockManaBomb = new BlockManaBomb().setTextureName(MagickLib.toTextureName("manabomb")).setCreativeTab(Ref.getRecommendedTab("item"));
+public static final Item manaDust = new ItemManaDust().setUnlocalizedName("Mageia Skoni").setCreativeTab(tabMagick);
+public static final Item minerTool = new MinerTool(FutureCraft.manaQuarryID).setUnlocalizedName("manaMiner").setTextureName(MagickLib.toTextureName("manaminer")).setCreativeTab(tabMagick);
+public static final Item manaDiamond = new Item(FutureCraft.magickDiamondID).setUnlocalizedName("Mana Diamond").setTextureName(KernelCraftCore.toTextureName("enderald")).setCreativeTab(tabMagick);
+public static final Block blockOldwood = new BlockOldwood().setUnlocalizedName("Oldwood").setCreativeTab(tabMagick);
+public static final Block manaColl = new BlockManaCollector().setUnlocalizedName("Collector").setCreativeTab(tabMagick);
+public static final Block blockManaBomb = new BlockManaBomb().setTextureName(MagickLib.toTextureName("manabomb")).setCreativeTab(tabMagick);
 public static final RunicHelper instanceRunic = new RunicHelper();
 public static final Item rune = new ItemRune();
 public static void register() {

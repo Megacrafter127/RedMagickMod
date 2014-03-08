@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import com.matt.FutureCraft;
 import com.matt.mod.kernelcraft.KernelCraftCore;
-import com.matt.mod.magick.MagickHelper;
+import com.matt.mod.magick.MagickRecipes;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,8 +27,11 @@ public class TabFuture extends CreativeTabs {
 		return ModHelper.enderiumStack;
 	} else if(str == "kernel") {
 		return new ItemStack(KernelCraftCore.Kernel);
-	}
-		return new ItemStack(Block.blockDiamond);
+	}else if(str == "magick") {
+		return  MagickRecipes.foscos;
+	}else {
+		return new ItemStack(Block.blockDiamond); }
+	
 	}
 	 
 	
@@ -40,9 +43,13 @@ public class TabFuture extends CreativeTabs {
 		} else if(str == "kernel") 
 			{
 			return "Kernel Craft";
+		}else if(str == "magick") { 
+			return "FutureCraft Magick";
 		}else {
 			return "Either mat or mega derped up somewhere";
 		}
+			
+		
 		}
 	
 } 
