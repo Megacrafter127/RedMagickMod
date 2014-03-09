@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
+import com.futurecraft.api.BookHelper;
 import com.futurecraft.api.FutureCraftAPI;
 import com.matt.lib.Ref;
 import com.matt.mod.ModHelper;
@@ -121,6 +122,7 @@ public class FutureCraft {
 		 * The commonly-used API instance.
 		 */
 		public static FutureCraftAPI apiInstance;
+		public static BookHelper bookHelperInstance;
 		
 		
 		@EventHandler

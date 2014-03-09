@@ -245,5 +245,10 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 		catch(InstantiationException ex) {
 			System.out.println("Unable to load kernelcraft; it will be ignored");
 		}
+		try{
+			((IFutureCraftPlugin)Class.forName("com.futurecraft.api.FutureCraftAPI").newInstance()).registerCommands(e);
+		}catch(Throwable t) {
+			System.out.println("Unable to load API. it will be ignored.");
+		}
 	}
 }

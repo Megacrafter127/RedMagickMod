@@ -20,6 +20,7 @@ public class FutureCraftAPI implements IFutureCraftPlugin {
 
 	@Override
 	public void register() {
+	FutureCraft.bookHelperInstance = BookHelper.instance;
 	FutureCraft.apiInstance = new FutureCraftAPI();
 	}
 	public void registerArrayOfBlocks(Block[] b) {
@@ -39,5 +40,7 @@ public class FutureCraftAPI implements IFutureCraftPlugin {
 		
 	}
 	
-	public void registerCommands(FMLServerStartingEvent e) {}
+	public void registerCommands(FMLServerStartingEvent e) {
+		e.registerServerCommand(new CommandAPI());
+	}
 }
