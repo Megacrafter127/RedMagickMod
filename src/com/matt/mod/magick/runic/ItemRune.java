@@ -1,4 +1,4 @@
-package com.matt.mod.magick.items.runic;
+package com.matt.mod.magick.runic;
 
 import java.util.List;
 

@@ -27,12 +27,13 @@ import com.matt.mod.magick.items.ItemMagickWand;
 import com.matt.mod.magick.items.ItemManaDust;
 import com.matt.mod.magick.items.ItemWandCore;
 import com.matt.mod.magick.items.MinerTool;
-import com.matt.mod.magick.items.runic.ItemRune;
-import com.matt.mod.magick.items.runic.RunicEnchantHandler;
-import com.matt.mod.magick.items.runic.RunicHelper;
 import com.matt.mod.magick.lib.MagickLib;
 import com.matt.mod.magick.multiblock.BlockAltar;
 import com.matt.mod.magick.multiblock.TileEntityAltar;
+import com.matt.mod.magick.runic.ItemRune;
+import com.matt.mod.magick.runic.ItemRunicSword;
+import com.matt.mod.magick.runic.RunicEnchantHandler;
+import com.matt.mod.magick.runic.RunicHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -42,7 +43,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  *
  */
 public class MagickHelper {
-	private static final CreativeTabs tabMagick = new TabFuture(CreativeTabs.getNextID(), "FutureCraftMagick", "magick");
+	public static final CreativeTabs tabMagick = new TabFuture(CreativeTabs.getNextID(), "FutureCraftMagick", "magick");
 public static final Block blockMagicalBlock = new SwagBlock(FutureCraft.swag_wall_id,"magicalwall").setBlockUnbreakable().setUnlocalizedName("Magical Block").setCreativeTab(tabMagick).setLightOpacity(0);
 public static final Block blockMagicalBlockBlue = new SwagBlock(FutureCraft.swag_wall1_id,"magicalwallb").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(tabMagick).setLightOpacity(0);;
 public static final Block blockMagicalBlockRed = new SwagBlock(FutureCraft.swag_wall2_id,"magicalwallre").setBlockUnbreakable().setUnlocalizedName("Magical Block - Colored").setCreativeTab(tabMagick).setLightOpacity(0);;
@@ -65,6 +66,7 @@ public static final Block manaColl = new BlockManaCollector().setUnlocalizedName
 public static final Block blockManaBomb = new BlockManaBomb().setTextureName(MagickLib.toTextureName("manabomb")).setCreativeTab(tabMagick);
 public static final RunicHelper instanceRunic = new RunicHelper();
 public static final Item rune = new ItemRune();
+public static final Item runicSword = new ItemRunicSword();
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -119,6 +121,8 @@ public static void register() {
 	LanguageRegistry.addName(blockManaBomb,"Nova Catalyst");
 	GameRegistry.registerItem(rune,((ItemRune) rune).getName());
 	LanguageRegistry.addName(rune,"Piece of Runic Scribblings");
+	GameRegistry.registerItem(runicSword,"Runic Sword");
+	LanguageRegistry.addName(runicSword,"Runic Sword");
 	MinecraftForge.EVENT_BUS.register(new RunicEnchantHandler());
 	instanceRunic.init();
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));

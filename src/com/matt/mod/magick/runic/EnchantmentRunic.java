@@ -1,21 +1,19 @@
-package com.matt.mod.magick.items.runic;
+package com.matt.mod.magick.runic;
 
-import com.google.common.collect.ObjectArrays;
+import com.matt.mod.magick.lib.MagickLib;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.EnumHelper;
 
 public class EnchantmentRunic extends Enchantment{
 	public static int idNew;
-	protected EnchantmentRunic(int par1, int par2,
-			EnumEnchantmentType par3EnumEnchantmentType) {
-		super(52, 1, EnumEnchantmentType.all);
-		
-	}
+	public static int id = MagickLib.getIdFor("Runic Enchantment ID",52);
 	public EnchantmentRunic() {
-		super(52, 1, EnumEnchantmentType.all);
+		super(id, 1, EnumEnchantmentType.armor);
+		
 	}
 	@Override
 	public int getMinEnchantability(int par1)

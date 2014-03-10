@@ -2,18 +2,15 @@ package com.matt.mod.magick.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-import com.matt.mod.generic.helpers.ChatHelper;
+import com.matt.mod.magick.MagickHelper;
 import com.matt.mod.magick.lib.MagickLib;
 
 public class BlockManaBomb extends Block{
 	public BlockManaBomb() {
-		super(MagickLib.getIdFor("Mana Bomb", 805), Material.tnt);
-		setCreativeTab(CreativeTabs.tabMisc);
+		super(MagickLib.getIdFor("Mana Bomb", 806), Material.tnt);
+		setCreativeTab(MagickHelper.tabMagick);
 	
 	}
 	@Override

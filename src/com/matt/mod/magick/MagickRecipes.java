@@ -8,12 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.matt.mod.magick.items.runic.RunicHelper;
+import com.matt.mod.magick.runic.RunicHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MagickRecipes {
 	static List foscosList;
+	
 	public static final ItemStack headPieceE = new ItemStack(ArmorHelper.manaHelm,1,0);
 	
 	public static final ItemStack chestPieceE = new ItemStack(ArmorHelper.manaChest,1,0);
@@ -40,6 +41,9 @@ public class MagickRecipes {
 	public  static final ItemStack oak = new ItemStack(Block.planks,0,0);
 	public static final ItemStack stoneStack = new ItemStack(Block.stone,0,0);
 	public static final ItemStack rune = new ItemStack(MagickHelper.rune);
+	private static final ItemStack stick = new ItemStack(Item.stick);
+	private static final ItemStack runicSword = new ItemStack(MagickHelper.runicSword);
+	public static final ItemStack enchantedSwordRunic = runicSword;
 	public static ShapedRecipes recipeHead = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,headPieceL,dia,foscos,dia,foscos}, headPiece);
 public static ShapedRecipes recipeChest = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,chestPieceL,dia,foscos,dia,foscos}, chestPiece);
 public static ShapedRecipes recipeLegs = new ShapedRecipes(3, 3, new ItemStack[]{foscos,dia,foscos,dia,legPieceL,dia,foscos,dia,foscos}, legPiece);
@@ -54,11 +58,13 @@ public static ShapedRecipes recipeEnchantC   = new ShapedRecipes(3,3,new ItemSta
 public static ShapedRecipes recipeEnchantL   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,legPiece,rune,foscos,rune,foscos},  legPieceE);
 public static ShapedRecipes recipeEnchantB   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,bootPiece,rune,foscos,rune,foscos}, bootPieceE);
 
+public static ShapedRecipes recipeEnchantSword = new ShapedRecipes(3,3,new ItemStack[]{rune,rune,rune,rune,runicSword,rune,rune,rune,rune}, enchantedSwordRunic);
 public static void init() {	
 	headPieceE.addEnchantment(RunicHelper.eRunic,3);
 	chestPieceE.addEnchantment(RunicHelper.eRunic,3);
 	legPieceE.addEnchantment(RunicHelper.eRunic,3);
 	bootPieceE.addEnchantment(RunicHelper.eRunic,3);
+	enchantedSwordRunic.addEnchantment(RunicHelper.eNecrotic,3);
 	GameRegistry.addShapelessRecipe(foscos, new ItemStack[]{coal,redstone,glowstone,lapis});
 	
 	GameRegistry.addRecipe(recipeCatalyst);
@@ -73,5 +79,6 @@ public static void init() {
 	GameRegistry.addRecipe(recipeEnchantC);
 	GameRegistry.addRecipe(recipeEnchantL);
 	GameRegistry.addRecipe(recipeEnchantB);
+	GameRegistry.addRecipe(recipeEnchantSword);
 }
 }

@@ -1,4 +1,4 @@
-package com.matt.mod.magick.items.runic;
+package com.matt.mod.magick.runic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;

@@ -2,6 +2,7 @@ package com.futurecraft.api;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
 
@@ -30,6 +31,7 @@ public class CommandAPI extends CommandBase {
 		{
 			EntityPlayer player = (EntityPlayer)icommandsender;
 			player.addChatMessage(args[1]);
+			Entity e;
 		}
 	}
 
