@@ -5,7 +5,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 import com.futurecraft.FutureCraft;
-import com.futurecraft.mod.kernelcraft.KernelCraftCore;
 import com.futurecraft.mod.magick.MagickRecipes;
 
 import cpw.mods.fml.relauncher.Side;
@@ -21,22 +20,17 @@ public class TabFuture extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getIconItemStack(){
-		try{
+		
 	if(str == "block") {
 		return FutureCraft.bFutureStack;	
 	} else if(str == "item") {
 		return ModHelper.enderiumStack;
-	} else if(str == "kernel") {
-		//return new ItemStack(KernelCraftCore.Kernel);
+	
 	}else if(str == "magick") {
 		return  MagickRecipes.foscos;
 	}else {
 		return new ItemStack(Block.blockDiamond); }
-		}catch(Throwable t) {
-			t.printStackTrace();
-		}finally{
-			return new ItemStack(Block.blockDiamond);
-		}
+		
 	}
 	 
 	
@@ -45,9 +39,7 @@ public class TabFuture extends CreativeTabs {
 			return "FutureCraft Blocks";	
 		} else if(str == "item") {
 			return "FutureCraft Items";
-		} else if(str == "kernel") 
-			{
-			return "Kernel Craft";
+		
 		}else if(str == "magick") { 
 			return "FutureCraft Magick";
 		}else {

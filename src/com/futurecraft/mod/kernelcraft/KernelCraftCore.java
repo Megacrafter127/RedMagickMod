@@ -173,6 +173,6 @@ public class KernelCraftCore implements IFutureCraftPlugin {
 		registerItems();
 		registerTileEntities();
 		registerRecipes();
-		registerCreativeTabs();
+		
 	}
 }

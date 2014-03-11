@@ -29,7 +29,6 @@ import com.futurecraft.mod.handlers.FutureCraftRegistry;
 import com.futurecraft.mod.item.ItemFutureNote;
 import com.futurecraft.mod.item.ItemIngot;
 import com.futurecraft.mod.item.ItemModPickaxe;
-import com.futurecraft.mod.kernelcraft.KernelCraftCore;
 import com.futurecraft.mod.magick.FutureCraftMagick;
 import com.futurecraft.mod.recipes.PickRecipe;
 import com.futurecraft.mod.recipes.QuadSymetricRecipe;
@@ -214,25 +213,14 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 			registerPlugin(new FutureCraftMagick());
 		
 		
-		//	registerPlugin(new KernelCraftCore());
+		
 		
 		registerPlugin(FutureCraftTweaks.instance);
 		registerPlugin(new FutureCraftAPI());
 	}
 	
 	public static void registerCommands(FMLServerStartingEvent e) {
-		/*try{
-			((IFutureCraftPlugin)Class.forName("com.futurecraft.mod.kernelcraft.KernelCraftCore").newInstance()).registerCommands(e);
-		}
-		catch(ClassNotFoundException ex) {
-			System.out.println("Unable to load kernelcraft; it will be ignored");
-			}
-		catch(IllegalAccessException ex) {
-			System.out.println("Unable to load kernelcraft; it will be ignored");
-			}
-		catch(InstantiationException ex) {
-			System.out.println("Unable to load kernelcraft; it will be ignored");
-		}*/
+		
 		try{
 			((IFutureCraftPlugin)Class.forName("com.futurecraft.api.FutureCraftAPI").newInstance()).registerCommands(e);
 		}catch(Throwable t) {
