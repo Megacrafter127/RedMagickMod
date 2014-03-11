@@ -3,9 +3,9 @@ package com.futurecraft.api;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-import com.matt.FutureCraft;
-import com.matt.generic.helpers.IFutureCraftPlugin;
-import com.matt.lib.Ref;
+import com.futurecraft.FutureCraft;
+import com.futurecraft.generic.helpers.IFutureCraftPlugin;
+import com.futurecraft.lib.Ref;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;

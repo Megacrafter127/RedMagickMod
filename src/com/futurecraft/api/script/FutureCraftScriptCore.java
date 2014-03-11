@@ -1,6 +1,6 @@
 package com.futurecraft.api.script;
 
-import com.matt.generic.helpers.IFutureCraftPlugin;
+import com.futurecraft.generic.helpers.IFutureCraftPlugin;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
