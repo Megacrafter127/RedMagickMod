@@ -43,7 +43,7 @@ import cpw.mods.fml.relauncher.Side;
 public class FutureCraft {
 	 @Instance(Ref.ID)
 	    public static FutureCraft instance;
-	 @SidedProxy(clientSide="com.matt.proxy.client.ClientProxy", serverSide="com.matt.proxy.CommonProxy")
+	 @SidedProxy(clientSide="com.futurecraft.proxy.client.ClientProxy", serverSide="com.futurecraft.proxy.CommonProxy")
         public static CommonProxy proxy;
 	
 	 public static HashMap<String, Object> pluginHash = new HashMap<String, Object>();
