@@ -18,6 +18,7 @@ public class FutureCraftMagick implements IFutureCraftPlugin {
 
 	@Override
 	public void registerCommands(FMLServerStartingEvent e) {
+	
 	}
 
 }
