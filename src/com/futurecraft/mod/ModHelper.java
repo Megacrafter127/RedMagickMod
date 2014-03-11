@@ -29,11 +29,11 @@ import com.futurecraft.mod.handlers.FutureCraftRegistry;
 import com.futurecraft.mod.item.ItemFutureNote;
 import com.futurecraft.mod.item.ItemIngot;
 import com.futurecraft.mod.item.ItemModPickaxe;
+import com.futurecraft.mod.kernelcraft.KernelCraftCore;
 import com.futurecraft.mod.magick.FutureCraftMagick;
 import com.futurecraft.mod.recipes.PickRecipe;
 import com.futurecraft.mod.recipes.QuadSymetricRecipe;
 import com.futurecraft.mod.tweaks.FutureCraftTweaks;
-import com.futurecraft.proxy.client.ClientProxy;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -213,28 +213,16 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 	
 			registerPlugin(new FutureCraftMagick());
 		
-		ClientProxy.registerTESR();
 		
-		try{
-			registerPlugin(Class.forName("com.matt.mod.kernelcraft.KernelCraftCore").newInstance());
-		}
-		catch(ClassNotFoundException ex) {
-			System.out.println("Unable to load kernelcraft; it will be ignored");
-			}
-		catch(IllegalAccessException ex) {
-			System.out.println("Unable to load kernelcraft; it will be ignored");
-			}
-		catch(InstantiationException ex) {
-			System.out.println("Unable to load kernelcraft; it will be ignored");
-		}
+		//	registerPlugin(new KernelCraftCore());
 		
 		registerPlugin(FutureCraftTweaks.instance);
 		registerPlugin(new FutureCraftAPI());
 	}
 	
 	public static void registerCommands(FMLServerStartingEvent e) {
-		try{
-			((IFutureCraftPlugin)Class.forName("com.matt.mod.kernelcraft.KernelCraftCore").newInstance()).registerCommands(e);
+		/*try{
+			((IFutureCraftPlugin)Class.forName("com.futurecraft.mod.kernelcraft.KernelCraftCore").newInstance()).registerCommands(e);
 		}
 		catch(ClassNotFoundException ex) {
 			System.out.println("Unable to load kernelcraft; it will be ignored");
@@ -244,7 +232,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 			}
 		catch(InstantiationException ex) {
 			System.out.println("Unable to load kernelcraft; it will be ignored");
-		}
+		}*/
 		try{
 			((IFutureCraftPlugin)Class.forName("com.futurecraft.api.FutureCraftAPI").newInstance()).registerCommands(e);
 		}catch(Throwable t) {
