@@ -21,17 +21,22 @@ public class TabFuture extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getIconItemStack(){
+		try{
 	if(str == "block") {
 		return FutureCraft.bFutureStack;	
 	} else if(str == "item") {
 		return ModHelper.enderiumStack;
 	} else if(str == "kernel") {
-		return new ItemStack(KernelCraftCore.Kernel);
+		//return new ItemStack(KernelCraftCore.Kernel);
 	}else if(str == "magick") {
 		return  MagickRecipes.foscos;
 	}else {
 		return new ItemStack(Block.blockDiamond); }
-	
+		}catch(Throwable t) {
+			t.printStackTrace();
+		}finally{
+			return new ItemStack(Block.blockDiamond);
+		}
 	}
 	 
 	
