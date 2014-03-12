@@ -3,6 +3,7 @@
 	<name>FutureCraft</name>
 	<comment></comment>
 	<projects>
+		<project>Minecraft</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -18,7 +19,7 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<location>C:/Users/Matheus/Desktop/Things/ATrueMod/forge/mcp/src/minecraft/assets/futurecraft</location>
+			<location>/home/til/C::/Users/Matheus/Desktop/Things/ATrueMod/forge/mcp/src/minecraft/assets/futurecraft</location>
 		</link>
 	</linkedResources>
 </projectDescription>
