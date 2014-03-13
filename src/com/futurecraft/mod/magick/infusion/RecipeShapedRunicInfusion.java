@@ -77,7 +77,12 @@ public class RecipeShapedRunicInfusion implements IRecipe {
 	}
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting f) {
-		if(matches(f,null)) return result;
+		if(matches(f,null)) {
+			for(int i=0;i<12;i++) {
+				f.decrStackSize(i, 1);
+			}
+			return result;
+		}
 		return null;
 	}
 	@Override
