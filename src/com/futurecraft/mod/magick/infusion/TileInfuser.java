@@ -1,48 +1,140 @@
 package com.futurecraft.mod.magick.infusion;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
-public class TileInfuser extends TileEntity{
-	private static int lastID;
-	private static int nextIDRequired;
-	private static int[] idsRequired;
-	private static int idClicked;
-	private static Item[] currentlyCrafted;
-	public int find(int[] array, int value) {
-	    for(int i=0; i<array.length; i++) 
-	         if(array[i] == value)
-	             return i;
-		return 0;
-	}
+import com.futurecraft.mod.magick.MagickHelper;
+import com.futurecraft.mod.magick.MagickRecipes;
+
+public class TileInfuser extends TileEntity implements IInventory{
 	public TileInfuser() {
 		
 	}
-	public TileEntity onCreated() {
-		lastID = 0;
-		nextIDRequired = 0;
-		idsRequired = new int[Integer.MAX_VALUE];
-		currentlyCrafted = new Item[Integer.MAX_VALUE];
-		idClicked = 0;
-		return null;
-		
-	}
-	public boolean onRun(World w, EntityPlayer p, int x,int y, int z) {
-		for(int current : idsRequired) {
-			if(current == nextIDRequired) {
-				lastID = current;
-				idClicked = current;
-				if(idClicked == find(idsRequired,idClicked)) {
-					nextIDRequired = idsRequired[find(idsRequired,idClicked) + 1];
-					p.inventory.addItemStackToInventory(new ItemStack(Item.itemsList[find(idsRequired,idClicked)]));
+    private ItemStack[] inv = new ItemStack[13];
+    @Override
+    public int getSizeInventory() {
+            return inv.length;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+            return inv[slot];
+    }
+    
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+            inv[slot] = stack;
+            if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+                    stack.stackSize = getInventoryStackLimit();
+            }               
+    }
+
+    @Override
+    public ItemStack decrStackSize(int slot, int amt) {
+            ItemStack stack = getStackInSlot(slot);
+            if (stack != null) {
+                    if (stack.stackSize <= amt) {
+                            setInventorySlotContents(slot, null);
+                    } else {
+                            stack = stack.splitStack(amt);
+                            if (stack.stackSize == 0) {
+                                    setInventorySlotContents(slot, null);
+                            }
+                    }
+            }
+            return stack;
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slot) {
+            ItemStack stack = getStackInSlot(slot);
+            if (stack != null) {
+                    setInventorySlotContents(slot, null);
+            }
+            return stack;
+    }
+    
+    @Override
+    public int getInventoryStackLimit() {
+            return 64;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player) {
+            return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this &&
+            player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
+    }
+
+    @Override
+    public void openChest() {}
+
+    @Override
+    public void closeChest() {
+    	
+    	
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+            super.readFromNBT(tagCompound);
+            
+            NBTTagList tagList = tagCompound.getTagList("Inventory");
+            for (int i = 0; i < tagList.tagCount(); i++) {
+                    NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+                    byte slot = tag.getByte("Slot");
+                    if (slot >= 0 && slot < inv.length) {
+                            inv[slot] = ItemStack.loadItemStackFromNBT(tag);
+                    }
+            }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+            super.writeToNBT(tagCompound);
+                            
+            NBTTagList itemList = new NBTTagList();
+            for (int i = 0; i < inv.length; i++) {
+                    ItemStack stack = inv[i];
+                    if (stack != null) {
+                            NBTTagCompound tag = new NBTTagCompound();
+                            tag.setByte("Slot", (byte) i);
+                            stack.writeToNBT(tag);
+                            itemList.appendTag(tag);
+                    }
+            }
+            tagCompound.setTag("Inventory", itemList);
+    }
+
+            @Override
+            public String getInvName() {
+                    return "mgck.InfusorTile";
+            }
+
+			@Override
+			public boolean isInvNameLocalized() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+				// TODO Auto-generated method stub
+				return true;
+			}
+
+			public void run(EntityPlayer p) {
+				if(getStackInSlot(9) == MagickRecipes.rune) {
+						if(getStackInSlot(0) == MagickRecipes.stoneStack) {
+							setInventorySlotContents(12,new ItemStack(MagickHelper.blockMagicalBlock));
+						
+					}
 				}
 			}
 			
-		}
-		return false;
-	}
 
 }

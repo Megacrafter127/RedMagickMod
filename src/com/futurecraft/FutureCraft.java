@@ -18,6 +18,7 @@ import com.futurecraft.mod.handlers.MultiPacketHandler;
 import com.futurecraft.mod.handlers.WorldHandlerFuture;
 import com.futurecraft.mod.magick.items.logic.WandTickHandler;
 import com.futurecraft.proxy.CommonProxy;
+import com.futurecraft.proxy.client.GuiHandlerFuture;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -205,6 +206,7 @@ public class FutureCraft {
          	System.out.println("Registering FutureCraft worldgenerator handler!");
          	GameRegistry.registerWorldGenerator(new WorldHandlerFuture());
          	NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
+         	 NetworkRegistry.instance().registerGuiHandler(this, new GuiHandlerFuture());
          	TickRegistry.registerTickHandler(new WandTickHandler(),Side.CLIENT);
      }
      @EventHandler

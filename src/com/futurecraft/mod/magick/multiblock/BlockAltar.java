@@ -8,12 +8,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.futurecraft.FutureCraft;
 import com.futurecraft.mod.magick.lib.IWandAble;
+import com.futurecraft.mod.magick.lib.MagickLib;
 
 public class BlockAltar extends Block implements ITileEntityProvider, IWandAble {
 	public BlockAltar() {
-		super(FutureCraft.altarCoreID,Material.iron);
+		super(MagickLib.getIdFor("ALTARCORE",810),Material.iron);
 	}
 	@Override
 	public void onWandRightClick(EntityPlayer p, World w, int x, int y, int z) {

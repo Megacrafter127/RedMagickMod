@@ -1,6 +1,7 @@
 package com.futurecraft.mod.magick;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +21,8 @@ import com.futurecraft.mod.magick.block.SwagDecoBlock;
 import com.futurecraft.mod.magick.block.WardedStone;
 import com.futurecraft.mod.magick.block.tile.TileEntityProtected;
 import com.futurecraft.mod.magick.block.tile.TileEntityWandRecharger;
+import com.futurecraft.mod.magick.infusion.InfusionAltar;
+import com.futurecraft.mod.magick.infusion.TileInfuser;
 import com.futurecraft.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.futurecraft.mod.magick.items.ItemFlyingCatalist;
 import com.futurecraft.mod.magick.items.ItemMagickWand;
@@ -66,6 +69,7 @@ public static final Block blockManaBomb = new BlockManaBomb().setTextureName(Mag
 public static final RunicHelper instanceRunic = new RunicHelper();
 public static final Item rune = new ItemRune();
 public static final Item runicSword = new ItemRunicSword();
+public static final Block infusionAltar = new InfusionAltar();
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -77,7 +81,7 @@ public static void register() {
 	GameRegistry.registerBlock(blockMagicalBlockYellow,"magicalWallYellow");
 
 	GameRegistry.registerItem(swaggishFlyer, "Swaggish Flyer");
-	
+	TileEntity.addMapping(TileInfuser.class,"Infuser");
 	GameRegistry.registerBlock(blockNetherald,"netheriumBlock");
 	GameRegistry.registerBlock(manaBattery,"Mana Battery");
 	
@@ -106,6 +110,8 @@ public static void register() {
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,1),new ItemStack(magickCore,1,1),new ItemStack(Item.stick,1,0)));
 	GameRegistry.addRecipe(new WandRecipe(new ItemStack(magickWand,1,2),new ItemStack(magickCore,1,2),new ItemStack(Item.stick,1,0)));
 	GameRegistry.registerBlock(blockAltarCore,"Altar Core");
+	GameRegistry.registerBlock(infusionAltar,"Altar Core - WIP - WIth GUI");
+	LanguageRegistry.addName(infusionAltar,"Altar Core - WIP - WIth GUI");
 	GameRegistry.registerBlock(blockProtectedStone,ItemBlockProtectedStone.class,"Warded Stone");
 	LanguageRegistry.addName(blockProtectedStone,"Protected Stone");
 	TileEntity.addMapping(TileEntityProtected.class, "Protected Block");

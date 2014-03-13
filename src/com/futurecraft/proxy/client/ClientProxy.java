@@ -25,15 +25,8 @@ public class ClientProxy extends CommonProxy {
         		return new LoreBookGui("Welcome to the /n beautiful world of /n futurecraft!");
         	}
         	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        	if (tileEntity != null)
-        	{
-        	switch(ID)
-        	{
-        		case 0: /* your GUIs go here */
-        			
-        	}
-        	}
-        	return null;
+			return null;
+        	
         } 
         
         public static void registerTESR(){

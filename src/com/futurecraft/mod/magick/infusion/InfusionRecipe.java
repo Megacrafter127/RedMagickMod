@@ -5,22 +5,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class InfusionRecipe {
-	Block[] blocksFor;
-	Item[] resultFor;
-public InfusionRecipe(Block[] blocks, Item[] results) {
-	if(blocks != null && results != null) {
-	blocksFor = blocks;
-	resultFor = results;
+	Object[] input;
+	ItemStack output;
+	public InfusionRecipe(ItemStack newOut, Object... input) {
+		output = newOut;
+		this.input = input;
 	}
-}
-public ItemStack[] getResults() {
-	ItemStack[] stack = new ItemStack[5];
-	for(Item i : resultFor) {
-		for(int j = 0; j <= resultFor.length; j++) {
-			stack[j] = new ItemStack(i);
-		}
-	}
-	return stack;
-}
 
 }
