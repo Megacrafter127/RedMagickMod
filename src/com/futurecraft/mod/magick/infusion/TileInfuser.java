@@ -135,7 +135,7 @@ public class TileInfuser extends TileEntity implements IInventory{
 					return false;
 				}
 				
-				return true;
+				return false;
 			}
 
 			public void run(EntityPlayer p) {
