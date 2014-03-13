@@ -113,4 +113,13 @@ public class ItemRune extends Item implements IMagickObject, INBTItem{
 		readFromNbt(par1ItemStack);
         return false;
     }
+	
+	
+	 public String getStackRunicType(ItemStack stack) {
+		if(stack.getItem() instanceof ItemRune) {
+			return(magickTypes[stack.stackTagCompound.getInteger("manaType")]);
+		}else {
+			return"notarune.type";
+		}
+	}
 }
