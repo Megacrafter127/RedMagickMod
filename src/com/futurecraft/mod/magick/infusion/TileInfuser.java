@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import com.futurecraft.mod.magick.MagickHelper;
 import com.futurecraft.mod.magick.MagickRecipes;
+import com.futurecraft.mod.magick.runic.ItemRune;
 
 public class TileInfuser extends TileEntity implements IInventory{
 	public TileInfuser() {
@@ -123,7 +124,17 @@ public class TileInfuser extends TileEntity implements IInventory{
 
 			@Override
 			public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-				// TODO Auto-generated method stub
+				if(i == 9 || i == 10 || i == 11) {
+					if(itemstack.getItem() instanceof ItemRune) {
+						return true;
+					}else {
+						return false;
+					}
+				}
+				if(i == 12) {
+					return false;
+				}
+				
 				return true;
 			}
 
