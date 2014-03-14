@@ -30,6 +30,7 @@ import com.futurecraft.mod.item.ItemFutureNote;
 import com.futurecraft.mod.item.ItemIngot;
 import com.futurecraft.mod.item.ItemModPickaxe;
 import com.futurecraft.mod.magick.FutureCraftMagick;
+import com.futurecraft.mod.magick.lib.MagickLib;
 import com.futurecraft.mod.recipes.PickRecipe;
 import com.futurecraft.mod.recipes.QuadSymetricRecipe;
 import com.futurecraft.mod.tweaks.FutureCraftTweaks;
@@ -44,11 +45,11 @@ public class ModHelper {
 	public static final Block basicFutureBlock = new BlockFutureBasic(FutureCraft.basicFBlockID, Material.ground,"blueblockfuture");
 	public static final Block goldenFutureBlock = new BlockFutureGold(FutureCraft.goldenFBlockID, Material.ground,"goldfutureblock");
 	public static final Block basicFutureFurnace = new BlockFutureFurnace(FutureCraft.basicFurnaceID,"compressionSmelter");
-	public static final Block blockPowerPipe = new BlockPowerPipe(FutureCraft.powerGenPassiveID,"powerpipe");
+	public static final Block blockPowerPipe = new BlockPowerPipe(FutureCraft.powerGenPassiveID,"powerpipe").setTextureName(MagickLib.toTextureName("nop"));
 	public static final Block dimensionalInfuser = new BlockDimensionalInfuser(FutureCraft.dimTransID);
 	public static final Block oreIndium = new BlockOre(FutureCraft.oreIndiumID,"oreindium").setTextureName(Ref.NAME.toLowerCase() + ":oreindium");
 	public static final Block oreRoent = new BlockOre(FutureCraft.oreRoentgeniumID,"oreroentgenium").setTextureName(Ref.NAME.toLowerCase() + ":oreroentgenium");
-	public static final Block altarCore = new BlockEnchantmentAltarCore().setUnlocalizedName("Altar Core");
+	public static final Block altarCore = new BlockEnchantmentAltarCore().setUnlocalizedName("Altar Core").setTextureName(MagickLib.toTextureName("nop"));
 	public static final Block gameOfLifeBlock = new BlockGOL(FutureCraft.blockGOLID).setUnlocalizedName("Game of life Block");
 	public static final Block controlerGOL = new BlockGOLControler(FutureCraft.blockGOLControlerID).setUnlocalizedName("Game of life Block Controler");
 	
