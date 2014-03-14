@@ -68,6 +68,13 @@ public static ShapedRecipes recipeAlchemyFuel = new ShapedRecipes(3,3,new ItemSt
 		foscos,diamondBlock,foscos
 	}, new ItemStack(MagickHelper.alchemyFuel));
 	
+public static ShapedRecipes recipeGrindStone= new ShapedRecipes(3,3,new ItemStack[] {
+		null,null,new ItemStack(Item.ingotGold),
+		null,new ItemStack(Item.ingotGold),foscos,
+		new ItemStack(Item.ingotGold),foscos,rune
+	
+	}, new ItemStack(MagickHelper.dustCrafter));
+	
 public static ShapedRecipes recipeEnchantSword = new ShapedRecipes(3,3,new ItemStack[]{rune,rune,rune,rune,runicSword,rune,rune,rune,rune}, enchantedSwordRunic);
 public static void init() {	
 	headPieceE.addEnchantment(RunicHelper.eRunic,3);
@@ -93,5 +100,6 @@ public static void init() {
 	GameRegistry.addRecipe(recipeEnchantSword);
 	GameRegistry.addRecipe(recipeAlchemyStone);
 	GameRegistry.addRecipe(recipeAlchemyFuel);
+	GameRegistry.addRecipe(recipeGrindStone);
 }
 }
