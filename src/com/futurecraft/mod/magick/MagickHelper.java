@@ -22,6 +22,7 @@ import com.futurecraft.mod.magick.block.WardedStone;
 import com.futurecraft.mod.magick.block.tile.TileEntityProtected;
 import com.futurecraft.mod.magick.block.tile.TileEntityWandRecharger;
 import com.futurecraft.mod.magick.infusion.InfusionAltar;
+import com.futurecraft.mod.magick.infusion.RecipeShapedRunicInfusion;
 import com.futurecraft.mod.magick.infusion.TileInfuser;
 import com.futurecraft.mod.magick.itemblocks.ItemBlockProtectedStone;
 import com.futurecraft.mod.magick.items.ItemFlyingCatalist;
@@ -135,6 +136,11 @@ public static void register() {
 	MinecraftForge.EVENT_BUS.register(new RunicEnchantHandler());
 	GameRegistry.registerItem(alchemyStone,"Alchemical Stone");
 	LanguageRegistry.addName(alchemyStone,"Philosopher's Stone");
+	try{
+		TileInfuser.infusionShapedList.add(new RecipeShapedRunicInfusion(new ItemStack(MagickHelper.blockMagicalBlock),TileInfuser.inv, new ItemStack[]{new ItemStack(MagickHelper.rune)},3));
+		}catch(Throwable t) {
+			t.printStackTrace();
+		}
 	instanceRunic.init();
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();

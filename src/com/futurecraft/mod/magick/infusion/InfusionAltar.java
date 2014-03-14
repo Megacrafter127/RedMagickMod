@@ -1,5 +1,6 @@
 package com.futurecraft.mod.magick.infusion;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -9,24 +10,26 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.futurecraft.FutureCraft;
+import com.futurecraft.mod.magick.MagickHelper;
 import com.futurecraft.mod.magick.lib.IWandAble;
 
 public class InfusionAltar extends Block implements IWandAble, ITileEntityProvider {
-
+	static InventoryCrafting thisCraftingInventory;
 	public InfusionAltar() {
 		super(FutureCraft.altarCoreID,Material.iron);
-		//Minecraft.getMinecraft().theWorld.markBlockForUpdate((int)this.minX,(int)this.minY,(int)this.minZ);
+		
 	}
 
-	@Override
+	@Override	
 	public TileEntity createNewTileEntity(World world) {
-		// TODO Auto-generated method stub
+		
 		return new TileInfuser();
 	}
 
@@ -39,6 +42,7 @@ public class InfusionAltar extends Block implements IWandAble, ITileEntityProvid
 	
 	 public boolean onBlockActivated(World world, int x, int y, int z,
              EntityPlayer player, int metadata, float what, float these, float are) {
+		thisCraftingInventory = new InventoryCrafting(new ContainerInfuser(Minecraft.getMinecraft().thePlayer.inventory,(TileInfuser)world.getBlockTileEntity(x,y,z)),3,3);
 		 world.markBlockForUpdate(x,y,z);
      TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
      if (tileEntity == null || player.isSneaking()) {

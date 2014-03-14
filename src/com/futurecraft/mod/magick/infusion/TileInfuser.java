@@ -1,8 +1,10 @@
 package com.futurecraft.mod.magick.infusion;
 
-import net.minecraft.block.Block;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -13,10 +15,15 @@ import com.futurecraft.mod.magick.MagickRecipes;
 import com.futurecraft.mod.magick.runic.ItemRune;
 
 public class TileInfuser extends TileEntity implements IInventory{
+	 private static final TileInfuser referenceInstance = new TileInfuser();
+	public static ItemStack[] inv = new ItemStack[13];
+	InventoryCrafting invCrafting = InfusionAltar.thisCraftingInventory;
+	public static List<RecipeShapedRunicInfusion> infusionShapedList;
+	
 	public TileInfuser() {
-		
-	}
-    private ItemStack[] inv = new ItemStack[13];
+	
+		}
+   
     @Override
     public int getSizeInventory() {
             return inv.length;
@@ -147,5 +154,19 @@ public class TileInfuser extends TileEntity implements IInventory{
 				}
 			}
 			
+			@Override
+			public void updateEntity() {
+				try {
+				for(RecipeShapedRunicInfusion r : infusionShapedList) {
+					if(r.matches(invCrafting,this.worldObj)) {
+						inv[12] = r.getRecipeOutput();
+					}
+				}
+				}catch(Throwable t) {
+					t.printStackTrace();
+				}
+				
+				
+			}
 
 }
