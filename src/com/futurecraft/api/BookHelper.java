@@ -21,6 +21,7 @@ public class BookHelper {
 		 tomeStack.setTagInfo("author", new NBTTagString("author", author));
 		 tomeStack.setTagInfo("title", new NBTTagString("title", title));
 		 tomeStack.itemID = Item.writtenBook.itemID;
+		 
 		 return tomeStack;
 	}
 	/**
@@ -33,12 +34,13 @@ public class BookHelper {
 	public ItemStack createBookFromString(String[] pages, String author, String title) {
 		ItemStack tomeStack = new ItemStack(Item.writableBook);
 		NBTTagList bookPages = new NBTTagList("pages");
-			for(int i = 0; i <= pages.length; i++) {
+			for(int i = 0; i <= pages.length-1; i++) {
 				bookPages.appendTag(new NBTTagString(Integer.toString(i),pages[i]));
 			}
 			tomeStack.setTagInfo("pages", bookPages);
 			 tomeStack.setTagInfo("author", new NBTTagString("author", author));
 			 tomeStack.setTagInfo("title", new NBTTagString("title", title));
+			 tomeStack.itemID = Item.writtenBook.itemID;
 			return tomeStack;
 	}
 }
