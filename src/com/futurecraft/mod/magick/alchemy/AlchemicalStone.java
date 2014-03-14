@@ -45,7 +45,7 @@ public class AlchemicalStone extends Item implements INBTItem {
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 		if(!entityPlayer.isSneaking()) {
 		
-			if(entityPlayer.inventory.hasItem(MagickHelper.rune.itemID) || entityPlayer.inventory.hasItem(MagickHelper.alchemyFuel.itemID) || entityPlayer.inventory.hasItem(MagickHelper.manaDust.itemID)) {
+			if(entityPlayer.inventory.hasItem(MagickHelper.rune.itemID) ) {
 				if(world.getBlockId(x,y,z) == transmutable[0]) {
 					world.setBlock(x,y,z,transmutable[1]);
 				}else if(world.getBlockId(x,y,z) == transmutable[1]) {
@@ -57,6 +57,34 @@ public class AlchemicalStone extends Item implements INBTItem {
 				}else if(world.getBlockId(x,y,z) == transmutable[4]) {
 					world.setBlock(x,y,z,transmutable[0]);
 				}
+				entityPlayer.inventory.consumeInventoryItem(MagickHelper.rune.itemID);
+			}else if(entityPlayer.inventory.hasItem(MagickHelper.alchemyFuel.itemID)) {
+				if(world.getBlockId(x,y,z) == transmutable[0]) {
+					world.setBlock(x,y,z,transmutable[1]);
+				}else if(world.getBlockId(x,y,z) == transmutable[1]) {
+					world.setBlock(x,y,z,transmutable[2]);
+				}else if(world.getBlockId(x,y,z) == transmutable[2]) {
+					world.setBlock(x,y,z,transmutable[3]);
+				}else if(world.getBlockId(x,y,z) == transmutable[3]) {
+					world.setBlock(x,y,z,transmutable[4]);
+				}else if(world.getBlockId(x,y,z) == transmutable[4]) {
+					world.setBlock(x,y,z,transmutable[0]);
+					
+				}
+				entityPlayer.inventory.consumeInventoryItem(MagickHelper.alchemyFuel.itemID);
+			}else if(entityPlayer.inventory.hasItem(MagickHelper.manaDust.itemID)) {
+				if(world.getBlockId(x,y,z) == transmutable[0]) {
+					world.setBlock(x,y,z,transmutable[1]);
+				}else if(world.getBlockId(x,y,z) == transmutable[1]) {
+					world.setBlock(x,y,z,transmutable[2]);
+				}else if(world.getBlockId(x,y,z) == transmutable[2]) {
+					world.setBlock(x,y,z,transmutable[3]);
+				}else if(world.getBlockId(x,y,z) == transmutable[3]) {
+					world.setBlock(x,y,z,transmutable[4]);
+				}else if(world.getBlockId(x,y,z) == transmutable[4]) {
+					world.setBlock(x,y,z,transmutable[0]);
+				}
+				entityPlayer.inventory.consumeInventoryItem(MagickHelper.manaDust.itemID);
 			}
 		
 		}else{
