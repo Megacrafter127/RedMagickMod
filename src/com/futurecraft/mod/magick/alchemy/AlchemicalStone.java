@@ -28,6 +28,7 @@ public class AlchemicalStone extends Item implements INBTItem {
 
 	public AlchemicalStone() {
 		super(MagickLib.getIdFor("Alchemical Stone",5000));
+		setMaxStackSize(1);
 	}
 
 	@Override
@@ -104,10 +105,12 @@ public class AlchemicalStone extends Item implements INBTItem {
 	          List list,
 	          boolean par4) {
 		if(stack.stackTagCompound != null) {
-			list.add(ChatHelper.acf("The Stone.. of alchemy!",EnumChatFormatting.LIGHT_PURPLE));
+			list.add(ChatHelper.acf("The Stone.. of alchemy!",EnumChatFormatting.DARK_PURPLE));
+			list.add(ChatHelper.acf("!!CONSUMES FUEL BEFORE ALCHEMY!!",EnumChatFormatting.DARK_PURPLE));
 		}else {
 			stack.stackTagCompound = new NBTTagCompound();
-			list.add(ChatHelper.acf("The Stone.. of alchemy!",EnumChatFormatting.LIGHT_PURPLE));
+			list.add(ChatHelper.acf("The Stone.. of alchemy!",EnumChatFormatting.DARK_PURPLE));
+			list.add(ChatHelper.acf("!!CONSUMES FUEL BEFORE ALCHEMY!!",EnumChatFormatting.DARK_PURPLE));
 		}
 	}
 }

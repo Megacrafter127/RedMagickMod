@@ -57,7 +57,17 @@ public static ShapedRecipes recipeEnchantH  = new ShapedRecipes(3,3,new ItemStac
 public static ShapedRecipes recipeEnchantC   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,chestPiece,rune,foscos,rune,foscos},  chestPieceE);
 public static ShapedRecipes recipeEnchantL   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,legPiece,rune,foscos,rune,foscos},  legPieceE);
 public static ShapedRecipes recipeEnchantB   = new ShapedRecipes(3,3,new ItemStack[]{foscos,rune,foscos,rune,bootPiece,rune,foscos,rune,foscos}, bootPieceE);
-
+public static ShapedRecipes recipeAlchemyStone = new ShapedRecipes(3,3,new ItemStack[] {
+	foscos,diamondBlock,foscos,
+	diamondBlock,foscos,diamondBlock,
+	foscos,diamondBlock,foscos
+}, new ItemStack(MagickHelper.alchemyStone));
+public static ShapedRecipes recipeAlchemyFuel = new ShapedRecipes(3,3,new ItemStack[] {
+		foscos,diamondBlock,foscos,
+		diamondBlock,coal,diamondBlock,
+		foscos,diamondBlock,foscos
+	}, new ItemStack(MagickHelper.alchemyFuel));
+	
 public static ShapedRecipes recipeEnchantSword = new ShapedRecipes(3,3,new ItemStack[]{rune,rune,rune,rune,runicSword,rune,rune,rune,rune}, enchantedSwordRunic);
 public static void init() {	
 	headPieceE.addEnchantment(RunicHelper.eRunic,3);
@@ -66,7 +76,8 @@ public static void init() {
 	bootPieceE.addEnchantment(RunicHelper.eRunic,3);
 	enchantedSwordRunic.addEnchantment(RunicHelper.eNecrotic,3);
 	GameRegistry.addShapelessRecipe(foscos, new ItemStack[]{coal,redstone,glowstone,lapis});
-	
+	GameRegistry.addShapelessRecipe(new ItemStack(MagickHelper.sunDust), new ItemStack[]{redstone,glowstone,lapis,new ItemStack(MagickHelper.dustCrafter),foscos});
+	GameRegistry.addShapelessRecipe(new ItemStack(MagickHelper.moonDust), new ItemStack[]{coal,redstone,lapis,new ItemStack(MagickHelper.dustCrafter),foscos});
 	GameRegistry.addRecipe(recipeCatalyst);
 	GameRegistry.addRecipe(recipeHead);
 	GameRegistry.addRecipe(recipeChest);
@@ -80,5 +91,7 @@ public static void init() {
 	GameRegistry.addRecipe(recipeEnchantL);
 	GameRegistry.addRecipe(recipeEnchantB);
 	GameRegistry.addRecipe(recipeEnchantSword);
+	GameRegistry.addRecipe(recipeAlchemyStone);
+	GameRegistry.addRecipe(recipeAlchemyFuel);
 }
 }

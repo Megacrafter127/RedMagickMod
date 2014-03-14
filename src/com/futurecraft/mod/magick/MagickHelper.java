@@ -12,6 +12,9 @@ import com.futurecraft.lib.Ref;
 import com.futurecraft.mod.TabFuture;
 import com.futurecraft.mod.magick.alchemy.AlchemicalStone;
 import com.futurecraft.mod.magick.alchemy.ItemAlchemicalFuel;
+import com.futurecraft.mod.magick.alchemy.ItemGrinder;
+import com.futurecraft.mod.magick.alchemy.ItemMoonDust;
+import com.futurecraft.mod.magick.alchemy.ItemSunDust;
 import com.futurecraft.mod.magick.block.BlockManaBomb;
 import com.futurecraft.mod.magick.block.BlockManaCollector;
 import com.futurecraft.mod.magick.block.BlockManaCollector.TileEntityCollector;
@@ -74,6 +77,9 @@ public static final Item runicSword = new ItemRunicSword();
 public static final Block infusionAltar = new InfusionAltar();
 public static final Item alchemyStone = new AlchemicalStone().setUnlocalizedName("Alchemical Stone").setTextureName(MagickLib.toTextureName("stonealch"));
 public static final Item alchemyFuel = new ItemAlchemicalFuel().setUnlocalizedName("alchemicalStone");
+public static final Item sunDust = new ItemSunDust();
+public static final Item moonDust = new ItemMoonDust();
+public static final Item dustCrafter = new ItemGrinder(MagickLib.getIdFor("Dust Crafter",5004)).setTextureName(MagickLib.toTextureName("grinder"));
 //public static final Fluid fluidMagicka = new FluidMagicka("null");
 public static void register() {
 		
@@ -139,7 +145,12 @@ public static void register() {
 	LanguageRegistry.addName(runicSword,"Runic Sword");
 	MinecraftForge.EVENT_BUS.register(new RunicEnchantHandler());
 	GameRegistry.registerItem(alchemyStone,"Alchemical Stone");
-	LanguageRegistry.addName(alchemyStone,"Philosopher's Stone");
+	LanguageRegistry.addName(alchemyStone,"Alchemical Stone");
+	GameRegistry.registerItem(sunDust,"sunDust");
+	GameRegistry.registerItem(moonDust,"moonDust");
+	GameRegistry.registerItem(dustCrafter,"grinder");
+	LanguageRegistry.addName(dustCrafter,"Magic Pulveriser");
+	 GameRegistry.registerCraftingHandler(new com.futurecraft.mod.handlers.CraftingHandler());
 	try{
 		TileInfuser.infusionShapedList.add(new RecipeShapedRunicInfusion(new ItemStack(MagickHelper.blockMagicalBlock),TileInfuser.inv, new ItemStack[]{new ItemStack(MagickHelper.rune)},3));
 		}catch(Throwable t) {
