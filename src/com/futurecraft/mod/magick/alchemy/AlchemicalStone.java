@@ -88,7 +88,12 @@ public class AlchemicalStone extends Item implements INBTItem {
 			}
 		
 		}else{
-			entityPlayer.inventory.addItemStackToInventory(BookHelper.instance.createBookFromString(new String[]{"Transmutation stone, the greatest advance in magic ever! It requires fuel to function, but can change blocks into another blocks! "},"The Creator","Alchemy 101"));
+			if(entityPlayer.inventory.hasItemStack(BookHelper.instance.createBookFromString(new String[]{"Transmutation stone, the greatest advance in magic ever! It requires fuel to function, but can change blocks into another blocks! "},"The Creator","Alchemy 101"))) {
+				
+			}else{
+				entityPlayer.inventory.addItemStackToInventory(BookHelper.instance.createBookFromString(new String[]{"Transmutation stone, the greatest advance in magic ever! It requires fuel to function, but can change blocks into another blocks! "},"The Creator","Alchemy 101"));
+			}
+			
 		}
 		return true;
 	}
