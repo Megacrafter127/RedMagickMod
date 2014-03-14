@@ -62,6 +62,7 @@ public class ItemArmorMana extends ItemArmor {
 	 
 	 @Override
 	 public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemstack) {
+		 try {
 		 ItemStack[] armor = new ItemStack[4];
 		 armor[0] = player.getCurrentArmor(0);
 		 armor[1] = player.getCurrentArmor(1);
@@ -113,6 +114,9 @@ public class ItemArmorMana extends ItemArmor {
 				 }
 			 }		
 		 }
+		 }
+		 }catch(Throwable t) {
+			 t.printStackTrace();
 		 }
 		 }
 		 

@@ -1,7 +1,6 @@
 package com.futurecraft.mod.magick;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,6 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.futurecraft.FutureCraft;
 import com.futurecraft.lib.Ref;
+import com.futurecraft.magick.alchemy.AlchemicalStone;
 import com.futurecraft.mod.TabFuture;
 import com.futurecraft.mod.magick.block.BlockManaBomb;
 import com.futurecraft.mod.magick.block.BlockManaCollector;
@@ -70,6 +70,8 @@ public static final RunicHelper instanceRunic = new RunicHelper();
 public static final Item rune = new ItemRune();
 public static final Item runicSword = new ItemRunicSword();
 public static final Block infusionAltar = new InfusionAltar();
+public static final Item alchemyStone = new AlchemicalStone().setUnlocalizedName("Alchemical Stone").setTextureName(MagickLib.toTextureName("stonealch"));
+//public static final Fluid fluidMagicka = new FluidMagicka("null");
 public static void register() {
 		
 	GameRegistry.registerBlock(blockMagicalBlock,"magicalWall");
@@ -128,8 +130,11 @@ public static void register() {
 	GameRegistry.registerItem(rune,((ItemRune) rune).getName());
 	LanguageRegistry.addName(rune,"Piece of Runic Scribblings");
 	GameRegistry.registerItem(runicSword,"Runic Sword");
+	//FluidRegistry.registerFluid(fluidMagicka);
 	LanguageRegistry.addName(runicSword,"Runic Sword");
 	MinecraftForge.EVENT_BUS.register(new RunicEnchantHandler());
+	GameRegistry.registerItem(alchemyStone,"Alchemical Stone");
+	LanguageRegistry.addName(alchemyStone,"Philosopher's Stone");
 	instanceRunic.init();
 	//GameRegistry.registerItem(minerTool, Ref.toItemName("minerTool"));
 	MagickRecipes.init();
