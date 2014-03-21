@@ -20,12 +20,12 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import org.lwjgl.input.Keyboard;
 
 import com.futurecraft.lib.Ref;
-import com.futurecraft.mod.magick.MagickHelper;
+import com.futurecraft.mod.magick.alchemy.IManaContainer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemMagickWand extends Item {
+public class ItemMagickWand extends Item implements IManaContainer {
 	public static boolean isInWandRecharger = false;
 	int tickCount;
 	static int[] mana = new int[10];
@@ -489,7 +489,61 @@ public class ItemMagickWand extends Item {
 	             * @return Return true to prevent any further processing.
 	             */
 	            public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-					return true;
+					return false;//block interaction is required sometimes
 	            	
-} }
+}
+	            
+	            
+			@Override
+			public int getManaTypeCount(ItemStack stack) {
+				return mana.length;
+			}
+
+			@Override
+			public int getMana(ItemStack stack, int type) {
+				NBTTagCompound nbt=stack.stackTagCompound;
+				String s="";
+				switch(type) {
+				case 0: s="light"; break;
+				case 1: s="dark"; break;
+				case 2: s="magic"; break;
+				case 3: s="null"; break;
+				case 4: s="fire"; break;
+				case 5: s="water"; break;
+				case 6: s="air"; break;
+				case 7: s="earth"; break;
+				case 8: s="life"; break;
+				case 9: s="death"; break;
+				default: return 0;
+				}
+				return nbt.getInteger(s);
+			}
+
+			@Override
+			public int useMana(ItemStack stack, int type, int amount) {
+				NBTTagCompound nbt=stack.stackTagCompound;
+				String s="";
+				switch(type) {
+				case 0: s="light"; break;
+				case 1: s="dark"; break;
+				case 2: s="magic"; break;
+				case 3: s="null"; break;
+				case 4: s="fire"; break;
+				case 5: s="water"; break;
+				case 6: s="air"; break;
+				case 7: s="earth"; break;
+				case 8: s="life"; break;
+				case 9: s="death"; break;
+				default: return 0;
+				}
+				int i=nbt.getInteger(s);
+				i-=amount;
+				if(i<0) {
+					amount+=i;
+					i=0;
+				}
+				nbt.setInteger(s, i);
+				return amount;
+			}
+}
 

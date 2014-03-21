@@ -34,6 +34,7 @@ import com.futurecraft.mod.magick.lib.MagickLib;
 import com.futurecraft.mod.recipes.PickRecipe;
 import com.futurecraft.mod.recipes.QuadSymetricRecipe;
 import com.futurecraft.mod.tweaks.FutureCraftTweaks;
+import com.futurecraft.mod.witchery.Witchery;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -213,7 +214,7 @@ public static final ItemModPickaxe indiumPick=new ItemModPickaxe(FutureCraft.ind
 	
 			registerPlugin(new FutureCraftMagick());
 		
-		
+			registerPlugin(new Witchery());
 		
 		
 		registerPlugin(FutureCraftTweaks.instance);
