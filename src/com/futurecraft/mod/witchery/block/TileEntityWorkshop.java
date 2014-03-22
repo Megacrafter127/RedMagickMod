@@ -5,13 +5,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import com.futurecraft.mod.generic.helpers.ChatHelper;
 import com.futurecraft.mod.magick.alchemy.IManaContainer;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class TileEntityWorkshop extends TileEntity {
 	private float magickStored;
@@ -40,23 +46,29 @@ public class TileEntityWorkshop extends TileEntity {
 	
 	@ForgeSubscribe
 	public void preventDamage(LivingHurtEvent event) {
+		if(!FMLCommonHandler.instance().getEffectiveSide().isServer()) return;
 		EntityLivingBase e=event.entityLiving;
+		float oDMG=event.ammount,tDMG=oDMG;
 		if(e.getDistanceSq(xCoord, yCoord+0.5, zCoord)>10000) return;
 		DamageSource d=event.source;
+		EntityPlayer p=getWorldObj().getPlayerEntityByName(source);
 		if(d.isMagicDamage()) {
 			if(event.ammount<=magickStored) {
 				magickStored-=event.ammount;
 				event.ammount=0;
 				event.setCanceled(true);
+				if(p!=null) p.addChatMessage("Stored mana absorbed all damage("+ChatHelper.acf(""+oDMG, EnumChatFormatting.RED)+")\n"+ChatHelper.acf(""+magickStored, ChatHelper.ENUMARRAY_NUMBER)+" mana remaining.");
 				return;
 			}
 			else {
 				event.ammount-=magickStored;
 				magickStored=0;
-				EntityPlayer p=getWorldObj().getPlayerEntityByName(source);
 				if(p==null) return;
+				p.addChatMessage("Stored mana absorbed "+ChatHelper.acf(""+(oDMG-event.ammount), EnumChatFormatting.RED)+" damage. "+ChatHelper.acf(""+event.ammount, EnumChatFormatting.RED)+" damage remaining.");
+				oDMG=event.ammount;
 				ItemStack[] inv=p.inventory.armorInventory;
 				for(ItemStack s:inv) {
+					if(s==null) continue;
 					Item it=s.getItem();
 					if(it instanceof IManaContainer) {
 						int m=((IManaContainer)it).getManaTypeCount(s);
@@ -68,13 +80,17 @@ public class TileEntityWorkshop extends TileEntity {
 								event.setCanceled(true);
 								event.ammount=0;
 								p.inventory.inventoryChanged=true;
+								p.addChatMessage("Your armor's mana absorbed all damage("+ChatHelper.acf(""+oDMG, EnumChatFormatting.RED)+")");
 								return;
 							}
 						}
 					}
 				}
+				p.addChatMessage("Your defensive mana absorbed "+ChatHelper.acf(""+(oDMG-event.ammount), EnumChatFormatting.RED)+" damage. "+ChatHelper.acf(""+event.ammount, EnumChatFormatting.RED)+" damage remaining.");
+				oDMG=event.ammount;
 				inv=p.inventory.mainInventory;
 				for(ItemStack s:inv) {
+					if(s==null) continue;
 					Item it=s.getItem();
 					if(it instanceof IManaContainer) {
 						int m=((IManaContainer)it).getManaTypeCount(s);
@@ -86,12 +102,21 @@ public class TileEntityWorkshop extends TileEntity {
 								event.setCanceled(true);
 								event.ammount=0;
 								p.inventory.inventoryChanged=true;
+								p.addChatMessage("Your mana absorbed all damage("+ChatHelper.acf(""+oDMG, EnumChatFormatting.RED)+")");
 								return;
 							}
 						}
 					}
 				}
-				p.addExhaustion(event.ammount);
+				p.addChatMessage("Your magick prevented "+ChatHelper.acf(""+(tDMG-event.ammount),EnumChatFormatting.RED)+" damage; "+ChatHelper.acf(""+event.ammount,EnumChatFormatting.RED)+" damage remains");
+				p.addPotionEffect(new PotionEffect(Potion.blindness.id,10*(int)event.ammount,6*(int)event.ammount));
+				p.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,10*(int)event.ammount,(int)event.ammount));
+				p.addPotionEffect(new PotionEffect(Potion.digSlowdown.id,10*(int)event.ammount,(int)event.ammount));
+				p.addPotionEffect(new PotionEffect(Potion.weakness.id,10*(int)event.ammount,(int)event.ammount));
+				if(p.getHealth()>0&&!p.isEntityEqual(e)) {
+					p.attackEntityFrom(DamageSource.generic, event.ammount);
+					event.setCanceled(true);
+				}
 			}
 		}
 	}
@@ -109,7 +134,7 @@ public class TileEntityWorkshop extends TileEntity {
 	}
 	
 	public boolean canSpend(EntityPlayer p) {
-		return (!protection)||p.getEntityName().equals(source);
+		return (!(protection&&magickStored>0))||p.username.equals(source);
 	}
 	
 	public void spend(int mana) {
@@ -120,5 +145,16 @@ public class TileEntityWorkshop extends TileEntity {
 			return;
 		}
 		magickStored+=mana;
+	}
+	
+	public boolean claim(EntityPlayer p) {
+		if(protection&&magickStored>0) return false;
+		source=p.username;
+		protection=true;
+		return true;
+	}
+
+	public float getMana() {
+		return magickStored;
 	}
 }

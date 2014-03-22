@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.futurecraft.mod.generic.helpers.ChatHelper;
 import com.futurecraft.mod.magick.alchemy.IManaContainer;
 import com.futurecraft.mod.magick.lib.MagickLib;
 
@@ -31,6 +32,7 @@ public class BlockWorkshop extends Block implements ITileEntityProvider {
 		System.out.println("Activated Workshop");
 		TileEntityWorkshop t=(TileEntityWorkshop) w.getBlockTileEntity(x, y, z);
 		if(t.canSpend(p)) {
+			t.claim(p);
 			ItemStack s=p.inventory.getCurrentItem();
 			if(s==null) return false;
 			Item it=s.getItem();
@@ -41,10 +43,12 @@ public class BlockWorkshop extends Block implements ITileEntityProvider {
 				}
 				t.spend(mana);
 				p.inventory.inventoryChanged=true;
-				System.out.println("transmitted "+mana+"to workshop");
+				p.addChatMessage("Transmitted "+ChatHelper.acf(""+mana, ChatHelper.ENUMARRAY_NUMBER)+"to the Workshop");
+				p.addChatMessage("This Workshop contains "+ChatHelper.acf(""+t.getMana(), ChatHelper.ENUMARRAY_NUMBER)+" mana.");
 				return true;
 			}
 		}
+		p.addChatMessage("This Workshop contains "+ChatHelper.acf(""+t.getMana(), ChatHelper.ENUMARRAY_NUMBER)+" mana.");
 		return false;
 		
 	}
