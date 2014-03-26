@@ -38,6 +38,7 @@ public class Witchery implements IFutureCraftPlugin {
 			return s.getItem();
 		}
 	}
+
 	public final int WorkshopID=2050;
 	public final int OverloadID=2051;
 	public final BlockWorkshop workshop=new BlockWorkshop(WorkshopID);

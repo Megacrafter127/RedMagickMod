@@ -128,6 +128,7 @@ public class FutureCraft {
 		
 		@EventHandler
      public void preInit(FMLPreInitializationEvent event) {
+			instance.proxy.registerHandlers();
              System.out.println("[FC]This is FutureCraft " + Ref.VERSION);
              configPatch = event.getSuggestedConfigurationFile();
              System.out.println("Config File:"+configPatch.getAbsolutePath());

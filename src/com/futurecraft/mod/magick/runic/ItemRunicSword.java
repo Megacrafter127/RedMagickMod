@@ -14,10 +14,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 
 import com.futurecraft.mod.generic.helpers.ChatHelper;
-import com.futurecraft.mod.magick.items.INBTItem;
 import com.futurecraft.mod.magick.lib.MagickLib;
 
-public class ItemRunicSword extends ItemSword implements INBTItem{
+public class ItemRunicSword extends ItemSword{
 
 	public ItemRunicSword() {
 		super(MagickLib.getIdFor("Runic Sword",3203),RunicHelper.runicToolMat);
@@ -30,23 +29,12 @@ public class ItemRunicSword extends ItemSword implements INBTItem{
 			Map enchantsMap = EnchantmentHelper.getEnchantments(stack);
 			if(enchantsMap.containsKey(RunicHelper.eNecrotic.id)) {
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.wither.getId(),0,1));
-			}else {
 				//nope
 				return false;
 			}
 			
 		 return true;
 	    }
-	@Override
-	public void writeToNbt(ItemStack stack) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void readFromNbt(ItemStack stack) {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player,List list, boolean bool) {
 		if(stack.stackTagCompound != null) {
