@@ -20,8 +20,9 @@ public class BlockManaBomb extends Block{
 		if( par1World.isBlockIndirectlyGettingPowered(par2, par3, par4)) {
 			
 				par1World.createExplosion(null, par2,par3,par4,500, true);
+				//par1World.spawnEntityInWorld(new MagicExplosion(par1World,null,par2,par3,par4,500));
 				par1World.setBlockToAir(par2,par3,par4);
-			
+				
 		}
     }
 }
